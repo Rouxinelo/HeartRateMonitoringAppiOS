@@ -10,6 +10,7 @@ import Foundation
 public struct HomeScreenStrings {
     static let titleString: String = "Welcome to the Heart Rate Monitoring App"
     static let loginString: String = "Login"
-    static let guestString: String = "Continue as Guest"
+    static let registerString: String = "Register"
+    static let guestString: String = "Guest Mode"
     static let settingsString: String = "Settings"
 }
