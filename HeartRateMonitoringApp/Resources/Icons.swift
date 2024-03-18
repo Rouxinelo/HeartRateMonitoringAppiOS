@@ -12,4 +12,5 @@ public struct HomeScreenIcons {
     static let registerIcon = "person.fill.badge.plus"
     static let guestIcon = "person.fill.questionmark"
     static let settingsIcon = "gearshape.fill"
+    static let alertIcon = "exclamationmark.circle"
 }

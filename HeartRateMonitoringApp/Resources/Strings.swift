@@ -13,4 +13,12 @@ public struct HomeScreenStrings {
     static let registerString: String = "Register"
     static let guestString: String = "Guest Mode"
     static let settingsString: String = "Settings"
+    static let guestAlertTitle: String = "Limited Functionality"
+    static let guestAlertDescription: String = "Using the app as a guest only allows for limited functionality, continue?"
+    static let guestAlertContinue: String = "Yes"
+    static let guestAlertCancel: String = "No"
+}
+
+public struct ScreenIds {
+    static let homeScreenId: String = "HomeScreen"
 }
