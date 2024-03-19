@@ -14,3 +14,7 @@ public struct HomeScreenIcons {
     static let settingsIcon = "gearshape.fill"
     static let alertIcon = "exclamationmark.circle"
 }
+
+public struct LoginScreenIcons {
+    static let heartIcon = "heart-rate"
+}

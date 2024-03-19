@@ -19,6 +19,12 @@ public struct HomeScreenStrings {
     static let guestAlertCancel: String = "No"
 }
 
+public struct LoginViewStrings {
+    static let loginString: String = "Login"
+    static let usernameString: String = "Username"
+    static let passwordString: String = "Password"
+}
+
 public struct ScreenIds {
     static let homeScreenId: String = "HomeScreen"
 }

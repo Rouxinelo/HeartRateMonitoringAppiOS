@@ -15,9 +15,7 @@ struct CustomAlert: View {
     let description: String
     let onOK: () -> Void
     let onCancel: () -> Void
-    
-    @State private var offset: CGFloat = 1000
-    
+        
     var body: some View {
         ZStack {
             Color(.black)

@@ -11,7 +11,8 @@
 		6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2845FB2BA79BAC007A9D8E /* Strings.swift */; };
 		6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2845FD2BA7A39C007A9D8E /* Icons.swift */; };
 		6B2846012BA8E867007A9D8E /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846002BA8E867007A9D8E /* MainMenu.swift */; };
-		6B2846042BA8F1E9007A9D8E /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */; };
+		6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846062BAA35D1007A9D8E /* UserType.swift */; };
+		6B2846092BAA3936007A9D8E /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */; };
 		6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D79152BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift */; };
 		6B3D791A2BA793E7000DBE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D79192BA793E7000DBE1A /* Assets.xcassets */; };
 		6B3D791D2BA793E7000DBE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D791C2BA793E7000DBE1A /* Preview Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		6B3D79312BA793E7000DBE1A /* HeartRateMonitoringAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D79302BA793E7000DBE1A /* HeartRateMonitoringAppUITests.swift */; };
 		6B3D79332BA793E7000DBE1A /* HeartRateMonitoringAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D79322BA793E7000DBE1A /* HeartRateMonitoringAppUITestsLaunchTests.swift */; };
 		6B3D79432BA79525000DBE1A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D79422BA79525000DBE1A /* HomeScreen.swift */; };
+		6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,7 @@
 		6B2845FD2BA7A39C007A9D8E /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		6B2846002BA8E867007A9D8E /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		6B2846062BAA35D1007A9D8E /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		6B3D79122BA793E6000DBE1A /* HeartRateMonitoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3D79152BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateMonitoringAppApp.swift; sourceTree = "<group>"; };
 		6B3D79192BA793E7000DBE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		6B3D79302BA793E7000DBE1A /* HeartRateMonitoringAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateMonitoringAppUITests.swift; sourceTree = "<group>"; };
 		6B3D79322BA793E7000DBE1A /* HeartRateMonitoringAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateMonitoringAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6B3D79422BA79525000DBE1A /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,23 @@
 			path = MainMenu;
 			sourceTree = "<group>";
 		};
+		6B2846052BAA35B9007A9D8E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				6B2846062BAA35D1007A9D8E /* UserType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		6B2846082BAA38D4007A9D8E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */,
+				6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		6B3D79092BA793E6000DBE1A = {
 			isa = PBXGroup;
 			children = (
@@ -121,13 +142,14 @@
 		6B3D79142BA793E6000DBE1A /* HeartRateMonitoringApp */ = {
 			isa = PBXGroup;
 			children = (
+				6B2846082BAA38D4007A9D8E /* Components */,
+				6B2846052BAA35B9007A9D8E /* Enums */,
 				6B2845FA2BA79BA1007A9D8E /* Resources */,
 				6B3D79402BA79457000DBE1A /* Extensions */,
 				6B3D793F2BA79406000DBE1A /* Modules */,
 				6B3D79152BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift */,
 				6B3D79192BA793E7000DBE1A /* Assets.xcassets */,
 				6B3D791B2BA793E7000DBE1A /* Preview Content */,
-				6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */,
 			);
 			path = HeartRateMonitoringApp;
 			sourceTree = "<group>";
@@ -314,11 +336,13 @@
 			files = (
 				6B3D79432BA79525000DBE1A /* HomeScreen.swift in Sources */,
 				6B2846012BA8E867007A9D8E /* MainMenu.swift in Sources */,
+				6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */,
+				6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */,
 				6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */,
 				6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */,
 				6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */,
 				6B2845F92BA796E9007A9D8E /* Color.swift in Sources */,
-				6B2846042BA8F1E9007A9D8E /* CustomAlert.swift in Sources */,
+				6B2846092BAA3936007A9D8E /* CustomAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

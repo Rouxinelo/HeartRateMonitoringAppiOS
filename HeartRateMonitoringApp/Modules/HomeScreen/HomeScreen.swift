@@ -10,7 +10,9 @@ import SwiftUI
 struct HomeScreen: View {
     @State private var path = NavigationPath()
     @State private var showingAlert = false
-
+    @State private var showingLogin = false
+    @State private var userType: UserType = .guest
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
@@ -35,7 +37,7 @@ struct HomeScreen: View {
                     VStack(spacing: 20) {
                         HStack(spacing: 10) {
                             Button(action: {
-                                // Action for Login button
+                                self.showingLogin = true
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -114,17 +116,40 @@ struct HomeScreen: View {
                     }
                 }
                 if showingAlert {
-                    CustomAlert(isShowing: $showingAlert, icon: HomeScreenIcons.alertIcon, title: HomeScreenStrings.guestAlertTitle, description: HomeScreenStrings.guestAlertDescription, onOK: { enterAsGuest() }, onCancel: {})
+                    CustomAlert(isShowing: $showingAlert, 
+                                icon: HomeScreenIcons.alertIcon,
+                                title: HomeScreenStrings.guestAlertTitle,
+                                description: HomeScreenStrings.guestAlertDescription, 
+                                onOK: { enterAsGuest() },
+                                onCancel: {})
+                }
+                if showingLogin {
+                    LoginView(isShowing: $showingLogin, 
+                              onLogin: { username, password in
+                        performLogin(username: username, password: password)
+                    })
                 }
             }
             .navigationDestination(for: String.self) { view in
                 if view == ScreenIds.homeScreenId {
-                    MainMenu()
+                    MainMenu(userType: userType)
                 }}
         }
     }
     
     func enterAsGuest() {
+        userType = .guest
+        path.append(ScreenIds.homeScreenId)
+        showingAlert = false
+    }
+    
+    func performLogin(username: String, password: String) {
+        // Create Login Functionality here
+        print("Username: \(username), Password \(password)")
+    }
+    
+    func loginSuccessfull(username: String) {
+        userType = .login(username)
         path.append(ScreenIds.homeScreenId)
         showingAlert = false
     }

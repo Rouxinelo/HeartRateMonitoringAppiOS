@@ -8,12 +8,27 @@
 import SwiftUI
 
 struct MainMenu: View {
+    let userType: UserType
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        Color.red
+        ZStack {
+            Color.red.ignoresSafeArea()
+            VStack {
+                Text(getUserType()).font(.headline).fontWeight(.bold)
+            }
+        }
+    }
+    
+    func getUserType() -> String {
+        switch userType {
+        case .guest:
+            return "Hello, Guest"
+        case .login(let name):
+            return "Hello, \(name)"
+        }
     }
 }
 
 #Preview {
-    MainMenu()
+    MainMenu(userType: .guest)
 }
