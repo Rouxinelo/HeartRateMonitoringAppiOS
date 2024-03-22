@@ -22,7 +22,10 @@ struct LoginView: View {
                     close()
                 }
             VStack {
-                Image(LoginScreenIcons.heartIcon).resizable().scaledToFit().frame(width: 50, height: 50)
+                Image(LoginScreenIcons.heartIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
                 Spacer(minLength: 20)
                 Text(LoginViewStrings.loginString)
                     .font(.title)

@@ -16,23 +16,16 @@ struct HomeScreen: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                LinearGradient(gradient:
-                                Gradient(colors: [Color.backgroundLightYellow, Color.backgroundLightOrange]),
-                               startPoint: .topLeading,
-                               endPoint: .bottomLeading)
-                .edgesIgnoringSafeArea(.all)
-                
-                VStack(spacing: 50) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(Color(uiColor: .lightGray))
-                        .frame(width: 250, height: 250)
-                        .overlay(
-                            Text(HomeScreenStrings.titleString)
-                                .font(.headline)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.white)
-                                .padding()
-                        )
+                VStack(spacing: 30) {
+                    Image(LoginScreenIcons.heartIcon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                    Text(HomeScreenStrings.titleString)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
                         .padding()
                     VStack(spacing: 20) {
                         HStack(spacing: 10) {
@@ -50,7 +43,7 @@ struct HomeScreen: View {
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
-                                .background(Color.buttonDarkBlue)
+                                .background(.red)
                                 .foregroundColor(.white)
                                 .cornerRadius(20)
                             }
@@ -68,7 +61,7 @@ struct HomeScreen: View {
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
-                                .background(Color.buttonDarkBlue)
+                                .background(.red)
                                 .foregroundColor(.white)
                                 .cornerRadius(20)
                             }
@@ -89,7 +82,7 @@ struct HomeScreen: View {
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
-                                .background(Color.buttonDarkBlue)
+                                .background(.red)
                                 .foregroundColor(.white)
                                 .cornerRadius(20)
                             }
@@ -107,7 +100,7 @@ struct HomeScreen: View {
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
-                                .background(Color.buttonDarkBlue)
+                                .background(.red)
                                 .foregroundColor(.white)
                                 .cornerRadius(20)
                             }
@@ -119,9 +112,11 @@ struct HomeScreen: View {
                     CustomAlert(isShowing: $showingAlert, 
                                 icon: HomeScreenIcons.alertIcon,
                                 title: HomeScreenStrings.guestAlertTitle,
-                                description: HomeScreenStrings.guestAlertDescription, 
-                                onOK: { enterAsGuest() },
-                                onCancel: {})
+                                leftButtonText: "Cancel",
+                                rightButtonText: "Ok",
+                                description: HomeScreenStrings.guestAlertDescription,
+                                leftButtonAction: {},
+                                rightButtonAction: { enterAsGuest() })
                 }
                 if showingLogin {
                     LoginView(isShowing: $showingLogin, 

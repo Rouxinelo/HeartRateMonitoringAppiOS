@@ -18,3 +18,14 @@ public struct HomeScreenIcons {
 public struct LoginScreenIcons {
     static let heartIcon = "heart-rate"
 }
+
+public struct MainMenuSectionIcons {
+    static let warningIcon = "exclamationmark.circle.fill"
+}
+
+public struct MainMenuIcons {
+    static let myClassesIcon = "book.fill"
+    static let calendarIcon = "calendar"
+    static let userIcon = "person.fill"
+    static let logoutIcon = "power"
+}

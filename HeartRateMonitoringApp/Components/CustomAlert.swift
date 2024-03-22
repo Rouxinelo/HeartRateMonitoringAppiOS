@@ -12,9 +12,11 @@ struct CustomAlert: View {
     
     let icon: String
     let title: String
+    let leftButtonText: String
+    let rightButtonText: String
     let description: String
-    let onOK: () -> Void
-    let onCancel: () -> Void
+    let leftButtonAction: () -> Void
+    let rightButtonAction: () -> Void
         
     var body: some View {
         ZStack {
@@ -43,10 +45,10 @@ struct CustomAlert: View {
                 
                 HStack(spacing: 20) {
                     Button(action: {
-                        onCancel()
+                        leftButtonAction()
                         close()
                     }, label: {
-                        Text("Cancel")
+                        Text(leftButtonText)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(.red)
@@ -55,10 +57,10 @@ struct CustomAlert: View {
                     })
                     
                     Button(action: {
-                        onOK()
+                        rightButtonAction()
                         close()
                     }, label: {
-                        Text("Ok")
+                        Text(rightButtonText)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(.red)
@@ -82,6 +84,6 @@ struct CustomAlert: View {
 }
 
 #Preview {
-    CustomAlert(isShowing: .constant(true), icon: "exclamationmark.circle", title: "Test Title", description: "Test Description", onOK: {}, onCancel: {})
+    CustomAlert(isShowing: .constant(true), icon: "exclamationmark.circle", title: "Test Title", leftButtonText: "left", rightButtonText: "right", description: "Test Description", leftButtonAction: {}, rightButtonAction: {})
 }
 
