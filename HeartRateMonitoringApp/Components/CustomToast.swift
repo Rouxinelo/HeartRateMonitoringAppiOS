@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct CustomToast: View {
-    @State private var yOffset: CGFloat = -200
-    
     @Binding var isShowing: Bool
+    @State private var yOffset: CGFloat = -200
 
     var iconName: String
     var message: String

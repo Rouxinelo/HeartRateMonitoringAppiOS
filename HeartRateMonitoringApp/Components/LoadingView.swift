@@ -9,7 +9,8 @@ import SwiftUI
 
 struct LoadingView: View {
     @Binding var isShowing: Bool
-        
+    @State private var yOffset: CGFloat = 1000
+
     let title: String
     let description: String
     
@@ -42,8 +43,15 @@ struct LoadingView: View {
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 20)
+            .offset(y: yOffset)
+            .animation(.spring())
         }
         .ignoresSafeArea()
+        .onAppear {
+            withAnimation {
+                yOffset = 0
+            }
+        }
     }
     
     func close() {

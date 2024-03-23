@@ -12,6 +12,8 @@ struct LoginView: View {
     @Binding var isShowing: Bool
     @State private var username = ""
     @State private var password = ""
+    @State private var yOffset: CGFloat = 1000
+    
     var onLogin: (String, String) -> Void
     
     var body: some View {
@@ -60,8 +62,15 @@ struct LoginView: View {
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 20)
-        }        
+            .offset(y: yOffset)
+            .animation(.spring())
+        }
         .ignoresSafeArea()
+        .onAppear {
+            withAnimation {
+                yOffset = 0
+            }
+        }
     }
     
     func close() {

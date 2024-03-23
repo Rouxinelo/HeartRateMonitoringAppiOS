@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CustomAlert: View {
     @Binding var isShowing: Bool
-    
+    @State private var yOffset: CGFloat = 1000
+
     let icon: String
     let title: String
     let leftButtonText: String
@@ -74,8 +75,15 @@ struct CustomAlert: View {
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 20)
+            .offset(y: yOffset)
+            .animation(.spring())
         }
         .ignoresSafeArea()
+        .onAppear {
+            withAnimation {
+                yOffset = 0
+            }
+        }
     }
     
     func close() {
