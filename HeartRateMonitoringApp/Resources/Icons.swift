@@ -27,6 +27,12 @@ public struct CustomToastIcons {
     static let xIcon = "xmark"
 }
 
+public struct languageSelectorViewIcons {
+    static let heartIcon = "heart-rate"
+    static let portugueseIcon = "portugueseFlag"
+    static let englishIcon = "englishFlag"
+}
+
 public struct MainMenuIcons {
     static let myClassesIcon = "book.fill"
     static let calendarIcon = "calendar"

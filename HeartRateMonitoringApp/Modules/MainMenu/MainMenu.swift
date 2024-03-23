@@ -86,7 +86,6 @@ struct MainMenu: View {
             if showingToast {
                 CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
             }
-            
         }.navigationBarBackButtonHidden()
     }
     

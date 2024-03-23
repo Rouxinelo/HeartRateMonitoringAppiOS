@@ -11,6 +11,8 @@ struct HomeScreen: View {
     @State private var path = NavigationPath()
     @State private var showingAlert = false
     @State private var showingLogin = false
+    @State private var showingLanguageSelector = false
+    @State private var showingToast = false
     @State private var userType: UserType = .guest
     
     var body: some View {
@@ -48,7 +50,7 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                             }
                             Button(action: {
-                                // Action for Register button
+                                showingToast = true
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -87,7 +89,7 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                             }
                             Button(action: {
-                                // Action for Settings button
+                                showingLanguageSelector = true
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -95,7 +97,7 @@ struct HomeScreen: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                    Text(HomeScreenStrings.settingsString)
+                                    Text(HomeScreenStrings.languageString)
                                         .font(.headline)
                                         .padding()
                                 }
@@ -124,6 +126,14 @@ struct HomeScreen: View {
                         performLogin(username: username, password: password)
                     })
                 }
+                if showingLanguageSelector {
+                    LanguageSelectorView(isShowing: $showingLanguageSelector, 
+                                         onLanguageChange: { handleLanguageSelection()
+                    })
+                }
+                if showingToast {
+                    CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
+                }
             }
             .navigationDestination(for: String.self) { view in
                 if view == ScreenIds.homeScreenId {
@@ -143,10 +153,15 @@ struct HomeScreen: View {
         print("Username: \(username), Password \(password)")
     }
     
-    func loginSuccessfull(username: String) {
+    func loginSuccessful(username: String) {
         userType = .login(username)
         path.append(ScreenIds.homeScreenId)
         showingAlert = false
+    }
+    
+    func handleLanguageSelection() {
+        guard let languageCode = UserDefaults.standard.string(forKey: "AppLanguage") else { return }
+        print("New Selected Language: \(languageCode)")
     }
 }
 

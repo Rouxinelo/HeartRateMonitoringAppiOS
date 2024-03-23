@@ -12,7 +12,7 @@ public struct HomeScreenStrings {
     static let loginString: String = "Login"
     static let registerString: String = "Register"
     static let guestString: String = "Guest Mode"
-    static let settingsString: String = "Settings"
+    static let languageString: String = "Language"
     static let guestAlertTitle: String = "Limited Functionality"
     static let guestAlertDescription: String = "Using the app as a guest only allows for limited functionality, continue?"
     static let guestAlertContinue: String = "Yes"
@@ -41,6 +41,14 @@ public struct LoginViewStrings {
     static let loginString: String = "Login"
     static let usernameString: String = "Username"
     static let passwordString: String = "Password"
+}
+
+public struct LanguageSelectorViewStrings {
+    static let titleString: String = "Select Language"
+    static let descriptionString: String = "Changing this will change the app's language"
+    static let portugueseString: String = "pt"
+    static let englishString: String = "en"
+    static let confirmString: String = "Confirm"
 }
 
 public struct ScreenIds {
