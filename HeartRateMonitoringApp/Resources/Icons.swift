@@ -23,6 +23,10 @@ public struct MainMenuSectionIcons {
     static let warningIcon = "exclamationmark.circle.fill"
 }
 
+public struct CustomToastIcons {
+    static let xIcon = "xmark"
+}
+
 public struct MainMenuIcons {
     static let myClassesIcon = "book.fill"
     static let calendarIcon = "calendar"

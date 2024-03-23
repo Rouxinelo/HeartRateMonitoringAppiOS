@@ -11,6 +11,7 @@ struct MainMenu: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showingAlert = false
     @State private var isLoading = false
+    @State private var showingToast = false
     
     let userType: UserType
     
@@ -36,13 +37,17 @@ struct MainMenu: View {
                                     sectionTitle: MainMenuStrings.classesSectionTitle,
                                     sectionDescription: MainMenuStrings.classesSectionDescription,
                                     isGuestMode: false,
-                                    sectionAction: {})
+                                    sectionAction: {
+                        showingToast = true
+                    })
                     MainMenuSection(sectionColor: .green,
                                     sectionIcon: MainMenuIcons.calendarIcon,
                                     sectionTitle: MainMenuStrings.calendarSectionTitle,
                                     sectionDescription: MainMenuStrings.calendarSectionDescription,
                                     isGuestMode: false,
-                                    sectionAction: {})
+                                    sectionAction: {
+                        showingToast = true
+                    })
                 }
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .yellow,
@@ -50,13 +55,16 @@ struct MainMenu: View {
                                     sectionTitle: MainMenuStrings.userInfoSectionTitle,
                                     sectionDescription: MainMenuStrings.userInfoSectionDescription,
                                     isGuestMode: false,
-                                    sectionAction: {})
+                                    sectionAction: {
+                        showingToast = true
+                    })
                     MainMenuSection(sectionColor: .blue,
                                     sectionIcon: MainMenuIcons.logoutIcon,
                                     sectionTitle: isGuest() ? MainMenuStrings.leaveSectionsTitle : MainMenuStrings.logoutSectionsTitle,
                                     sectionDescription: MainMenuStrings.logoutSectionDescription,
                                     isGuestMode: false,
-                                    sectionAction: { showingAlert = true })
+                                    sectionAction: { 
+                        showingAlert = true })
                 }
             }
             
@@ -73,6 +81,10 @@ struct MainMenu: View {
             
             if isLoading {
                 LoadingView(isShowing: $isLoading, title: MainMenuStrings.loadingViewTitle, description: MainMenuStrings.loadingViewDescription)
+            }
+            
+            if showingToast {
+                CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
             }
             
         }.navigationBarBackButtonHidden()
