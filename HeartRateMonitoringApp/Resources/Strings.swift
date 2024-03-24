@@ -53,6 +53,13 @@ public struct LanguageSelectorViewStrings {
     static let confirmString: String = "Confirm"
 }
 
+public struct UserDetailTypeStrings {
+    static let nameString: String = "Name"
+    static let emailString: String = "Email"
+    static let genderString: String = "Gender"
+    static let ageString: String = "Age"
+}
+
 public struct ScreenIds {
     static let homeScreenId: String = "HomeScreen"
 }
