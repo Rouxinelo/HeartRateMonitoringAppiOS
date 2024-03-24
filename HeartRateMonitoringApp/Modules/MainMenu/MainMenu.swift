@@ -47,7 +47,7 @@ struct MainMenu: View {
                                     sectionDescription: MainMenuStrings.calendarSectionDescription,
                                     isUnavailable: false,
                                     sectionAction: {
-                        showingToast = true
+                        goToCalendar()
                     })
                 }
                 HStack (spacing: 5) {
@@ -82,21 +82,49 @@ struct MainMenu: View {
             }
             
             if isLoading {
-                LoadingView(isShowing: $isLoading, 
+                LoadingView(isShowing: $isLoading,
                             title: MainMenuStrings.loadingViewTitle,
                             description: MainMenuStrings.loadingViewDescription)
             }
             
             if showingToast {
-                CustomToast(isShowing: $showingToast, 
+                CustomToast(isShowing: $showingToast,
                             iconName: "info.circle.fill",
                             message: "Coming Soon")
             }
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
-        })
+        }).navigationDestination(for: [Session].self, destination: { sessions in
+            CalendarScreen(sessions: sessions)})
         .navigationBarBackButtonHidden()
-            
+        
+    }
+    func goToCalendar() {
+        path.append([Session(name: "Pilates Clinico",
+                             date: "24/03",
+                             hour: "19h",
+                             teacher: "J. Rouxinol",
+                             totalSpots: 10,
+                             filledSpots: 10),
+                     Session(name: "Fisioterapia",
+                             date: "30/03",
+                             hour: "23h",
+                             teacher: "J. Saias",
+                             totalSpots: 15,
+                             filledSpots: 5),
+                     Session(name: "Yoga",
+                             date: "14/04",
+                             hour: "12h",
+                             teacher: "John Doe",
+                             totalSpots: 10,
+                             filledSpots: 10),
+                     Session(name: "Alongamentos",
+                             date: "20/0403",
+                             hour: "14h",
+                             teacher: "Example Name",
+                             totalSpots: 15,
+                             filledSpots: 5)]
+        )
     }
     
     func goToUserDetail() {
