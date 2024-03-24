@@ -10,9 +10,11 @@ import SwiftUI
 struct HomeScreen: View {
     @State private var path = NavigationPath()
     @State private var showingAlert = false
+    @State private var showingFailedLoginAlert = false
     @State private var showingLogin = false
     @State private var showingLanguageSelector = false
     @State private var showingToast = false
+    @State private var isLoading = false
     @State private var userType: UserType = .guest
     
     var body: some View {
@@ -118,7 +120,19 @@ struct HomeScreen: View {
                                 rightButtonText: "Ok",
                                 description: HomeScreenStrings.guestAlertDescription,
                                 leftButtonAction: {},
-                                rightButtonAction: { enterAsGuest() })
+                                rightButtonAction: { enterAsGuest() }, 
+                                isSingleButton: false)
+                }
+                if showingFailedLoginAlert {
+                    CustomAlert(isShowing: $showingFailedLoginAlert,
+                                icon: HomeScreenIcons.alertIcon,
+                                title: HomeScreenStrings.guestAlertTitle,
+                                leftButtonText: "Cancel",
+                                rightButtonText: "",
+                                description: HomeScreenStrings.guestAlertDescription,
+                                leftButtonAction: {},
+                                rightButtonAction: {},
+                                isSingleButton: true)
                 }
                 if showingLogin {
                     LoginView(isShowing: $showingLogin, 
@@ -133,6 +147,9 @@ struct HomeScreen: View {
                 }
                 if showingToast {
                     CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
+                }
+                if isLoading {
+                    LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
                 }
             }
             .navigationDestination(for: String.self) { view in
@@ -149,14 +166,22 @@ struct HomeScreen: View {
     }
     
     func performLogin(username: String, password: String) {
-        // Create Login Functionality here
+        isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            isLoading = false
+            // Implement login logic here
+            if username == "Teste", password == "teste" {
+                loginSuccessful(username: username)
+            } else {
+                showingFailedLoginAlert = true
+            }
+        }
         print("Username: \(username), Password \(password)")
     }
     
     func loginSuccessful(username: String) {
         userType = .login(username)
         path.append(ScreenIds.homeScreenId)
-        showingAlert = false
     }
     
     func handleLanguageSelection() {

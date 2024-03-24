@@ -17,6 +17,8 @@ public struct HomeScreenStrings {
     static let guestAlertDescription: String = "Using the app as a guest only allows for limited functionality, continue?"
     static let guestAlertContinue: String = "Yes"
     static let guestAlertCancel: String = "No"
+    static let loginLoadingTitle: String = "Logging In!"
+    static let loginLoadingDescription: String = "Please wait..."
 }
 
 public struct MainMenuStrings {

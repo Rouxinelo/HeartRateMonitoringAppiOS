@@ -18,6 +18,7 @@ struct CustomAlert: View {
     let description: String
     let leftButtonAction: () -> Void
     let rightButtonAction: () -> Void
+    var isSingleButton: Bool
         
     var body: some View {
         ZStack {
@@ -56,18 +57,19 @@ struct CustomAlert: View {
                             .foregroundColor(.white)
                             .cornerRadius(20)
                     })
-                    
-                    Button(action: {
-                        rightButtonAction()
-                        close()
-                    }, label: {
-                        Text(rightButtonText)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                    })
+                    if !isSingleButton {
+                        Button(action: {
+                            rightButtonAction()
+                            close()
+                        }, label: {
+                            Text(rightButtonText)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(20)
+                        })
+                    }
                 }
             }
             .frame(width: 300)
@@ -92,6 +94,6 @@ struct CustomAlert: View {
 }
 
 #Preview {
-    CustomAlert(isShowing: .constant(true), icon: "exclamationmark.circle", title: "Test Title", leftButtonText: "left", rightButtonText: "right", description: "Test Description", leftButtonAction: {}, rightButtonAction: {})
+    CustomAlert(isShowing: .constant(true), icon: "exclamationmark.circle", title: "Test Title", leftButtonText: "left", rightButtonText: "right", description: "Test Description", leftButtonAction: {}, rightButtonAction: {}, isSingleButton: false)
 }
 

@@ -36,7 +36,7 @@ struct MainMenu: View {
                                     sectionIcon: MainMenuIcons.myClassesIcon,
                                     sectionTitle: MainMenuStrings.classesSectionTitle,
                                     sectionDescription: MainMenuStrings.classesSectionDescription,
-                                    isGuestMode: false,
+                                    isUnavailable: isGuest(),
                                     sectionAction: {
                         showingToast = true
                     })
@@ -44,7 +44,7 @@ struct MainMenu: View {
                                     sectionIcon: MainMenuIcons.calendarIcon,
                                     sectionTitle: MainMenuStrings.calendarSectionTitle,
                                     sectionDescription: MainMenuStrings.calendarSectionDescription,
-                                    isGuestMode: false,
+                                    isUnavailable: false,
                                     sectionAction: {
                         showingToast = true
                     })
@@ -54,7 +54,7 @@ struct MainMenu: View {
                                     sectionIcon: MainMenuIcons.userIcon,
                                     sectionTitle: MainMenuStrings.userInfoSectionTitle,
                                     sectionDescription: MainMenuStrings.userInfoSectionDescription,
-                                    isGuestMode: false,
+                                    isUnavailable: isGuest(),
                                     sectionAction: {
                         showingToast = true
                     })
@@ -62,7 +62,7 @@ struct MainMenu: View {
                                     sectionIcon: MainMenuIcons.logoutIcon,
                                     sectionTitle: isGuest() ? MainMenuStrings.leaveSectionsTitle : MainMenuStrings.logoutSectionsTitle,
                                     sectionDescription: MainMenuStrings.logoutSectionDescription,
-                                    isGuestMode: false,
+                                    isUnavailable: false,
                                     sectionAction: { 
                         showingAlert = true })
                 }
@@ -76,7 +76,8 @@ struct MainMenu: View {
                             rightButtonText: "Ok",
                             description: MainMenuStrings.logoutAlertDescription,
                             leftButtonAction: {},
-                            rightButtonAction: { beginLogoutAnimation() })
+                            rightButtonAction: { beginLogoutAnimation() },
+                            isSingleButton: false)
             }
             
             if isLoading {

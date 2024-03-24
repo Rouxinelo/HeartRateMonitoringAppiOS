@@ -12,16 +12,16 @@ struct MainMenuSection: View {
     let sectionIcon: String
     let sectionTitle: String
     let sectionDescription: String
-    let isGuestMode: Bool
+    let isUnavailable: Bool
     let sectionAction: (() -> Void)
     
     var body: some View {
         Button(action: {
-            if !isGuestMode { sectionAction() }
+            if !isUnavailable { sectionAction() }
         }) {
             ZStack {
                 VStack(spacing:0) {
-                    Image(systemName: isGuestMode ? MainMenuSectionIcons.warningIcon : sectionIcon)
+                    Image(systemName: isUnavailable ? MainMenuSectionIcons.warningIcon : sectionIcon)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40, height: 40)
@@ -30,18 +30,18 @@ struct MainMenuSection: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
-                    Text(isGuestMode ? "Unavailable in Guest Mode": sectionDescription)
+                    Text(isUnavailable ? "Unavailable in Guest Mode": sectionDescription)
                 }
                 .frame(width: 180, height: 200, alignment: .top)
-                .background(isGuestMode ? .gray : sectionColor)
+                .background(isUnavailable ? .gray : sectionColor)
                 .foregroundColor(.white)
                 .cornerRadius(20)
             }
         }
-        .disabled(isGuestMode)
+        .disabled(isUnavailable)
     }
 }
 
 #Preview {
-    MainMenuSection(sectionColor: .red, sectionIcon: "arrow.clockwise.circle", sectionTitle: "Test", sectionDescription: "Test Description", isGuestMode: false, sectionAction: {})
+    MainMenuSection(sectionColor: .red, sectionIcon: "arrow.clockwise.circle", sectionTitle: "Test", sectionDescription: "Test Description", isUnavailable: false, sectionAction: {})
 }
