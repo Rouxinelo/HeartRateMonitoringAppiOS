@@ -23,7 +23,6 @@ struct HomeScreen: View {
                 VStack(spacing: 30) {
                     Image(LoginScreenIcons.heartIcon)
                         .resizable()
-                        .scaledToFit()
                         .frame(width: 150, height: 150)
                     Text(HomeScreenStrings.titleString)
                         .font(.largeTitle)
