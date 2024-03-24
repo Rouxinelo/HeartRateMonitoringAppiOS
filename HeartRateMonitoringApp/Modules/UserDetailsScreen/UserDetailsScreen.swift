@@ -13,10 +13,9 @@ struct UserDetail: Hashable {
 }
 
 struct UserDetailsScreen: View {
-    let details: [UserDetail] = [UserDetail(detailType: .name, description: "test name"),
-                                 UserDetail(detailType: .email, description: "testemail@testemail.com"),
-                                 UserDetail(detailType: .gender, description: "M"),
-                                 UserDetail(detailType: .age, description: "50")]
+    @Environment(\.presentationMode) var presentationMode
+    @State var details: [UserDetail]
+    
     var body: some View {
         VStack (alignment: .center, spacing: 50){
             VStack (alignment: .center, spacing: 25){
@@ -35,7 +34,14 @@ struct UserDetailsScreen: View {
                 }
             }
             Spacer()
-        }.padding()
+        }
+        .padding()
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                CustomBackButton(onClick: { back() })
+            }
+        }
     }
     
     func getInitials(for details: [UserDetail]) -> String {
@@ -51,8 +57,15 @@ struct UserDetailsScreen: View {
         }
         return nil
     }
+    
+    func back() {
+        presentationMode.wrappedValue.dismiss()
+    }
 }
 
 #Preview {
-    UserDetailsScreen()
+    UserDetailsScreen(details: [UserDetail(detailType: .name, description: "test name"),
+                                UserDetail(detailType: .email, description: "testemail@testemail.com"),
+                                UserDetail(detailType: .gender, description: "M"),
+                                UserDetail(detailType: .age, description: "50")])
 }
