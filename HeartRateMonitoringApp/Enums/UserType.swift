@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UserType {
+public enum UserType: Hashable {
     case guest
     case login(String)
 }

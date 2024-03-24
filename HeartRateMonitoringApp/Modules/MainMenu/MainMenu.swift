@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainMenu: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
     @State private var showingAlert = false
     @State private var isLoading = false
     @State private var showingToast = false
@@ -56,14 +57,14 @@ struct MainMenu: View {
                                     sectionDescription: MainMenuStrings.userInfoSectionDescription,
                                     isUnavailable: isGuest(),
                                     sectionAction: {
-                        showingToast = true
+                        goToUserDetail()
                     })
                     MainMenuSection(sectionColor: .blue,
                                     sectionIcon: MainMenuIcons.logoutIcon,
                                     sectionTitle: isGuest() ? MainMenuStrings.leaveSectionsTitle : MainMenuStrings.logoutSectionsTitle,
                                     sectionDescription: MainMenuStrings.logoutSectionDescription,
                                     isUnavailable: false,
-                                    sectionAction: { 
+                                    sectionAction: {
                         showingAlert = true })
                 }
             }.padding()
@@ -81,13 +82,28 @@ struct MainMenu: View {
             }
             
             if isLoading {
-                LoadingView(isShowing: $isLoading, title: MainMenuStrings.loadingViewTitle, description: MainMenuStrings.loadingViewDescription)
+                LoadingView(isShowing: $isLoading, 
+                            title: MainMenuStrings.loadingViewTitle,
+                            description: MainMenuStrings.loadingViewDescription)
             }
             
             if showingToast {
-                CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
+                CustomToast(isShowing: $showingToast, 
+                            iconName: "info.circle.fill",
+                            message: "Coming Soon")
             }
-        }.navigationBarBackButtonHidden()
+        }.navigationDestination(for: [UserDetail].self, destination: { detail in
+            UserDetailsScreen(details: detail)
+        })
+        .navigationBarBackButtonHidden()
+            
+    }
+    
+    func goToUserDetail() {
+        path.append([UserDetail(detailType: .name, description: "test name"),
+                     UserDetail(detailType: .email, description: "testemail@testemail.com"),
+                     UserDetail(detailType: .gender, description: "M"),
+                     UserDetail(detailType: .age, description: "50")])
     }
     
     func logout() {
@@ -123,5 +139,5 @@ struct MainMenu: View {
 }
 
 #Preview {
-    MainMenu(userType: .guest)
+    MainMenu(path: .constant(NavigationPath()), userType: .login("João"))
 }

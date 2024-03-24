@@ -152,16 +152,15 @@ struct HomeScreen: View {
                     LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
                 }
             }
-            .navigationDestination(for: String.self) { view in
-                if view == ScreenIds.homeScreenId {
-                    MainMenu(userType: userType)
-                }}
+            .navigationDestination(for: UserType.self) { screenID in
+                MainMenu(path: $path, userType: userType)
+            }
         }
     }
     
     func enterAsGuest() {
         userType = .guest
-        path.append(ScreenIds.homeScreenId)
+        path.append(userType)
         showingAlert = false
     }
     
@@ -181,7 +180,7 @@ struct HomeScreen: View {
     
     func loginSuccessful(username: String) {
         userType = .login(username)
-        path.append(ScreenIds.homeScreenId)
+        path.append(userType)
     }
     
     func handleLanguageSelection() {
