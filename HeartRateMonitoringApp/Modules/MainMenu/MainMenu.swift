@@ -66,7 +66,7 @@ struct MainMenu: View {
                                     sectionAction: { 
                         showingAlert = true })
                 }
-            }
+            }.padding()
             
             if showingAlert {
                 CustomAlert(isShowing: $showingAlert,
