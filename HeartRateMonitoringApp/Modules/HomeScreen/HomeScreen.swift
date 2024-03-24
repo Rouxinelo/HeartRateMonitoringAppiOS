@@ -125,10 +125,10 @@ struct HomeScreen: View {
                 if showingFailedLoginAlert {
                     CustomAlert(isShowing: $showingFailedLoginAlert,
                                 icon: HomeScreenIcons.alertIcon,
-                                title: HomeScreenStrings.guestAlertTitle,
-                                leftButtonText: "Cancel",
+                                title: HomeScreenStrings.loginFailedTitle,
+                                leftButtonText: "Ok",
                                 rightButtonText: "",
-                                description: HomeScreenStrings.guestAlertDescription,
+                                description: HomeScreenStrings.loginFailedDescription,
                                 leftButtonAction: {},
                                 rightButtonAction: {},
                                 isSingleButton: true)

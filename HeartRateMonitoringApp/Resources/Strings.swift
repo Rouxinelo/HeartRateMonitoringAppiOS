@@ -19,6 +19,8 @@ public struct HomeScreenStrings {
     static let guestAlertCancel: String = "No"
     static let loginLoadingTitle: String = "Logging In!"
     static let loginLoadingDescription: String = "Please wait..."
+    static let loginFailedTitle: String = "Login Failed"
+    static let loginFailedDescription: String = "Invalid credentials"
 }
 
 public struct MainMenuStrings {
