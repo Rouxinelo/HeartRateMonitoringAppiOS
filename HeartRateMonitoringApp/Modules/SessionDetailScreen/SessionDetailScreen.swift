@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SessionDetailScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var didSignIn: Bool
     @State var session: Session
     @State var imageName: String = "exercise-cartoon-1"
     
@@ -100,6 +101,7 @@ struct SessionDetailScreen: View {
     
     func didPressSignIn() {
         back()
+        didSignIn = true
     }
     
     func getRandomImage() -> String {
@@ -110,10 +112,10 @@ struct SessionDetailScreen: View {
 }
 
 #Preview {
-    SessionDetailScreen(session: Session(name: "Example Session", 
-                                         date: "11/11",
-                                         hour: "11h",
-                                         teacher: "Example Teacher",
-                                         totalSpots: 10,
-                                         filledSpots: 9))
+    SessionDetailScreen(didSignIn: .constant(true), session: Session(name: "Example Session",
+                                                                    date: "11/11",
+                                                                    hour: "11h",
+                                                                    teacher: "Example Teacher",
+                                                                    totalSpots: 10,
+                                                                    filledSpots: 9))
 }
