@@ -95,10 +95,10 @@ struct MainMenu: View {
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
-            CalendarScreen(sessions: sessions)})
+            CalendarScreen(path: $path, sessions: sessions)})
         .navigationBarBackButtonHidden()
-        
     }
+    
     func goToCalendar() {
         path.append([Session(name: "Pilates Clinico",
                              date: "24/03",

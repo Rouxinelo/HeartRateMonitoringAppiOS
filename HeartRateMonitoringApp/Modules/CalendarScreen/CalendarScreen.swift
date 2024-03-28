@@ -19,7 +19,9 @@ struct Session: Hashable {
 
 struct CalendarScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
     @State var sessions: [Session]
+    
     var body: some View {
         VStack (alignment: .center, spacing: 50){
             Text("Available Sessions")
@@ -33,12 +35,15 @@ struct CalendarScreen: View {
                                     teacher: session.teacher,
                                     occupation: getOccupationString(totalSpots: session.totalSpots,
                                                                     occupiedSpots: session.filledSpots),
-                                    onClick: {})
+                                    onClick: { clickedSession(session) })
                 }
             }
             Spacer()
         }
         .padding()
+        .navigationDestination(for: Session.self, destination: { session in
+            // Add session detail screen
+        })
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -54,19 +59,23 @@ struct CalendarScreen: View {
     func getOccupationString(totalSpots: Int, occupiedSpots: Int) -> String {
         "\(occupiedSpots)/\(totalSpots)"
     }
+    
+    func clickedSession(_ session: Session) {
+        path.append(session)
+    }
 }
 
 #Preview {
-    CalendarScreen(sessions: [Session(name: "Pilates Clinico",
-                                                date: "24/03",
-                                                hour: "19h",
-                                                teacher: "J. Rouxinol",
-                                                totalSpots: 10,
-                                                filledSpots: 10),
-                                        Session(name: "Fisioterapia",
-                                                date: "30/03",
-                                                hour: "23h",
-                                                teacher: "J. Saias",
-                                                totalSpots: 15,
-                                                filledSpots: 5)])
+    CalendarScreen(path: .constant(NavigationPath()), sessions: [Session(name: "Pilates Clinico",
+                                                                         date: "24/03",
+                                                                         hour: "19h",
+                                                                         teacher: "J. Rouxinol",
+                                                                         totalSpots: 10,
+                                                                         filledSpots: 10),
+                                                                 Session(name: "Fisioterapia",
+                                                                         date: "30/03",
+                                                                         hour: "23h",
+                                                                         teacher: "J. Saias",
+                                                                         totalSpots: 15,
+                                                                         filledSpots: 5)])
 }
