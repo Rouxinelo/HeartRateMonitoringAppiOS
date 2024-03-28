@@ -23,11 +23,11 @@ struct CalendarScreen: View {
     @State var sessions: [Session]
     
     var body: some View {
-        VStack (alignment: .center, spacing: 50){
+        VStack (alignment: .center, spacing: 50) {
             Text("Available Sessions")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            VStack {
+            VStack (spacing: 0) {
                 ForEach(sessions, id: \.self) { session in
                     CalendarSection(title: session.name, 
                                     date: session.date,
@@ -37,12 +37,12 @@ struct CalendarScreen: View {
                                                                     occupiedSpots: session.filledSpots),
                                     onClick: { clickedSession(session) })
                 }
-            }
+            }.scrollOnOverflow()
             Spacer()
         }
         .padding()
         .navigationDestination(for: Session.self, destination: { session in
-            // Add session detail screen
+            SessionDetailScreen(session: session)
         })
         .navigationBarBackButtonHidden()
         .toolbar {

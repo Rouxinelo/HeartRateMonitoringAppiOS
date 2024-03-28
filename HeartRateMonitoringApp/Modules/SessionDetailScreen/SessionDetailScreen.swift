@@ -10,24 +10,24 @@ import SwiftUI
 struct SessionDetailScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @State var session: Session
-
+    @State var imageName: String = "exercise-cartoon-1"
+    
     var body: some View {
         VStack (alignment: .center, spacing: 20) {
             Text("About This Session")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            
-            VStack (spacing: 15){
+            VStack (spacing: 10){
                 HStack {
-                    Image("exercise-cartoon-5")
+                    Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 200)
+                        .frame(height: 180)
                         .cornerRadius(20)
                         .shadow(radius: 20)
                 }
                 HStack {
-                    Text("Session Name")
+                    Text(session.name)
                         .font(.title)
                         .fontWeight(.bold)
                     Spacer()
@@ -35,7 +35,7 @@ struct SessionDetailScreen: View {
                 VStack (spacing: 0) {
                     HStack {
                         Image(systemName: "book.fill")
-                        Text("J Rouxinol")
+                        Text(session.teacher)
                             .font(.headline)
                             .fontWeight(.bold)
                         Spacer()
@@ -53,17 +53,17 @@ struct SessionDetailScreen: View {
                     }
                 }
                 
-                VStack (spacing: 20) {
+                VStack (spacing: 0) {
                     HStack {
                         Text("Session Description")
                             .font(.title)
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    Text(session.description ?? "No description was provided for this session.")
+                    Text(session.description ?? "No description was provided for this session. No description was provided for this session. No description was provided for this session. No description was provided for this session. No description was provided for this session.").fontWeight(.semibold)
                 }
                 
-                Spacer()
+                Spacer(minLength: 0)
                 
                 HStack {
                     Spacer()
@@ -71,8 +71,9 @@ struct SessionDetailScreen: View {
                     Text("\(session.filledSpots)/\(session.totalSpots)").font(.title).fontWeight(.bold)
                     Spacer()
                 }
-            }
+            }.scrollOnOverflow()
             Button(action: {
+                didPressSignIn()
             }, label: {
                 Text("Sign in")
                     .padding()
@@ -80,7 +81,7 @@ struct SessionDetailScreen: View {
                     .background(session.filledSpots < session.totalSpots ? .red : .gray)
                     .foregroundColor(.white)
                     .cornerRadius(20)
-            }).disabled(session.filledSpots < session.totalSpots)
+            }).disabled(session.filledSpots >= session.totalSpots)
         }
         .padding()
         .navigationBarBackButtonHidden()
@@ -88,6 +89,8 @@ struct SessionDetailScreen: View {
             ToolbarItem(placement: .topBarLeading) {
                 CustomBackButton(onClick: { back() })
             }
+        }.onAppear {
+            imageName = getRandomImage()
         }
     }
     
@@ -95,13 +98,22 @@ struct SessionDetailScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
     
+    func didPressSignIn() {
+        back()
+    }
+    
     func getRandomImage() -> String {
         let baseString = "exercise-cartoon-"
-        let randomNumber = Int(arc4random_uniform(5)) + 1
-        return "baseString\(randomNumber)"
+        let randomNumber = Int(arc4random_uniform(6)) + 1
+        return baseString + String(randomNumber)
     }
 }
 
 #Preview {
-    SessionDetailScreen(session: Session(name: "Example Session", date: "11/11", hour: "11h", teacher: "Example Teacher", totalSpots: 10, filledSpots: 9))
+    SessionDetailScreen(session: Session(name: "Example Session", 
+                                         date: "11/11",
+                                         hour: "11h",
+                                         teacher: "Example Teacher",
+                                         totalSpots: 10,
+                                         filledSpots: 9))
 }

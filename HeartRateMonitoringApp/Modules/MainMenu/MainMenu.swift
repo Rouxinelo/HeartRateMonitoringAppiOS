@@ -123,6 +123,18 @@ struct MainMenu: View {
                              hour: "14h",
                              teacher: "Example Name",
                              totalSpots: 15,
+                             filledSpots: 5),
+                     Session(name: "Alongamentos",
+                             date: "20/0403",
+                             hour: "14h",
+                             teacher: "Example Name",
+                             totalSpots: 15,
+                             filledSpots: 5),
+                     Session(name: "Alongamentos",
+                             date: "20/0403",
+                             hour: "14h",
+                             teacher: "Example Name",
+                             totalSpots: 15,
                              filledSpots: 5)]
         )
     }

@@ -60,7 +60,7 @@ struct CalendarSection: View {
             }
             .background(.white)
             .cornerRadius(20)
-            .shadow(radius: 20)
+            .shadow(radius: 5)
             .padding()
         }
     }
