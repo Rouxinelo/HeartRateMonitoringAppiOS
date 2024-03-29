@@ -10,6 +10,7 @@ import SwiftUI
 struct SessionDetailScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var didSignIn: Bool
+    @State var isGuest: Bool
     @State var session: Session
     @State var imageName: String = "exercise-cartoon-1"
     
@@ -61,7 +62,7 @@ struct SessionDetailScreen: View {
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    Text(session.description ?? "No description was provided for this session. No description was provided for this session. No description was provided for this session. No description was provided for this session. No description was provided for this session.").fontWeight(.semibold)
+                    Text(session.description ?? "No description was provided for this session. This is an example of long test. This is just to test the behaviour.").fontWeight(.semibold)
                 }
                 
                 Spacer(minLength: 0)
@@ -76,10 +77,10 @@ struct SessionDetailScreen: View {
             Button(action: {
                 didPressSignIn()
             }, label: {
-                Text("Sign in")
+                Text(getSignInButtonText())
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(session.filledSpots < session.totalSpots ? .red : .gray)
+                    .background(session.filledSpots == session.totalSpots || isGuest ? .gray : .red)
                     .foregroundColor(.white)
                     .cornerRadius(20)
             }).disabled(session.filledSpots >= session.totalSpots)
@@ -109,13 +110,25 @@ struct SessionDetailScreen: View {
         let randomNumber = Int(arc4random_uniform(6)) + 1
         return baseString + String(randomNumber)
     }
+    
+    func getSignInButtonText() -> String {
+        if isGuest {
+            return "Log in to sign in"
+        } else if session.totalSpots <= session.filledSpots {
+            return "Session full"
+        } else {
+            return "Sign in"
+        }
+    }
 }
 
 #Preview {
-    SessionDetailScreen(didSignIn: .constant(true), session: Session(name: "Example Session",
-                                                                    date: "11/11",
-                                                                    hour: "11h",
-                                                                    teacher: "Example Teacher",
-                                                                    totalSpots: 10,
-                                                                    filledSpots: 9))
+    SessionDetailScreen(didSignIn: .constant(true),
+                        isGuest: false,
+                        session: Session(name: "Example Session",
+                                         date: "11/11",
+                                         hour: "11h",
+                                         teacher: "Example Teacher",
+                                         totalSpots: 10,
+                                         filledSpots: 10))
 }

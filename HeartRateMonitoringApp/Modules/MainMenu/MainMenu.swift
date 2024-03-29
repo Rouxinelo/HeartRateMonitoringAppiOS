@@ -95,7 +95,7 @@ struct MainMenu: View {
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
-            CalendarScreen(path: $path, sessions: sessions)})
+            CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)})
         .navigationBarBackButtonHidden()
     }
     
