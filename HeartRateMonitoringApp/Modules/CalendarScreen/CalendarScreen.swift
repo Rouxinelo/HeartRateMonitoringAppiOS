@@ -21,6 +21,7 @@ struct CalendarScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
     @State var didSignIn: Bool = false
+    @State var isGuest: Bool
     @State var sessions: [Session]
     
     var body: some View {
@@ -44,7 +45,7 @@ struct CalendarScreen: View {
             }
             .padding()
             .navigationDestination(for: Session.self, destination: { session in
-                SessionDetailScreen(didSignIn: $didSignIn, session: session)
+                SessionDetailScreen(didSignIn: $didSignIn, isGuest: isGuest, session: session)
             })
             .navigationBarBackButtonHidden()
             .toolbar {
@@ -72,18 +73,19 @@ struct CalendarScreen: View {
 }
 
 #Preview {
-    CalendarScreen(path: .constant(NavigationPath()), 
+    CalendarScreen(path: .constant(NavigationPath()),
                    didSignIn: false,
+                   isGuest: true,
                    sessions: [Session(name: "Pilates Clinico",
-                                                                                           date: "24/03",
-                                                                                           hour: "19h",
-                                                                                           teacher: "J. Rouxinol",
-                                                                                           totalSpots: 10,
-                                                                                           filledSpots: 10),
-                                                                                   Session(name: "Fisioterapia",
-                                                                                           date: "30/03",
-                                                                                           hour: "23h",
-                                                                                           teacher: "J. Saias",
-                                                                                           totalSpots: 15,
-                                                                                           filledSpots: 5)])
+                                      date: "24/03",
+                                      hour: "19h",
+                                      teacher: "J. Rouxinol",
+                                      totalSpots: 10,
+                                      filledSpots: 10),
+                              Session(name: "Fisioterapia",
+                                      date: "30/03",
+                                      hour: "23h",
+                                      teacher: "J. Saias",
+                                      totalSpots: 15,
+                                      filledSpots: 5)])
 }
