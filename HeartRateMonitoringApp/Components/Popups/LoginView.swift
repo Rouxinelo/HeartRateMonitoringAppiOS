@@ -48,6 +48,7 @@ struct LoginView: View {
                 }) {
                     Text(LoginViewStrings.loginString)
                         .padding()
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(width: 150)
                         .background(username.isEmpty || password.isEmpty ? Color.gray : Color.red)

@@ -84,6 +84,7 @@ struct LanguageSelectorView: View {
                 }) {
                     Text(LanguageSelectorViewStrings.confirmString)
                         .padding()
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(width: 100)
                         .background(Color.red)

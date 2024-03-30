@@ -43,6 +43,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.loginString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -61,6 +62,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.registerString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -82,6 +84,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.guestString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -100,6 +103,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.languageString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)

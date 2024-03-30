@@ -7,18 +7,27 @@
 
 import SwiftUI
 
-struct SearchTextField: View {
+struct CustomTextField: View {
     @FocusState private var isTextFieldFocused: Bool
     @Binding var searchText: String
+    var isHiddenField: Bool
     var placeholder: String
     
     var body: some View {
         HStack {
-            TextField(placeholder, text: $searchText)
-                .padding()
-                .background(Color.white)
-                .font(.headline)
-                .focused($isTextFieldFocused)
+            if isHiddenField {
+                SecureField(placeholder, text: $searchText)
+                    .padding()
+                    .background(Color.white)
+                    .font(.headline)
+                    .focused($isTextFieldFocused)
+            } else {
+                TextField(placeholder, text: $searchText)
+                    .padding()
+                    .background(Color.white)
+                    .font(.headline)
+                    .focused($isTextFieldFocused)
+            }
             if !searchText.removeSpaces().isEmpty {
                 Button(action: {
                     searchText = ""
@@ -34,10 +43,9 @@ struct SearchTextField: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(isTextFieldFocused ? Color.red : Color.gray, lineWidth: 2)
         )
-        .padding()
     }
 }
 
 #Preview {
-    SearchTextField(searchText: .constant(""), placeholder: "Search")
+    CustomTextField(searchText: .constant(""), isHiddenField: false, placeholder: "Search")
 }
