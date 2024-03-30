@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchTextField: View {
+    @FocusState private var isTextFieldFocused: Bool
     @Binding var searchText: String
     var placeholder: String
     
@@ -17,9 +18,11 @@ struct SearchTextField: View {
                 .padding()
                 .background(Color.white)
                 .font(.headline)
+                .focused($isTextFieldFocused)
             if !searchText.removeSpaces().isEmpty {
                 Button(action: {
                     searchText = ""
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.red)
@@ -29,7 +32,7 @@ struct SearchTextField: View {
         }
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.red, lineWidth: 2)
+                .stroke(isTextFieldFocused ? Color.red : Color.gray, lineWidth: 2)
         )
         .padding()
     }
