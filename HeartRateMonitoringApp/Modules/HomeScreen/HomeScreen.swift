@@ -178,13 +178,17 @@ struct HomeScreen: View {
     }
     
     func loginSuccessful(username: String) {
-        userType = .login(username)
+        userType = .login(getMockUser(username))
         path.append(userType)
     }
     
     func handleLanguageSelection() {
         guard let languageCode = UserDefaults.standard.string(forKey: "AppLanguage") else { return }
         print("New Selected Language: \(languageCode)")
+    }
+    
+    func getMockUser(_ username: String) -> User {
+        return User(username: username, firstName: "TestName", lastName: "TestName", email: "testmail@test.com", gender: "M", age: 18, password: "testPassword")
     }
 }
 
