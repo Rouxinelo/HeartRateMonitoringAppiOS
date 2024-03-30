@@ -20,18 +20,34 @@ struct Session: Hashable {
 struct CalendarScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
+    @State var searchText: String = ""
     @State var didSignIn: Bool = false
     @State var isGuest: Bool
     @State var sessions: [Session]
     
     var body: some View {
         ZStack {
-            VStack (alignment: .center, spacing: 50) {
-                Text("Available Sessions")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+            VStack(spacing: 0) {
+                HStack (alignment: .center) {
+                    CustomBackButton(onClick: { back() })
+                    Spacer()
+                    Text("Available Sessions")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                SearchTextField(searchText: $searchText, placeholder: "Search (Name or Teacher)")
+                
+                HStack {
+                    Text("Found \(filterSessions(searchText).count) Sessions")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                .padding(.leading)
+                
                 VStack (spacing: 0) {
-                    ForEach(sessions, id: \.self) { session in
+                    ForEach(filterSessions(searchText), id: \.self) { session in
                         CalendarSection(title: session.name,
                                         date: session.date,
                                         hour: session.hour,
@@ -41,18 +57,13 @@ struct CalendarScreen: View {
                                         onClick: { clickedSession(session) })
                     }
                 }.scrollOnOverflow()
-                Spacer()
+                    .padding(.top)
             }
             .padding()
             .navigationDestination(for: Session.self, destination: { session in
                 SessionDetailScreen(didSignIn: $didSignIn, isGuest: isGuest, session: session)
             })
             .navigationBarBackButtonHidden()
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    CustomBackButton(onClick: { back() })
-                }
-            }
             if didSignIn {
                 CustomToast(isShowing: $didSignIn, iconName: "info.circle.fill", message: "Signed In Successfully")
             }
@@ -69,6 +80,16 @@ struct CalendarScreen: View {
     
     func clickedSession(_ session: Session) {
         path.append(session)
+    }
+    
+    func filterSessions(_ searchText: String) -> [Session] {
+        guard searchText.replacingOccurrences(of: " ", with: "") != "" else { return sessions }
+        return sessions.filter { containsSearchedText($0, searchText)}
+    }
+    
+    func containsSearchedText(_ session: Session, _ searchText: String) -> Bool {
+        session.name.removeSpaces().lowercased().contains(searchText.removeSpaces().lowercased()) ||
+        session.teacher.removeSpaces().lowercased().contains(searchText.removeSpaces().lowercased())
     }
 }
 
