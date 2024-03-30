@@ -9,5 +9,15 @@ import Foundation
 
 public enum UserType: Hashable {
     case guest
-    case login(String)
+    case login(User)
+}
+
+public struct User: Hashable {
+    var username: String
+    var firstName: String
+    var lastName: String
+    var email: String
+    var gender: String
+    var age: Int
+    var password: String
 }

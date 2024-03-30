@@ -11,4 +11,10 @@ extension String {
     func removeSpaces() -> String {
         return self.replacingOccurrences(of: " ", with: "")
     }
+    
+    func shortenFirstName() -> String {
+        guard !self.isEmpty else { return "" }
+        let words = self.components(separatedBy: " ")
+        return "\(String(words.first?.first ?? Character(""))). \(words.last ?? "")"
+    }
 }

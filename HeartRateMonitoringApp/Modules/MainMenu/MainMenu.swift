@@ -140,10 +140,15 @@ struct MainMenu: View {
     }
     
     func goToUserDetail() {
-        path.append([UserDetail(detailType: .name, description: "test name"),
-                     UserDetail(detailType: .email, description: "testemail@testemail.com"),
-                     UserDetail(detailType: .gender, description: "M"),
-                     UserDetail(detailType: .age, description: "50")])
+        guard case let .login(user) = userType else { return }
+        path.append(getUserDetail(for: user))
+    }
+    
+    func getUserDetail(for user: User) -> [UserDetail] {
+        [UserDetail(detailType: .name, description: "\(user.firstName) \(user.lastName)".shortenFirstName() ),
+            UserDetail(detailType: .age, description: String(user.age)),
+            UserDetail(detailType: .gender, description: user.gender),
+            UserDetail(detailType: .email, description: user.email)]
     }
     
     func logout() {
@@ -163,8 +168,8 @@ struct MainMenu: View {
         switch userType {
         case .guest:
             return MainMenuStrings.welcomeStringGuest
-        case .login(let name):
-            return MainMenuStrings.welcomeStringUser + name
+        case .login(let user):
+            return MainMenuStrings.welcomeStringUser + user.username
         }
     }
     
@@ -179,5 +184,11 @@ struct MainMenu: View {
 }
 
 #Preview {
-    MainMenu(path: .constant(NavigationPath()), userType: .login("João"))
+    MainMenu(path: .constant(NavigationPath()), userType: .login(User(username: "rouxinol",
+                                                                      firstName: "Joao",
+                                                                      lastName: "Rouxinol",
+                                                                      email: "testemail@test.com",
+                                                                      gender: "M",
+                                                                      age: 27,
+                                                                      password: "testPassword")))
 }
