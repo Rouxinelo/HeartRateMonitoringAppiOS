@@ -52,7 +52,7 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                             }
                             Button(action: {
-                                showingToast = true
+                                goToRegisterScreen()
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -155,10 +155,19 @@ struct HomeScreen: View {
                     LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
                 }
             }
-            .navigationDestination(for: UserType.self) { screenID in
+            .navigationDestination(for: UserType.self) { _ in
                 MainMenu(path: $path, userType: userType)
             }
+            .navigationDestination(for: String.self) { screenId in
+                if screenId == ScreenIds.registerScreenID {
+                    RegisterUserScreen()
+                }
+            }
         }
+    }
+    
+    func goToRegisterScreen() {
+        path.append(ScreenIds.registerScreenID)
     }
     
     func enterAsGuest() {

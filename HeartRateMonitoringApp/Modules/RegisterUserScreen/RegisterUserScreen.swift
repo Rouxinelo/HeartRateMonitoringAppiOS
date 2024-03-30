@@ -95,16 +95,16 @@ struct RegisterUserScreen: View {
                     
                     Button(action: {
                     }) {
-                        Text(LoginViewStrings.loginString)
+                        Text("Register")
                             .padding()
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .background(Color.red)
+                            .background(verifyFields() ? Color.red : Color.gray   )
                             .cornerRadius(10)
                     }
                     .padding()
-                    .disabled(false)
+                    .disabled(!verifyFields())
                 }.scrollOnOverflow()
             }
             .padding()
@@ -114,6 +114,10 @@ struct RegisterUserScreen: View {
     
     func back() {
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    func verifyFields() -> Bool {
+        return !userName.isEmpty && !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !password.isEmpty && !age.isEmpty && (isMaleSelected || isFemaleSelected) && password.count >= 6
     }
 }
 
