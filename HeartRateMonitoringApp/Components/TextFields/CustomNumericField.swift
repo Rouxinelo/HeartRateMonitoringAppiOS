@@ -11,8 +11,8 @@ struct CustomNumericField: View {
     @FocusState private var isTextFieldFocused: Bool
     @Binding var numberText: String
     @State var placeHolder: String
-    @State private var isValid = true
-    
+    @State var maximumDigits: Int
+
     var body: some View {
         HStack {
             TextField(placeHolder, text: $numberText)
@@ -24,8 +24,8 @@ struct CustomNumericField: View {
                 .focused($isTextFieldFocused)
                 .onChange(of: numberText) {
                     let filtered = numberText.filter { $0.isNumber }
-                    if filtered != numberText || numberText.count > 3 {
-                        numberText = String(filtered.prefix(3))
+                    if filtered != numberText || numberText.count > maximumDigits {
+                        numberText = String(filtered.prefix(maximumDigits))
                     }
                 }
                 .overlay(
@@ -37,5 +37,5 @@ struct CustomNumericField: View {
 }
 
 #Preview {
-    CustomNumericField(numberText: .constant(""), placeHolder: "Insert Number")
+    CustomNumericField(numberText: .constant(""), placeHolder: "Insert Number", maximumDigits: 3)
 }

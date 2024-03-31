@@ -18,9 +18,6 @@ struct LoadingView: View {
         ZStack {
             Color(.black)
                 .opacity(0.5)
-                .onTapGesture {
-                    close()
-                }
             VStack(spacing: 10) {
                 ProgressView()
                     .scaleEffect(2)

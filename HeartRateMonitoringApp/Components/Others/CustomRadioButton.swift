@@ -13,7 +13,9 @@ struct CustomRadioButton: View {
     
     var body: some View {
         Button(action: {
-            isSelected.toggle()
+            if !isSelected {
+                isSelected.toggle()
+            }
         }) {
             HStack {
                 Text(text)

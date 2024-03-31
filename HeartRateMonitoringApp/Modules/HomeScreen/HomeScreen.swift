@@ -149,7 +149,7 @@ struct HomeScreen: View {
                     })
                 }
                 if showingToast {
-                    CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
+                    CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Registered new user!")
                 }
                 if isLoading {
                     LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
@@ -160,7 +160,7 @@ struct HomeScreen: View {
             }
             .navigationDestination(for: String.self) { screenId in
                 if screenId == ScreenIds.registerScreenID {
-                    RegisterUserScreen()
+                    RegisterUserScreen(showRegisterToast: $showingToast)
                 }
             }
         }

@@ -9,14 +9,18 @@ import SwiftUI
 
 struct RegisterUserScreen: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var userName: String = ""
-    @State var firstName: String = ""
-    @State var lastName: String = ""
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var age: String = ""
-    @State var isMaleSelected: Bool = false
-    @State var isFemaleSelected: Bool = false
+    @Binding var showRegisterToast: Bool
+    @State private var isLoading = false
+    @State private var userName: String = ""
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var birthDay: String = ""
+    @State private var birthMonth: String = ""
+    @State private var birthYear: String = ""
+    @State private var isMaleSelected: Bool = false
+    @State private var isFemaleSelected: Bool = false
     
     var body: some View {
         ZStack {
@@ -60,40 +64,55 @@ struct RegisterUserScreen: View {
                                         title: "Password",
                                         description: "Your password (minimum 6 characters)")
                     
+                    HStack {
+                        Text("Date Of Birth")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        Spacer()
+                    }.padding(.horizontal)
                     HStack (spacing: 20){
                         VStack(spacing: 0) {
+                            CustomNumericField(numberText: $birthDay, placeHolder: "", maximumDigits: 2)
                             HStack {
-                                Text("Age")
-                                    .font(.headline).fontWeight(.bold)
-                                Spacer()
-                            }
-                            CustomNumericField(numberText: $age, placeHolder: "")
-                            HStack {
-                                Text("Your age")
+                                Text("Day")
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
                         }
-                        
                         VStack(spacing: 0) {
+                            CustomNumericField(numberText: $birthMonth, placeHolder: "", maximumDigits: 2)
                             HStack {
-                                Text("Gender")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                Spacer()
-                            }
-                            .padding(.horizontal)
-                            RegisterScreenGenderField(isMaleSelected: $isMaleSelected, isFemaleSelected: $isFemaleSelected)
-                            HStack {
-                                Text("Your gender")
+                                Text("Month")
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
-                            .padding(.horizontal)
+                            
+                        }
+                        VStack(spacing: 0) {
+                            CustomNumericField(numberText: $birthYear, placeHolder: "", maximumDigits: 4)
+                            HStack {
+                                Text("Year")
+                                    .foregroundStyle(.gray)
+                                Spacer()
+                            }
                         }
                     }.padding(.horizontal)
                     
+                    VStack(spacing: 0) {
+                        HStack {
+                            Text("Gender")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                        }
+                        RegisterScreenGenderField(isMaleSelected: $isMaleSelected, isFemaleSelected: $isFemaleSelected)
+                        HStack {
+                            Text("Your gender")
+                                .foregroundStyle(.gray)
+                        }
+                    }
+                    
                     Button(action: {
+                        register()
                     }) {
                         Text("Register")
                             .padding()
@@ -108,8 +127,15 @@ struct RegisterUserScreen: View {
                 }.scrollOnOverflow()
             }
             .padding()
-            .navigationBarBackButtonHidden()
+            
+            if isLoading {
+                LoadingView(isShowing: $isLoading,
+                            title: "Registering User",
+                            description: "Please Wait...")
+            }
         }
+        .navigationBarBackButtonHidden()
+        
     }
     
     func back() {
@@ -117,10 +143,36 @@ struct RegisterUserScreen: View {
     }
     
     func verifyFields() -> Bool {
-        return !userName.isEmpty && !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !password.isEmpty && !age.isEmpty && (isMaleSelected || isFemaleSelected) && password.count >= 6
+        return true
+        return !userName.isEmpty && !email.isEmpty && selectedGender() && isValidPassword() && isValidDateOfBirth() && isValidUsername()
+    }
+    
+    func isValidDateOfBirth() -> Bool {
+        !birthDay.isEmpty && !birthMonth.isEmpty && !birthYear.isEmpty && birthDay.count == 2 && birthMonth.count == 2 && birthYear.count == 4
+    }
+    
+    func isValidPassword() -> Bool {
+        !password.isEmpty && password.count >= 6
+    }
+    
+    func selectedGender() -> Bool {
+        isMaleSelected || isFemaleSelected
+    }
+    
+    func isValidUsername() -> Bool {
+        !firstName.isEmpty && !lastName.isEmpty
+    }
+    
+    func register() {
+        isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            isLoading = false
+            back()
+            showRegisterToast = true
+        }
     }
 }
 
 #Preview {
-    RegisterUserScreen()
+    RegisterUserScreen(showRegisterToast: .constant(false))
 }
