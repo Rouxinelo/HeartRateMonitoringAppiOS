@@ -63,5 +63,5 @@ public struct UserDetailTypeStrings {
 }
 
 public struct ScreenIds {
-    static let homeScreenId: String = "HomeScreen"
+    static let registerScreenID: String = "registerScreen"
 }

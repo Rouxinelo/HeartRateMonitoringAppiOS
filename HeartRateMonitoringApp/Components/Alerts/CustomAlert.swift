@@ -52,6 +52,7 @@ struct CustomAlert: View {
                     }, label: {
                         Text(leftButtonText)
                             .padding()
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
                             .background(.red)
                             .foregroundColor(.white)
@@ -64,6 +65,7 @@ struct CustomAlert: View {
                         }, label: {
                             Text(rightButtonText)
                                 .padding()
+                                .fontWeight(.bold)
                                 .frame(maxWidth: .infinity)
                                 .background(.red)
                                 .foregroundColor(.white)

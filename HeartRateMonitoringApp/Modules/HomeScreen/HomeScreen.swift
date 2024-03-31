@@ -43,6 +43,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.loginString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -51,7 +52,7 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                             }
                             Button(action: {
-                                showingToast = true
+                                goToRegisterScreen()
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -61,6 +62,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.registerString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -82,6 +84,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.guestString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -100,6 +103,7 @@ struct HomeScreen: View {
                                         .frame(width: 24, height: 24)
                                     Text(HomeScreenStrings.languageString)
                                         .font(.headline)
+                                        .fontWeight(.bold)
                                         .padding()
                                 }
                                 .frame(width: 150, height: 100, alignment: .center)
@@ -145,16 +149,25 @@ struct HomeScreen: View {
                     })
                 }
                 if showingToast {
-                    CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Coming Soon")
+                    CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Registered new user!")
                 }
                 if isLoading {
                     LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
                 }
             }
-            .navigationDestination(for: UserType.self) { screenID in
+            .navigationDestination(for: UserType.self) { _ in
                 MainMenu(path: $path, userType: userType)
             }
+            .navigationDestination(for: String.self) { screenId in
+                if screenId == ScreenIds.registerScreenID {
+                    RegisterUserScreen(showRegisterToast: $showingToast)
+                }
+            }
         }
+    }
+    
+    func goToRegisterScreen() {
+        path.append(ScreenIds.registerScreenID)
     }
     
     func enterAsGuest() {
