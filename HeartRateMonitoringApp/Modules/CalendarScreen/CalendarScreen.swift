@@ -37,7 +37,7 @@ struct CalendarScreen: View {
                     Spacer()
                 }
                 CustomTextField(searchText: $searchText,
-                                isHiddenField: false,
+                                isPrivateField: false,
                                 placeholder: "Search (Name or Teacher)")
                 
                 HStack {

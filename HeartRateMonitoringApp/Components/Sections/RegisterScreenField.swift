@@ -20,7 +20,7 @@ struct RegisterScreenField: View {
                 Text(title).font(.headline).fontWeight(.bold)
                 Spacer()
             }
-            CustomTextField(searchText: $searchText, isHiddenField: isHiddenField, placeholder: placeholder)
+            CustomTextField(searchText: $searchText, isPrivateField: isHiddenField, placeholder: placeholder)
             HStack {
                 Text(description).foregroundStyle(.gray)
                 Spacer()
