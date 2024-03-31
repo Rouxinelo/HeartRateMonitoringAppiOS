@@ -39,6 +39,7 @@ struct CalendarScreen: View {
                 CustomTextField(searchText: $searchText,
                                 isPrivateField: false,
                                 placeholder: "Search (Name or Teacher)")
+                .padding()
                 
                 HStack {
                     Text("Found \(filterSessions(searchText).count) Sessions")

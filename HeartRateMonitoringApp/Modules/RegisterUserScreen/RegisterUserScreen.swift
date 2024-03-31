@@ -143,7 +143,6 @@ struct RegisterUserScreen: View {
     }
     
     func verifyFields() -> Bool {
-        return true
         return !userName.isEmpty && !email.isEmpty && selectedGender() && isValidPassword() && isValidDateOfBirth() && isValidUsername()
     }
     
