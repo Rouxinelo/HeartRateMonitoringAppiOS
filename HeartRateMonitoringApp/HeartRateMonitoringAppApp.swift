@@ -12,6 +12,7 @@ struct HeartRateMonitoringAppApp: App {
     var body: some Scene {
         WindowGroup {
             HomeScreen()
+                .preferredColorScheme(.light)
         }
     }
 }

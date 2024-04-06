@@ -34,13 +34,15 @@ struct LoginView: View {
                     .bold()
                     .foregroundColor(.black)
                 
-                TextField(LoginViewStrings.usernameString, text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                CustomTextField(searchText: $username, 
+                                isPrivateField: false,
+                                placeholder: LoginViewStrings.usernameString)
+                .padding()
                 
-                SecureField(LoginViewStrings.passwordString, text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                CustomTextField(searchText: $password, 
+                                isPrivateField: true,
+                                placeholder: LoginViewStrings.passwordString)
+                .padding(.horizontal)
                 
                 Button(action: {
                     onLogin(username, password)

@@ -16,12 +16,19 @@ struct CustomTextField: View {
     var body: some View {
         ZStack {
             HStack {
-                TextField(placeholder, text: $searchText)
-                    .padding()
-                    .background(Color.white)
-                    .font(.headline)
-                    .focused($isTextFieldFocused)
-                    .blur(radius: isPrivateField ? 3 : 0)
+                if isPrivateField {
+                    SecureField(placeholder, text: $searchText)
+                        .padding()
+                        .background(Color.white)
+                        .font(.headline)
+                        .focused($isTextFieldFocused)
+                } else {
+                    TextField(placeholder, text: $searchText)
+                        .padding()
+                        .background(Color.white)
+                        .font(.headline)
+                        .focused($isTextFieldFocused)
+                }
                 if !searchText.removeSpaces().isEmpty {
                     Button(action: {
                         searchText = ""

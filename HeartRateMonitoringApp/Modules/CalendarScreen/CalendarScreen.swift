@@ -22,6 +22,7 @@ struct CalendarScreen: View {
     @Binding var path: NavigationPath
     @State var searchText: String = ""
     @State var didSignIn: Bool = false
+    @State var showEmptyAlert: Bool = false
     @State var isGuest: Bool
     @State var sessions: [Session]
     
@@ -61,6 +62,7 @@ struct CalendarScreen: View {
                     }
                 }.scrollOnOverflow()
                     .padding(.top)
+                
             }
             .padding()
             .navigationDestination(for: Session.self, destination: { session in
@@ -69,6 +71,17 @@ struct CalendarScreen: View {
             .navigationBarBackButtonHidden()
             if didSignIn {
                 CustomToast(isShowing: $didSignIn, iconName: "info.circle.fill", message: "Signed In Successfully")
+            }
+            if sessions.isEmpty {
+                CustomAlert(isShowing: $showEmptyAlert,
+                            icon: "exclamationmark.circle",
+                            title: "Oops",
+                            leftButtonText: "Ok",
+                            rightButtonText: "",
+                            description: "No sessions were found",
+                            leftButtonAction: { back() },
+                            rightButtonAction: {},
+                            isSingleButton: true)
             }
         }
     }

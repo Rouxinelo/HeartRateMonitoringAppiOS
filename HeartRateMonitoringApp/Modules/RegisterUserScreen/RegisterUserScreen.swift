@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterUserScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @FocusState private var isNumericFieldFocused: Bool
     @Binding var showRegisterToast: Bool
     @State private var isLoading = false
     @State private var userName: String = ""
@@ -21,6 +22,7 @@ struct RegisterUserScreen: View {
     @State private var birthYear: String = ""
     @State private var isMaleSelected: Bool = false
     @State private var isFemaleSelected: Bool = false
+    @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
     
     var body: some View {
         ZStack {
@@ -62,7 +64,8 @@ struct RegisterUserScreen: View {
                                         isHiddenField: true,
                                         placeholder: "",
                                         title: "Password",
-                                        description: "Your password (minimum 6 characters)")
+                                        description: "Your password (minimum 6 characters)")                                
+                    .focused($isNumericFieldFocused)
                     
                     HStack {
                         Text("Date Of Birth")
@@ -72,7 +75,10 @@ struct RegisterUserScreen: View {
                     }.padding(.horizontal)
                     HStack (spacing: 20){
                         VStack(spacing: 0) {
-                            CustomNumericField(numberText: $birthDay, placeHolder: "", maximumDigits: 2)
+                            CustomNumericField(numberText: $birthDay, 
+                                               placeHolder: "",
+                                               maximumDigits: 2)
+                                .focused($isNumericFieldFocused)
                             HStack {
                                 Text("Day")
                                     .foregroundStyle(.gray)
@@ -80,7 +86,10 @@ struct RegisterUserScreen: View {
                             }
                         }
                         VStack(spacing: 0) {
-                            CustomNumericField(numberText: $birthMonth, placeHolder: "", maximumDigits: 2)
+                            CustomNumericField(numberText: $birthMonth, 
+                                               placeHolder: "",
+                                               maximumDigits: 2)
+                                .focused($isNumericFieldFocused)
                             HStack {
                                 Text("Month")
                                     .foregroundStyle(.gray)
@@ -89,7 +98,10 @@ struct RegisterUserScreen: View {
                             
                         }
                         VStack(spacing: 0) {
-                            CustomNumericField(numberText: $birthYear, placeHolder: "", maximumDigits: 4)
+                            CustomNumericField(numberText: $birthYear, 
+                                               placeHolder: "",
+                                               maximumDigits: 4)
+                                .focused($isNumericFieldFocused)
                             HStack {
                                 Text("Year")
                                     .foregroundStyle(.gray)
@@ -135,7 +147,7 @@ struct RegisterUserScreen: View {
             }
         }
         .navigationBarBackButtonHidden()
-        
+        .offset(y: isNumericFieldFocused ? -self.keyboardHeightHelper.keyboardHeight : 0)
     }
     
     func back() {
