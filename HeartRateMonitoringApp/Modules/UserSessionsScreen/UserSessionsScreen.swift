@@ -9,8 +9,10 @@ import SwiftUI
 
 struct UserSessionsScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @State private var firstLoad = true
     @State var showJoinableSessionsModal: Bool = false
     @State var showSignedSessionsModal: Bool = false
+    @State var showSignedOutToast: Bool = false
     @State var joinableSessions = [Session]()
     @State var signedSessions: [Session] = []
     @State var user: User
@@ -67,28 +69,36 @@ struct UserSessionsScreen: View {
                 }.foregroundStyle(.black)
                 Spacer()
             }
+            
             if showSignedSessionsModal {
                 UserSessionsModal(isShowing: $showSignedSessionsModal,
                                   sessions: signedSessions,
                                   title: "Signed Sessions",
-                                  onSelectSession: { _ in })
+                                  modalType: .signOut, 
+                                  onSelectSession: { session in handleSessionSignOut(session) })
             }
+            
             if showJoinableSessionsModal {
                 UserSessionsModal(isShowing: $showJoinableSessionsModal,
                                   sessions: joinableSessions,
                                   title: "Joinable Sessions",
                                   onSelectSession: { _ in })
             }
+            
+            if showSignedOutToast {
+                CustomToast(isShowing: $showSignedOutToast,
+                            iconName: "info.circle.fill",
+                            message: "Signed out successfully")
+            }
         }
         .onAppear {
-            setSignedSessions()
-            setJoinableSessions()
+            if firstLoad {
+                firstLoad.toggle()
+                setSignedSessions()
+                setJoinableSessions()
+            }
         }
         .navigationBarBackButtonHidden()
-    }
-    
-    func back() {
-        presentationMode.wrappedValue.dismiss()
     }
     
     func setJoinableSessions() {
@@ -108,7 +118,18 @@ struct UserSessionsScreen: View {
                                   hour: "22h",
                                   teacher: "Test T",
                                   totalSpots: 11,
-                                  filledSpots: 11)]
+                                  filledSpots: 11,
+                                  description: "this is just a test description")]
+    }
+
+    func handleSessionSignOut(_ session: Session) {
+        guard let sessionIndex = signedSessions.firstIndex(of: session) else { return }
+        signedSessions.remove(at: sessionIndex)
+        showSignedOutToast = true
+    }
+    
+    func back() {
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

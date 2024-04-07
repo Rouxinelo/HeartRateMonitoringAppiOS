@@ -7,11 +7,20 @@
 
 import SwiftUI
 
+enum ModalType {
+    case join
+    case signOut
+}
+
 struct UserSessionsModal: View {
     @Binding var isShowing: Bool
     @State var sessions: [Session]
+    @State var selectedSession: Session?
     @State var title: String
+    @State var modalType: ModalType = .join
+    @State var showSignoutAlert: Bool = false
     @State private var yOffset: CGFloat = 1000
+    
     var onSelectSession: (Session) -> Void
     
     var body: some View {
@@ -45,7 +54,7 @@ struct UserSessionsModal: View {
                                            onClick: { handleSelectedSession(session) })
                         }
                     }.scrollOnOverflow()
-                        .frame(height: getNeededHeight())
+                        .frame(height: getSessionsHeight())
                 }.frame(maxWidth: .infinity)
                     .background(
                         Rectangle()
@@ -54,6 +63,17 @@ struct UserSessionsModal: View {
                     )
                     .offset(y: yOffset)
                     .animation(.linear(duration: 0.5))
+            }
+            if showSignoutAlert, let selectedSession = selectedSession {
+                CustomAlert(isShowing: $showSignoutAlert,
+                            icon: "book",
+                            title: selectedSession.name,
+                            leftButtonText: "Exit",
+                            rightButtonText: "Sign out",
+                            description: selectedSession.description ?? "",
+                            leftButtonAction: { close() },
+                            rightButtonAction: { close(selectedSession) },
+                            isSingleButton: false)
             }
         }.ignoresSafeArea()
             .onAppear {
@@ -70,24 +90,33 @@ struct UserSessionsModal: View {
     }
     
     func handleSelectedSession(_ session: Session) {
-        onSelectSession(session)
-        close()
-    }
-    
-    func close() {
-        withAnimation {
-            yOffset = 1000
-        } completion: {
-            isShowing = false
+        switch modalType {
+        case .join:
+            close(session)
+        case .signOut:
+            selectedSession = session
+            showSignoutAlert = true
         }
     }
     
-    func getNeededHeight() -> CGFloat {
+    func getSessionsHeight() -> CGFloat {
         return CGFloat(min(sessions.count * 150, 450))
     }
     
     func getSessionsText() -> String {
         return "Found \(sessions.count) Session\(sessions.count != 1 ? "s" : "")"
+    }
+    
+    func close(_ selectedSession: Session? = nil) {
+        if let selectedSession = selectedSession {
+            onSelectSession(selectedSession)
+        }
+        showSignoutAlert = false
+        withAnimation {
+            yOffset = 1000
+        } completion: {
+            isShowing = false
+        }
     }
 }
 
