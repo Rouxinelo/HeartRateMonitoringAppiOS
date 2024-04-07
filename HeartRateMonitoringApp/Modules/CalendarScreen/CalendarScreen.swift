@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Session: Hashable {
+struct Session: Hashable, Identifiable {
+    var id: String
     var name: String
     var date: String
     var hour: String
@@ -113,13 +114,15 @@ struct CalendarScreen: View {
     CalendarScreen(path: .constant(NavigationPath()),
                    didSignIn: false,
                    isGuest: true,
-                   sessions: [Session(name: "Pilates Clinico",
+                   sessions: [Session(id: "test1", 
+                                      name: "Pilates Clinico",
                                       date: "24/03",
                                       hour: "19h",
                                       teacher: "J. Rouxinol",
                                       totalSpots: 10,
                                       filledSpots: 10),
-                              Session(name: "Fisioterapia",
+                              Session(id: "test2", 
+                                      name: "Fisioterapia",
                                       date: "30/03",
                                       hour: "23h",
                                       teacher: "J. Saias",

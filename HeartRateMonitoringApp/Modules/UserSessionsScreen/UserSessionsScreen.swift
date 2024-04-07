@@ -26,33 +26,65 @@ struct UserSessionsScreen: View {
                         .fontWeight(.bold)
                     Spacer()
                 }.padding(.horizontal)
-                    VStack(spacing: 5) {
-                        Text("Ready to join")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
-                        Text("You can join one of this sessions now")
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
+                Button(action: {
+                    showJoinableSessionsModal = true
+                }) {
+                    HStack {
+                        VStack(spacing: 5) {
+                            Text("Ready to join")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
+                            Text("You can join one of this sessions now")
+                                .foregroundColor(.gray)
+                                .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
+                        }
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.red)
+                            .padding()
                     }
-                    VStack(spacing: 5) {
-                        Text("Signed sessions")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                        Text("View future sessions and cancel if needed")
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
+                }.foregroundStyle(.black)
+                Button(action: {
+                    showSignedSessionsModal = true
+                }) {
+                    HStack {
+                        VStack(spacing: 5) {
+                            Text("Signed sessions")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading)
+                            Text("View future sessions and cancel if needed")
+                                .foregroundColor(.gray)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .multilineTextAlignment(.leading)
+                                .padding(.leading)
+                        }
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.red)
+                            .padding()
                     }
-                    Spacer()
+                }.foregroundStyle(.black)
+                Spacer()
+            }
+            if showSignedSessionsModal {
+                UserSessionsModal(isShowing: $showSignedSessionsModal,
+                                  sessions: signedSessions,
+                                  title: "Signed Sessions",
+                                  onSelectSession: { _ in })
+            }
+            if showJoinableSessionsModal {
+                UserSessionsModal(isShowing: $showJoinableSessionsModal,
+                                  sessions: joinableSessions,
+                                  title: "Joinable Sessions",
+                                  onSelectSession: { _ in })
             }
         }
-            .onAppear {
-                setSignedSessions()
-                setJoinableSessions()
-            }
+        .onAppear {
+            setSignedSessions()
+            setJoinableSessions()
+        }
+        .navigationBarBackButtonHidden()
     }
     
     func back() {
@@ -60,23 +92,23 @@ struct UserSessionsScreen: View {
     }
     
     func setJoinableSessions() {
-        joinableSessions = [Session(name: "testname1", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                            Session(name: "testname2", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                            Session(name: "testname3", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                            Session(name: "testname4", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                            Session(name: "testname5", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                            Session(name: "testname6", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-        ]
+        joinableSessions = [Session(id: "test1",
+                                    name: "testname1",
+                                    date: "22/22",
+                                    hour: "22h",
+                                    teacher: "Test T",
+                                    totalSpots: 11,
+                                    filledSpots: 11)]
     }
     
     func setSignedSessions() {
-        signedSessions = [Session(name: "testname1", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                          Session(name: "testname2", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                          Session(name: "testname3", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                          Session(name: "testname4", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                          Session(name: "testname5", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-                          Session(name: "testname6", date: "22/22", hour: "22h", teacher: "Test T", totalSpots: 11, filledSpots: 11),
-        ]
+        signedSessions = [Session(id: "test1",
+                                  name: "testname1",
+                                  date: "22/22",
+                                  hour: "22h",
+                                  teacher: "Test T",
+                                  totalSpots: 11,
+                                  filledSpots: 11)]
     }
 }
 
