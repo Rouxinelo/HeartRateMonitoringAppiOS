@@ -39,7 +39,7 @@ struct MainMenu: View {
                                     sectionDescription: MainMenuStrings.classesSectionDescription,
                                     isUnavailable: isGuest(),
                                     sectionAction: {
-                        showingToast = true
+                        goToUserSessions()
                     })
                     MainMenuSection(sectionColor: .green,
                                     sectionIcon: MainMenuIcons.calendarIcon,
@@ -95,8 +95,16 @@ struct MainMenu: View {
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
-            CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)})
+            CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)
+        }).navigationDestination(for: User.self, destination: { user in
+            UserSessionsScreen(user: user)
+        })
         .navigationBarBackButtonHidden()
+    }
+    
+    func goToUserSessions() {
+        guard let user = getUser() else { return }
+        path.append(user)
     }
     
     func goToCalendar() {
@@ -179,6 +187,15 @@ struct MainMenu: View {
             return true
         case .login(_):
             return false
+        }
+    }
+    
+    func getUser() -> User? {
+        switch userType {
+        case .guest:
+            return nil
+        case .login(let user):
+            return user
         }
     }
 }

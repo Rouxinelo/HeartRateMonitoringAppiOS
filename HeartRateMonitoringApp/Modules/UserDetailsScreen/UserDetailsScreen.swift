@@ -35,7 +35,7 @@ struct UserDetailsScreen: View {
             }
             Spacer()
         }
-        .padding()
+        .padding(.horizontal)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

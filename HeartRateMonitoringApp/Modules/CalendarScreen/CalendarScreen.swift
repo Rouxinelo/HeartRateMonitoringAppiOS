@@ -52,7 +52,7 @@ struct CalendarScreen: View {
                 
                 VStack (spacing: 0) {
                     ForEach(filterSessions(searchText), id: \.self) { session in
-                        CalendarSection(title: session.name,
+                        SessionSection(title: session.name,
                                         date: session.date,
                                         hour: session.hour,
                                         teacher: session.teacher,
