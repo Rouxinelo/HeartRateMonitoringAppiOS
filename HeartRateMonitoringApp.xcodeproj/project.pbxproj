@@ -33,6 +33,9 @@
 		6B47AF492BAE3BE4001C0172 /* CustomToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B47AF482BAE3BE4001C0172 /* CustomToast.swift */; };
 		6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B47AF4D2BAF57DC001C0172 /* LanguageSelectorView.swift */; };
 		6B4BDB372BB0722D00E25C2D /* UserDetailType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4BDB362BB0722D00E25C2D /* UserDetailType.swift */; };
+		6B7194BC2BC4971E00B297AF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BB2BC4971E00B297AF /* Session.swift */; };
+		6B7194BE2BC4973200B297AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BD2BC4973200B297AF /* User.swift */; };
+		6B7194C02BC4975600B297AF /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BF2BC4975600B297AF /* Gender.swift */; };
 		6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */; };
 		6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB62BB04F3E0088899E /* CircularAvatar.swift */; };
 		6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB82BB052E20088899E /* UserDetailsSection.swift */; };
@@ -95,6 +98,9 @@
 		6B47AF482BAE3BE4001C0172 /* CustomToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToast.swift; sourceTree = "<group>"; };
 		6B47AF4D2BAF57DC001C0172 /* LanguageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectorView.swift; sourceTree = "<group>"; };
 		6B4BDB362BB0722D00E25C2D /* UserDetailType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailType.swift; sourceTree = "<group>"; };
+		6B7194BB2BC4971E00B297AF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		6B7194BD2BC4973200B297AF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6B7194BF2BC4975600B297AF /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsScreen.swift; sourceTree = "<group>"; };
 		6B872BB62BB04F3E0088899E /* CircularAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAvatar.swift; sourceTree = "<group>"; };
 		6B872BB82BB052E20088899E /* UserDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsSection.swift; sourceTree = "<group>"; };
@@ -173,6 +179,7 @@
 		6B2846052BAA35B9007A9D8E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				6B7194BF2BC4975600B297AF /* Gender.swift */,
 				6B2846062BAA35D1007A9D8E /* UserType.swift */,
 				6B4BDB362BB0722D00E25C2D /* UserDetailType.swift */,
 			);
@@ -214,6 +221,7 @@
 		6B3D79142BA793E6000DBE1A /* HeartRateMonitoringApp */ = {
 			isa = PBXGroup;
 			children = (
+				6B7194BA2BC4971400B297AF /* DataModels */,
 				6B2846082BAA38D4007A9D8E /* Components */,
 				6B2846052BAA35B9007A9D8E /* Enums */,
 				6B2845FA2BA79BA1007A9D8E /* Resources */,
@@ -282,6 +290,15 @@
 				6B3D79422BA79525000DBE1A /* HomeScreen.swift */,
 			);
 			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		6B7194BA2BC4971400B297AF /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				6B7194BB2BC4971E00B297AF /* Session.swift */,
+				6B7194BD2BC4973200B297AF /* User.swift */,
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 		6B872BB32BB04F100088899E /* UserDetailsScreen */ = {
@@ -503,15 +520,18 @@
 				6B47AF452BACD615001C0172 /* MainMenuSection.swift in Sources */,
 				6B2846012BA8E867007A9D8E /* MainMenu.swift in Sources */,
 				6B47AF472BAE2B41001C0172 /* LoadingView.swift in Sources */,
+				6B7194BE2BC4973200B297AF /* User.swift in Sources */,
 				6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */,
 				6BC27BE02BB22DF80089217F /* SessionDetailScreen.swift in Sources */,
 				6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */,
 				6B47AF492BAE3BE4001C0172 /* CustomToast.swift in Sources */,
 				6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */,
+				6B7194BC2BC4971E00B297AF /* Session.swift in Sources */,
 				6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */,
 				6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */,
 				6B10AACF2BC2FD2D00AFE2FC /* View.swift in Sources */,
 				6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */,
+				6B7194C02BC4975600B297AF /* Gender.swift in Sources */,
 				6B10AACB2BC1FD7600AFE2FC /* UserSessionsScreen.swift in Sources */,
 				6B10AACD2BC2AA9C00AFE2FC /* UserSessionsModal.swift in Sources */,
 				6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */,
