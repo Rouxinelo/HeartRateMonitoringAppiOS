@@ -39,7 +39,7 @@ struct MainMenu: View {
                                     sectionDescription: MainMenuStrings.classesSectionDescription,
                                     isUnavailable: isGuest(),
                                     sectionAction: {
-                        showingToast = true
+                        goToUserSessions()
                     })
                     MainMenuSection(sectionColor: .green,
                                     sectionIcon: MainMenuIcons.calendarIcon,
@@ -95,45 +95,31 @@ struct MainMenu: View {
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
-            CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)})
+            CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)
+        }).navigationDestination(for: User.self, destination: { user in
+            UserSessionsScreen(user: user)
+        })
         .navigationBarBackButtonHidden()
     }
     
+    func goToUserSessions() {
+        guard let user = getUser() else { return }
+        path.append(user)
+    }
+    
     func goToCalendar() {
-        path.append([Session(name: "Pilates Clinico",
+        path.append([Session(id: "test1",
+                             name: "Pilates Clinico",
                              date: "24/03",
                              hour: "19h",
                              teacher: "J. Rouxinol",
                              totalSpots: 10,
                              filledSpots: 10),
-                     Session(name: "Fisioterapia",
+                     Session(id: "test2",
+                             name: "Fisioterapia",
                              date: "30/03",
                              hour: "23h",
                              teacher: "J. Saias",
-                             totalSpots: 15,
-                             filledSpots: 5),
-                     Session(name: "Yoga",
-                             date: "14/04",
-                             hour: "12h",
-                             teacher: "John Doe",
-                             totalSpots: 10,
-                             filledSpots: 10),
-                     Session(name: "Alongamentos",
-                             date: "20/0403",
-                             hour: "14h",
-                             teacher: "Example Name",
-                             totalSpots: 15,
-                             filledSpots: 5),
-                     Session(name: "Alongamentos",
-                             date: "20/0403",
-                             hour: "14h",
-                             teacher: "Example Name",
-                             totalSpots: 15,
-                             filledSpots: 5),
-                     Session(name: "Alongamentos",
-                             date: "20/0403",
-                             hour: "14h",
-                             teacher: "Example Name",
                              totalSpots: 15,
                              filledSpots: 5)]
         )
@@ -179,6 +165,15 @@ struct MainMenu: View {
             return true
         case .login(_):
             return false
+        }
+    }
+    
+    func getUser() -> User? {
+        switch userType {
+        case .guest:
+            return nil
+        case .login(let user):
+            return user
         }
     }
 }

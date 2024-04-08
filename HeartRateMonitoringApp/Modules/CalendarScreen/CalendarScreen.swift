@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-struct Session: Hashable {
-    var name: String
-    var date: String
-    var hour: String
-    var teacher: String
-    var totalSpots: Int
-    var filledSpots: Int
-    var description: String?
-}
-
 struct CalendarScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
@@ -52,7 +42,7 @@ struct CalendarScreen: View {
                 
                 VStack (spacing: 0) {
                     ForEach(filterSessions(searchText), id: \.self) { session in
-                        CalendarSection(title: session.name,
+                        SessionSection(title: session.name,
                                         date: session.date,
                                         hour: session.hour,
                                         teacher: session.teacher,
@@ -113,13 +103,15 @@ struct CalendarScreen: View {
     CalendarScreen(path: .constant(NavigationPath()),
                    didSignIn: false,
                    isGuest: true,
-                   sessions: [Session(name: "Pilates Clinico",
+                   sessions: [Session(id: "test1", 
+                                      name: "Pilates Clinico",
                                       date: "24/03",
                                       hour: "19h",
                                       teacher: "J. Rouxinol",
                                       totalSpots: 10,
                                       filledSpots: 10),
-                              Session(name: "Fisioterapia",
+                              Session(id: "test2", 
+                                      name: "Fisioterapia",
                                       date: "30/03",
                                       hour: "23h",
                                       teacher: "J. Saias",

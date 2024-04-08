@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum Gender {
-    case male
-    case female
-}
-
 struct RegisterScreenGenderField: View {
     @Binding var isMaleSelected: Bool
     @Binding var isFemaleSelected: Bool

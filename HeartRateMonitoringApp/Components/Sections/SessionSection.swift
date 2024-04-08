@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CalendarSection: View {
+struct SessionSection: View {
     let title: String
     let date: String
     let hour: String
@@ -67,7 +67,7 @@ struct CalendarSection: View {
 }
 
 #Preview {
-    CalendarSection(title: "Pilates Clinico",
+    SessionSection(title: "Pilates Clinico",
                     date: "19/02",
                     hour: "22h",
                     teacher: "J. Santos",
