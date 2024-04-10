@@ -8,12 +8,12 @@
 import Foundation
 
 struct Session: Hashable, Identifiable {
-    var id: String
-    var name: String
-    var date: String
-    var hour: String
-    var teacher: String
-    var totalSpots: Int
-    var filledSpots: Int
+    let id: String
+    let name: String
+    let date: String
+    let hour: String
+    let teacher: String
+    let totalSpots: Int
+    let filledSpots: Int
     var description: String?
 }

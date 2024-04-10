@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserSessionsScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
     @State private var firstLoad = true
     @State var showJoinableSessionsModal: Bool = false
     @State var showSignedSessionsModal: Bool = false
@@ -19,7 +20,7 @@ struct UserSessionsScreen: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 100) {
+            VStack(spacing: 50) {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
@@ -28,45 +29,16 @@ struct UserSessionsScreen: View {
                         .fontWeight(.bold)
                     Spacer()
                 }.padding(.horizontal)
-                Button(action: {
-                    showJoinableSessionsModal = true
-                }) {
-                    HStack {
-                        VStack(spacing: 5) {
-                            Text("Ready to join")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
-                            Text("You can join one of this sessions now")
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
-                        }
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.red)
-                            .padding()
-                    }
-                }.foregroundStyle(.black)
-                Button(action: {
-                    showSignedSessionsModal = true
-                }) {
-                    HStack {
-                        VStack(spacing: 5) {
-                            Text("Signed sessions")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading)
-                            Text("View future sessions and cancel if needed")
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .multilineTextAlignment(.leading)
-                                .padding(.leading)
-                        }
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.red)
-                            .padding()
-                    }
-                }.foregroundStyle(.black)
+                
+                MultipleTextButton(action: { showJoinableSessionsModal = true },
+                                   title: "Ready to join",
+                                   description: "You can join one of this sessions now")
+                .padding()
+                
+                MultipleTextButton(action: { showSignedSessionsModal = true },
+                                   title: "Signed sessions",
+                                   description: "View future sessions and cancel if needed")
+                .padding()
                 Spacer()
             }
             
@@ -74,15 +46,19 @@ struct UserSessionsScreen: View {
                 UserSessionsModal(isShowing: $showSignedSessionsModal,
                                   sessions: signedSessions,
                                   title: "Signed Sessions",
-                                  modalType: .signOut, 
-                                  onSelectSession: { session in handleSessionSignOut(session) })
+                                  modalType: .signOut,
+                                  onSelectSession: { session in
+                    handleSessionSignOut(session)
+                })
             }
             
             if showJoinableSessionsModal {
                 UserSessionsModal(isShowing: $showJoinableSessionsModal,
                                   sessions: joinableSessions,
                                   title: "Joinable Sessions",
-                                  onSelectSession: { _ in })
+                                  onSelectSession: { session in
+                    handleSessionJoin(session)
+                })
             }
             
             if showSignedOutToast {
@@ -98,6 +74,9 @@ struct UserSessionsScreen: View {
                 setJoinableSessions()
             }
         }
+        .navigationDestination(for: PreSessionData.self, destination: { preSessionData in
+            JoinSessionScreen(preSessionData: preSessionData)
+        })
         .navigationBarBackButtonHidden()
     }
     
@@ -121,11 +100,16 @@ struct UserSessionsScreen: View {
                                   filledSpots: 11,
                                   description: "this is just a test description")]
     }
-
+    
     func handleSessionSignOut(_ session: Session) {
         guard let sessionIndex = signedSessions.firstIndex(of: session) else { return }
         signedSessions.remove(at: sessionIndex)
         showSignedOutToast = true
+    }
+    
+    func handleSessionJoin(_ session: Session) {
+        path.append(PreSessionData(session: session,
+                                   user: user))
     }
     
     func back() {
@@ -134,7 +118,8 @@ struct UserSessionsScreen: View {
 }
 
 #Preview {
-    UserSessionsScreen(user: User(username: "",
+    UserSessionsScreen(path: .constant(NavigationPath()),
+                       user: User(username: "",
                                   firstName: "",
                                   lastName: "",
                                   email: "",

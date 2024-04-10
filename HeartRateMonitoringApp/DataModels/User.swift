@@ -8,11 +8,11 @@
 import Foundation
 
 public struct User: Hashable {
-    var username: String
-    var firstName: String
-    var lastName: String
-    var email: String
-    var gender: String
-    var age: Int
-    var password: String
+    let username: String
+    let firstName: String
+    let lastName: String
+    let email: String
+    let gender: String
+    let age: Int
+    let password: String
 }

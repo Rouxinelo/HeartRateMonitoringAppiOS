@@ -20,6 +20,7 @@
 		6B2846012BA8E867007A9D8E /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846002BA8E867007A9D8E /* MainMenu.swift */; };
 		6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846062BAA35D1007A9D8E /* UserType.swift */; };
 		6B2846092BAA3936007A9D8E /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */; };
+		6B2A30242BC5E91F00E45B20 /* MultipleTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A30232BC5E91F00E45B20 /* MultipleTextButton.swift */; };
 		6B3A17322BB0A82E00C98E35 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3A17312BB0A82E00C98E35 /* CustomBackButton.swift */; };
 		6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D79152BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift */; };
 		6B3D791A2BA793E7000DBE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D79192BA793E7000DBE1A /* Assets.xcassets */; };
@@ -36,6 +37,9 @@
 		6B7194BC2BC4971E00B297AF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BB2BC4971E00B297AF /* Session.swift */; };
 		6B7194BE2BC4973200B297AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BD2BC4973200B297AF /* User.swift */; };
 		6B7194C02BC4975600B297AF /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BF2BC4975600B297AF /* Gender.swift */; };
+		6B7194C32BC498AE00B297AF /* JoinSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194C22BC498AE00B297AF /* JoinSessionScreen.swift */; };
+		6B7194C52BC49C3C00B297AF /* SessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194C42BC49C3C00B297AF /* SessionData.swift */; };
+		6B7194C72BC49C9800B297AF /* PreSessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194C62BC49C9800B297AF /* PreSessionData.swift */; };
 		6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */; };
 		6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB62BB04F3E0088899E /* CircularAvatar.swift */; };
 		6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB82BB052E20088899E /* UserDetailsSection.swift */; };
@@ -82,6 +86,7 @@
 		6B2846002BA8E867007A9D8E /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		6B2846062BAA35D1007A9D8E /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		6B2A30232BC5E91F00E45B20 /* MultipleTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleTextButton.swift; sourceTree = "<group>"; };
 		6B3A17312BB0A82E00C98E35 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		6B3D79122BA793E6000DBE1A /* HeartRateMonitoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3D79152BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateMonitoringAppApp.swift; sourceTree = "<group>"; };
@@ -101,6 +106,9 @@
 		6B7194BB2BC4971E00B297AF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6B7194BD2BC4973200B297AF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6B7194BF2BC4975600B297AF /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		6B7194C22BC498AE00B297AF /* JoinSessionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSessionScreen.swift; sourceTree = "<group>"; };
+		6B7194C42BC49C3C00B297AF /* SessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionData.swift; sourceTree = "<group>"; };
+		6B7194C62BC49C9800B297AF /* PreSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSessionData.swift; sourceTree = "<group>"; };
 		6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsScreen.swift; sourceTree = "<group>"; };
 		6B872BB62BB04F3E0088899E /* CircularAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAvatar.swift; sourceTree = "<group>"; };
 		6B872BB82BB052E20088899E /* UserDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsSection.swift; sourceTree = "<group>"; };
@@ -189,6 +197,7 @@
 		6B2846082BAA38D4007A9D8E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6B2A30222BC5E90000E45B20 /* Buttons */,
 				6BC27BEE2BB8BE4D0089217F /* Others */,
 				6BC27BED2BB8BE350089217F /* Popups */,
 				6BC27BEC2BB8BE170089217F /* Sections */,
@@ -196,6 +205,16 @@
 				6BC27BEA2BB8BDF90089217F /* TextFields */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		6B2A30222BC5E90000E45B20 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				6B3A17312BB0A82E00C98E35 /* CustomBackButton.swift */,
+				6BC27BF32BB8CAF80089217F /* CustomRadioButton.swift */,
+				6B2A30232BC5E91F00E45B20 /* MultipleTextButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		6B3D79092BA793E6000DBE1A = {
@@ -263,6 +282,7 @@
 		6B3D793F2BA79406000DBE1A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6B7194C12BC4989900B297AF /* JoinSessionScreen */,
 				6B10AAC92BC1FD6400AFE2FC /* UserSessionsScreen */,
 				6BC27BE72BB8533F0089217F /* RegisterUserScreen */,
 				6BC27BDE2BB22DE60089217F /* SessionDetailScreen */,
@@ -297,8 +317,18 @@
 			children = (
 				6B7194BB2BC4971E00B297AF /* Session.swift */,
 				6B7194BD2BC4973200B297AF /* User.swift */,
+				6B7194C42BC49C3C00B297AF /* SessionData.swift */,
+				6B7194C62BC49C9800B297AF /* PreSessionData.swift */,
 			);
 			path = DataModels;
+			sourceTree = "<group>";
+		};
+		6B7194C12BC4989900B297AF /* JoinSessionScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6B7194C22BC498AE00B297AF /* JoinSessionScreen.swift */,
+			);
+			path = JoinSessionScreen;
 			sourceTree = "<group>";
 		};
 		6B872BB32BB04F100088899E /* UserDetailsScreen */ = {
@@ -370,8 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				6B872BB62BB04F3E0088899E /* CircularAvatar.swift */,
-				6B3A17312BB0A82E00C98E35 /* CustomBackButton.swift */,
-				6BC27BF32BB8CAF80089217F /* CustomRadioButton.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -523,9 +551,12 @@
 				6B7194BE2BC4973200B297AF /* User.swift in Sources */,
 				6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */,
 				6BC27BE02BB22DF80089217F /* SessionDetailScreen.swift in Sources */,
+				6B2A30242BC5E91F00E45B20 /* MultipleTextButton.swift in Sources */,
 				6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */,
 				6B47AF492BAE3BE4001C0172 /* CustomToast.swift in Sources */,
 				6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */,
+				6B7194C72BC49C9800B297AF /* PreSessionData.swift in Sources */,
+				6B7194C32BC498AE00B297AF /* JoinSessionScreen.swift in Sources */,
 				6B7194BC2BC4971E00B297AF /* Session.swift in Sources */,
 				6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */,
 				6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */,
@@ -537,6 +568,7 @@
 				6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */,
 				6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */,
 				6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */,
+				6B7194C52BC49C3C00B297AF /* SessionData.swift in Sources */,
 				6B10AAC12BBC365500AFE2FC /* KeyboardHelper.swift in Sources */,
 				6B3A17322BB0A82E00C98E35 /* CustomBackButton.swift in Sources */,
 				6B2845F92BA796E9007A9D8E /* Color.swift in Sources */,
