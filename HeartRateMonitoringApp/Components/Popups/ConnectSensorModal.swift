@@ -46,7 +46,7 @@ struct ConnectSensorModal: View {
                         ForEach(devices, id: \.self) { device in
                             HStack  {
                                 Button(action: {
-                                    
+                                    close(device)
                                 }) {
                                     Image("movesense-icon")
                                         .resizable()

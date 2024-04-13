@@ -9,10 +9,11 @@ import SwiftUI
 
 struct JoinSessionScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
     @State var showConnectionModal: Bool = false
     @State var devices = [MockDevice]()
     var preSessionData: PreSessionData
-    var movesenseDevice: Int?
+    
     var body: some View {
         ZStack {
             VStack (spacing: 20) {
@@ -62,21 +63,22 @@ struct JoinSessionScreen: View {
                     showConnectionModal = true
                     addDevicesPeriodically()
                 }, title: "Join this session", description: "Connect your sensor and start exercising!")
-                    .padding()
+                .padding()
             }
             
             if showConnectionModal {
-                ConnectSensorModal(isShowing: $showConnectionModal, 
+                ConnectSensorModal(isShowing: $showConnectionModal,
                                    devices: $devices,
                                    title: "Choose nearby sensor",
-                                   onSelectedDevice: { _ in showConnectionModal.toggle() })
+                                   onSelectedDevice: { device in
+                    goToSession(device)
+                })
             }
         }
+        .navigationDestination(for: SessionData.self, destination: { sessionData in
+            SessionScreen(sessionData: sessionData)
+        })
         .navigationBarBackButtonHidden()
-    }
-    
-    func deviceConnected() -> Bool {
-        return movesenseDevice != nil
     }
     
     func addDevicesPeriodically() {
@@ -86,24 +88,33 @@ struct JoinSessionScreen: View {
         }
     }
     
+    func goToSession(_ device: MockDevice) {
+        showConnectionModal.toggle()
+        path.append(SessionData(session: SessionSimplified(id: preSessionData.session.id,
+                                                           name: preSessionData.session.name,
+                                                           teacher: preSessionData.session.teacher),
+                                user: UserSimplified(username: preSessionData.user.username),
+                                device: device))
+    }
+    
     func back() {
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 #Preview {
-    JoinSessionScreen(preSessionData: PreSessionData(session: Session(id: "testID",
-                                                                      name: "Test Name",
-                                                                      date: "11/11",
-                                                                      hour: "11h",
-                                                                      teacher: "Test Teacher",
-                                                                      totalSpots: 1,
-                                                                      filledSpots: 1),
-                                                     user: User(username: "testUsername",
-                                                                firstName: "Test",
-                                                                lastName: "Name",
-                                                                email: "testEmail@testemail.com",
-                                                                gender: "M",
-                                                                age: 11,
-                                                                password: "ucdu")))
+    JoinSessionScreen(path: .constant(NavigationPath()), preSessionData: PreSessionData(session: Session(id: "testID",
+                                                                                              name: "Test Name",
+                                                                                              date: "11/11",
+                                                                                              hour: "11h",
+                                                                                              teacher: "Test Teacher",
+                                                                                              totalSpots: 1,
+                                                                                              filledSpots: 1),
+                                                                             user: User(username: "testUsername",
+                                                                                        firstName: "Test",
+                                                                                        lastName: "Name",
+                                                                                        email: "testEmail@testemail.com",
+                                                                                        gender: "M",
+                                                                                        age: 11,
+                                                                                        password: "ucdu")))
 }
