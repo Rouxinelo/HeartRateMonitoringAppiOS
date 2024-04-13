@@ -9,11 +9,13 @@ import SwiftUI
 
 struct JoinSessionScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @State var showConnectionModal: Bool = false
+    @State var devices = [MockDevice]()
     var preSessionData: PreSessionData
     var movesenseDevice: Int?
     var body: some View {
         ZStack {
-            VStack (spacing: 50) {
+            VStack (spacing: 20) {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
@@ -22,44 +24,66 @@ struct JoinSessionScreen: View {
                         .fontWeight(.bold)
                     Spacer()
                 }.padding(.horizontal)
-                VStack (spacing: 20){
-                    Text("Session Details")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    
-                    VStack (spacing: 10) {
-                        Text(preSessionData.session.name)
-                        Text(preSessionData.session.description ?? "No description was provided")
-                        HStack {
-                            Image(systemName: "book.fill")
-                                .foregroundStyle(.red)
-                            Text(preSessionData.session.teacher)
+                HStack {
+                    VStack (spacing: 10){
+                        Image("heart-rate").resizable().aspectRatio(contentMode: .fit).frame(width: 100, height: 100)
+                        Text("Session Details")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        VStack (spacing: 10) {
+                            Text(preSessionData.session.name)
+                            Text(preSessionData.session.description ?? "No description was provided")
+                            HStack {
+                                Image(systemName: "book.fill")
+                                    .foregroundStyle(.red)
+                                Text(preSessionData.session.teacher)
+                            }
+                            HStack {
+                                Image(systemName: "clock.fill")
+                                    .foregroundStyle(.red)
+                                Text(preSessionData.session.hour)
+                            }
+                            HStack {
+                                Image(systemName: "person.fill")
+                                    .foregroundStyle(.red)
+                                Text("\(preSessionData.session.filledSpots)/\(preSessionData.session.totalSpots)")
+                            }
                         }
-                        HStack {
-                            Image(systemName: "clock.fill")
-                                .foregroundStyle(.red)
-                            Text(preSessionData.session.hour)
-                        }
-                        HStack {
-                            Image(systemName: "person.fill")
-                                .foregroundStyle(.red)
-                            Text("\(preSessionData.session.filledSpots)/\(preSessionData.session.totalSpots)")
-                        }
+                        .padding()
+                        .background(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .shadow(radius: 5)
                     }
-                    .padding()
-                    .background(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius: 5)
+                    
                 }
-                MultipleTextButton(action: {}, title: "Join this session", description: "Connect your sensor and start exercising!")
-                    .padding()
                 Spacer()
+                MultipleTextButton(action: {
+                    showConnectionModal = true
+                    addDevicesPeriodically()
+                }, title: "Join this session", description: "Connect your sensor and start exercising!")
+                    .padding()
+            }
+            
+            if showConnectionModal {
+                ConnectSensorModal(isShowing: $showConnectionModal, 
+                                   devices: $devices,
+                                   title: "Choose nearby sensor",
+                                   onSelectedDevice: { _ in showConnectionModal.toggle() })
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     func deviceConnected() -> Bool {
         return movesenseDevice != nil
+    }
+    
+    func addDevicesPeriodically() {
+        devices.append(MockDevice(name: "876543210", batteryPercentage: 25))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.devices.append(MockDevice(name: "012345678", batteryPercentage: 100))
+        }
     }
     
     func back() {

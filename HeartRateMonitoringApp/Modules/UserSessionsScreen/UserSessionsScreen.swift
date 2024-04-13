@@ -20,7 +20,7 @@ struct UserSessionsScreen: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 50) {
+            VStack {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
@@ -29,6 +29,8 @@ struct UserSessionsScreen: View {
                         .fontWeight(.bold)
                     Spacer()
                 }.padding(.horizontal)
+                
+                Image("heart-rate").resizable().aspectRatio(contentMode: .fit).frame(width: 100, height: 100)
                 
                 MultipleTextButton(action: { showJoinableSessionsModal = true },
                                    title: "Ready to join",

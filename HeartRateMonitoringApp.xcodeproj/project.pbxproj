@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B0724142BB0D4EF00FEDEFE /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0724132BB0D4EF00FEDEFE /* CalendarScreen.swift */; };
 		6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */; };
+		6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */; };
 		6B0F35282BB0B69A00F0911B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B0F35272BB0B69A00F0911B /* Launch Screen.storyboard */; };
 		6B10AAC12BBC365500AFE2FC /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */; };
 		6B10AACB2BC1FD7600AFE2FC /* UserSessionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AACA2BC1FD7600AFE2FC /* UserSessionsScreen.swift */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		6B0724132BB0D4EF00FEDEFE /* CalendarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
 		6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSection.swift; sourceTree = "<group>"; };
+		6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSensorModal.swift; sourceTree = "<group>"; };
 		6B0F35272BB0B69A00F0911B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		6B10AACA2BC1FD7600AFE2FC /* UserSessionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionsScreen.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				6B47AF462BAE2B41001C0172 /* LoadingView.swift */,
 				6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */,
 				6B10AACC2BC2AA9C00AFE2FC /* UserSessionsModal.swift */,
+				6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				6BC27BE62BB853170089217F /* RegisterUserScreen.swift in Sources */,
 				6BC27BDD2BB0DE0A0089217F /* OverflowContentViewModifier.swift in Sources */,
 				6B3D79432BA79525000DBE1A /* HomeScreen.swift in Sources */,
+				6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */,
 				6BC27BF42BB8CAF80089217F /* CustomRadioButton.swift in Sources */,
 				6BC27BF02BB8C1150089217F /* CustomNumericField.swift in Sources */,
 				6B47AF452BACD615001C0172 /* MainMenuSection.swift in Sources */,
