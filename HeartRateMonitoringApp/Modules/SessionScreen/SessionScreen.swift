@@ -123,6 +123,7 @@ struct SessionScreen: View {
                             Text("\(measurements.min() ?? 0) BPM")
                                 .font(.headline)
                                 .fontWeight(.bold)
+                                .foregroundStyle(.red)
                         }
                         VStack {
                             Text("Maximum:")
@@ -131,6 +132,7 @@ struct SessionScreen: View {
                             Text("\(measurements.max() ?? 0) BPM")
                                 .font(.headline)
                                 .fontWeight(.bold)
+                                .foregroundStyle(.red)
                         }
                         VStack {
                             Text("Average:")
@@ -139,13 +141,15 @@ struct SessionScreen: View {
                             Text("\(getAverage(measurements)) BPM")
                                 .font(.headline)
                                 .fontWeight(.bold)
+                                .foregroundStyle(.red)
                         }
                     }
                 }
                 Spacer()
             }.padding(.horizontal)
         }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
-            SessionSummaryScreen(sessionSummary: sessionSummaryData)
+            SessionSummaryScreen(path: $path,
+                                 sessionSummary: sessionSummaryData)
         })
         .navigationBarBackButtonHidden()
         .onAppear {

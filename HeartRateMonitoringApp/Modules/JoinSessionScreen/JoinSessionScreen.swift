@@ -16,7 +16,7 @@ struct JoinSessionScreen: View {
     
     var body: some View {
         ZStack {
-            VStack (spacing: 20) {
+            VStack (spacing: 10) {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
@@ -50,7 +50,8 @@ struct JoinSessionScreen: View {
                                     .foregroundStyle(.red)
                                 Text("\(preSessionData.session.filledSpots)/\(preSessionData.session.totalSpots)")
                             }
-                        }
+                        }.font(.title3)
+                        .fontWeight(.bold)
                         .padding()
                         .background(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SessionSummaryScreen: View {
+    @Binding var path: NavigationPath
+    @State private var showingAlert = false
     @State var sessionSummary: SessionSummaryData
     
     var body: some View {
@@ -39,7 +41,7 @@ struct SessionSummaryScreen: View {
                     }
                     Spacer()
                     Button(action: {
-                        
+                        showingAlert = true
                     }) {
                         VStack {
                             Image(systemName: "xmark")
@@ -77,28 +79,41 @@ struct SessionSummaryScreen: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                     HStack {
                         HeartRateSummarySection(sectionIcon: "number",
-                                                sectionTitle: "Measurements",
-                                                sectionDescription: "\(sessionSummary.measurements.count) BPM",
+                                                sectionTitle: "Count",
+                                                sectionDescription: "\(sessionSummary.measurements.count) Samples",
                                                 sectionColor: .red)
                         HeartRateSummarySection(sectionIcon: "alternatingcurrent",
                                                 sectionTitle: "Average",
-                                                sectionDescription: "123 BPM",
+                                                sectionDescription: "\(getAverage(sessionSummary.measurements)) BPM",
                                                 sectionColor: .blue)
                     }
                     HStack {
                         HeartRateSummarySection(sectionIcon: "arrow.up",
                                                 sectionTitle: "Maximum",
-                                                sectionDescription: "1000 BPM",
+                                                sectionDescription: "\(sessionSummary.measurements.max() ?? 0) BPM",
                                                 sectionColor: .green)
                         HeartRateSummarySection(sectionIcon: "arrow.down",
                                                 sectionTitle: "Minimum",
-                                                sectionDescription: "10 BPM",
+                                                sectionDescription: "\(sessionSummary.measurements.min() ?? 0) BPM",
                                                 sectionColor: .yellow)
                     }
                 }
                 Spacer()
-            }.padding(.horizontal)
-        }.navigationBarBackButtonHidden()
+            }
+            
+            if showingAlert {
+                CustomAlert(isShowing: $showingAlert,
+                            icon: "exclamationmark.circle",
+                            title: "Exit",
+                            leftButtonText: "Cancel",
+                            rightButtonText: "Exit",
+                            description: "Leave to main menu?",
+                            leftButtonAction: { showingAlert = false },
+                            rightButtonAction: { didPressClose() },
+                            isSingleButton: false)
+            }
+        }.padding(.horizontal)
+        .navigationBarBackButtonHidden()
     }
     
     func getFormattedHours(_ time: Int) -> String {
@@ -115,13 +130,22 @@ struct SessionSummaryScreen: View {
     func getFormattedSeconds(_ time: Int) -> String {
         return time >= 10 ? "\(time)" : "0\(time)"
     }
+    
+    func getAverage(_ array: [Int]) -> Int {
+        return array.isEmpty ? 0 : array.reduce(0, +) / array.count
+    }
+    
+    func didPressClose() {
+        path.removeLast(path.count - 1)
+    }
 }
 
 #Preview {
-    SessionSummaryScreen(sessionSummary: SessionSummaryData(sensor: MockDevice(name: "Movesense 12345678", 
+    SessionSummaryScreen(path: .constant(NavigationPath()),
+                         sessionSummary: SessionSummaryData(sensor: MockDevice(name: "Movesense 12345678",
                                                                                batteryPercentage: 10),
                                                             user: UserSimplified(username: "rouxinol"),
-                                                            session: SessionSimplified(id: "testID", 
+                                                            session: SessionSimplified(id: "testID",
                                                                                        name: "Test Name",
                                                                                        teacher: "Test Teacher"),
                                                             measurements: [1, 2, 3, 4, 5, 6, 7, 8],
