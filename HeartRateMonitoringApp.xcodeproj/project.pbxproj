@@ -11,6 +11,9 @@
 		6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */; };
 		6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */; };
 		6B0813942BCAD91500AAAE30 /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813932BCAD91500AAAE30 /* SessionScreen.swift */; };
+		6B0813972BCBE28E00AAAE30 /* SessionSummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */; };
+		6B0813992BCBE3D800AAAE30 /* SessionSummaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */; };
+		6B08139B2BCBECD800AAAE30 /* HeartRateSummarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */; };
 		6B0F35282BB0B69A00F0911B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B0F35272BB0B69A00F0911B /* Launch Screen.storyboard */; };
 		6B10AAC12BBC365500AFE2FC /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */; };
 		6B10AACB2BC1FD7600AFE2FC /* UserSessionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AACA2BC1FD7600AFE2FC /* UserSessionsScreen.swift */; };
@@ -79,6 +82,9 @@
 		6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSection.swift; sourceTree = "<group>"; };
 		6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSensorModal.swift; sourceTree = "<group>"; };
 		6B0813932BCAD91500AAAE30 /* SessionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
+		6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSummaryScreen.swift; sourceTree = "<group>"; };
+		6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSummaryData.swift; sourceTree = "<group>"; };
+		6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateSummarySection.swift; sourceTree = "<group>"; };
 		6B0F35272BB0B69A00F0911B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		6B10AACA2BC1FD7600AFE2FC /* UserSessionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionsScreen.swift; sourceTree = "<group>"; };
@@ -167,6 +173,14 @@
 				6B0813932BCAD91500AAAE30 /* SessionScreen.swift */,
 			);
 			path = SessionScreen;
+			sourceTree = "<group>";
+		};
+		6B0813952BCBE27F00AAAE30 /* SessionSummaryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */,
+			);
+			path = SessionSummaryScreen;
 			sourceTree = "<group>";
 		};
 		6B10AAC92BC1FD6400AFE2FC /* UserSessionsScreen */ = {
@@ -294,6 +308,7 @@
 		6B3D793F2BA79406000DBE1A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6B0813952BCBE27F00AAAE30 /* SessionSummaryScreen */,
 				6B0813922BCAD90800AAAE30 /* SessionScreen */,
 				6B7194C12BC4989900B297AF /* JoinSessionScreen */,
 				6B10AAC92BC1FD6400AFE2FC /* UserSessionsScreen */,
@@ -332,6 +347,7 @@
 				6B7194BD2BC4973200B297AF /* User.swift */,
 				6B7194C42BC49C3C00B297AF /* SessionData.swift */,
 				6B7194C62BC49C9800B297AF /* PreSessionData.swift */,
+				6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -394,6 +410,7 @@
 				6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */,
 				6B872BB82BB052E20088899E /* UserDetailsSection.swift */,
 				6BC27BF12BB8C7850089217F /* RegisterScreenGenderField.swift */,
+				6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -552,15 +569,18 @@
 				6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */,
 				6B4BDB372BB0722D00E25C2D /* UserDetailType.swift in Sources */,
 				6BC27BE22BB789900089217F /* String.swift in Sources */,
+				6B0813992BCBE3D800AAAE30 /* SessionSummaryData.swift in Sources */,
 				6BC27BE92BB8B8930089217F /* RegisterScreenField.swift in Sources */,
 				6B0724142BB0D4EF00FEDEFE /* CalendarScreen.swift in Sources */,
 				6BC27BE62BB853170089217F /* RegisterUserScreen.swift in Sources */,
 				6BC27BDD2BB0DE0A0089217F /* OverflowContentViewModifier.swift in Sources */,
 				6B3D79432BA79525000DBE1A /* HomeScreen.swift in Sources */,
 				6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */,
+				6B08139B2BCBECD800AAAE30 /* HeartRateSummarySection.swift in Sources */,
 				6BC27BF42BB8CAF80089217F /* CustomRadioButton.swift in Sources */,
 				6BC27BF02BB8C1150089217F /* CustomNumericField.swift in Sources */,
 				6B47AF452BACD615001C0172 /* MainMenuSection.swift in Sources */,
+				6B0813972BCBE28E00AAAE30 /* SessionSummaryScreen.swift in Sources */,
 				6B2846012BA8E867007A9D8E /* MainMenu.swift in Sources */,
 				6B47AF472BAE2B41001C0172 /* LoadingView.swift in Sources */,
 				6B7194BE2BC4973200B297AF /* User.swift in Sources */,
