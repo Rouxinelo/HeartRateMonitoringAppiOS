@@ -9,8 +9,9 @@ import SwiftUI
 import Charts
 
 struct SessionScreen: View {
+    @Binding var path: NavigationPath
     @State var sessionData: SessionData
-    @State private var heartbeat = false
+    @State private var animationAmount: CGFloat = 1
     @State private var sessionTime: Int = 0
     @State private var timer: Timer? = nil
     @State private var sessionTimeString: String = "00h 00m 00s"
@@ -35,7 +36,7 @@ struct SessionScreen: View {
                     }
                     Spacer()
                     Button(action: {
-                        
+                        didTapClose()
                     }) {
                         VStack {
                             Image(systemName: "xmark")
@@ -66,17 +67,19 @@ struct SessionScreen: View {
                         .fontWeight(.bold)
                         .foregroundStyle(.black)
                         .frame(maxWidth: .infinity, alignment: .center)
-                    Image(systemName: "suit.heart.fill")
-                        .resizable()
-                        .frame(width: 50, height: 50, alignment: .center)
-                        .foregroundStyle(.red)
-                        .scaleEffect(heartbeat ? 1.1 : 1.0)
-                        .animation(Animation.easeInOut(duration: 1)
-                            .repeatForever(autoreverses: false))
-                        .onAppear() {
-                            self.heartbeat.toggle()
-                        }
-                    Text("Current HR: \(measurements.last ?? 0)")
+                    Image(systemName: "heart.fill")
+                         .resizable()
+                         .frame(width: 50, height: 50)
+                         .foregroundColor(.red)
+                         .scaleEffect(animationAmount)
+                         .animation(
+                            .linear(duration: 0.5)
+                                 .repeatForever(autoreverses: true),
+                             value: animationAmount)
+                         .onAppear {
+                             animationAmount = 1.2
+                         }
+                    Text("Current Heart Rate: \(measurements.last ?? 0) BPM")
                         .font(.headline)
                         .fontWeight(.bold)
                     GeometryReader { geometry in
@@ -113,26 +116,44 @@ struct SessionScreen: View {
                         .foregroundStyle(.black)
                         .padding(10)
                     HStack (spacing: 40) {
-                        Text("Min: \(measurements.min() ?? 0)")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        Text("Max: \(measurements.max() ?? 0)")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        Text("Avg: \(getAverage(measurements) ?? 0)")
-                            .font(.headline)
-                            .fontWeight(.bold)
+                        VStack {
+                            Text("Minimum:")
+                                .font(.headline)
+                                .fontWeight(.bold).frame(alignment: .leading)
+                            Text("\(measurements.min() ?? 0) BPM")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                        }
+                        VStack {
+                            Text("Maximum:")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            Text("\(measurements.max() ?? 0) BPM")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                        }
+                        VStack {
+                            Text("Average:")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            Text("\(getAverage(measurements)) BPM")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                        }
                     }
                 }
                 Spacer()
             }.padding(.horizontal)
-        }.navigationBarBackButtonHidden()
-            .onAppear {
-                self.startTimer()
-            }
-            .onDisappear {
-                self.stopTimer()
-            }
+        }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
+            SessionSummaryScreen(sessionSummary: sessionSummaryData)
+        })
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            self.startTimer()
+        }
+        .onDisappear {
+            self.stopTimer()
+        }
     }
     
     func startTimer() {
@@ -175,14 +196,31 @@ struct SessionScreen: View {
         return array.isEmpty ? 0 : array.reduce(0, +) / array.count
     }
     
-    // Mock Methods (remove after integrate sensors)
+    func getHeartBeatDuration(_ averageBPM: Int) -> Double {
+        60.0 / Double(averageBPM)
+    }
+    
+    func didTapClose() {
+        path.append(getSessionSummaryData())
+    }
+    
+    // Mock Methods (remove after integrate sensors and backend)
     func appendRandomValue() {
         measurements.append(Int.random(in: 70...110))
+    }
+    
+    func getSessionSummaryData() -> SessionSummaryData {
+        SessionSummaryData(sensor: sessionData.device,
+                           user: sessionData.user,
+                           session: sessionData.session,
+                           measurements: measurements,
+                           sessionTime: sessionTime)
     }
 }
 
 #Preview {
-    SessionScreen(sessionData: SessionData(session: SessionSimplified(id: "testId",
+    SessionScreen(path: .constant(NavigationPath()),
+                  sessionData: SessionData(session: SessionSimplified(id: "testId",
                                                                       name: "Pilates Clinico",
                                                                       teacher: "Joao Rouxinol"),
                                            user: UserSimplified(username: "testUsername"),

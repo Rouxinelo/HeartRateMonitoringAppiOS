@@ -26,8 +26,9 @@ struct HeartRateSummarySection: View {
                 Text(sectionTitle)
                     .font(.title)
                     .fontWeight(.bold)
-                    .padding()
+                    .padding(.vertical)
                 Text(sectionDescription)
+                    .fontWeight(.bold)
             }
             .frame(width: 180, height: 140, alignment: .top)
             .background(sectionColor)

@@ -76,7 +76,7 @@ struct JoinSessionScreen: View {
             }
         }
         .navigationDestination(for: SessionData.self, destination: { sessionData in
-            SessionScreen(sessionData: sessionData)
+            SessionScreen(path: $path, sessionData: sessionData)
         })
         .navigationBarBackButtonHidden()
     }

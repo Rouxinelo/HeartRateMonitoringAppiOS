@@ -78,21 +78,21 @@ struct SessionSummaryScreen: View {
                     HStack {
                         HeartRateSummarySection(sectionIcon: "number",
                                                 sectionTitle: "Measurements",
-                                                sectionDescription: "\(sessionSummary.measurements.count)",
+                                                sectionDescription: "\(sessionSummary.measurements.count) BPM",
                                                 sectionColor: .red)
                         HeartRateSummarySection(sectionIcon: "alternatingcurrent",
                                                 sectionTitle: "Average",
-                                                sectionDescription: "123",
+                                                sectionDescription: "123 BPM",
                                                 sectionColor: .blue)
                     }
                     HStack {
                         HeartRateSummarySection(sectionIcon: "arrow.up",
                                                 sectionTitle: "Maximum",
-                                                sectionDescription: "1000",
+                                                sectionDescription: "1000 BPM",
                                                 sectionColor: .green)
                         HeartRateSummarySection(sectionIcon: "arrow.down",
                                                 sectionTitle: "Minimum",
-                                                sectionDescription: "10",
+                                                sectionDescription: "10 BPM",
                                                 sectionColor: .yellow)
                     }
                 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SessionSummaryData {
+struct SessionSummaryData: Hashable {
     let sensor: MockDevice
     let user: UserSimplified
     let session: SessionSimplified
