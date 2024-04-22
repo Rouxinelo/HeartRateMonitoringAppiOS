@@ -41,6 +41,12 @@ struct UserSessionsScreen: View {
                                    title: "Signed sessions",
                                    description: "View future sessions and cancel if needed")
                 .padding()
+                
+                MultipleTextButton(action: { },
+                                   title: "Previously Joined",
+                                   description: "View statistics about previous sessions")
+                .padding()
+                
                 Spacer()
             }
             
