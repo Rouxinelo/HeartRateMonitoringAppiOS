@@ -49,6 +49,8 @@
 		6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB62BB04F3E0088899E /* CircularAvatar.swift */; };
 		6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB82BB052E20088899E /* UserDetailsSection.swift */; };
 		6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */; };
+		6BBB68D52BDA72AE003E8109 /* PreviousSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB68D42BDA72AE003E8109 /* PreviousSessionScreen.swift */; };
+		6BBB68D72BDA734F003E8109 /* PreviousSessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB68D62BDA734F003E8109 /* PreviousSessionData.swift */; };
 		6BC27BDD2BB0DE0A0089217F /* OverflowContentViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27BDC2BB0DE0A0089217F /* OverflowContentViewModifier.swift */; };
 		6BC27BE02BB22DF80089217F /* SessionDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27BDF2BB22DF80089217F /* SessionDetailScreen.swift */; };
 		6BC27BE22BB789900089217F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27BE12BB789900089217F /* String.swift */; };
@@ -123,6 +125,8 @@
 		6B872BB62BB04F3E0088899E /* CircularAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAvatar.swift; sourceTree = "<group>"; };
 		6B872BB82BB052E20088899E /* UserDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsSection.swift; sourceTree = "<group>"; };
 		6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6BBB68D42BDA72AE003E8109 /* PreviousSessionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSessionScreen.swift; sourceTree = "<group>"; };
+		6BBB68D62BDA734F003E8109 /* PreviousSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSessionData.swift; sourceTree = "<group>"; };
 		6BC27BDC2BB0DE0A0089217F /* OverflowContentViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowContentViewModifier.swift; sourceTree = "<group>"; };
 		6BC27BDF2BB22DF80089217F /* SessionDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailScreen.swift; sourceTree = "<group>"; };
 		6BC27BE12BB789900089217F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 		6B3D793F2BA79406000DBE1A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6BBB68D32BDA72A2003E8109 /* PreviousSessionScreen */,
 				6B0813952BCBE27F00AAAE30 /* SessionSummaryScreen */,
 				6B0813922BCAD90800AAAE30 /* SessionScreen */,
 				6B7194C12BC4989900B297AF /* JoinSessionScreen */,
@@ -348,6 +353,7 @@
 				6B7194C42BC49C3C00B297AF /* SessionData.swift */,
 				6B7194C62BC49C9800B297AF /* PreSessionData.swift */,
 				6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */,
+				6BBB68D62BDA734F003E8109 /* PreviousSessionData.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -366,6 +372,14 @@
 				6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */,
 			);
 			path = UserDetailsScreen;
+			sourceTree = "<group>";
+		};
+		6BBB68D32BDA72A2003E8109 /* PreviousSessionScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6BBB68D42BDA72AE003E8109 /* PreviousSessionScreen.swift */,
+			);
+			path = PreviousSessionScreen;
 			sourceTree = "<group>";
 		};
 		6BC27BDE2BB22DE60089217F /* SessionDetailScreen */ = {
@@ -603,10 +617,12 @@
 				6B10AACD2BC2AA9C00AFE2FC /* UserSessionsModal.swift in Sources */,
 				6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */,
 				6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */,
+				6BBB68D72BDA734F003E8109 /* PreviousSessionData.swift in Sources */,
 				6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */,
 				6B7194C52BC49C3C00B297AF /* SessionData.swift in Sources */,
 				6B10AAC12BBC365500AFE2FC /* KeyboardHelper.swift in Sources */,
 				6B3A17322BB0A82E00C98E35 /* CustomBackButton.swift in Sources */,
+				6BBB68D52BDA72AE003E8109 /* PreviousSessionScreen.swift in Sources */,
 				6B2845F92BA796E9007A9D8E /* Color.swift in Sources */,
 				6BC27BF22BB8C7850089217F /* RegisterScreenGenderField.swift in Sources */,
 				6B2846092BAA3936007A9D8E /* CustomAlert.swift in Sources */,

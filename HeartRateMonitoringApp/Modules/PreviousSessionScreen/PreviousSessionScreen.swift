@@ -1,16 +1,17 @@
 //
-//  SessionSummaryScreen.swift
+//  PreviousSessionScreen.swift
 //  HeartRateMonitoringApp
 //
-//  Created by João Rouxinol on 14/04/2024.
+//  Created by João Rouxinol on 25/04/2024.
 //
 
 import SwiftUI
 
-struct SessionSummaryScreen: View {
+struct PreviousSessionScreen: View {
     @Binding var path: NavigationPath
     @State private var showingAlert = false
-    @State var sessionSummary: SessionSummaryData
+    @State private var showingToast = false
+    @State var sessionData: PreviousSessionData
     
     var body: some View {
         ZStack {
@@ -20,21 +21,27 @@ struct SessionSummaryScreen: View {
                         Text("Summary")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        HStack (spacing: 9) {
+                        HStack (spacing: 3) {
                             Image(systemName: "book.fill")
-                            Text(sessionSummary.session.name)
+                            Text(sessionData.session.name)
                                 .font(.headline)
                                 .fontWeight(.bold)
                         }
-                        HStack (spacing: 15) {
+                        HStack (spacing: 11) {
                             Image(systemName: "person.fill")
-                            Text(sessionSummary.session.teacher)
+                            Text(sessionData.session.teacher)
                                 .font(.headline)
                                 .fontWeight(.bold)
                         }
                         HStack {
-                            Image(systemName: "sensor.tag.radiowaves.forward.fill")
-                            Text(sessionSummary.sensor.name)
+                            Image(systemName: "calendar")
+                            Text(sessionData.session.date)
+                                .font(.headline)
+                                .fontWeight(.bold)
+                        }
+                        HStack (spacing: 9) {
+                            Image(systemName: "clock.fill")
+                            Text(sessionData.session.hour)
                                 .font(.headline)
                                 .fontWeight(.bold)
                         }
@@ -56,50 +63,49 @@ struct SessionSummaryScreen: View {
                     }
                 }.padding(.horizontal)
                 
-                Text("Details:")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
-                
-                VStack (spacing: 0) {
-                    Text("Session time:")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(getFormattedHours(sessionSummary.sessionTime))h \(getFormattedMinutes(sessionSummary.sessionTime % 3600))m \(getFormattedSeconds(sessionSummary.sessionTime % 60))s")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.red)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }.padding(.horizontal)
-                
                 VStack (spacing: 10) {
-                    Text("Heart Rate data:")
+                    Text("Heart Rate Data:")
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .center)
                     HStack {
                         HeartRateSummarySection(sectionIcon: "number",
                                                 sectionTitle: "Count",
-                                                sectionDescription: "\(sessionSummary.measurements.count) Samples",
+                                                sectionDescription: "\(sessionData.measurements.count) Samples",
                                                 sectionColor: .red)
                         HeartRateSummarySection(sectionIcon: "alternatingcurrent",
                                                 sectionTitle: "Average",
-                                                sectionDescription: "\(getAverage(sessionSummary.measurements)) BPM",
+                                                sectionDescription: "\(getAverage(sessionData.measurements)) BPM",
                                                 sectionColor: .blue)
                     }
                     HStack {
                         HeartRateSummarySection(sectionIcon: "arrow.up",
                                                 sectionTitle: "Maximum",
-                                                sectionDescription: "\(sessionSummary.measurements.max() ?? 0) BPM",
+                                                sectionDescription: "\(sessionData.measurements.max() ?? 0) BPM",
                                                 sectionColor: .green)
                         HeartRateSummarySection(sectionIcon: "arrow.down",
                                                 sectionTitle: "Minimum",
-                                                sectionDescription: "\(sessionSummary.measurements.min() ?? 0) BPM",
+                                                sectionDescription: "\(sessionData.measurements.min() ?? 0) BPM",
                                                 sectionColor: .yellow)
                     }
                 }
+                
+                Button(action: {
+                    showingToast = true
+                }) {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                        Text("Share this summary")
+                    }
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
+                }
+                .background(.red)
+                .foregroundStyle(.white)
+                .cornerRadius(30)
+                
+                
                 Spacer()
             }
             
@@ -114,8 +120,15 @@ struct SessionSummaryScreen: View {
                             rightButtonAction: { didPressClose() },
                             isSingleButton: false)
             }
+            
+            if showingToast {
+                CustomToast(isShowing: $showingToast,
+                            iconName: "info.circle.fill",
+                            message: "Coming Soon")
+            }
+            
         }
-        .navigationBarBackButtonHidden()
+            .navigationBarBackButtonHidden()
     }
     
     func getFormattedHours(_ time: Int) -> String {
@@ -138,18 +151,19 @@ struct SessionSummaryScreen: View {
     }
     
     func didPressClose() {
-        path.removeLast(path.count - 1)
+        path.removeLast()
     }
 }
 
 #Preview {
-    SessionSummaryScreen(path: .constant(NavigationPath()),
-                         sessionSummary: SessionSummaryData(sensor: MockDevice(name: "Movesense 12345678",
-                                                                               batteryPercentage: 10),
-                                                            user: UserSimplified(username: "rouxinol"),
-                                                            session: SessionSimplified(id: "testID",
-                                                                                       name: "Test Name",
-                                                                                       teacher: "Test Teacher"),
-                                                            measurements: [1, 2, 3, 4, 5, 6, 7, 8],
-                                                            sessionTime: 3661))
+    PreviousSessionScreen(path: .constant(NavigationPath()),
+                          sessionData: PreviousSessionData(session: Session(id: "testId",
+                                                                            name: "Test Name",
+                                                                            date: "11/11",
+                                                                            hour: "11h",
+                                                                            teacher: "test teacher",
+                                                                            totalSpots: 10,
+                                                                            filledSpots: 10),
+                                                           username: UserSimplified(username: "testUsername"),
+                                                           measurements: [10]))
 }
