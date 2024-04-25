@@ -7,10 +7,14 @@
 
 import SwiftUI
 import UIKit
-
+import Combine
 struct PreviousSessionScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @State var sessionData: PreviousSessionData
+    @State var subscriptions = Set<AnyCancellable>()
+    @State var showSuccessToast: Bool = false
+    @State var showFailureToast: Bool = false
+    let screenshotManager = ScreenshotManager()
     
     var body: some View {
         ZStack {
@@ -93,7 +97,7 @@ struct PreviousSessionScreen: View {
                     Text("Actions:").font(.title).fontWeight(.bold)
                     HStack {
                         Button(action: {
-                            captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .share)
+                            screenshotManager.captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .save)
                         }) {
                             HStack {
                                 Image(systemName: "square.and.arrow.down")
@@ -109,7 +113,7 @@ struct PreviousSessionScreen: View {
                         .cornerRadius(30)
                         
                         Button(action: {
-                            captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .share)
+                            screenshotManager.captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .share)
                         }) {
                             HStack {
                                 Image(systemName: "square.and.arrow.up")
@@ -127,38 +131,23 @@ struct PreviousSessionScreen: View {
                 }
                 Spacer()
             }
+            
+            if showFailureToast {
+                CustomToast(isShowing: $showFailureToast,
+                            iconName: "info.circle.fill",
+                            message: "Error ocurred while saving")
+            }
+            
+            if showSuccessToast {
+                CustomToast(isShowing: $showSuccessToast,
+                            iconName: "info.circle.fill",
+                            message: "Saved successfully")
+            }
         }
-            .navigationBarBackButtonHidden()
-    }
-    
-    func captureScreenshot(of customView: some View, event: ScreenShotEvent = .share) {
-        let hostingController = UIHostingController(rootView: customView)
-        hostingController.view.frame = UIScreen.main.bounds
-        let renderer = UIGraphicsImageRenderer(bounds: hostingController.view.bounds)
-        
-        let screenshot = renderer.image { ctx in
-            hostingController.view.drawHierarchy(in: hostingController.view.bounds, afterScreenUpdates: true)
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            bindScreenshotManager()
         }
-        switch event {
-        case .save:
-            saveScreenShot(screenshot)
-        case .share:
-            shareScreenShot(screenshot)
-        }
-    }
-    
-    func shareScreenShot(_ screenshot: UIImage) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first else {
-            return
-        }
-        let activityViewController = UIActivityViewController(activityItems: [screenshot], applicationActivities: nil)
-        if let topViewController = window.rootViewController {
-            topViewController.present(activityViewController, animated: true, completion: nil)
-        }
-    }
-    
-    func saveScreenShot(_ screenshot: UIImage) {
-        UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil)
     }
     
     func getAverage(_ array: [Int]) -> Int {
@@ -167,6 +156,17 @@ struct PreviousSessionScreen: View {
     
     func back() {
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    func bindScreenshotManager() {
+        screenshotManager.statePublisher.sink { result in
+            switch result {
+            case .success:
+                showSuccessToast.toggle()
+            case .failure:
+                showFailureToast.toggle()
+            }
+        }.store(in: &subscriptions)
     }
 }
 
