@@ -104,6 +104,9 @@ struct UserSessionsScreen: View {
         .navigationDestination(for: PreSessionData.self, destination: { preSessionData in
             JoinSessionScreen(path: $path, preSessionData: preSessionData)
         })
+        .navigationDestination(for: PreviousSessionData.self, destination: { previousSessionData in
+            PreviousSessionScreen(sessionData: previousSessionData)
+        })
         .navigationBarBackButtonHidden()
     }
     
@@ -130,13 +133,13 @@ struct UserSessionsScreen: View {
     
     func setPreviousSessions() {
         previousSessions = [Session(id: "previous1",
-                                  name: "testname1",
-                                  date: "22/22",
-                                  hour: "22h",
-                                  teacher: "Test T",
-                                  totalSpots: 11,
-                                  filledSpots: 11,
-                                  description: "this is just a test description")]
+                                    name: "testname1",
+                                    date: "22/22",
+                                    hour: "22h",
+                                    teacher: "Test T",
+                                    totalSpots: 11,
+                                    filledSpots: 11,
+                                    description: "this is just a test description")]
     }
     
     func handleSessionSignOut(_ session: Session) {
@@ -151,7 +154,9 @@ struct UserSessionsScreen: View {
     }
     
     func handlePreviousSession(_ session: Session) {
-        showComingSoonToast = true
+        path.append(PreviousSessionData(session: session,
+                                        username: UserSimplified(username: user.username),
+                                        measurements: [10, 20, 30]))
     }
     
     func back() {

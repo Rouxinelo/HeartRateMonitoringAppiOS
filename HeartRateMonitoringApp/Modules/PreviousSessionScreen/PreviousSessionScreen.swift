@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct PreviousSessionScreen: View {
-    @Binding var path: NavigationPath
-    @State private var showingAlert = false
-    @State private var showingToast = false
+    @Environment(\.presentationMode) var presentationMode
     @State var sessionData: PreviousSessionData
     
     var body: some View {
@@ -48,7 +47,7 @@ struct PreviousSessionScreen: View {
                     }
                     Spacer()
                     Button(action: {
-                        showingAlert = true
+                        back()
                     }) {
                         VStack {
                             Image(systemName: "xmark")
@@ -90,74 +89,89 @@ struct PreviousSessionScreen: View {
                     }
                 }
                 
-                Button(action: {
-                    showingToast = true
-                }) {
+                VStack (spacing: 10){
+                    Text("Actions:").font(.title).fontWeight(.bold)
                     HStack {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Share this summary")
+                        Button(action: {
+                            captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .share)
+                        }) {
+                            HStack {
+                                Image(systemName: "square.and.arrow.down")
+                                Text("Save")
+                            }
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .frame(width: 120)
+                            .padding()
+                        }
+                        .background(.red)
+                        .foregroundStyle(.white)
+                        .cornerRadius(30)
+                        
+                        Button(action: {
+                            captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .share)
+                        }) {
+                            HStack {
+                                Image(systemName: "square.and.arrow.up")
+                                Text("Share")
+                            }
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .frame(width: 120)
+                            .padding()
+                        }
+                        .background(.red)
+                        .foregroundStyle(.white)
+                        .cornerRadius(30)
                     }
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding()
                 }
-                .background(.red)
-                .foregroundStyle(.white)
-                .cornerRadius(30)
-                
-                
                 Spacer()
             }
-            
-            if showingAlert {
-                CustomAlert(isShowing: $showingAlert,
-                            icon: "exclamationmark.circle",
-                            title: "Exit",
-                            leftButtonText: "Cancel",
-                            rightButtonText: "Exit",
-                            description: "Leave to main menu?",
-                            leftButtonAction: { showingAlert = false },
-                            rightButtonAction: { didPressClose() },
-                            isSingleButton: false)
-            }
-            
-            if showingToast {
-                CustomToast(isShowing: $showingToast,
-                            iconName: "info.circle.fill",
-                            message: "Coming Soon")
-            }
-            
         }
             .navigationBarBackButtonHidden()
     }
     
-    func getFormattedHours(_ time: Int) -> String {
-        let hours = time/3600
-        return hours >= 10 ? "\(time/3600)" : "0\(time/3600)"
+    func captureScreenshot(of customView: some View, event: ScreenShotEvent = .share) {
+        let hostingController = UIHostingController(rootView: customView)
+        hostingController.view.frame = UIScreen.main.bounds
+        let renderer = UIGraphicsImageRenderer(bounds: hostingController.view.bounds)
         
+        let screenshot = renderer.image { ctx in
+            hostingController.view.drawHierarchy(in: hostingController.view.bounds, afterScreenUpdates: true)
+        }
+        switch event {
+        case .save:
+            saveScreenShot(screenshot)
+        case .share:
+            shareScreenShot(screenshot)
+        }
     }
     
-    func getFormattedMinutes(_ time: Int) -> String {
-        let hours = time/60
-        return hours >= 10 ? "\(time/60)" : "0\(time/60)"
+    func shareScreenShot(_ screenshot: UIImage) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first else {
+            return
+        }
+        let activityViewController = UIActivityViewController(activityItems: [screenshot], applicationActivities: nil)
+        if let topViewController = window.rootViewController {
+            topViewController.present(activityViewController, animated: true, completion: nil)
+        }
     }
     
-    func getFormattedSeconds(_ time: Int) -> String {
-        return time >= 10 ? "\(time)" : "0\(time)"
+    func saveScreenShot(_ screenshot: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil)
     }
     
     func getAverage(_ array: [Int]) -> Int {
         return array.isEmpty ? 0 : array.reduce(0, +) / array.count
     }
     
-    func didPressClose() {
-        path.removeLast()
+    func back() {
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
 #Preview {
-    PreviousSessionScreen(path: .constant(NavigationPath()),
-                          sessionData: PreviousSessionData(session: Session(id: "testId",
+    PreviousSessionScreen(sessionData: PreviousSessionData(session: Session(id: "testId",
                                                                             name: "Test Name",
                                                                             date: "11/11",
                                                                             hour: "11h",
