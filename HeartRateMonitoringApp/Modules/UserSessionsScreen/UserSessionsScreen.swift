@@ -13,9 +13,12 @@ struct UserSessionsScreen: View {
     @State private var firstLoad = true
     @State var showJoinableSessionsModal: Bool = false
     @State var showSignedSessionsModal: Bool = false
+    @State var showPreviousSessionsModal: Bool = false
     @State var showSignedOutToast: Bool = false
+    @State var showComingSoonToast: Bool = false
     @State var joinableSessions = [Session]()
-    @State var signedSessions: [Session] = []
+    @State var signedSessions = [Session]()
+    @State var previousSessions = [Session]()
     @State var user: User
     
     var body: some View {
@@ -42,7 +45,7 @@ struct UserSessionsScreen: View {
                                    description: "View future sessions and cancel if needed")
                 .padding()
                 
-                MultipleTextButton(action: { },
+                MultipleTextButton(action: { showPreviousSessionsModal = true },
                                    title: "Previously Joined",
                                    description: "View statistics about previous sessions")
                 .padding()
@@ -69,10 +72,25 @@ struct UserSessionsScreen: View {
                 })
             }
             
+            if showPreviousSessionsModal {
+                UserSessionsModal(isShowing: $showPreviousSessionsModal,
+                                  sessions: previousSessions,
+                                  title: "Previous Sessions",
+                                  onSelectSession: { session in
+                    handlePreviousSession(session)
+                })
+            }
+            
             if showSignedOutToast {
                 CustomToast(isShowing: $showSignedOutToast,
                             iconName: "info.circle.fill",
                             message: "Signed out successfully")
+            }
+            
+            if showComingSoonToast {
+                CustomToast(isShowing: $showComingSoonToast,
+                            iconName: "info.circle.fill",
+                            message: "Coming Soon")
             }
         }
         .onAppear {
@@ -80,6 +98,7 @@ struct UserSessionsScreen: View {
                 firstLoad.toggle()
                 setSignedSessions()
                 setJoinableSessions()
+                setPreviousSessions()
             }
         }
         .navigationDestination(for: PreSessionData.self, destination: { preSessionData in
@@ -109,6 +128,17 @@ struct UserSessionsScreen: View {
                                   description: "this is just a test description")]
     }
     
+    func setPreviousSessions() {
+        previousSessions = [Session(id: "previous1",
+                                  name: "testname1",
+                                  date: "22/22",
+                                  hour: "22h",
+                                  teacher: "Test T",
+                                  totalSpots: 11,
+                                  filledSpots: 11,
+                                  description: "this is just a test description")]
+    }
+    
     func handleSessionSignOut(_ session: Session) {
         guard let sessionIndex = signedSessions.firstIndex(of: session) else { return }
         signedSessions.remove(at: sessionIndex)
@@ -118,6 +148,10 @@ struct UserSessionsScreen: View {
     func handleSessionJoin(_ session: Session) {
         path.append(PreSessionData(session: session,
                                    user: user))
+    }
+    
+    func handlePreviousSession(_ session: Session) {
+        showComingSoonToast = true
     }
     
     func back() {
