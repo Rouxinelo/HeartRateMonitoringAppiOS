@@ -16,12 +16,23 @@ extension View {
     func bottomCornerRadius(_ radius: CGFloat) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: [.bottomLeft, .bottomRight]))
     }
+    
+    func swipeRight(perform action: @escaping () -> Void) -> some View {
+        self.gesture(
+            DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                .onEnded { value in
+                    if value.translation.width > 0 {
+                        action()
+                    }
+                }
+        )
+    }
 }
 
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(
             roundedRect: rect,

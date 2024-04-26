@@ -58,6 +58,9 @@ struct CalendarScreen: View {
             .navigationDestination(for: Session.self, destination: { session in
                 SessionDetailScreen(didSignIn: $didSignIn, isGuest: isGuest, session: session)
             })
+            .swipeRight {
+                back()
+            }
             .navigationBarBackButtonHidden()
             if didSignIn {
                 CustomToast(isShowing: $didSignIn, iconName: "info.circle.fill", message: "Signed In Successfully")

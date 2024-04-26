@@ -41,6 +41,8 @@ struct UserDetailsScreen: View {
             ToolbarItem(placement: .topBarLeading) {
                 CustomBackButton(onClick: { back() })
             }
+        }.swipeRight {
+            back()
         }
     }
     

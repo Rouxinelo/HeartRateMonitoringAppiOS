@@ -10,17 +10,13 @@ import UIKit
 import SwiftUI
 import Combine
 
-enum ImageSaveResult {
-    case success
-    case failure
-}
-
 class ScreenshotManager: NSObject {
     var statePublisher = PassthroughSubject<ImageSaveResult, Never>()
     
     func captureScreenshot(of customView: some View, event: ScreenShotEvent = .share) {
         let hostingController = UIHostingController(rootView: customView)
         hostingController.view.frame = UIScreen.main.bounds
+        hostingController.overrideUserInterfaceStyle = .light
         let renderer = UIGraphicsImageRenderer(bounds: hostingController.view.bounds)
         
         let screenshot = renderer.image { ctx in
