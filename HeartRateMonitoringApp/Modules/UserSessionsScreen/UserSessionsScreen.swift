@@ -100,6 +100,8 @@ struct UserSessionsScreen: View {
                 setJoinableSessions()
                 setPreviousSessions()
             }
+        }.swipeRight {
+            back()
         }
         .navigationDestination(for: PreSessionData.self, destination: { preSessionData in
             JoinSessionScreen(path: $path, preSessionData: preSessionData)

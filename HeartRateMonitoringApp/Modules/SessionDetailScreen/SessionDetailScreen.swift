@@ -93,6 +93,8 @@ struct SessionDetailScreen: View {
             }
         }.onAppear {
             imageName = getRandomImage()
+        }.swipeRight {
+            back()
         }
     }
     

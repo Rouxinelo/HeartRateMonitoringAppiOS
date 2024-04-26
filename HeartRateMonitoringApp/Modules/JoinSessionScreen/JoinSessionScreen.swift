@@ -75,6 +75,8 @@ struct JoinSessionScreen: View {
                     goToSession(device)
                 })
             }
+        }.swipeRight {
+            back()
         }
         .navigationDestination(for: SessionData.self, destination: { sessionData in
             SessionScreen(path: $path, sessionData: sessionData)

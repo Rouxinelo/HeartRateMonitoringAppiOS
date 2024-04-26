@@ -147,6 +147,8 @@ struct PreviousSessionScreen: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             bindScreenshotManager()
+        }.swipeRight {
+            back()
         }
     }
     
