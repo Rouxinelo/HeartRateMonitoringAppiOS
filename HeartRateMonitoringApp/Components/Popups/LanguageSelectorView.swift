@@ -27,13 +27,13 @@ struct LanguageSelectorView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 50)
-                Text(LanguageSelectorViewStrings.titleString)
+                Text(localized(LanguageSelectorViewStrings.titleString))
                     .font(.title)
                     .bold()
                     .foregroundColor(.black)
                 HStack (spacing: 20) {
                     Button(action: {
-                        selectedLanguage(language: LanguageSelectorViewStrings.portugueseString)
+                        selectedLanguage(language: localized(LanguageSelectorViewStrings.portugueseString))
                     }) {
                         VStack (spacing: 10) {
                             Image(languageSelectorViewIcons.portugueseIcon)
@@ -42,7 +42,7 @@ struct LanguageSelectorView: View {
                                 .frame(width: 40, height: 40, alignment: .center)
                                 .cornerRadius(50)
                                 .padding(.top, 10)
-                            Text(LanguageSelectorViewStrings.portugueseString)
+                            Text(localized(LanguageSelectorViewStrings.portugueseString))
                                 .padding(.bottom, 10)
                                 .foregroundColor(portugueseSelected ? .white : .black)
                         }
@@ -53,7 +53,7 @@ struct LanguageSelectorView: View {
                     }
                     
                     Button(action: {
-                        selectedLanguage(language: LanguageSelectorViewStrings.englishString)
+                        selectedLanguage(language: localized(LanguageSelectorViewStrings.englishString))
                     }) {
                         VStack(spacing: 10) {
                             Image(languageSelectorViewIcons.englishIcon)
@@ -62,7 +62,7 @@ struct LanguageSelectorView: View {
                                 .frame(width: 40, height: 40, alignment: .center)
                                 .cornerRadius(50)
                                 .padding(.top, 10)
-                            Text(LanguageSelectorViewStrings.englishString)
+                            Text(localized(LanguageSelectorViewStrings.englishString))
                                 .padding(.bottom, 10)
                                 .foregroundColor(englishSelected ? .white : .black)
                         }
@@ -75,18 +75,18 @@ struct LanguageSelectorView: View {
 
                 Button(action: {
                     if portugueseSelected {
-                        UserDefaults.standard.set(LanguageSelectorViewStrings.portugueseString, forKey: "AppLanguage")
+                        UserDefaults.standard.set("pt-PT", forKey: "AppLanguage")
                     } else {
-                        UserDefaults.standard.set(LanguageSelectorViewStrings.englishString, forKey: "AppLanguage")
+                        UserDefaults.standard.set("en", forKey: "AppLanguage")
                     }
                     onLanguageChange()
                     close()
                 }) {
-                    Text(LanguageSelectorViewStrings.confirmString)
+                    Text(localized(LanguageSelectorViewStrings.confirmString))
                         .padding()
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .frame(width: 100)
+                        .frame(width: 150)
                         .background(Color.red)
                         .cornerRadius(10)
                 }
@@ -124,10 +124,10 @@ struct LanguageSelectorView: View {
     
     func selectedLanguage(language: String) {
         switch language {
-        case LanguageSelectorViewStrings.englishString:
+        case "en":
             englishSelected = true
             portugueseSelected = false
-        case LanguageSelectorViewStrings.portugueseString:
+        case "pt-PT":
             englishSelected = false
             portugueseSelected = true
         default:

@@ -13,6 +13,7 @@ public struct HomeScreenIcons {
     static let guestIcon = "person.fill.questionmark"
     static let settingsIcon = "gearshape.fill"
     static let alertIcon = "exclamationmark.circle"
+    static let toastIcon = "info.circle.fill"
 }
 
 public struct LoginScreenIcons {

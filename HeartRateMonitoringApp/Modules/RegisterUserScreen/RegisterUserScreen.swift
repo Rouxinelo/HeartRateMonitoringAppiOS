@@ -145,6 +145,8 @@ struct RegisterUserScreen: View {
                             title: "Registering User",
                             description: "Please Wait...")
             }
+        }.swipeRight {
+            back()
         }
         .navigationBarBackButtonHidden()
         .offset(y: isNumericFieldFocused ? -self.keyboardHeightHelper.keyboardHeight : 0)

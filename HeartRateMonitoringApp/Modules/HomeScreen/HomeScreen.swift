@@ -24,7 +24,7 @@ struct HomeScreen: View {
                     Image(LoginScreenIcons.heartIcon)
                         .resizable()
                         .frame(width: 150, height: 150)
-                    Text(HomeScreenStrings.titleString)
+                    Text(localized(HomeScreenStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
@@ -41,7 +41,7 @@ struct HomeScreen: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                    Text(HomeScreenStrings.loginString)
+                                    Text(localized(HomeScreenStrings.loginString))
                                         .font(.headline)
                                         .fontWeight(.bold)
                                         .padding()
@@ -60,7 +60,7 @@ struct HomeScreen: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                    Text(HomeScreenStrings.registerString)
+                                    Text(localized(HomeScreenStrings.registerString))
                                         .font(.headline)
                                         .fontWeight(.bold)
                                         .padding()
@@ -82,7 +82,7 @@ struct HomeScreen: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                    Text(HomeScreenStrings.guestString)
+                                    Text(localized(HomeScreenStrings.guestString))
                                         .font(.headline)
                                         .fontWeight(.bold)
                                         .padding()
@@ -101,7 +101,7 @@ struct HomeScreen: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                    Text(HomeScreenStrings.languageString)
+                                    Text(localized(HomeScreenStrings.languageString))
                                         .font(.headline)
                                         .fontWeight(.bold)
                                         .padding()
@@ -118,10 +118,10 @@ struct HomeScreen: View {
                 if showingAlert {
                     CustomAlert(isShowing: $showingAlert, 
                                 icon: HomeScreenIcons.alertIcon,
-                                title: HomeScreenStrings.guestAlertTitle,
-                                leftButtonText: "Cancel",
-                                rightButtonText: "Ok",
-                                description: HomeScreenStrings.guestAlertDescription,
+                                title: localized(HomeScreenStrings.guestAlertTitle),
+                                leftButtonText: localized(HomeScreenStrings.guestAlertCancel),
+                                rightButtonText: localized(HomeScreenStrings.guestAlertContinue),
+                                description: localized(HomeScreenStrings.guestAlertDescription),
                                 leftButtonAction: {},
                                 rightButtonAction: { enterAsGuest() }, 
                                 isSingleButton: false)
@@ -129,10 +129,10 @@ struct HomeScreen: View {
                 if showingFailedLoginAlert {
                     CustomAlert(isShowing: $showingFailedLoginAlert,
                                 icon: HomeScreenIcons.alertIcon,
-                                title: HomeScreenStrings.loginFailedTitle,
-                                leftButtonText: "Ok",
+                                title: localized(HomeScreenStrings.loginFailedTitle),
+                                leftButtonText: localized(HomeScreenStrings.guestAlertContinue),
                                 rightButtonText: "",
-                                description: HomeScreenStrings.loginFailedDescription,
+                                description: localized(HomeScreenStrings.loginFailedDescription),
                                 leftButtonAction: {},
                                 rightButtonAction: {},
                                 isSingleButton: true)
@@ -149,7 +149,9 @@ struct HomeScreen: View {
                     })
                 }
                 if showingToast {
-                    CustomToast(isShowing: $showingToast, iconName: "info.circle.fill", message: "Registered new user!")
+                    CustomToast(isShowing: $showingToast,
+                                iconName: HomeScreenIcons.toastIcon,
+                                message: localized(HomeScreenStrings.registeredToastMessage))
                 }
                 if isLoading {
                     LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
@@ -187,7 +189,6 @@ struct HomeScreen: View {
                 showingFailedLoginAlert = true
             }
         }
-        print("Username: \(username), Password \(password)")
     }
     
     func loginSuccessful(username: String) {
@@ -201,7 +202,13 @@ struct HomeScreen: View {
     }
     
     func getMockUser(_ username: String) -> User {
-        return User(username: username, firstName: "TestName", lastName: "TestName", email: "testmail@test.com", gender: "M", age: 18, password: "testPassword")
+        return User(username: username, 
+                    firstName: "TestName",
+                    lastName: "TestName",
+                    email: "testmail@test.com",
+                    gender: "M",
+                    age: 18,
+                    password: "testPassword")
     }
 }
 
