@@ -30,7 +30,7 @@ struct RegisterUserScreen: View {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
-                    Text("Register")
+                    Text(localized(RegisterUserStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     Spacer()
@@ -41,34 +41,34 @@ struct RegisterUserScreen: View {
                     RegisterScreenField(searchText: $userName,
                                         isHiddenField: false,
                                         placeholder: "",
-                                        title: "Username",
-                                        description: "Used to login")
+                                        title: localized(RegisterUserStrings.usernameString),
+                                        description: localized(RegisterUserStrings.usernameDescription))
                     HStack {
                         RegisterScreenField(searchText: $firstName,
                                             isHiddenField: false,
                                             placeholder: "",
-                                            title: "First Name",
-                                            description: "Your first name")
+                                            title: localized(RegisterUserStrings.firstNameString),
+                                            description: localized(RegisterUserStrings.firstNameDescription))
                         RegisterScreenField(searchText: $lastName,
                                             isHiddenField: false,
                                             placeholder: "",
-                                            title: "Last Name",
-                                            description: "Your last name")
+                                            title: localized(RegisterUserStrings.lastNameString),
+                                            description: localized(RegisterUserStrings.lastNameDescription))
                     }
                     RegisterScreenField(searchText: $email,
                                         isHiddenField: false,
                                         placeholder: "",
-                                        title: "Email",
-                                        description: "Your email")
+                                        title: localized(RegisterUserStrings.emailString),
+                                        description: localized(RegisterUserStrings.emailDescription))
                     RegisterScreenField(searchText: $password,
                                         isHiddenField: true,
                                         placeholder: "",
-                                        title: "Password",
-                                        description: "Your password (minimum 6 characters)")                                
+                                        title: localized(RegisterUserStrings.passwordString),
+                                        description: localized(RegisterUserStrings.passwordDescription))
                     .focused($isNumericFieldFocused)
                     
                     HStack {
-                        Text("Date Of Birth")
+                        Text(localized(RegisterUserStrings.dateTitleString))
                             .font(.headline)
                             .fontWeight(.bold)
                         Spacer()
@@ -80,7 +80,7 @@ struct RegisterUserScreen: View {
                                                maximumDigits: 2)
                                 .focused($isNumericFieldFocused)
                             HStack {
-                                Text("Day")
+                                Text(localized(RegisterUserStrings.dayString))
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -91,7 +91,7 @@ struct RegisterUserScreen: View {
                                                maximumDigits: 2)
                                 .focused($isNumericFieldFocused)
                             HStack {
-                                Text("Month")
+                                Text(localized(RegisterUserStrings.monthString))
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -103,7 +103,7 @@ struct RegisterUserScreen: View {
                                                maximumDigits: 4)
                                 .focused($isNumericFieldFocused)
                             HStack {
-                                Text("Year")
+                                Text(localized(RegisterUserStrings.yearString))
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -112,13 +112,13 @@ struct RegisterUserScreen: View {
                     
                     VStack(spacing: 0) {
                         HStack {
-                            Text("Gender")
+                            Text(localized(RegisterUserStrings.genderString))
                                 .font(.headline)
                                 .fontWeight(.bold)
                         }
                         RegisterScreenGenderField(isMaleSelected: $isMaleSelected, isFemaleSelected: $isFemaleSelected)
                         HStack {
-                            Text("Your gender")
+                            Text(localized(RegisterUserStrings.genderDescription))
                                 .foregroundStyle(.gray)
                         }
                     }
@@ -126,7 +126,7 @@ struct RegisterUserScreen: View {
                     Button(action: {
                         register()
                     }) {
-                        Text("Register")
+                        Text(localized(RegisterUserStrings.registerButton))
                             .padding()
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -142,8 +142,8 @@ struct RegisterUserScreen: View {
             
             if isLoading {
                 LoadingView(isShowing: $isLoading,
-                            title: "Registering User",
-                            description: "Please Wait...")
+                            title: localized(RegisterUserStrings.loadingViewTitle),
+                            description: localized(RegisterUserStrings.loadingViewDescription))
             }
         }.swipeRight {
             back()

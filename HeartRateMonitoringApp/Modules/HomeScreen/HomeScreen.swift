@@ -154,7 +154,8 @@ struct HomeScreen: View {
                                 message: localized(HomeScreenStrings.registeredToastMessage))
                 }
                 if isLoading {
-                    LoadingView(isShowing: $isLoading, title: HomeScreenStrings.loginLoadingTitle, description: HomeScreenStrings.loginLoadingDescription)
+                    LoadingView(isShowing: $isLoading, title: localized(HomeScreenStrings.loginLoadingTitle), 
+                                description: localized(HomeScreenStrings.loginLoadingDescription))
                 }
             }
             .navigationDestination(for: UserType.self) { _ in

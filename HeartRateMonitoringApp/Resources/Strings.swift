@@ -57,6 +57,29 @@ public struct LanguageSelectorViewStrings {
     static let confirmString: String = "language_selector_confirm"
 }
 
+public struct RegisterUserStrings {
+    static let titleString: String = "register_user_title"
+    static let usernameString: String = "register_user_username"
+    static let usernameDescription: String = "register_user_usernameDescription"
+    static let firstNameString: String = "register_user_firstName"
+    static let firstNameDescription: String = "register_user_firstNameDescription"
+    static let lastNameString: String = "register_user_lastName"
+    static let lastNameDescription: String = "register_user_lastNameDescription"
+    static let emailString: String = "register_user_email"
+    static let emailDescription: String = "register_user_emailDescription"
+    static let passwordString: String = "register_user_password"
+    static let passwordDescription: String = "register_user_passwordDescription"
+    static let dateTitleString: String = "register_user_dobTitle"
+    static let dayString: String = "register_user_day"
+    static let monthString: String = "register_user_month"
+    static let yearString: String = "register_user_year"
+    static let genderString: String = "register_user_gender"
+    static let genderDescription: String = "register_user_genderDescription"
+    static let registerButton: String = "register_user_registerButton"
+    static let loadingViewTitle: String = "register_user_loadingTitle"
+    static let loadingViewDescription: String = "register_user_loadingDescription"
+}
+
 public struct UserDetailTypeStrings {
     static let nameString: String = "Name"
     static let emailString: String = "Email"
