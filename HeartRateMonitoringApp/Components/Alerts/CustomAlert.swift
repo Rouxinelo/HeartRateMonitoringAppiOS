@@ -38,6 +38,7 @@ struct CustomAlert: View {
                     .font(.title)
                     .bold()
                     .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
                 
                 Text(description)
                     .font(.body)

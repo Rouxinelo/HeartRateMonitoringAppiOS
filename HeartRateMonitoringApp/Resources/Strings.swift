@@ -41,7 +41,7 @@ public struct MainMenuStrings {
     static let loadingViewDescription: String = "main_menu_loadingDescription"
     static let welcomeStringGuest: String = "main_menu_welcomeGuest"
     static let welcomeStringUser: String = "main_menu_welcomeUser"
-    static let logoutAlertTitle: String = "Are you sure?"
+    static let logoutAlertTitle: String = "main_menu_logoutAlertTitle"
     static let logoutAlertDescription: String = ""
 }
 public struct LoginViewStrings {
@@ -78,6 +78,16 @@ public struct RegisterUserStrings {
     static let registerButton: String = "register_user_registerButton"
     static let loadingViewTitle: String = "register_user_loadingTitle"
     static let loadingViewDescription: String = "register_user_loadingDescription"
+}
+
+public struct CalendarStrings {
+    static let titleString: String = "calendar_title"
+    static let textFieldPlaceholder: String = "calendar_textPlaceholder"
+    static let sessionsCount: String = "calendar_foundSessions"
+    static let toastMessage: String = "calendar_toastMessage"
+    static let alertTitle: String = "calendar_alertTitle"
+    static let alertLeftButton: String = "calendar_alertLeftButton"
+    static let alertDescription: String = "calendar_alertDescription"
 }
 
 public struct UserDetailTypeStrings {
