@@ -19,7 +19,7 @@ struct UserDetailsScreen: View {
     var body: some View {
         VStack (alignment: .center, spacing: 50){
             VStack (alignment: .center, spacing: 25){
-                Text("Your Details")
+                Text(localized(UserDetailTypeStrings.titleString))
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 CircularAvatar(backgroundColor: .red, 

@@ -100,10 +100,30 @@ public struct SessionDetailStrings {
 }
 
 public struct UserDetailTypeStrings {
-    static let nameString: String = "Name"
-    static let emailString: String = "Email"
-    static let genderString: String = "Gender"
-    static let ageString: String = "Age"
+    static let titleString: String = "user_detail_title"
+    static let nameString: String = "user_detail_name"
+    static let emailString: String = "user_detail_email"
+    static let genderString: String = "user_detail_gender"
+    static let ageString: String = "user_detail_age"
+}
+
+public struct UserSessionsStrings {
+    static let titleString: String = "user_sessions_title"
+    static let readyToJoinTitleString: String = "user_sessions_readyTitle"
+    static let readyToJoinDescriptionString: String = "user_sessions_readyDescription"
+    static let signedSessionsTitleString: String = "user_sessions_signedTitle"
+    static let signedSessionsDescriptionString: String = "user_sessions_signedDescription"
+    static let previousSessionsTitleString: String = "user_sessions_previousTitle"
+    static let previousSessionsDescriptionString: String = "user_sessions_previousDescription"
+    static let signedModalString: String = "user_sessions_signedModal"
+    static let joinableModalString: String = "user_sessions_joinableModal"
+    static let previousModalString: String = "user_sessions_previousModal"
+    static let signedToastString: String = "user_sessions_signedToast"
+}
+
+public struct UserSessionsModalStrings {
+    static let leftButtonString: String = "user_sessions_modal_leftButton"
+    static let rightButtonString: String = "user_sessions_modal_rightButton"
 }
 
 public struct ScreenIds {
