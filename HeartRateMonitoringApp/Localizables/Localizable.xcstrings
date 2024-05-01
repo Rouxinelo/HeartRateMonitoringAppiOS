@@ -23,9 +23,6 @@
     "%lld%%" : {
 
     },
-    "About This Session" : {
-
-    },
     "Actions:" : {
 
     },
@@ -1166,9 +1163,6 @@
     "Save" : {
 
     },
-    "Session Description" : {
-
-    },
     "Session Details" : {
 
     },
@@ -1177,6 +1171,108 @@
     },
     "Session time:" : {
 
+    },
+    "session_detail_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscrever-se"
+          }
+        }
+      }
+    },
+    "session_detail_buttonFull" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session full"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sessão cheia"
+          }
+        }
+      }
+    },
+    "session_detail_buttonGuest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in to sign in"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in para inscrever"
+          }
+        }
+      }
+    },
+    "session_detail_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session description"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrição da sessão"
+          }
+        }
+      }
+    },
+    "session_detail_descriptionUnavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No description was provided for this session."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi disponibilizada nenhuma descrição para esta sessão"
+          }
+        }
+      }
+    },
+    "session_detail_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About this session"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sobre esta sessão"
+          }
+        }
+      }
     },
     "Share" : {
 

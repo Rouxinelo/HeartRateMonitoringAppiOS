@@ -16,7 +16,7 @@ struct SessionDetailScreen: View {
     
     var body: some View {
         VStack (alignment: .center, spacing: 20) {
-            Text("About This Session")
+            Text(localized(SessionDetailStrings.titleString))
                 .font(.largeTitle)
                 .fontWeight(.bold)
             VStack (spacing: 10){
@@ -57,12 +57,12 @@ struct SessionDetailScreen: View {
                 
                 VStack (spacing: 0) {
                     HStack {
-                        Text("Session Description")
+                        Text(localized(SessionDetailStrings.sessionDescriptionString))
                             .font(.title)
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    Text(session.description ?? "No description was provided for this session. This is an example of long test. This is just to test the behaviour.").fontWeight(.semibold)
+                    Text(session.description ?? localized(SessionDetailStrings.noDescriptionString)).fontWeight(.semibold)
                 }
                 
                 Spacer(minLength: 0)
@@ -115,11 +115,11 @@ struct SessionDetailScreen: View {
     
     func getSignInButtonText() -> String {
         if isGuest {
-            return "Log in to sign in"
+            return localized(SessionDetailStrings.signInButtonGuest)
         } else if session.totalSpots <= session.filledSpots {
-            return "Session full"
+            return localized(SessionDetailStrings.signInButtonFull)
         } else {
-            return "Sign in"
+            return localized(SessionDetailStrings.signInButton)
         }
     }
 }

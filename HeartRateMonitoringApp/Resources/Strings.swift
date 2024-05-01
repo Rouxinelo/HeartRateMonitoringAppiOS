@@ -90,6 +90,15 @@ public struct CalendarStrings {
     static let alertDescription: String = "calendar_alertDescription"
 }
 
+public struct SessionDetailStrings {
+    static let titleString: String = "session_detail_title"
+    static let sessionDescriptionString: String = "session_detail_description"
+    static let noDescriptionString: String = "session_detail_descriptionUnavailable"
+    static let signInButtonGuest: String = "session_detail_buttonGuest"
+    static let signInButtonFull: String = "session_detail_buttonFull"
+    static let signInButton: String = "session_detail_button"
+}
+
 public struct UserDetailTypeStrings {
     static let nameString: String = "Name"
     static let emailString: String = "Email"
