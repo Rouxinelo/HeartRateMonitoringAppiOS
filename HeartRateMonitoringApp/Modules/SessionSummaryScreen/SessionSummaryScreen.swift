@@ -17,7 +17,7 @@ struct SessionSummaryScreen: View {
             VStack (spacing: 20) {
                 HStack (alignment: .center) {
                     VStack (alignment: .leading) {
-                        Text("Summary")
+                        Text(localized(SessionSummaryStrings.titleString))
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         HStack (spacing: 9) {
@@ -48,7 +48,7 @@ struct SessionSummaryScreen: View {
                                 .foregroundStyle(.red)
                                 .fontWeight(.bold)
                                 .font(.title2)
-                            Text("Close")
+                            Text(localized(SessionSummaryStrings.closeString))
                                 .foregroundStyle(.red)
                                 .fontWeight(.bold)
                                 .font(.headline)
@@ -56,14 +56,14 @@ struct SessionSummaryScreen: View {
                     }
                 }.padding(.horizontal)
                 
-                Text("Details:")
+                Text(localized(SessionSummaryStrings.detailsString))
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                 
                 VStack (spacing: 0) {
-                    Text("Session time:")
+                    Text(localized(SessionSummaryStrings.sessionTimeString))
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -75,28 +75,28 @@ struct SessionSummaryScreen: View {
                 }.padding(.horizontal)
                 
                 VStack (spacing: 10) {
-                    Text("Heart Rate data:")
+                    Text(localized(SessionSummaryStrings.heartRateDataString))
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .center)
                     HStack {
                         HeartRateSummarySection(sectionIcon: "number",
-                                                sectionTitle: "Count",
-                                                sectionDescription: "\(sessionSummary.measurements.count) Samples",
+                                                sectionTitle: localized(SessionSummaryStrings.countTitleString),
+                                                sectionDescription: "\(sessionSummary.measurements.count) \(localized(SessionSummaryStrings.countDescriptionString))",
                                                 sectionColor: .red)
                         HeartRateSummarySection(sectionIcon: "alternatingcurrent",
-                                                sectionTitle: "Average",
-                                                sectionDescription: "\(getAverage(sessionSummary.measurements)) BPM",
+                                                sectionTitle: localized(SessionSummaryStrings.averageString),
+                                                sectionDescription: "\(getAverage(sessionSummary.measurements)) \(localized(SessionSummaryStrings.bpmString))",
                                                 sectionColor: .blue)
                     }
                     HStack {
                         HeartRateSummarySection(sectionIcon: "arrow.up",
-                                                sectionTitle: "Maximum",
-                                                sectionDescription: "\(sessionSummary.measurements.max() ?? 0) BPM",
+                                                sectionTitle: localized(SessionSummaryStrings.maxString),
+                                                sectionDescription: "\(sessionSummary.measurements.max() ?? 0) \(localized(SessionSummaryStrings.bpmString))",
                                                 sectionColor: .green)
                         HeartRateSummarySection(sectionIcon: "arrow.down",
-                                                sectionTitle: "Minimum",
-                                                sectionDescription: "\(sessionSummary.measurements.min() ?? 0) BPM",
+                                                sectionTitle: localized(SessionSummaryStrings.minString),
+                                                sectionDescription: "\(sessionSummary.measurements.min() ?? 0) \(localized(SessionSummaryStrings.bpmString))",
                                                 sectionColor: .yellow)
                     }
                 }
@@ -106,10 +106,10 @@ struct SessionSummaryScreen: View {
             if showingAlert {
                 CustomAlert(isShowing: $showingAlert,
                             icon: "exclamationmark.circle",
-                            title: "Exit",
-                            leftButtonText: "Cancel",
-                            rightButtonText: "Exit",
-                            description: "Leave to main menu?",
+                            title: localized(SessionSummaryStrings.alertTitleString),
+                            leftButtonText: localized(SessionSummaryStrings.alertLeftButtonString),
+                            rightButtonText: localized(SessionSummaryStrings.alertRightButtonString),
+                            description: localized(SessionSummaryStrings.alertDescriptionString),
                             leftButtonAction: { showingAlert = false },
                             rightButtonAction: { didPressClose() },
                             isSingleButton: false)

@@ -169,6 +169,24 @@ public struct SessionStrings {
     static let averageString: String = "session_average"
 }
 
+public struct SessionSummaryStrings {
+    static let titleString: String = "session_summary_title"
+    static let closeString: String = "session_summary_close"
+    static let detailsString: String = "session_summary_details"
+    static let sessionTimeString: String = "session_summary_time"
+    static let heartRateDataString: String = "session_summary_heartRateData"
+    static let countTitleString: String = "session_summary_countTitle"
+    static let countDescriptionString: String = "session_summary_countDescription"
+    static let averageString: String = "session_summary_average"
+    static let maxString: String = "session_summary_max"
+    static let minString: String = "session_summary_min"
+    static let bpmString: String = "session_summary_bpm"
+    static let alertTitleString: String = "session_summary_alertTitle"
+    static let alertDescriptionString: String = "session_summary_alertDescription"
+    static let alertLeftButtonString: String = "session_summary_alertLeftButton"
+    static let alertRightButtonString: String = "session_summary_alertRightButton"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
 }

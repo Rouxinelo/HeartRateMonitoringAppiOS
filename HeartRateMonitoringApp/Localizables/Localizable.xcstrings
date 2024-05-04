@@ -149,9 +149,6 @@
         }
       }
     },
-    "Close" : {
-
-    },
     "Current Heart Rate: %lld BPM" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -162,12 +159,6 @@
           }
         }
       }
-    },
-    "Details:" : {
-
-    },
-    "Heart Rate data:" : {
-
     },
     "Heart Rate Data:" : {
 
@@ -1487,9 +1478,6 @@
         }
       }
     },
-    "Session time:" : {
-
-    },
     "session_average" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1727,9 +1715,6 @@
           }
         }
       }
-    },
-    "Summary" : {
-
     },
     "user_detail_age" : {
       "extractionState" : "manual",
