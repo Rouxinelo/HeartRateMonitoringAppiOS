@@ -64,7 +64,7 @@ struct UserSessionsScreen: View {
             if showJoinableSessionsModal {
                 UserSessionsModal(isShowing: $showJoinableSessionsModal,
                                   sessions: joinableSessions,
-                                  title: UserSessionsStrings.joinableModalString,
+                                  title: localized(UserSessionsStrings.joinableModalString),
                                   onSelectSession: { session in
                     handleSessionJoin(session)
                 })
@@ -73,7 +73,7 @@ struct UserSessionsScreen: View {
             if showPreviousSessionsModal {
                 UserSessionsModal(isShowing: $showPreviousSessionsModal,
                                   sessions: previousSessions,
-                                  title: UserSessionsStrings.previousModalString,
+                                  title: localized(UserSessionsStrings.previousModalString),
                                   onSelectSession: { session in
                     handlePreviousSession(session)
                 })

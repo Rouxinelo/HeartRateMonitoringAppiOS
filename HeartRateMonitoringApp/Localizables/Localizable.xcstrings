@@ -1396,6 +1396,23 @@
         }
       }
     },
+    "user_sessions_modal_multiple" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Found $ sessions"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ Sessões encontradas"
+          }
+        }
+      }
+    },
     "user_sessions_modal_rightButton" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1409,6 +1426,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "user_sessions_modal_single" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Found 1 session"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Sessão encontrada"
           }
         }
       }

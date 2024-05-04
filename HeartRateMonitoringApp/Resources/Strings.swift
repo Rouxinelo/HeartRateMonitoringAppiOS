@@ -124,6 +124,8 @@ public struct UserSessionsStrings {
 public struct UserSessionsModalStrings {
     static let leftButtonString: String = "user_sessions_modal_leftButton"
     static let rightButtonString: String = "user_sessions_modal_rightButton"
+    static let foundSingleSessionString: String = "user_sessions_modal_single"
+    static let foundMultipleSessionString: String = "user_sessions_modal_multiple"
 }
 
 public struct ScreenIds {

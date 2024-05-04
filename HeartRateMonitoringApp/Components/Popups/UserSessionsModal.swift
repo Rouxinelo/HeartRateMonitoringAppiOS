@@ -104,7 +104,7 @@ struct UserSessionsModal: View {
     }
     
     func getSessionsText() -> String {
-        return "Found \(sessions.count) Session\(sessions.count != 1 ? "s" : "")"
+        return sessions.count == 1 ? localized(UserSessionsModalStrings.foundSingleSessionString) : localized(UserSessionsModalStrings.foundMultipleSessionString).replacingOccurrences(of: "$", with: "\(sessions.count)")
     }
     
     func close(_ selectedSession: Session? = nil) {
