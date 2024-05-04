@@ -158,6 +158,17 @@ public struct JoinSessionStrings {
     static let modalTitleString: String = "join_session_modalTitle"
 }
 
+public struct SessionStrings {
+    static let timeString: String = "session_time"
+    static let heartRateInfoString: String = "session_hrInfo"
+    static let closeString: String = "session_close"
+    static let currentHeartRateString: String = "session_currentHeartRate"
+    static let bpmString: String = "session_bpm"
+    static let minString: String = "session_min"
+    static let maxString: String = "session_max"
+    static let averageString: String = "session_average"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
 }

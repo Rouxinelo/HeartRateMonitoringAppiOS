@@ -7,8 +7,15 @@
     "%lld" : {
 
     },
-    "%lld BPM" : {
-
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
     },
     "%lld/%lld" : {
       "localizations" : {
@@ -21,9 +28,6 @@
       }
     },
     "%lld%%" : {
-
-    },
-    "Average:" : {
 
     },
     "calendar_alertDescription" : {
@@ -149,6 +153,7 @@
 
     },
     "Current Heart Rate: %lld BPM" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -165,9 +170,6 @@
 
     },
     "Heart Rate Data:" : {
-
-    },
-    "Heart rate info" : {
 
     },
     "HeartRate Monitoring App" : {
@@ -907,12 +909,6 @@
         }
       }
     },
-    "Maximum:" : {
-
-    },
-    "Minimum:" : {
-
-    },
     "previous_sessions_actions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1494,6 +1490,74 @@
     "Session time:" : {
 
     },
+    "session_average" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Média:"
+          }
+        }
+      }
+    },
+    "session_bpm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BPM"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BPM"
+          }
+        }
+      }
+    },
+    "session_close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar"
+          }
+        }
+      }
+    },
+    "session_currentHeartRate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Heart rate: $ BPM"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frequência Cardiaca: $ BPM"
+          }
+        }
+      }
+    },
     "session_detail_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1592,6 +1656,74 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sobre esta sessão"
+          }
+        }
+      }
+    },
+    "session_hrInfo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heart rate info"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informação Cardíaca:"
+          }
+        }
+      }
+    },
+    "session_max" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Máximo:"
+          }
+        }
+      }
+    },
+    "session_min" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimum:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mínimo:"
+          }
+        }
+      }
+    },
+    "session_time" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session time:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tempo da sessão:"
           }
         }
       }
