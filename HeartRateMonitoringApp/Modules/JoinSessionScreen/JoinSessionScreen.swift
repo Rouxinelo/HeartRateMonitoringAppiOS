@@ -20,7 +20,7 @@ struct JoinSessionScreen: View {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
-                    Text("Join This Session")
+                    Text(localized(JoinSessionStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     Spacer()
@@ -28,13 +28,13 @@ struct JoinSessionScreen: View {
                 HStack {
                     VStack (spacing: 10){
                         Image("heart-rate").resizable().aspectRatio(contentMode: .fit).frame(width: 100, height: 100)
-                        Text("Session Details")
+                        Text(localized(JoinSessionStrings.detailsString))
                             .font(.title)
                             .fontWeight(.bold)
                         
                         VStack (spacing: 10) {
                             Text(preSessionData.session.name)
-                            Text(preSessionData.session.description ?? "No description was provided")
+                            Text(preSessionData.session.description ?? localized(JoinSessionStrings.noDescriptionString))
                             HStack {
                                 Image(systemName: "book.fill")
                                     .foregroundStyle(.red)
@@ -63,14 +63,14 @@ struct JoinSessionScreen: View {
                 MultipleTextButton(action: {
                     showConnectionModal = true
                     addDevicesPeriodically()
-                }, title: "Join this session", description: "Connect your sensor and start exercising!")
+                }, title: localized(JoinSessionStrings.joinButtonString), description: localized(JoinSessionStrings.connectSensorString))
                 .padding()
             }
             
             if showConnectionModal {
                 ConnectSensorModal(isShowing: $showConnectionModal,
                                    devices: $devices,
-                                   title: "Choose nearby sensor",
+                                   title: localized(JoinSessionStrings.connectSensorString),
                                    onSelectedDevice: { device in
                     goToSession(device)
                 })

@@ -128,6 +128,36 @@ public struct UserSessionsModalStrings {
     static let foundMultipleSessionString: String = "user_sessions_modal_multiple"
 }
 
+public struct PreviousSessionStrings {
+    static let titleString: String = "previous_sessions_title"
+    static let closeButtonString: String = "previous_sessions_close"
+    static let heartRateDataString: String = "previous_sessions_hrData"
+    static let countSectionTitleString: String = "previous_sessions_countTitle"
+    static let countSectionDescriptionString: String = "previous_sessions_countDescription"
+    static let averageSectionTitleString: String = "previous_sessions_averageTitle"
+    static let bpmString: String = "previous_sessions_bpm"
+    static let maxSectionTitleString: String = "previous_sessions_maxTitle"
+    static let minSectionTitleString: String = "previous_sessions_minTitle"
+    static let actionString: String = "previous_sessions_actions"
+    static let saveString: String = "previous_sessions_save"
+    static let shareString: String = "previous_sessions_share"
+    static let toastErrorString: String = "previous_sessions_toastError"
+    static let toastSuccessString: String = "previous_sessions_toastSuccess"
+}
+
+public struct SessionShareabaleStrings {
+    static let titleString: String = "session_shareable_title"
+}
+
+public struct JoinSessionStrings {
+    static let titleString: String = "join_session_title"
+    static let detailsString: String = "join_session_details"
+    static let noDescriptionString: String = "join_session_noDescription"
+    static let joinButtonString: String = "join_session_joinButton"
+    static let connectSensorString: String = "join_session_connectSensor"
+    static let modalTitleString: String = "join_session_modalTitle"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
 }
