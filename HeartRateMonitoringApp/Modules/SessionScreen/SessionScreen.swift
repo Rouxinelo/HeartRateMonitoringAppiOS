@@ -43,7 +43,7 @@ struct SessionScreen: View {
                                 .foregroundStyle(.red)
                                 .fontWeight(.bold)
                                 .font(.title2)
-                            Text("Close")
+                            Text(localized(SessionStrings.closeString))
                                 .foregroundStyle(.red)
                                 .fontWeight(.bold)
                                 .font(.headline)
@@ -51,7 +51,7 @@ struct SessionScreen: View {
                     }
                 }
                 VStack (spacing: 0) {
-                    Text("Session time:")
+                    Text(localized(SessionStrings.timeString))
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,7 +62,7 @@ struct SessionScreen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 VStack {
-                    Text("Heart rate info")
+                    Text(localized(SessionStrings.heartRateInfoString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundStyle(.black)
@@ -79,7 +79,7 @@ struct SessionScreen: View {
                          .onAppear {
                              animationAmount = 1.2
                          }
-                    Text("Current Heart Rate: \(measurements.last ?? 0) BPM")
+                    Text(localized(SessionStrings.currentHeartRateString).replacingOccurrences(of: "$", with: "\(measurements.last ?? 0)"))
                         .font(.headline)
                         .fontWeight(.bold)
                     GeometryReader { geometry in
@@ -117,28 +117,28 @@ struct SessionScreen: View {
                         .padding(10)
                     HStack (spacing: 40) {
                         VStack {
-                            Text("Minimum:")
+                            Text(localized(SessionStrings.minString))
                                 .font(.headline)
                                 .fontWeight(.bold).frame(alignment: .leading)
-                            Text("\(measurements.min() ?? 0) BPM")
+                            Text("\(measurements.min() ?? 0) \(localized(SessionStrings.bpmString))")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
                         }
                         VStack {
-                            Text("Maximum:")
+                            Text(localized(SessionStrings.maxString))
                                 .font(.headline)
                                 .fontWeight(.bold)
-                            Text("\(measurements.max() ?? 0) BPM")
+                            Text("\(measurements.max() ?? 0) \(localized(SessionStrings.bpmString))")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
                         }
                         VStack {
-                            Text("Average:")
+                            Text(localized(SessionStrings.averageString))
                                 .font(.headline)
                                 .fontWeight(.bold)
-                            Text("\(getAverage(measurements)) BPM")
+                            Text("\(getAverage(measurements)) \(localized(SessionStrings.bpmString))")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)

@@ -12,7 +12,6 @@ struct MainMenu: View {
     @Binding var path: NavigationPath
     @State private var showingAlert = false
     @State private var isLoading = false
-    @State private var showingToast = false
     
     let userType: UserType
     
@@ -29,22 +28,22 @@ struct MainMenu: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50, height: 50, alignment: .center)
-                Text(MainMenuStrings.sectionsTitle)
+                Text(localized(MainMenuStrings.sectionsTitle))
                     .font(.title)
                     .fontWeight(.bold)
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .red,
                                     sectionIcon: MainMenuIcons.myClassesIcon,
-                                    sectionTitle: MainMenuStrings.classesSectionTitle,
-                                    sectionDescription: MainMenuStrings.classesSectionDescription,
+                                    sectionTitle: localized(MainMenuStrings.classesSectionTitle),
+                                    sectionDescription: localized(MainMenuStrings.classesSectionDescription),
                                     isUnavailable: isGuest(),
                                     sectionAction: {
                         goToUserSessions()
                     })
                     MainMenuSection(sectionColor: .green,
                                     sectionIcon: MainMenuIcons.calendarIcon,
-                                    sectionTitle: MainMenuStrings.calendarSectionTitle,
-                                    sectionDescription: MainMenuStrings.calendarSectionDescription,
+                                    sectionTitle: localized(MainMenuStrings.calendarSectionTitle),
+                                    sectionDescription: localized(MainMenuStrings.calendarSectionDescription),
                                     isUnavailable: false,
                                     sectionAction: {
                         goToCalendar()
@@ -53,16 +52,16 @@ struct MainMenu: View {
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .yellow,
                                     sectionIcon: MainMenuIcons.userIcon,
-                                    sectionTitle: MainMenuStrings.userInfoSectionTitle,
-                                    sectionDescription: MainMenuStrings.userInfoSectionDescription,
+                                    sectionTitle: localized(MainMenuStrings.userInfoSectionTitle),
+                                    sectionDescription: localized(MainMenuStrings.userInfoSectionDescription),
                                     isUnavailable: isGuest(),
                                     sectionAction: {
                         goToUserDetail()
                     })
                     MainMenuSection(sectionColor: .blue,
                                     sectionIcon: MainMenuIcons.logoutIcon,
-                                    sectionTitle: isGuest() ? MainMenuStrings.leaveSectionsTitle : MainMenuStrings.logoutSectionsTitle,
-                                    sectionDescription: MainMenuStrings.logoutSectionDescription,
+                                    sectionTitle: isGuest() ? localized(MainMenuStrings.leaveSectionsTitle) : localized(MainMenuStrings.logoutSectionsTitle),
+                                    sectionDescription: localized(MainMenuStrings.logoutSectionDescription),
                                     isUnavailable: false,
                                     sectionAction: {
                         showingAlert = true })
@@ -72,10 +71,10 @@ struct MainMenu: View {
             if showingAlert {
                 CustomAlert(isShowing: $showingAlert,
                             icon: HomeScreenIcons.alertIcon,
-                            title: MainMenuStrings.logoutAlertTitle,
-                            leftButtonText: "Cancel",
-                            rightButtonText: "Ok",
-                            description: MainMenuStrings.logoutAlertDescription,
+                            title: localized(MainMenuStrings.logoutAlertTitle),
+                            leftButtonText: localized(MainMenuStrings.logoutSectionCancel),
+                            rightButtonText: localized(MainMenuStrings.logoutSectionOk),
+                            description: localized(MainMenuStrings.logoutAlertDescription),
                             leftButtonAction: {},
                             rightButtonAction: { beginLogoutAnimation() },
                             isSingleButton: false)
@@ -83,14 +82,8 @@ struct MainMenu: View {
             
             if isLoading {
                 LoadingView(isShowing: $isLoading,
-                            title: MainMenuStrings.loadingViewTitle,
-                            description: MainMenuStrings.loadingViewDescription)
-            }
-            
-            if showingToast {
-                CustomToast(isShowing: $showingToast,
-                            iconName: "info.circle.fill",
-                            message: "Coming Soon")
+                            title: localized(MainMenuStrings.loadingViewTitle),
+                            description: localized(MainMenuStrings.loadingViewDescription))
             }
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
@@ -153,9 +146,9 @@ struct MainMenu: View {
     func getUserType() -> String {
         switch userType {
         case .guest:
-            return MainMenuStrings.welcomeStringGuest
+            return localized(MainMenuStrings.welcomeStringGuest)
         case .login(let user):
-            return MainMenuStrings.welcomeStringUser + user.username
+            return localized(MainMenuStrings.welcomeStringUser) + user.username
         }
     }
     
@@ -179,7 +172,8 @@ struct MainMenu: View {
 }
 
 #Preview {
-    MainMenu(path: .constant(NavigationPath()), userType: .login(User(username: "rouxinol",
+    MainMenu(path: .constant(NavigationPath()), 
+             userType: .login(User(username: "rouxinol",
                                                                       firstName: "Joao",
                                                                       lastName: "Rouxinol",
                                                                       email: "testemail@test.com",

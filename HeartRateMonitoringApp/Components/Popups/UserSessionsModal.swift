@@ -68,8 +68,8 @@ struct UserSessionsModal: View {
                 CustomAlert(isShowing: $showSignoutAlert,
                             icon: "book",
                             title: selectedSession.name,
-                            leftButtonText: "Exit",
-                            rightButtonText: "Sign out",
+                            leftButtonText: localized(UserSessionsModalStrings.leftButtonString),
+                            rightButtonText: localized(UserSessionsModalStrings.rightButtonString),
                             description: selectedSession.description ?? "",
                             leftButtonAction: { close() },
                             rightButtonAction: { close(selectedSession) },
@@ -104,7 +104,7 @@ struct UserSessionsModal: View {
     }
     
     func getSessionsText() -> String {
-        return "Found \(sessions.count) Session\(sessions.count != 1 ? "s" : "")"
+        return sessions.count == 1 ? localized(UserSessionsModalStrings.foundSingleSessionString) : localized(UserSessionsModalStrings.foundMultipleSessionString).replacingOccurrences(of: "$", with: "\(sessions.count)")
     }
     
     func close(_ selectedSession: Session? = nil) {

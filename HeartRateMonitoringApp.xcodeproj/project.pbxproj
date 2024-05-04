@@ -20,6 +20,8 @@
 		6B10AACD2BC2AA9C00AFE2FC /* UserSessionsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AACC2BC2AA9C00AFE2FC /* UserSessionsModal.swift */; };
 		6B10AACF2BC2FD2D00AFE2FC /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AACE2BC2FD2D00AFE2FC /* View.swift */; };
 		6B1168CD2BDC47BD00B0E9FE /* ImageSaveResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1168CC2BDC47BD00B0E9FE /* ImageSaveResult.swift */; };
+		6B24E2BE2BDE97640048BA30 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6B24E2BD2BDE97640048BA30 /* Localizable.xcstrings */; };
+		6B24E2C02BDEA0890048BA30 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24E2BF2BDEA0890048BA30 /* LanguageManager.swift */; };
 		6B2845F92BA796E9007A9D8E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2845F82BA796E9007A9D8E /* Color.swift */; };
 		6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2845FB2BA79BAC007A9D8E /* Strings.swift */; };
 		6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2845FD2BA7A39C007A9D8E /* Icons.swift */; };
@@ -97,6 +99,8 @@
 		6B10AACC2BC2AA9C00AFE2FC /* UserSessionsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionsModal.swift; sourceTree = "<group>"; };
 		6B10AACE2BC2FD2D00AFE2FC /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		6B1168CC2BDC47BD00B0E9FE /* ImageSaveResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveResult.swift; sourceTree = "<group>"; };
+		6B24E2BD2BDE97640048BA30 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		6B24E2BF2BDEA0890048BA30 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		6B2845F82BA796E9007A9D8E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6B2845FB2BA79BAC007A9D8E /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		6B2845FD2BA7A39C007A9D8E /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
@@ -203,6 +207,15 @@
 			path = UserSessionsScreen;
 			sourceTree = "<group>";
 		};
+		6B24E2BC2BDE97500048BA30 /* Localizables */ = {
+			isa = PBXGroup;
+			children = (
+				6B24E2BD2BDE97640048BA30 /* Localizable.xcstrings */,
+				6B24E2BF2BDEA0890048BA30 /* LanguageManager.swift */,
+			);
+			path = Localizables;
+			sourceTree = "<group>";
+		};
 		6B2845FA2BA79BA1007A9D8E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +294,7 @@
 		6B3D79142BA793E6000DBE1A /* HeartRateMonitoringApp */ = {
 			isa = PBXGroup;
 			children = (
+				6B24E2BC2BDE97500048BA30 /* Localizables */,
 				6B7194BA2BC4971400B297AF /* DataModels */,
 				6B2846082BAA38D4007A9D8E /* Components */,
 				6B2846052BAA35B9007A9D8E /* Enums */,
@@ -547,6 +561,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-PT",
 			);
 			mainGroup = 6B3D79092BA793E6000DBE1A;
 			productRefGroup = 6B3D79132BA793E6000DBE1A /* Products */;
@@ -567,6 +582,7 @@
 			files = (
 				6B0F35282BB0B69A00F0911B /* Launch Screen.storyboard in Resources */,
 				6B3D791D2BA793E7000DBE1A /* Preview Assets.xcassets in Resources */,
+				6B24E2BE2BDE97640048BA30 /* Localizable.xcstrings in Resources */,
 				6B3D791A2BA793E7000DBE1A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +635,7 @@
 				6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */,
 				6BBB68DD2BDA951B003E8109 /* ScreenshotManager.swift in Sources */,
 				6B7194C72BC49C9800B297AF /* PreSessionData.swift in Sources */,
+				6B24E2C02BDEA0890048BA30 /* LanguageManager.swift in Sources */,
 				6B7194C32BC498AE00B297AF /* JoinSessionScreen.swift in Sources */,
 				6B7194BC2BC4971E00B297AF /* Session.swift in Sources */,
 				6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */,

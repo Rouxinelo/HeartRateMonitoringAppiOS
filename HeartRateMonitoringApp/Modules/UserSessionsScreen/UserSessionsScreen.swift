@@ -15,7 +15,6 @@ struct UserSessionsScreen: View {
     @State var showSignedSessionsModal: Bool = false
     @State var showPreviousSessionsModal: Bool = false
     @State var showSignedOutToast: Bool = false
-    @State var showComingSoonToast: Bool = false
     @State var joinableSessions = [Session]()
     @State var signedSessions = [Session]()
     @State var previousSessions = [Session]()
@@ -27,7 +26,7 @@ struct UserSessionsScreen: View {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
-                    Text("Available Sessions")
+                    Text(localized(UserSessionsStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     Spacer()
@@ -36,27 +35,26 @@ struct UserSessionsScreen: View {
                 Image("heart-rate").resizable().aspectRatio(contentMode: .fit).frame(width: 100, height: 100)
                 
                 MultipleTextButton(action: { showJoinableSessionsModal = true },
-                                   title: "Ready to join",
-                                   description: "You can join one of this sessions now")
+                                   title: localized(UserSessionsStrings.readyToJoinTitleString),
+                                   description: localized(UserSessionsStrings.signedSessionsDescriptionString))
                 .padding()
                 
                 MultipleTextButton(action: { showSignedSessionsModal = true },
-                                   title: "Signed sessions",
-                                   description: "View future sessions and cancel if needed")
+                                   title: localized(UserSessionsStrings.signedSessionsTitleString),
+                                   description: localized(UserSessionsStrings.signedSessionsDescriptionString))
                 .padding()
                 
                 MultipleTextButton(action: { showPreviousSessionsModal = true },
-                                   title: "Previously Joined",
-                                   description: "View statistics about previous sessions")
+                                   title: localized(UserSessionsStrings.previousSessionsTitleString),
+                                   description: localized(UserSessionsStrings.previousSessionsDescriptionString))
                 .padding()
-                
                 Spacer()
             }
             
             if showSignedSessionsModal {
                 UserSessionsModal(isShowing: $showSignedSessionsModal,
                                   sessions: signedSessions,
-                                  title: "Signed Sessions",
+                                  title: localized(UserSessionsStrings.signedModalString),
                                   modalType: .signOut,
                                   onSelectSession: { session in
                     handleSessionSignOut(session)
@@ -66,7 +64,7 @@ struct UserSessionsScreen: View {
             if showJoinableSessionsModal {
                 UserSessionsModal(isShowing: $showJoinableSessionsModal,
                                   sessions: joinableSessions,
-                                  title: "Joinable Sessions",
+                                  title: localized(UserSessionsStrings.joinableModalString),
                                   onSelectSession: { session in
                     handleSessionJoin(session)
                 })
@@ -75,7 +73,7 @@ struct UserSessionsScreen: View {
             if showPreviousSessionsModal {
                 UserSessionsModal(isShowing: $showPreviousSessionsModal,
                                   sessions: previousSessions,
-                                  title: "Previous Sessions",
+                                  title: localized(UserSessionsStrings.previousModalString),
                                   onSelectSession: { session in
                     handlePreviousSession(session)
                 })
@@ -84,13 +82,7 @@ struct UserSessionsScreen: View {
             if showSignedOutToast {
                 CustomToast(isShowing: $showSignedOutToast,
                             iconName: "info.circle.fill",
-                            message: "Signed out successfully")
-            }
-            
-            if showComingSoonToast {
-                CustomToast(isShowing: $showComingSoonToast,
-                            iconName: "info.circle.fill",
-                            message: "Coming Soon")
+                            message: localized(UserSessionsStrings.signedToastString))
             }
         }
         .onAppear {

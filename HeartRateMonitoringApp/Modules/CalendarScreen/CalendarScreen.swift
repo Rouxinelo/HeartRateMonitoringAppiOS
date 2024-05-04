@@ -22,18 +22,18 @@ struct CalendarScreen: View {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
-                    Text("Available Sessions")
+                    Text(localized(CalendarStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     Spacer()
                 }
                 CustomTextField(searchText: $searchText,
                                 isPrivateField: false,
-                                placeholder: "Search (Name or Teacher)")
+                                placeholder: localized(CalendarStrings.textFieldPlaceholder))
                 .padding()
                 
                 HStack {
-                    Text("Found \(filterSessions(searchText).count) Sessions")
+                    Text(localized(CalendarStrings.sessionsCount).replacingOccurrences(of: "$", with: "\(filterSessions(searchText).count)"))
                         .font(.title)
                         .fontWeight(.bold)
                     Spacer()
@@ -63,15 +63,15 @@ struct CalendarScreen: View {
             }
             .navigationBarBackButtonHidden()
             if didSignIn {
-                CustomToast(isShowing: $didSignIn, iconName: "info.circle.fill", message: "Signed In Successfully")
+                CustomToast(isShowing: $didSignIn, iconName: "info.circle.fill", message: localized(CalendarStrings.toastMessage))
             }
             if sessions.isEmpty {
                 CustomAlert(isShowing: $showEmptyAlert,
                             icon: "exclamationmark.circle",
-                            title: "Oops",
-                            leftButtonText: "Ok",
+                            title: localized(CalendarStrings.alertTitle),
+                            leftButtonText: localized(CalendarStrings.alertLeftButton),
                             rightButtonText: "",
-                            description: "No sessions were found",
+                            description: localized(CalendarStrings.alertDescription),
                             leftButtonAction: { back() },
                             rightButtonAction: {},
                             isSingleButton: true)

@@ -19,7 +19,7 @@ struct SessionShareabaleView: View {
                         Text("HeartRate Monitoring App")
                             .font(.title).fontWeight(.bold)
                     }
-                    Text("Session Summary")
+                    Text(localized(SessionShareabaleStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     HStack (spacing: 3) {
@@ -51,7 +51,7 @@ struct SessionShareabaleView: View {
             }.padding(.horizontal)
             
             VStack (spacing: 10) {
-                Text("Heart Rate Data:")
+                Text(localized(PreviousSessionStrings.heartRateDataString))
                     .font(.title)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .center)

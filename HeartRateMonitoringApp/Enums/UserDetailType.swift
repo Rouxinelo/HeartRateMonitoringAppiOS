@@ -31,13 +31,13 @@ extension UserDetailType {
     var sectionTitle: String {
         switch self {
         case .name:
-            return UserDetailTypeStrings.nameString
+            return localized(UserDetailTypeStrings.nameString)
         case .email:
-            return UserDetailTypeStrings.emailString
+            return localized(UserDetailTypeStrings.emailString)
         case .gender:
-            return UserDetailTypeStrings.genderString
+            return localized(UserDetailTypeStrings.genderString)
         case .age:
-            return UserDetailTypeStrings.ageString
+            return localized(UserDetailTypeStrings.ageString)
         }
     }
 }

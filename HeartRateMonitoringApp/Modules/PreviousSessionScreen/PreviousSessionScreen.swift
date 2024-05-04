@@ -21,7 +21,7 @@ struct PreviousSessionScreen: View {
             VStack (spacing: 20) {
                 HStack (alignment: .center) {
                     VStack (alignment: .leading) {
-                        Text("Summary")
+                        Text(localized(PreviousSessionStrings.titleString))
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         HStack (spacing: 3) {
@@ -58,7 +58,7 @@ struct PreviousSessionScreen: View {
                                 .foregroundStyle(.red)
                                 .fontWeight(.bold)
                                 .font(.title2)
-                            Text("Close")
+                            Text(localized(PreviousSessionStrings.closeButtonString))
                                 .foregroundStyle(.red)
                                 .fontWeight(.bold)
                                 .font(.headline)
@@ -73,39 +73,39 @@ struct PreviousSessionScreen: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                     HStack {
                         HeartRateSummarySection(sectionIcon: "number",
-                                                sectionTitle: "Count",
-                                                sectionDescription: "\(sessionData.measurements.count) Samples",
+                                                sectionTitle: localized(PreviousSessionStrings.countSectionTitleString),
+                                                sectionDescription: localized(PreviousSessionStrings.countSectionDescriptionString).replacingOccurrences(of: "$", with: "\(sessionData.measurements.count)"),
                                                 sectionColor: .red)
                         HeartRateSummarySection(sectionIcon: "alternatingcurrent",
-                                                sectionTitle: "Average",
-                                                sectionDescription: "\(getAverage(sessionData.measurements)) BPM",
+                                                sectionTitle: localized(PreviousSessionStrings.averageSectionTitleString),
+                                                sectionDescription: "\(getAverage(sessionData.measurements)) " + localized(PreviousSessionStrings.bpmString),
                                                 sectionColor: .blue)
                     }
                     HStack {
                         HeartRateSummarySection(sectionIcon: "arrow.up",
-                                                sectionTitle: "Maximum",
-                                                sectionDescription: "\(sessionData.measurements.max() ?? 0) BPM",
+                                                sectionTitle: localized(PreviousSessionStrings.maxSectionTitleString),
+                                                sectionDescription: "\(sessionData.measurements.max() ?? 0) " + localized(PreviousSessionStrings.bpmString),
                                                 sectionColor: .green)
                         HeartRateSummarySection(sectionIcon: "arrow.down",
-                                                sectionTitle: "Minimum",
-                                                sectionDescription: "\(sessionData.measurements.min() ?? 0) BPM",
+                                                sectionTitle: localized(PreviousSessionStrings.minSectionTitleString),
+                                                sectionDescription: "\(sessionData.measurements.min() ?? 0) " + localized(PreviousSessionStrings.bpmString),
                                                 sectionColor: .yellow)
                     }
                 }
                 
                 VStack (spacing: 10){
-                    Text("Actions:").font(.title).fontWeight(.bold)
+                    Text(localized(PreviousSessionStrings.actionString)).font(.title).fontWeight(.bold)
                     HStack {
                         Button(action: {
                             screenshotManager.captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .save)
                         }) {
                             HStack {
                                 Image(systemName: "square.and.arrow.down")
-                                Text("Save")
+                                Text(localized(PreviousSessionStrings.saveString))
                             }
                             .font(.title)
                             .fontWeight(.bold)
-                            .frame(width: 120)
+                            .frame(width: 150)
                             .padding()
                         }
                         .background(.red)
@@ -113,15 +113,17 @@ struct PreviousSessionScreen: View {
                         .cornerRadius(30)
                         
                         Button(action: {
-                            screenshotManager.captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), event: .share)
+                            screenshotManager
+                                .captureScreenshot(of: SessionShareabaleView(sessionData: sessionData), 
+                                                                event: .share)
                         }) {
                             HStack {
                                 Image(systemName: "square.and.arrow.up")
-                                Text("Share")
+                                Text(localized(PreviousSessionStrings.shareString))
                             }
                             .font(.title)
                             .fontWeight(.bold)
-                            .frame(width: 120)
+                            .frame(width: 150)
                             .padding()
                         }
                         .background(.red)
@@ -135,13 +137,13 @@ struct PreviousSessionScreen: View {
             if showFailureToast {
                 CustomToast(isShowing: $showFailureToast,
                             iconName: "info.circle.fill",
-                            message: "Error ocurred while saving")
+                            message: localized(PreviousSessionStrings.toastErrorString))
             }
             
             if showSuccessToast {
                 CustomToast(isShowing: $showSuccessToast,
                             iconName: "info.circle.fill",
-                            message: "Saved successfully")
+                            message: localized(PreviousSessionStrings.toastSuccessString))
             }
         }
         .navigationBarBackButtonHidden()
