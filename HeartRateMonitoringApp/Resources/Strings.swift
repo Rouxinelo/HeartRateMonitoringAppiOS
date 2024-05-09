@@ -43,6 +43,8 @@ public struct MainMenuStrings {
     static let welcomeStringUser: String = "main_menu_welcomeUser"
     static let logoutAlertTitle: String = "main_menu_logoutAlertTitle"
     static let logoutAlertDescription: String = ""
+    static let userDataLoadingTitle: String = "main_menu_userDataLoadingTitle"
+    static let userDataLoadingDescription: String = "main_menu_userDataLoadingDescription"
 }
 public struct LoginViewStrings {
     static let loginString: String = "login_view_title"

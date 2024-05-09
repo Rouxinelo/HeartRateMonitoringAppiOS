@@ -509,6 +509,42 @@
     "Key" : {
       "extractionState" : "manual"
     },
+    "Key 1" : {
+      "comment" : "Loading!",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "main_menu_userDataLoadingTitle"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde!"
+          }
+        }
+      }
+    },
+    "Key 2" : {
+      "comment" : "Fetching user data...",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "main_menu_userDataLoadingDescription"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A carregar dados do utilizador"
+          }
+        }
+      }
+    },
     "language_selector_confirm" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -7,9 +7,8 @@
 
 import Foundation
 
-let URLPath: String = "192.168.1.68:8000/"
-
 protocol TargetType {
+    var baseURL: String { get }
     var path: String { get }
     var method: String { get }
     var params: [String : AnyObject]? { get }
@@ -28,31 +27,35 @@ enum API {
 }
 
 extension API: TargetType {
+    var baseURL: String {
+        "http://192.168.1.68:8000/"
+    }
+    
     var path: String {
         switch self {
         case .login:
-            return "login-user"
+            return baseURL + "login-user"
         case .register:
-            return "register-user"
+            return baseURL + "register-user"
         case .getUserData(let username):
-            return "get-user/\(username)"
+            return baseURL + "get-user/\(username)"
         // MIssing IMPL Backend
         case .getAllSessions(let username):
-            return "get-available-sessions/\(username)"
+            return baseURL + "get-available-sessions/\(username)"
         // MIssing IMPL Backend
         case .getUserSessions(let username):
-            return "get-user-sessions/\(username)"
+            return baseURL + "get-user-sessions/\(username)"
         // MIssing IMPL Backend
         case .signInSession:
-            return "session-sign-out/"
+            return baseURL + "session-sign-out/"
         // MIssing IMPL Backend
         case .signOutSession:
-            return "session-sign-in/"
+            return baseURL + "session-sign-in/"
         case .sendHeartRateData:
-            return "heartbeat-info/"
+            return baseURL + "heartbeat-info/"
         // Missing IMPL Backend
         case .sendSessionSummary:
-            return "session-summary"
+            return baseURL + "session-summary"
         }
     }
     

@@ -11,7 +11,9 @@ struct MainMenu: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
     @State private var showingAlert = false
-    @State private var isLoading = false
+    @State private var isLogoutLoading = false
+    @State private var isUserDataLoading = false
+    @StateObject var viewModel = MainMenuViewModel()
     
     let userType: UserType
     
@@ -80,10 +82,15 @@ struct MainMenu: View {
                             isSingleButton: false)
             }
             
-            if isLoading {
-                LoadingView(isShowing: $isLoading,
+            if isLogoutLoading {
+                LoadingView(isShowing: $isLogoutLoading,
                             title: localized(MainMenuStrings.loadingViewTitle),
                             description: localized(MainMenuStrings.loadingViewDescription))
+            }
+            if isUserDataLoading {
+                LoadingView(isShowing: $isLogoutLoading,
+                            title: localized(MainMenuStrings.userDataLoadingTitle),
+                            description: localized(MainMenuStrings.userDataLoadingDescription))
             }
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
@@ -91,7 +98,19 @@ struct MainMenu: View {
             CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)
         }).navigationDestination(for: User.self, destination: { user in
             UserSessionsScreen(path: $path, user: user)
-        })
+        }).onReceive(viewModel.publisher) { recievedValue in
+            switch recievedValue {
+            case .didLoadUserData(let userData):
+                isUserDataLoading = false
+                path.append(getUserDetail(for: userData))
+            case .didLoadUserSessions(_):
+                return
+            case .didLoadSignableSessions(_):
+                return
+            case .error:
+                return
+            }
+        }
         .navigationBarBackButtonHidden()
     }
     
@@ -120,7 +139,8 @@ struct MainMenu: View {
     
     func goToUserDetail() {
         guard case let .login(user) = userType else { return }
-        path.append(getUserDetail(for: user))
+        isUserDataLoading = true
+        viewModel.fetchUserData(for: "teste")
     }
     
     func getUserDetail(for user: User) -> [UserDetail] {
@@ -131,13 +151,13 @@ struct MainMenu: View {
     }
     
     func logout() {
-        isLoading = false
+        isLogoutLoading = false
         presentationMode.wrappedValue.dismiss()
     }
     
     func beginLogoutAnimation() {
         showingAlert = false
-        isLoading = true
+        isLogoutLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             logout()
         }
