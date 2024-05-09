@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Session: Hashable, Identifiable {
+struct Session: Hashable, Identifiable, Codable {
     let id: String
     let name: String
     let date: String

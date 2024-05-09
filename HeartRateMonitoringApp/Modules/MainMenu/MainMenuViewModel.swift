@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum MainMenuPublisherCases {
-    case didLoadUserData(User)
+    case didLoadUserData([UserDetail])
     case didLoadUserSessions([Session])
     case didLoadSignableSessions([Session])
     case error
@@ -29,11 +29,15 @@ class MainMenuViewModel: ObservableObject {
         networkManager.performGetRequest(apiPath: .getUserData(username))
     }
     
-    func bind() {
-        bindUser()
+    func fetchCalendarSessions(for username: String) {
+        networkManager.performGetRequest(apiPath: .getAllSessions(username))
     }
     
-    func bindUser() {
+    func bind() {
+        bindNetworkResponse()
+    }
+    
+    func bindNetworkResponse() {
         networkManager.statePublisher.sink { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -42,8 +46,21 @@ class MainMenuViewModel: ObservableObject {
                     self.publisher.send(.error)
                     return
                 }
-                self.publisher.send(.didLoadUserData(user))
+                self.publisher.send(.didLoadUserData(getUserDetail(for: user)))
+            case .loadCalendarSessions(let sessions):
+                guard let sessions = sessions else {
+                    self.publisher.send(.error)
+                    return
+                }
+                self.publisher.send(.didLoadSignableSessions(sessions))
             }
         }.store(in: &subscriptions)
+    }
+    
+    func getUserDetail(for user: User) -> [UserDetail] {
+        [UserDetail(detailType: .name, description: "\(user.firstName) \(user.lastName)".shortenFirstName() ),
+            UserDetail(detailType: .age, description: String(user.age)),
+            UserDetail(detailType: .gender, description: user.gender),
+            UserDetail(detailType: .email, description: user.email)]
     }
 }

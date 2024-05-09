@@ -13,6 +13,7 @@ struct MainMenu: View {
     @State private var showingAlert = false
     @State private var isLogoutLoading = false
     @State private var isUserDataLoading = false
+    @State private var areSessionsLoading = false
     @StateObject var viewModel = MainMenuViewModel()
     
     let userType: UserType
@@ -48,7 +49,8 @@ struct MainMenu: View {
                                     sectionDescription: localized(MainMenuStrings.calendarSectionDescription),
                                     isUnavailable: false,
                                     sectionAction: {
-                        goToCalendar()
+                        guard let user = getUser() else { return }
+                        fetchCalendarSessions(for: user.username)
                     })
                 }
                 HStack (spacing: 5) {
@@ -92,6 +94,11 @@ struct MainMenu: View {
                             title: localized(MainMenuStrings.userDataLoadingTitle),
                             description: localized(MainMenuStrings.userDataLoadingDescription))
             }
+            if areSessionsLoading {
+                LoadingView(isShowing: $areSessionsLoading,
+                            title: localized(MainMenuStrings.userDataLoadingTitle),
+                            description: localized(MainMenuStrings.userDataLoadingDescription))
+            }
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
@@ -102,11 +109,12 @@ struct MainMenu: View {
             switch recievedValue {
             case .didLoadUserData(let userData):
                 isUserDataLoading = false
-                path.append(getUserDetail(for: userData))
+                path.append(userData)
             case .didLoadUserSessions(_):
                 return
-            case .didLoadSignableSessions(_):
-                return
+            case .didLoadSignableSessions(let sessions):
+                areSessionsLoading = false
+                goToCalendar(with: sessions)
             case .error:
                 return
             }
@@ -119,35 +127,18 @@ struct MainMenu: View {
         path.append(user)
     }
     
-    func goToCalendar() {
-        path.append([Session(id: "test1",
-                             name: "Pilates Clinico",
-                             date: "24/03",
-                             hour: "19h",
-                             teacher: "J. Rouxinol",
-                             totalSpots: 10,
-                             filledSpots: 10),
-                     Session(id: "test2",
-                             name: "Fisioterapia",
-                             date: "30/03",
-                             hour: "23h",
-                             teacher: "J. Saias",
-                             totalSpots: 15,
-                             filledSpots: 5)]
-        )
+    func fetchCalendarSessions(for user: String) {
+        viewModel.fetchCalendarSessions(for: user)
+    }
+    
+    func goToCalendar(with sessions: [Session]) {
+        path.append(sessions)
     }
     
     func goToUserDetail() {
         guard case let .login(user) = userType else { return }
         isUserDataLoading = true
         viewModel.fetchUserData(for: "teste")
-    }
-    
-    func getUserDetail(for user: User) -> [UserDetail] {
-        [UserDetail(detailType: .name, description: "\(user.firstName) \(user.lastName)".shortenFirstName() ),
-            UserDetail(detailType: .age, description: String(user.age)),
-            UserDetail(detailType: .gender, description: user.gender),
-            UserDetail(detailType: .email, description: user.email)]
     }
     
     func logout() {

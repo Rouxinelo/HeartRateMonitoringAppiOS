@@ -41,7 +41,7 @@ extension API: TargetType {
             return baseURL + "get-user/\(username)"
         // MIssing IMPL Backend
         case .getAllSessions(let username):
-            return baseURL + "get-available-sessions/\(username)"
+            return baseURL + "get-sessions/\(username)"
         // MIssing IMPL Backend
         case .getUserSessions(let username):
             return baseURL + "get-user-sessions/\(username)"

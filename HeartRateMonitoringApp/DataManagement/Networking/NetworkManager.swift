@@ -10,6 +10,7 @@ import Combine
 
 enum NetworkManageResponse {
     case loadUserData(User? = nil)
+    case loadCalendarSessions([Session]? = nil)
 }
 
 class NetworkManager {
@@ -71,8 +72,8 @@ class NetworkManager {
             return
         case .getUserData:
             statePublisher.send(.loadUserData(decoder.decodeUserData(data: data)))
-        case .getAllSessions(let string):
-            return
+        case .getAllSessions:
+            statePublisher.send(.loadCalendarSessions(decoder.decodeSessions(data: data)))
         case .getUserSessions(let string):
             return
         case .signInSession(let string, let string2):
