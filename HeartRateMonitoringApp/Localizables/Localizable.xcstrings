@@ -851,6 +851,23 @@
         }
       }
     },
+    "main_menu_networkToastMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Error"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro de conexão"
+          }
+        }
+      }
+    },
     "main_menu_sectionTitle" : {
       "extractionState" : "manual",
       "localizations" : {

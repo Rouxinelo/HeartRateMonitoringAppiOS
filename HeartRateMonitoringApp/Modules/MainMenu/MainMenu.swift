@@ -14,6 +14,7 @@ struct MainMenu: View {
     @State private var isLogoutLoading = false
     @State private var isUserDataLoading = false
     @State private var areSessionsLoading = false
+    @State private var showErrorToast = false
     @StateObject var viewModel = MainMenuViewModel()
     
     let userType: UserType
@@ -99,6 +100,11 @@ struct MainMenu: View {
                             title: localized(MainMenuStrings.userDataLoadingTitle),
                             description: localized(MainMenuStrings.userDataLoadingDescription))
             }
+            if showErrorToast {
+                CustomToast(isShowing: $showErrorToast,
+                            iconName: "info.circle.fill",
+                            message: localized(MainMenuStrings.networkErrorToast))
+            }
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
@@ -116,7 +122,7 @@ struct MainMenu: View {
                 areSessionsLoading = false
                 goToCalendar(with: sessions)
             case .error:
-                return
+                showErrorToast = true
             }
         }
         .navigationBarBackButtonHidden()

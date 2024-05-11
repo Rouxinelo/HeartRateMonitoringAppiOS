@@ -11,6 +11,16 @@ import Combine
 enum NetworkManageResponse {
     case loadUserData(User? = nil)
     case loadCalendarSessions([Session]? = nil)
+    case registerUserResult(RegisterUserResult)
+    case urlUnavailable
+    case failedRequest
+}
+
+enum RegisterUserResult {
+    case usernameAlreadyRegistered
+    case emailAlreadyRegistered
+    case registerSuccessful
+    case urlUnavailable
 }
 
 class NetworkManager {
@@ -20,30 +30,44 @@ class NetworkManager {
 
     func performGetRequest(apiPath: API) {
         switch apiPath {
-        case .login:
-            return
-        case .register:
-            return
         case .getUserData:
             performGETRequest(for: apiPath)
         case .getAllSessions:
             performGETRequest(for: apiPath)
         case .getUserSessions:
             performGETRequest(for: apiPath)
-        case .signInSession:
-            return
-        case .signOutSession:
-            return
-        case .sendHeartRateData:
-            return
-        case .sendSessionSummary:
+        default:
+            print("ERROR. NOT A VALID GET REQUEST")
+            break
+        }
+    }
+    
+    private func performPOSTRequest(for apiPath: API, with data: Data) {
+        guard let url = URL(string: apiPath.path), let request = getRequest(for: apiPath, with: data, with: url) else {
+            statePublisher.send(.urlUnavailable)
             return
         }
+        URLSession.shared.dataTaskPublisher(for: request)
+            .eraseToAnyPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(_):
+                    statePublisher.send(.failedRequest)
+                default:
+                    break
+                }
+            }, receiveValue: { [weak self] response in
+                guard let self = self else { return }
+                print(response)
+            }
+            ).store(in: &subscriptions)
     }
     
     private func performGETRequest(for apiPath: API) {
         guard let url = URL(string: apiPath.path) else {
-            statePublisher.send(.loadUserData(nil))
+            statePublisher.send(.urlUnavailable)
             return
         }
         URLSession.shared.dataTaskPublisher(for: url)
@@ -52,8 +76,8 @@ class NetworkManager {
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {
-                case .failure(let failure):
-                    statePublisher.send(.loadUserData())
+                case .failure(_):
+                    statePublisher.send(.failedRequest)
                 default:
                     break
                 }
@@ -64,7 +88,7 @@ class NetworkManager {
             ).store(in: &subscriptions)
     }
     
-    func decodeData(data: Data, apiPath: API) {
+    private func decodeData(data: Data, apiPath: API) {
         switch apiPath {
         case .login(let user):
             return
@@ -84,6 +108,19 @@ class NetworkManager {
             return
         case .sendSessionSummary:
             return
+        }
+    }
+    
+    private func getRequest(for apiPath: API, with params: Data, with url: URL) -> URLRequest? {
+        var request = URLRequest(url: url)
+        request.httpMethod = apiPath.method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+            return request
+        } catch {
+            return nil
         }
     }
 }

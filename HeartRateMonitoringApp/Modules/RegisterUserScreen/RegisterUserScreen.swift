@@ -22,6 +22,7 @@ struct RegisterUserScreen: View {
     @State private var birthYear: String = ""
     @State private var isMaleSelected: Bool = false
     @State private var isFemaleSelected: Bool = false
+    @StateObject var viewModel = RegisterUserViewModel()
     @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
     
     var body: some View {

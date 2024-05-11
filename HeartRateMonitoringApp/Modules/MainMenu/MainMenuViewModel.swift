@@ -53,6 +53,8 @@ class MainMenuViewModel: ObservableObject {
                     return
                 }
                 self.publisher.send(.didLoadSignableSessions(sessions))
+            default:
+                self.publisher.send(.error)
             }
         }.store(in: &subscriptions)
     }

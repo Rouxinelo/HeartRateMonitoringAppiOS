@@ -45,6 +45,7 @@ public struct MainMenuStrings {
     static let logoutAlertDescription: String = ""
     static let userDataLoadingTitle: String = "main_menu_userDataLoadingTitle"
     static let userDataLoadingDescription: String = "main_menu_userDataLoadingDescription"
+    static let networkErrorToast: String = "main_menu_networkToastMessage"
 }
 public struct LoginViewStrings {
     static let loginString: String = "login_view_title"
