@@ -15,6 +15,7 @@ struct JSONDataEncoder {
             let data = try encoder.encode(user)
             return data
         } catch {
+            print(error)
             return nil
         }
     }

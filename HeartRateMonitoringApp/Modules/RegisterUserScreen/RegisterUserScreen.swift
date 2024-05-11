@@ -173,8 +173,6 @@ struct RegisterUserScreen: View {
                             isSingleButton: true)
             }
             
-        }.swipeRight {
-            back()
         }
         .onReceive(viewModel.publisher) { recievedValue in
             switch recievedValue {
@@ -217,6 +215,7 @@ struct RegisterUserScreen: View {
     }
     
     func didPressRegister() {
+        UIApplication.shared.endEditing()
         isLoading = true
         viewModel.register(for: getUserFromData())
     }

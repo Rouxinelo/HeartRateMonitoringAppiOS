@@ -122,12 +122,8 @@ class NetworkManager {
         request.httpMethod = apiPath.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
-            return request
-        } catch {
-            return nil
-        }
+        request.httpBody = params
+        return request
     }
 }
 

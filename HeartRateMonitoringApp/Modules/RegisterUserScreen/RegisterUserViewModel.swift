@@ -22,6 +22,7 @@ class RegisterUserViewModel: ObservableObject {
     
     init(subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()) {
         self.subscriptions = subscriptions
+        bind()
     }
     
     func register(for user: RegisterUser) {
