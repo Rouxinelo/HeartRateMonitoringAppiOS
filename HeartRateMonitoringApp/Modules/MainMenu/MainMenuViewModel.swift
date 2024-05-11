@@ -26,11 +26,11 @@ class MainMenuViewModel: ObservableObject {
     }
     
     func fetchUserData(for username: String) {
-        networkManager.performGetRequest(apiPath: .getUserData(username))
+        networkManager.performRequest(apiPath: .getUserData(username))
     }
     
     func fetchCalendarSessions(for username: String) {
-        networkManager.performGetRequest(apiPath: .getAllSessions(username))
+        networkManager.performRequest(apiPath: .getAllSessions(username))
     }
     
     func bind() {

@@ -20,24 +20,26 @@ enum RegisterUserResult {
     case usernameAlreadyRegistered
     case emailAlreadyRegistered
     case registerSuccessful
-    case urlUnavailable
 }
 
 class NetworkManager {
     let decoder = JSONDataDecoder()
+    let encoder = JSONDataEncoder()
     var statePublisher = PassthroughSubject<NetworkManageResponse, Never>()
     var subscriptions = Set<AnyCancellable>()
 
-    func performGetRequest(apiPath: API) {
+    func performRequest(apiPath: API) {
         switch apiPath {
-        case .getUserData:
+        case .getUserData, .getAllSessions, .getUserSessions:
             performGETRequest(for: apiPath)
-        case .getAllSessions:
-            performGETRequest(for: apiPath)
-        case .getUserSessions:
-            performGETRequest(for: apiPath)
+        case .register(let user):
+            guard let data = encoder.encodeRegister(user: user) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
         default:
-            print("ERROR. NOT A VALID GET REQUEST")
+            print("ERROR. NOT A VALID REQUEST")
             break
         }
     }
@@ -60,7 +62,7 @@ class NetworkManager {
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
-                print(response)
+                decodeData(data: response.data, apiPath: apiPath)
             }
             ).store(in: &subscriptions)
     }
@@ -93,7 +95,11 @@ class NetworkManager {
         case .login(let user):
             return
         case .register(let user):
-            return
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleRegisterUserResponse(response: response)
         case .getUserData:
             statePublisher.send(.loadUserData(decoder.decodeUserData(data: data)))
         case .getAllSessions:
@@ -121,6 +127,23 @@ class NetworkManager {
             return request
         } catch {
             return nil
+        }
+    }
+}
+
+// MARK: - Handling POST Request Responses
+
+private extension NetworkManager {
+    func handleRegisterUserResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.registerFailedEmail:
+            statePublisher.send(.registerUserResult(.emailAlreadyRegistered))
+        case ResponseMessages.registerFailedUsername:
+            statePublisher.send(.registerUserResult(.usernameAlreadyRegistered))
+        case ResponseMessages.registerSuccessfullMessage:
+            statePublisher.send(.registerUserResult(.registerSuccessful))
+        default:
+            statePublisher.send(.failedRequest)
         }
     }
 }

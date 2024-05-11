@@ -1191,6 +1191,23 @@
         }
       }
     },
+    "register_user_alertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro!"
+          }
+        }
+      }
+    },
     "register_user_day" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1238,6 +1255,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email"
+          }
+        }
+      }
+    },
+    "register_user_emailAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email already in use"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email já utilizado"
           }
         }
       }
@@ -1412,6 +1446,23 @@
         }
       }
     },
+    "register_user_okAlert" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
     "register_user_password" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1476,6 +1527,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Registo"
+          }
+        }
+      }
+    },
+    "register_user_userAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username already in use"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome de utilizador já utilizado"
           }
         }
       }

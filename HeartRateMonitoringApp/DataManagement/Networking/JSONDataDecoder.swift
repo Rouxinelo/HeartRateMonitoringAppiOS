@@ -27,4 +27,13 @@ struct JSONDataDecoder {
             return nil
         }
     }
+    
+    func decodeResponse(data: Data) -> PostResponse? {
+        do {
+            let response = try decoder.decode(PostResponse.self, from: data)
+            return response
+        } catch {
+            return nil
+        }
+    }
 }

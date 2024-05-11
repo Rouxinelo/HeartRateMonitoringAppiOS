@@ -81,6 +81,10 @@ public struct RegisterUserStrings {
     static let registerButton: String = "register_user_registerButton"
     static let loadingViewTitle: String = "register_user_loadingTitle"
     static let loadingViewDescription: String = "register_user_loadingDescription"
+    static let alertTitleString: String = "register_user_alertTitle"
+    static let emailRegisteredString: String = "register_user_emailAlertDescription"
+    static let userRegisteredString: String = "register_user_userAlertDescription"
+    static let alertOkString: String = "register_user_okAlert"
 }
 
 public struct CalendarStrings {

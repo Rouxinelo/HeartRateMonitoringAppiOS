@@ -16,7 +16,7 @@ protocol TargetType {
 
 enum API {
     case login(User)
-    case register(User)
+    case register(RegisterUser)
     case getUserData(String)
     case getAllSessions(String)
     case getUserSessions(String)

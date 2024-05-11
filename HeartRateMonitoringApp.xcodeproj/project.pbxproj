@@ -16,6 +16,9 @@
 		6B08139B2BCBECD800AAAE30 /* HeartRateSummarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */; };
 		6B0EC09B2BED76FB00747793 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC09A2BED76FB00747793 /* MainMenuViewModel.swift */; };
 		6B0EC09D2BEF87AF00747793 /* RegisterUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC09C2BEF87AF00747793 /* RegisterUserViewModel.swift */; };
+		6B0EC09F2BEF90DA00747793 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC09E2BEF90DA00747793 /* PostResponse.swift */; };
+		6B0EC0A12BEF9C1D00747793 /* JSONDataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC0A02BEF9C1D00747793 /* JSONDataEncoder.swift */; };
+		6B0EC0A32BEFAA2400747793 /* RegisterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC0A22BEFAA2400747793 /* RegisterUser.swift */; };
 		6B0F35282BB0B69A00F0911B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B0F35272BB0B69A00F0911B /* Launch Screen.storyboard */; };
 		6B10AAC12BBC365500AFE2FC /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */; };
 		6B10AACB2BC1FD7600AFE2FC /* UserSessionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10AACA2BC1FD7600AFE2FC /* UserSessionsScreen.swift */; };
@@ -100,6 +103,9 @@
 		6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateSummarySection.swift; sourceTree = "<group>"; };
 		6B0EC09A2BED76FB00747793 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		6B0EC09C2BEF87AF00747793 /* RegisterUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewModel.swift; sourceTree = "<group>"; };
+		6B0EC09E2BEF90DA00747793 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
+		6B0EC0A02BEF9C1D00747793 /* JSONDataEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataEncoder.swift; sourceTree = "<group>"; };
+		6B0EC0A22BEFAA2400747793 /* RegisterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUser.swift; sourceTree = "<group>"; };
 		6B0F35272BB0B69A00F0911B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		6B10AACA2BC1FD7600AFE2FC /* UserSessionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionsScreen.swift; sourceTree = "<group>"; };
@@ -391,6 +397,7 @@
 				6B7194C62BC49C9800B297AF /* PreSessionData.swift */,
 				6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */,
 				6BBB68D62BDA734F003E8109 /* PreviousSessionData.swift */,
+				6B0EC0A22BEFAA2400747793 /* RegisterUser.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -510,6 +517,8 @@
 				6BD818F42BE804D0002F0ADE /* ApiPath.swift */,
 				6BD818F62BE8276B002F0ADE /* NetworkManager.swift */,
 				6BD818F82BE8593A002F0ADE /* JSONDataDecoder.swift */,
+				6B0EC09E2BEF90DA00747793 /* PostResponse.swift */,
+				6B0EC0A02BEF9C1D00747793 /* JSONDataEncoder.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -668,9 +677,11 @@
 				6B47AF472BAE2B41001C0172 /* LoadingView.swift in Sources */,
 				6B7194BE2BC4973200B297AF /* User.swift in Sources */,
 				6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */,
+				6B0EC0A12BEF9C1D00747793 /* JSONDataEncoder.swift in Sources */,
 				6BD818F52BE804D0002F0ADE /* ApiPath.swift in Sources */,
 				6BC27BE02BB22DF80089217F /* SessionDetailScreen.swift in Sources */,
 				6B2A30242BC5E91F00E45B20 /* MultipleTextButton.swift in Sources */,
+				6B0EC0A32BEFAA2400747793 /* RegisterUser.swift in Sources */,
 				6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */,
 				6B47AF492BAE3BE4001C0172 /* CustomToast.swift in Sources */,
 				6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */,
@@ -691,6 +702,7 @@
 				6B0813942BCAD91500AAAE30 /* SessionScreen.swift in Sources */,
 				6B0EC09D2BEF87AF00747793 /* RegisterUserViewModel.swift in Sources */,
 				6B10AACD2BC2AA9C00AFE2FC /* UserSessionsModal.swift in Sources */,
+				6B0EC09F2BEF90DA00747793 /* PostResponse.swift in Sources */,
 				6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */,
 				6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */,
 				6BBB68D72BDA734F003E8109 /* PreviousSessionData.swift in Sources */,
