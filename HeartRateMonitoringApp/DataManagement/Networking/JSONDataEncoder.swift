@@ -19,4 +19,14 @@ struct JSONDataEncoder {
             return nil
         }
     }
+    
+    func encodeSessionSignIn(sessionSignData: SessionSign) -> Data? {
+        do {
+            let data = try encoder.encode(sessionSignData)
+            return data
+        } catch {
+            print(error)
+            return nil
+        }
+    }
 }

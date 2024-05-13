@@ -12,6 +12,7 @@ enum NetworkManageResponse {
     case loadUserData(User? = nil)
     case loadCalendarSessions([Session]? = nil)
     case registerUserResult(RegisterUserResult)
+    case didSignInSession
     case urlUnavailable
     case failedRequest
 }
@@ -34,6 +35,12 @@ class NetworkManager {
             performGETRequest(for: apiPath)
         case .register(let user):
             guard let data = encoder.encodeRegister(user: user) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .signInSession(let username, let sessionId):
+            guard let data = encoder.encodeSessionSignIn(sessionSignData: SessionSign(username: username, sessionId: sessionId)) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -106,8 +113,12 @@ class NetworkManager {
             statePublisher.send(.loadCalendarSessions(decoder.decodeSessions(data: data)))
         case .getUserSessions(let string):
             return
-        case .signInSession(let string, let string2):
-            return
+        case .signInSession:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleSignInSessionResponse(response: response)
         case .signOutSession(let string, let string2):
             return
         case .sendHeartRateData:
@@ -138,6 +149,15 @@ private extension NetworkManager {
             statePublisher.send(.registerUserResult(.usernameAlreadyRegistered))
         case ResponseMessages.registerSuccessfullMessage:
             statePublisher.send(.registerUserResult(.registerSuccessful))
+        default:
+            statePublisher.send(.failedRequest)
+        }
+    }
+    
+    func handleSignInSessionResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.signInSessionSuccessful:
+            statePublisher.send(.didSignInSession)
         default:
             statePublisher.send(.failedRequest)
         }

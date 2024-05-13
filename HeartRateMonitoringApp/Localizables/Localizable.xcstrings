@@ -1749,6 +1749,40 @@
         }
       }
     },
+    "session_detail_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing you in."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "A inscrever na sessão."
+          }
+        }
+      }
+    },
+    "session_detail_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please wait!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde!"
+          }
+        }
+      }
+    },
     "session_detail_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1762,6 +1796,23 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sobre esta sessão"
+          }
+        }
+      }
+    },
+    "session_detail_toastMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to sign in."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscrição falhada."
           }
         }
       }

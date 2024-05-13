@@ -47,6 +47,7 @@ public struct MainMenuStrings {
     static let userDataLoadingDescription: String = "main_menu_userDataLoadingDescription"
     static let networkErrorToast: String = "main_menu_networkToastMessage"
 }
+
 public struct LoginViewStrings {
     static let loginString: String = "login_view_title"
     static let usernameString: String = "login_view_username"
@@ -104,6 +105,9 @@ public struct SessionDetailStrings {
     static let signInButtonGuest: String = "session_detail_buttonGuest"
     static let signInButtonFull: String = "session_detail_buttonFull"
     static let signInButton: String = "session_detail_button"
+    static let loadingTitle: String = "session_detail_loadingTitle"
+    static let loadingDescription: String = "session_detail_loadingDescription"
+    static let toastMessage: String = "session_detail_toastMessage"
 }
 
 public struct UserDetailTypeStrings {
