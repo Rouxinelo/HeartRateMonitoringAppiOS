@@ -13,6 +13,7 @@ enum NetworkManageResponse {
     case loadCalendarSessions([Session]? = nil)
     case registerUserResult(RegisterUserResult)
     case didSignInSession
+    case didLogin
     case urlUnavailable
     case failedRequest
 }
@@ -34,13 +35,19 @@ class NetworkManager {
         case .getUserData, .getAllSessions, .getUserSessions:
             performGETRequest(for: apiPath)
         case .register(let user):
-            guard let data = encoder.encodeRegister(user: user) else {
+            guard let data = encoder.encodeToJSON(user) else {
                 statePublisher.send(.failedRequest)
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
         case .signInSession(let username, let sessionId):
-            guard let data = encoder.encodeSessionSignIn(sessionSignData: SessionSign(username: username, sessionId: sessionId)) else {
+            guard let data = encoder.encodeToJSON(SessionSign(username: username, sessionId: sessionId)) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .login(let user):
+            guard let data = encoder.encodeToJSON(user) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -99,8 +106,12 @@ class NetworkManager {
     
     private func decodeData(data: Data, apiPath: API) {
         switch apiPath {
-        case .login(let user):
-            return
+        case .login:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleLoginUserResponse(response: response)
         case .register(let user):
             guard let response = decoder.decodeResponse(data: data) else {
                 statePublisher.send(.failedRequest)
@@ -158,6 +169,15 @@ private extension NetworkManager {
         switch response.message {
         case ResponseMessages.signInSessionSuccessful:
             statePublisher.send(.didSignInSession)
+        default:
+            statePublisher.send(.failedRequest)
+        }
+    }
+    
+    func handleLoginUserResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.loginSuccessful:
+            statePublisher.send(.didLogin)
         default:
             statePublisher.send(.failedRequest)
         }

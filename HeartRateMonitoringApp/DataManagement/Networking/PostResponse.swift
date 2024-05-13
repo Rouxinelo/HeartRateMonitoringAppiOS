@@ -14,6 +14,7 @@ struct PostResponse: Codable {
 
 struct ResponseMessages {
     static let registerSuccessfullMessage = "REGISTER_OK"
+    static let loginSuccessful = "LOGIN_OK"
     static let registerFailedUsername = "REGISTER_FAILED_USERNAME_USED"
     static let registerFailedEmail = "REGISTER_FAILED_EMAIL_USED"
     static let signInSessionSuccessful = "SIGN_IN_OK"
