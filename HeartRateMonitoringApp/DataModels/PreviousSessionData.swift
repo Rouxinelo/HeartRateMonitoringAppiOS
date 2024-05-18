@@ -9,6 +9,6 @@ import Foundation
 
 struct PreviousSessionData: Hashable {
     var session: Session
-    var username: UserSimplified
+    var username: String
     var measurements: [Int]
 }

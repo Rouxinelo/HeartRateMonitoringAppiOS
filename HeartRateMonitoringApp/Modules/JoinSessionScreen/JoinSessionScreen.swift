@@ -96,7 +96,7 @@ struct JoinSessionScreen: View {
         path.append(SessionData(session: SessionSimplified(id: preSessionData.session.id,
                                                            name: preSessionData.session.name,
                                                            teacher: preSessionData.session.teacher),
-                                user: UserSimplified(username: preSessionData.user.username),
+                                username: preSessionData.user.username,
                                 device: device))
     }
     

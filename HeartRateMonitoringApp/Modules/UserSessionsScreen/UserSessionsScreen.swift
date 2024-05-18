@@ -149,7 +149,7 @@ struct UserSessionsScreen: View {
     
     func handlePreviousSession(_ session: Session) {
         path.append(PreviousSessionData(session: session,
-                                        username: UserSimplified(username: user.username),
+                                        username: user.username,
                                         measurements: [10, 20, 30]))
     }
     

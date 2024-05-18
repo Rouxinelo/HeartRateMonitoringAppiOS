@@ -146,7 +146,7 @@ struct SessionSummaryScreen: View {
     SessionSummaryScreen(path: .constant(NavigationPath()),
                          sessionSummary: SessionSummaryData(sensor: MockDevice(name: "Movesense 12345678",
                                                                                batteryPercentage: 10),
-                                                            user: UserSimplified(username: "rouxinol"),
+                                                            username: "rouxinol",
                                                             session: SessionSimplified(id: "testID",
                                                                                        name: "Test Name",
                                                                                        teacher: "Test Teacher"),

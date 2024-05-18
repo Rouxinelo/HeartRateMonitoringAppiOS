@@ -9,7 +9,7 @@ import Foundation
 
 struct SessionData: Hashable {
     let session: SessionSimplified
-    let user: UserSimplified
+    let username: String
     var device: MockDevice
 }
 
@@ -17,9 +17,5 @@ struct SessionSimplified: Hashable {
     let id: String
     let name: String
     let teacher: String
-}
-
-struct UserSimplified: Hashable {
-    let username: String
 }
 

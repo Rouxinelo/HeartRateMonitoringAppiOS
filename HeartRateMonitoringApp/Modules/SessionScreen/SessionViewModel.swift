@@ -74,7 +74,7 @@ private extension SessionViewModel {
         guard let sessionData = sessionData else { return }
         let value = Int.random(in: 70...110)
         measurements.append(value)
-        sendHeartrateData(username: sessionData.user.username,
+        sendHeartrateData(username: sessionData.username,
                           sessionId: sessionData.session.id,
                           heartrate: value)
     }

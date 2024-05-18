@@ -180,10 +180,9 @@ struct SessionScreen: View {
     }
     
 
-    
     func getSessionSummaryData() -> SessionSummaryData {
         SessionSummaryData(sensor: sessionData.device,
-                           user: sessionData.user,
+                           username: sessionData.username,
                            session: sessionData.session,
                            measurements: viewModel.measurements,
                            sessionTime: viewModel.sessionTime)
@@ -195,7 +194,7 @@ struct SessionScreen: View {
                   sessionData: SessionData(session: SessionSimplified(id: "testId",
                                                                       name: "Pilates Clinico",
                                                                       teacher: "Joao Rouxinol"),
-                                           user: UserSimplified(username: "testUsername"),
+                                           username: "testUsername",
                                            device: MockDevice(name: "Movesense 12345678",
                                                               batteryPercentage: 10)))
 }
