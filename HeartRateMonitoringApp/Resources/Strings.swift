@@ -178,6 +178,10 @@ public struct SessionStrings {
     static let minString: String = "session_min"
     static let maxString: String = "session_max"
     static let averageString: String = "session_average"
+    static let closeAlertTitleString: String = "session_alertTitle"
+    static let closeAlertDescriptionString: String = "session_alertDescription"
+    static let closeAlertLeftButtonString: String = "session_alertLeftButton"
+    static let closeAlertRightButtonString: String = "session_alertRightButton"
 }
 
 public struct SessionSummaryStrings {

@@ -11,6 +11,7 @@ import Charts
 struct SessionScreen: View {
     @Binding var path: NavigationPath
     @State var sessionData: SessionData
+    @State private var showingCloseAlert: Bool = false
     @State private var animationAmount: CGFloat = 1
     @StateObject var viewModel = SessionViewModel()
     var maximumChartValues: Int = 5
@@ -144,6 +145,18 @@ struct SessionScreen: View {
                 }
                 Spacer()
             }.padding(.horizontal)
+            
+            if showingCloseAlert {
+                CustomAlert(isShowing: $showingCloseAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(SessionStrings.closeAlertTitleString),
+                            leftButtonText: localized(SessionStrings.closeAlertLeftButtonString),
+                            rightButtonText: localized(SessionStrings.closeAlertRightButtonString),
+                            description: localized(SessionStrings.closeAlertDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: { closeSession() },
+                            isSingleButton: false)
+            }
         }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
             SessionSummaryScreen(path: $path,
                                  sessionSummary: sessionSummaryData)
@@ -176,10 +189,13 @@ struct SessionScreen: View {
     }
     
     func didTapClose() {
+        showingCloseAlert = true
+    }
+    
+    func closeSession() {
         path.append(getSessionSummaryData())
     }
     
-
     func getSessionSummaryData() -> SessionSummaryData {
         SessionSummaryData(sensor: sessionData.device,
                            username: sessionData.username,

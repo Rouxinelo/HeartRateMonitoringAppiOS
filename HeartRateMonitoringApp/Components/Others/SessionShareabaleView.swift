@@ -86,5 +86,13 @@ struct SessionShareabaleView: View {
 }
 
 #Preview {
-    SessionShareabaleView(sessionData: PreviousSessionData(session: Session(id: "testID", name: "testName", date: "11/11", hour: "11h", teacher: "testTeacher", totalSpots: 11, filledSpots: 11), username: "testUsername", measurements: [1,2,3]))
+    SessionShareabaleView(sessionData: PreviousSessionData(session: Session(id: "testID", 
+                                                                            name: "testName",
+                                                                            date: "11/11",
+                                                                            hour: "11h",
+                                                                            teacher: "testTeacher",
+                                                                            totalSpots: 11,
+                                                                            filledSpots: 11),
+                                                           username: "testUsername",
+                                                           measurements: [1,2,3]))
 }
