@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct PostSessionData: Codable {
+    let username: String
+    let sessionId: String
+    let measurements: [Int]
+}
