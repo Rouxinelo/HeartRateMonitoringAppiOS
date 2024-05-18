@@ -22,7 +22,7 @@ enum API {
     case getUserSessions(String)
     case signInSession(String, String)
     case signOutSession(String, String)
-    case sendHeartRateData
+    case sendHeartRateData(HeartRateData)
     case sendSessionSummary
 }
 

@@ -52,6 +52,12 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
+        case .sendHeartRateData(let heartRateData):
+            guard let data = encoder.encodeToJSON(heartRateData) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
         default:
             print("ERROR. NOT A VALID REQUEST")
             break

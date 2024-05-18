@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MainMenu: View {
+    
+    private struct Constants {
+        static let guestUser: String = "Guest"
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
     @State private var showingAlert = false
@@ -50,7 +55,10 @@ struct MainMenu: View {
                                     sectionDescription: localized(MainMenuStrings.calendarSectionDescription),
                                     isUnavailable: false,
                                     sectionAction: {
-                        guard let user = getUser() else { return }
+                        guard let user = getUser() else { 
+                            fetchCalendarSessions(for: Constants.guestUser)
+                            return
+                        }
                         fetchCalendarSessions(for: user.username)
                     })
                 }
