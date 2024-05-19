@@ -11,6 +11,7 @@ struct SessionSummaryScreen: View {
     @Binding var path: NavigationPath
     @State private var showingAlert = false
     @State var sessionSummary: SessionSummaryData
+    @StateObject var viewModel = SessionSummaryViewModel()
     
     var body: some View {
         ZStack {
@@ -114,8 +115,9 @@ struct SessionSummaryScreen: View {
                             rightButtonAction: { didPressClose() },
                             isSingleButton: false)
             }
-        }
-        .navigationBarBackButtonHidden()
+        }.onAppear {
+            viewModel.processSummary(sessionSummary)
+        }.navigationBarBackButtonHidden()
     }
     
     func getFormattedHours(_ time: Int) -> String {

@@ -23,7 +23,7 @@ enum API {
     case signInSession(String, String)
     case signOutSession(String, String)
     case sendHeartRateData(HeartRateData)
-    case sendSessionSummary
+    case sendSessionSummary(PostSessionData)
 }
 
 extension API: TargetType {
@@ -55,7 +55,7 @@ extension API: TargetType {
             return baseURL + "heartbeat-info/"
         // Missing IMPL Backend
         case .sendSessionSummary:
-            return baseURL + "session-summary"
+            return baseURL + "session-summary/"
         }
     }
     

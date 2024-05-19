@@ -58,6 +58,12 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
+        case .sendSessionSummary(let postSessionData):
+            guard let data = encoder.encodeToJSON(postSessionData) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
         default:
             print("ERROR. NOT A VALID REQUEST")
             break
@@ -118,7 +124,7 @@ class NetworkManager {
                 return
             }
             handleLoginUserResponse(response: response)
-        case .register(let user):
+        case .register:
             guard let response = decoder.decodeResponse(data: data) else {
                 statePublisher.send(.failedRequest)
                 return
@@ -128,7 +134,7 @@ class NetworkManager {
             statePublisher.send(.loadUserData(decoder.decodeUserData(data: data)))
         case .getAllSessions:
             statePublisher.send(.loadCalendarSessions(decoder.decodeSessions(data: data)))
-        case .getUserSessions(let string):
+        case .getUserSessions:
             return
         case .signInSession:
             guard let response = decoder.decodeResponse(data: data) else {
@@ -136,11 +142,11 @@ class NetworkManager {
                 return
             }
             handleSignInSessionResponse(response: response)
-        case .signOutSession(let string, let string2):
+        case .signOutSession:
             return
         case .sendHeartRateData:
             return
-        case .sendSessionSummary:
+        default:
             return
         }
     }
