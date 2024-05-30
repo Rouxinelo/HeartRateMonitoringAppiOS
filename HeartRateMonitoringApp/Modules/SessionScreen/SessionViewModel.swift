@@ -23,10 +23,6 @@ class SessionViewModel: ObservableObject {
     @Published var sessionTimeString: String = "00h 00m 00s"
     @Published var measurements = [Int]()
     
-    init(subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()) {
-        self.subscriptions = subscriptions
-    }
-    
     func setSessionData(_ sessionData: SessionData) {
         self.sessionData = sessionData
     }

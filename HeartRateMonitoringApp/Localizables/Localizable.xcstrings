@@ -2296,6 +2296,40 @@
         }
       }
     },
+    "user_sessions_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processing request."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A processar pedido."
+          }
+        }
+      }
+    },
+    "user_sessions_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde..."
+          }
+        }
+      }
+    },
     "user_sessions_modal_leftButton" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2513,6 +2547,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inscrição cancelada"
+          }
+        }
+      }
+    },
+    "user_sessions_signedToastFail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error signing out"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro no cancelamento"
           }
         }
       }

@@ -19,7 +19,7 @@ enum API {
     case register(RegisterUser)
     case getUserData(String)
     case getAllSessions(String)
-    case getUserSessions(String)
+    case getUserSessions(String, UserSessionType)
     case signInSession(String, String)
     case signOutSession(String, String)
     case sendHeartRateData(HeartRateData)
@@ -39,21 +39,16 @@ extension API: TargetType {
             return baseURL + "register-user"
         case .getUserData(let username):
             return baseURL + "get-user/\(username)"
-        // MIssing IMPL Backend
         case .getAllSessions(let username):
             return baseURL + "get-sessions/\(username)"
-        // MIssing IMPL Backend
-        case .getUserSessions(let username):
-            return baseURL + "get-user-sessions/\(username)"
-        // MIssing IMPL Backend
+        case .getUserSessions(let username, let type):
+            return baseURL + "get-user-sessions/\(username)/\(type)/"
         case .signInSession:
-            return baseURL + "session-sign-out/"
-        // MIssing IMPL Backend
-        case .signOutSession:
             return baseURL + "session-sign-in/"
+        case .signOutSession:
+            return baseURL + "session-sign-out/"
         case .sendHeartRateData:
             return baseURL + "heartbeat-info/"
-        // Missing IMPL Backend
         case .sendSessionSummary:
             return baseURL + "session-summary/"
         }

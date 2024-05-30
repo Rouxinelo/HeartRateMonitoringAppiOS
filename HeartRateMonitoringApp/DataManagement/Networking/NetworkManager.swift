@@ -12,7 +12,12 @@ enum NetworkManageResponse {
     case loadUserData(User? = nil)
     case loadCalendarSessions([Session]? = nil)
     case registerUserResult(RegisterUserResult)
+    case didLoadSignedSessions([Session]? = nil)
+    case didLoadPreviousSessions([Session]? = nil)
+    case didLoadJoinableSessions([Session]? = nil)
     case didSignInSession
+    case didSignOutSession
+    case didFailSign
     case didLogin
     case urlUnavailable
     case failedRequest
@@ -134,8 +139,19 @@ class NetworkManager {
             statePublisher.send(.loadUserData(decoder.decodeUserData(data: data)))
         case .getAllSessions:
             statePublisher.send(.loadCalendarSessions(decoder.decodeSessions(data: data)))
-        case .getUserSessions:
-            return
+        case .getUserSessions(_, let type):
+            guard let sessions = decoder.decodeSessions(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            switch type {
+            case .joinable:
+                statePublisher.send(.didLoadJoinableSessions(sessions))
+            case .previous:
+                statePublisher.send(.didLoadPreviousSessions(sessions))
+            case .signed:
+                statePublisher.send(.didLoadSignedSessions(sessions))
+            }
         case .signInSession:
             guard let response = decoder.decodeResponse(data: data) else {
                 statePublisher.send(.failedRequest)

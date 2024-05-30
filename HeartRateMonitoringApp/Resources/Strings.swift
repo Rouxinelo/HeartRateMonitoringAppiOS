@@ -130,6 +130,9 @@ public struct UserSessionsStrings {
     static let joinableModalString: String = "user_sessions_joinableModal"
     static let previousModalString: String = "user_sessions_previousModal"
     static let signedToastString: String = "user_sessions_signedToast"
+    static let signedToastFailString: String = "user_sessions_signedToastFail"
+    static let loadingTitleString: String = "user_sessions_loadingTitle"
+    static let loadingDescriptionString: String = "user_sessions_loadingDescription"
 }
 
 public struct UserSessionsModalStrings {

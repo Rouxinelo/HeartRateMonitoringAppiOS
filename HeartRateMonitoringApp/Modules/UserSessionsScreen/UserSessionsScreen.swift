@@ -10,15 +10,17 @@ import SwiftUI
 struct UserSessionsScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
-    @State private var firstLoad = true
     @State var showJoinableSessionsModal: Bool = false
     @State var showSignedSessionsModal: Bool = false
     @State var showPreviousSessionsModal: Bool = false
     @State var showSignedOutToast: Bool = false
+    @State var showFailedSignOutToast: Bool = false
+    @State var showLoading: Bool = false
     @State var joinableSessions = [Session]()
     @State var signedSessions = [Session]()
     @State var previousSessions = [Session]()
     @State var user: User
+    @StateObject var viewModel = UserSessionsViewModel()
     
     var body: some View {
         ZStack {
@@ -34,17 +36,17 @@ struct UserSessionsScreen: View {
                 
                 Image("heart-rate").resizable().aspectRatio(contentMode: .fit).frame(width: 100, height: 100)
                 
-                MultipleTextButton(action: { showJoinableSessionsModal = true },
+                MultipleTextButton(action: { searchSessions(.joinable) },
                                    title: localized(UserSessionsStrings.readyToJoinTitleString),
                                    description: localized(UserSessionsStrings.signedSessionsDescriptionString))
                 .padding()
                 
-                MultipleTextButton(action: { showSignedSessionsModal = true },
+                MultipleTextButton(action: { searchSessions(.signed) },
                                    title: localized(UserSessionsStrings.signedSessionsTitleString),
                                    description: localized(UserSessionsStrings.signedSessionsDescriptionString))
                 .padding()
                 
-                MultipleTextButton(action: { showPreviousSessionsModal = true },
+                MultipleTextButton(action: { searchSessions(.previous) },
                                    title: localized(UserSessionsStrings.previousSessionsTitleString),
                                    description: localized(UserSessionsStrings.previousSessionsDescriptionString))
                 .padding()
@@ -57,7 +59,7 @@ struct UserSessionsScreen: View {
                                   title: localized(UserSessionsStrings.signedModalString),
                                   modalType: .signOut,
                                   onSelectSession: { session in
-                    handleSessionSignOut(session)
+                    signOutSession(for: session.id)
                 })
             }
             
@@ -84,13 +86,17 @@ struct UserSessionsScreen: View {
                             iconName: "info.circle.fill",
                             message: localized(UserSessionsStrings.signedToastString))
             }
-        }
-        .onAppear {
-            if firstLoad {
-                firstLoad.toggle()
-                setSignedSessions()
-                setJoinableSessions()
-                setPreviousSessions()
+            
+            if showFailedSignOutToast {
+                CustomToast(isShowing: $showFailedSignOutToast, 
+                            iconName: "info.circle.fill",
+                            message: localized(UserSessionsStrings.signedToastFailString))
+            }
+            
+            if showLoading {
+                LoadingView(isShowing: $showLoading,
+                            title: localized(UserSessionsStrings.loadingTitleString),
+                            description: localized(UserSessionsStrings.loadingDescriptionString))
             }
         }.swipeRight {
             back()
@@ -101,45 +107,59 @@ struct UserSessionsScreen: View {
         .navigationDestination(for: PreviousSessionData.self, destination: { previousSessionData in
             PreviousSessionScreen(sessionData: previousSessionData)
         })
+        .onReceive(viewModel.publisher) { recieveValue in
+            handlePublisherResponse(recieveValue)
+        }
         .navigationBarBackButtonHidden()
     }
     
-    func setJoinableSessions() {
-        joinableSessions = [Session(id: "test1",
-                                    name: "testname1",
-                                    date: "22/22",
-                                    hour: "22h",
-                                    teacher: "Test T",
-                                    totalSpots: 11,
-                                    filledSpots: 11)]
+    func handlePublisherResponse(_ response: UserSessionPublisherCases) {
+        showLoading = false
+        switch response {
+        case .didLoadJoinableSessions(let sessions):
+            setJoinableSessions(sessions ?? [])
+        case .didLoadSignedSessions(let sessions):
+            setSignedSessions(sessions ?? [])
+        case .didLoadPreviousSessions(let sessions):
+            setPreviousSessions(sessions ?? [])
+        case .didFailSignOut:
+            handleSessionSignOut(false)
+        case .didSignOut:
+            handleSessionSignOut(true)
+        }
     }
     
-    func setSignedSessions() {
-        signedSessions = [Session(id: "test1",
-                                  name: "testname1",
-                                  date: "22/22",
-                                  hour: "22h",
-                                  teacher: "Test T",
-                                  totalSpots: 11,
-                                  filledSpots: 11,
-                                  description: "this is just a test description")]
+    func searchSessions(_ type: UserSessionType) {
+        showLoading = true
+        viewModel.fetchSessions(for: user.username, type)
     }
     
-    func setPreviousSessions() {
-        previousSessions = [Session(id: "previous1",
-                                    name: "testname1",
-                                    date: "22/22",
-                                    hour: "22h",
-                                    teacher: "Test T",
-                                    totalSpots: 11,
-                                    filledSpots: 11,
-                                    description: "this is just a test description")]
+    func signOutSession(for sessionId: String) {
+        showLoading = true
+        viewModel.signOutSession(for: user.username, sessionId: sessionId)
     }
     
-    func handleSessionSignOut(_ session: Session) {
-        guard let sessionIndex = signedSessions.firstIndex(of: session) else { return }
-        signedSessions.remove(at: sessionIndex)
-        showSignedOutToast = true
+    func setJoinableSessions(_ sessions: [Session] = []) {
+        joinableSessions = sessions
+        showJoinableSessionsModal = true
+    }
+    
+    func setSignedSessions(_ sessions: [Session] = []) {
+        signedSessions = sessions
+        showSignedSessionsModal = true
+    }
+    
+    func setPreviousSessions(_ sessions: [Session] = []) {
+        previousSessions = sessions
+        showPreviousSessionsModal = true
+    }
+    
+    func handleSessionSignOut(_ success: Bool) {
+        if success {
+            showSignedOutToast = true
+        } else {
+            showFailedSignOutToast = true
+        }
     }
     
     func handleSessionJoin(_ session: Session) {
