@@ -88,7 +88,7 @@ struct UserSessionsScreen: View {
             }
             
             if showFailedSignOutToast {
-                CustomToast(isShowing: $showFailedSignOutToast, 
+                CustomToast(isShowing: $showFailedSignOutToast,
                             iconName: "info.circle.fill",
                             message: localized(UserSessionsStrings.signedToastFailString))
             }

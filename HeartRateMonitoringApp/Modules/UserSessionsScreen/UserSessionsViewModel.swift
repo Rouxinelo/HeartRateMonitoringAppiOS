@@ -23,7 +23,7 @@ class UserSessionsViewModel: ObservableObject {
     
     init(subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()) {
         self.subscriptions = subscriptions
-        bindSessionsRecieved()
+        bind()
     }
     
     func fetchSessions(for user: String, _ type: UserSessionType) {

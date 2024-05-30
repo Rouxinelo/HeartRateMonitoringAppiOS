@@ -45,7 +45,7 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
-        case .signInSession(let username, let sessionId):
+        case .signInSession(let username, let sessionId), .signOutSession(let username, let sessionId):
             guard let data = encoder.encodeToJSON(SessionSign(username: username, sessionId: sessionId)) else {
                 statePublisher.send(.failedRequest)
                 return
@@ -69,9 +69,6 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
-        default:
-            print("ERROR. NOT A VALID REQUEST")
-            break
         }
     }
     
@@ -159,7 +156,11 @@ class NetworkManager {
             }
             handleSignInSessionResponse(response: response)
         case .signOutSession:
-            return
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleSignOutSessionResponse(response: response)
         case .sendHeartRateData:
             return
         default:
@@ -197,6 +198,17 @@ private extension NetworkManager {
         switch response.message {
         case ResponseMessages.signInSessionSuccessful:
             statePublisher.send(.didSignInSession)
+        default:
+            statePublisher.send(.failedRequest)
+        }
+    }
+    
+    func handleSignOutSessionResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.signOutSessionSuccessful:
+            statePublisher.send(.didSignOutSession)
+        case ResponseMessages.signOutSessionFailed:
+            statePublisher.send(.didFailSign)
         default:
             statePublisher.send(.failedRequest)
         }
