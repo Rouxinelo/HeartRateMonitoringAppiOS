@@ -133,6 +133,9 @@ public struct UserSessionsStrings {
     static let signedToastFailString: String = "user_sessions_signedToastFail"
     static let loadingTitleString: String = "user_sessions_loadingTitle"
     static let loadingDescriptionString: String = "user_sessions_loadingDescription"
+    static let alertTitleString: String = "user_session_alertTitle"
+    static let alertButtonString: String = "user_session_alertButton"
+    static let alertDescriptionString: String = "user_session_alertDescription"
 }
 
 public struct UserSessionsModalStrings {

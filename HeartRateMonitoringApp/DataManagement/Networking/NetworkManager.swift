@@ -15,6 +15,7 @@ enum NetworkManageResponse {
     case didLoadSignedSessions([Session]? = nil)
     case didLoadPreviousSessions([Session]? = nil)
     case didLoadJoinableSessions([Session]? = nil)
+    case didLoadPreviousSession(PreviousSessionData)
     case didSignInSession
     case didSignOutSession
     case didFailSign
@@ -45,7 +46,9 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
-        case .signInSession(let username, let sessionId), .signOutSession(let username, let sessionId):
+        case .signInSession(let username, let sessionId),
+                .signOutSession(let username, let sessionId),
+                .getSessionSummary(let username, let sessionId):
             guard let data = encoder.encodeToJSON(SessionSign(username: username, sessionId: sessionId)) else {
                 statePublisher.send(.failedRequest)
                 return
@@ -163,6 +166,12 @@ class NetworkManager {
             handleSignOutSessionResponse(response: response)
         case .sendHeartRateData:
             return
+        case .getSessionSummary:
+            guard let response = decoder.decodePreviousSession(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            statePublisher.send(.didLoadPreviousSession(response))
         default:
             return
         }

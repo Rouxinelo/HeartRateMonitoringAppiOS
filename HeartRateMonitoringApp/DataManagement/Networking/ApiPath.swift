@@ -11,7 +11,6 @@ protocol TargetType {
     var baseURL: String { get }
     var path: String { get }
     var method: String { get }
-    var params: [String : AnyObject]? { get }
 }
 
 enum API {
@@ -24,6 +23,7 @@ enum API {
     case signOutSession(String, String)
     case sendHeartRateData(HeartRateData)
     case sendSessionSummary(PostSessionData)
+    case getSessionSummary(String, String)
 }
 
 extension API: TargetType {
@@ -51,6 +51,8 @@ extension API: TargetType {
             return baseURL + "heartbeat-info/"
         case .sendSessionSummary:
             return baseURL + "session-summary/"
+        case .getSessionSummary:
+            return baseURL + "get-session-summary/"
         }
     }
     
@@ -74,29 +76,8 @@ extension API: TargetType {
             return "POST"
         case .sendSessionSummary:
             return "POST"
-        }
-    }
-    
-    var params: [String: AnyObject]? {
-        switch self {
-        case .login(let user):
-            return ["username": user.username, "password": user.password] as [String: AnyObject]
-        case .register(let user):
-            return ["user": user] as [String: AnyObject]
-        case .getUserData:
-            return nil
-        case .getAllSessions:
-            return nil
-        case .getUserSessions:
-            return nil
-        case .signInSession(let username, let sessionId):
-            return ["username": username, "sessionId": sessionId] as [String: AnyObject]
-        case .signOutSession(let username, let sessionId):
-            return ["username": username, "sessionId": sessionId] as [String: AnyObject]
-        case .sendHeartRateData:
-            return nil
-        case .sendSessionSummary:
-            return nil
+        case .getSessionSummary:
+            return "POST"
         }
     }
 }

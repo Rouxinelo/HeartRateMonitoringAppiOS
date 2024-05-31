@@ -15,6 +15,7 @@ struct UserSessionsScreen: View {
     @State var showPreviousSessionsModal: Bool = false
     @State var showSignedOutToast: Bool = false
     @State var showFailedSignOutToast: Bool = false
+    @State var showErrorSessionAlert: Bool = false
     @State var showLoading: Bool = false
     @State var joinableSessions = [Session]()
     @State var signedSessions = [Session]()
@@ -77,7 +78,7 @@ struct UserSessionsScreen: View {
                                   sessions: previousSessions,
                                   title: localized(UserSessionsStrings.previousModalString),
                                   onSelectSession: { session in
-                    handlePreviousSession(session)
+                    fetchPreviousSession(session)
                 })
             }
             
@@ -98,6 +99,19 @@ struct UserSessionsScreen: View {
                             title: localized(UserSessionsStrings.loadingTitleString),
                             description: localized(UserSessionsStrings.loadingDescriptionString))
             }
+            
+            if showErrorSessionAlert {
+                CustomAlert(isShowing: $showErrorSessionAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(UserSessionsStrings.alertTitleString),
+                            leftButtonText: localized(UserSessionsStrings.alertButtonString),
+                            rightButtonText: "",
+                            description: localized(UserSessionsStrings.alertDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
+            
         }.swipeRight {
             back()
         }
@@ -126,6 +140,12 @@ struct UserSessionsScreen: View {
             handleSessionSignOut(false)
         case .didSignOut:
             handleSessionSignOut(true)
+        case .didLoadPreviousSession(let session):
+            guard let session = session else {
+                showErrorSessionAlert = true
+                return
+            }
+            handlePreviousSession(session)
         }
     }
     
@@ -167,10 +187,13 @@ struct UserSessionsScreen: View {
                                    user: user))
     }
     
-    func handlePreviousSession(_ session: Session) {
-        path.append(PreviousSessionData(session: session,
-                                        username: user.username,
-                                        measurements: [10, 20, 30]))
+    func fetchPreviousSession(_ session: Session) {
+        showLoading = true
+        viewModel.fetchPreviousSession(for: user.username, sessionId: session.id)
+    }
+    
+    func handlePreviousSession(_ previousSessionData: PreviousSessionData) {
+        path.append(previousSessionData)
     }
     
     func back() {
