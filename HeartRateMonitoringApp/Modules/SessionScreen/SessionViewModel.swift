@@ -52,7 +52,8 @@ private extension SessionViewModel {
     }
     
     func bindNetworkResponse() {
-        networkManager.statePublisher.sink { response in
+        networkManager.statePublisher.sink { [weak self] response in
+            guard let self = self else { return }
             switch response {
             default:
                 return

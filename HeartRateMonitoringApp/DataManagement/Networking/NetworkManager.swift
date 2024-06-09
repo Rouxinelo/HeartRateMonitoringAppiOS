@@ -20,6 +20,8 @@ enum NetworkManageResponse {
     case didSignOutSession
     case didFailSign
     case didLogin
+    case sessionOperationSuccessful
+    case sessionOperationFailed
     case urlUnavailable
     case failedRequest
 }
@@ -68,6 +70,12 @@ class NetworkManager {
             performPOSTRequest(for: apiPath, with: data)
         case .sendSessionSummary(let postSessionData):
             guard let data = encoder.encodeToJSON(postSessionData) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .enterSession(let username, let sessionId), .leaveSession(let username, let sessionId):
+            guard let data = encoder.encodeToJSON(SessionOperation(username: username, sessionId: sessionId)) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -144,14 +152,7 @@ class NetworkManager {
                 statePublisher.send(.failedRequest)
                 return
             }
-            switch type {
-            case .joinable:
-                statePublisher.send(.didLoadJoinableSessions(sessions))
-            case .previous:
-                statePublisher.send(.didLoadPreviousSessions(sessions))
-            case .signed:
-                statePublisher.send(.didLoadSignedSessions(sessions))
-            }
+            handleGetUserSessions(type: type, sessions: sessions)
         case .signInSession:
             guard let response = decoder.decodeResponse(data: data) else {
                 statePublisher.send(.failedRequest)
@@ -172,6 +173,18 @@ class NetworkManager {
                 return
             }
             statePublisher.send(.didLoadPreviousSession(response))
+        case .enterSession:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleSessionOperation(response: response)
+        case .leaveSession:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleSessionOperation(response: response)
         default:
             return
         }
@@ -190,6 +203,26 @@ class NetworkManager {
 // MARK: - Handling POST Request Responses
 
 private extension NetworkManager {
+    func handleSessionOperation(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.enterSessionSuccessful, ResponseMessages.leaveSessionSuccessful:
+            statePublisher.send(.sessionOperationSuccessful)
+        default:
+            statePublisher.send(.sessionOperationFailed)
+        }
+    }
+    
+    func handleGetUserSessions(type: UserSessionType, sessions: [Session]) {
+        switch type {
+        case .joinable:
+            statePublisher.send(.didLoadJoinableSessions(sessions))
+        case .previous:
+            statePublisher.send(.didLoadPreviousSessions(sessions))
+        case .signed:
+            statePublisher.send(.didLoadSignedSessions(sessions))
+        }
+    }
+    
     func handleRegisterUserResponse(response: PostResponse) {
         switch response.message {
         case ResponseMessages.registerFailedEmail:

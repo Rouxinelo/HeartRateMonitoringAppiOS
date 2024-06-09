@@ -24,6 +24,8 @@ enum API {
     case sendHeartRateData(HeartRateData)
     case sendSessionSummary(PostSessionData)
     case getSessionSummary(String, String)
+    case enterSession(String, String)
+    case leaveSession(String, String)
 }
 
 extension API: TargetType {
@@ -53,6 +55,10 @@ extension API: TargetType {
             return baseURL + "session-summary/"
         case .getSessionSummary:
             return baseURL + "get-session-summary/"
+        case .enterSession:
+            return baseURL + "enter-session/"
+        case .leaveSession:
+            return baseURL + "leave-session/"
         }
     }
     
@@ -77,6 +83,10 @@ extension API: TargetType {
         case .sendSessionSummary:
             return "POST"
         case .getSessionSummary:
+            return "POST"
+        case .enterSession:
+            return "POST"
+        case .leaveSession:
             return "POST"
         }
     }

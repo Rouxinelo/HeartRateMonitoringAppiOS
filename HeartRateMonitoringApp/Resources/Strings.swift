@@ -173,6 +173,11 @@ public struct JoinSessionStrings {
     static let joinButtonString: String = "join_session_joinButton"
     static let connectSensorString: String = "join_session_connectSensor"
     static let modalTitleString: String = "join_session_modalTitle"
+    static let loadingTitleString: String = "join_session_loadingTitle"
+    static let loadingDescriptionString: String = "join_session_loadingDescription"
+    static let alertTitleString: String = "join_session_alertTitle"
+    static let alertButtonString: String = "join_session_alertButton"
+    static let alertDescriptionString: String = "join_session_alertDescription"
 }
 
 public struct SessionStrings {
