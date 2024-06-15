@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PreviousSessionData: Hashable {
+struct PreviousSessionData: Hashable, Decodable {
     var session: Session
-    var username: UserSimplified
+    var username: String
     var measurements: [Int]
 }

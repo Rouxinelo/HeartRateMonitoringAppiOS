@@ -11,6 +11,8 @@ struct RegisterUserScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @FocusState private var isNumericFieldFocused: Bool
     @Binding var showRegisterToast: Bool
+    @State private var showUsernameRegisteredAlert: Bool = false
+    @State private var showEmailRegisteredAlert: Bool = false
     @State private var isLoading = false
     @State private var userName: String = ""
     @State private var firstName: String = ""
@@ -22,6 +24,7 @@ struct RegisterUserScreen: View {
     @State private var birthYear: String = ""
     @State private var isMaleSelected: Bool = false
     @State private var isFemaleSelected: Bool = false
+    @StateObject var viewModel = RegisterUserViewModel()
     @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
     
     var body: some View {
@@ -124,7 +127,7 @@ struct RegisterUserScreen: View {
                     }
                     
                     Button(action: {
-                        register()
+                        didPressRegister()
                     }) {
                         Text(localized(RegisterUserStrings.registerButton))
                             .padding()
@@ -145,8 +148,43 @@ struct RegisterUserScreen: View {
                             title: localized(RegisterUserStrings.loadingViewTitle),
                             description: localized(RegisterUserStrings.loadingViewDescription))
             }
-        }.swipeRight {
-            back()
+            
+            if showEmailRegisteredAlert {
+                CustomAlert(isShowing: $showEmailRegisteredAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(RegisterUserStrings.alertTitleString),
+                            leftButtonText: localized(RegisterUserStrings.alertOkString),
+                            rightButtonText: "",
+                            description: localized(RegisterUserStrings.emailRegisteredString),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
+            
+            if showUsernameRegisteredAlert {
+                CustomAlert(isShowing: $showUsernameRegisteredAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(RegisterUserStrings.alertTitleString),
+                            leftButtonText: localized(RegisterUserStrings.alertOkString),
+                            rightButtonText: "",
+                            description: localized(RegisterUserStrings.userRegisteredString),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
+            
+        }
+        .onReceive(viewModel.publisher) { recievedValue in
+            switch recievedValue {
+            case .didRegisterSuccessfully:
+                register()
+            case .emailAlreadyRegistered:
+                emailRegistered()
+            case .usernameAlreadyRegistered:
+                usernameRegistered()
+            case .error:
+                return
+            }
         }
         .navigationBarBackButtonHidden()
         .offset(y: isNumericFieldFocused ? -self.keyboardHeightHelper.keyboardHeight : 0)
@@ -176,13 +214,37 @@ struct RegisterUserScreen: View {
         !firstName.isEmpty && !lastName.isEmpty
     }
     
-    func register() {
+    func didPressRegister() {
+        UIApplication.shared.endEditing()
         isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isLoading = false
-            back()
-            showRegisterToast = true
-        }
+        viewModel.register(for: getUserFromData())
+    }
+    
+    func register() {
+        isLoading = false
+        back()
+        showRegisterToast = true
+    }
+    
+    func usernameRegistered() {
+        isLoading = false
+        showUsernameRegisteredAlert = true
+    }
+    
+    func emailRegistered() {
+        isLoading = false
+        showEmailRegisteredAlert = true
+    }
+    
+    func getUserFromData() -> RegisterUser {
+        RegisterUser(username: userName,
+                     password: password,
+                     email: email,
+                     firstName: firstName,
+                     lastName: lastName,
+                     birthDay: Int(birthDay) ?? 01,
+                     birthMonth: Int(birthMonth) ?? 01,
+                     birthYear: Int(birthYear) ?? 1999)
     }
 }
 

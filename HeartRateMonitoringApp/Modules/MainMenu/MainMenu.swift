@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct MainMenu: View {
+    
+    private struct Constants {
+        static let guestUser: String = "Guest"
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
     @State private var showingAlert = false
-    @State private var isLoading = false
+    @State private var isLogoutLoading = false
+    @State private var isUserDataLoading = false
+    @State private var areSessionsLoading = false
+    @State private var showErrorToast = false
+    @StateObject var viewModel = MainMenuViewModel()
     
     let userType: UserType
     
@@ -46,7 +55,11 @@ struct MainMenu: View {
                                     sectionDescription: localized(MainMenuStrings.calendarSectionDescription),
                                     isUnavailable: false,
                                     sectionAction: {
-                        goToCalendar()
+                        guard let user = getUser() else { 
+                            fetchCalendarSessions(for: Constants.guestUser)
+                            return
+                        }
+                        fetchCalendarSessions(for: user.username)
                     })
                 }
                 HStack (spacing: 5) {
@@ -80,10 +93,25 @@ struct MainMenu: View {
                             isSingleButton: false)
             }
             
-            if isLoading {
-                LoadingView(isShowing: $isLoading,
+            if isLogoutLoading {
+                LoadingView(isShowing: $isLogoutLoading,
                             title: localized(MainMenuStrings.loadingViewTitle),
                             description: localized(MainMenuStrings.loadingViewDescription))
+            }
+            if isUserDataLoading {
+                LoadingView(isShowing: $isLogoutLoading,
+                            title: localized(MainMenuStrings.userDataLoadingTitle),
+                            description: localized(MainMenuStrings.userDataLoadingDescription))
+            }
+            if areSessionsLoading {
+                LoadingView(isShowing: $areSessionsLoading,
+                            title: localized(MainMenuStrings.userDataLoadingTitle),
+                            description: localized(MainMenuStrings.userDataLoadingDescription))
+            }
+            if showErrorToast {
+                CustomToast(isShowing: $showErrorToast,
+                            iconName: "info.circle.fill",
+                            message: localized(MainMenuStrings.networkErrorToast))
             }
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
@@ -91,7 +119,20 @@ struct MainMenu: View {
             CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)
         }).navigationDestination(for: User.self, destination: { user in
             UserSessionsScreen(path: $path, user: user)
-        })
+        }).onReceive(viewModel.publisher) { recievedValue in
+            switch recievedValue {
+            case .didLoadUserData(let userData):
+                isUserDataLoading = false
+                path.append(userData)
+            case .didLoadUserSessions(_):
+                return
+            case .didLoadSignableSessions(let sessions):
+                areSessionsLoading = false
+                goToCalendar(with: sessions)
+            case .error:
+                showErrorToast = true
+            }
+        }
         .navigationBarBackButtonHidden()
     }
     
@@ -100,44 +141,28 @@ struct MainMenu: View {
         path.append(user)
     }
     
-    func goToCalendar() {
-        path.append([Session(id: "test1",
-                             name: "Pilates Clinico",
-                             date: "24/03",
-                             hour: "19h",
-                             teacher: "J. Rouxinol",
-                             totalSpots: 10,
-                             filledSpots: 10),
-                     Session(id: "test2",
-                             name: "Fisioterapia",
-                             date: "30/03",
-                             hour: "23h",
-                             teacher: "J. Saias",
-                             totalSpots: 15,
-                             filledSpots: 5)]
-        )
+    func fetchCalendarSessions(for user: String) {
+        viewModel.fetchCalendarSessions(for: user)
+    }
+    
+    func goToCalendar(with sessions: [Session]) {
+        path.append(sessions)
     }
     
     func goToUserDetail() {
         guard case let .login(user) = userType else { return }
-        path.append(getUserDetail(for: user))
-    }
-    
-    func getUserDetail(for user: User) -> [UserDetail] {
-        [UserDetail(detailType: .name, description: "\(user.firstName) \(user.lastName)".shortenFirstName() ),
-            UserDetail(detailType: .age, description: String(user.age)),
-            UserDetail(detailType: .gender, description: user.gender),
-            UserDetail(detailType: .email, description: user.email)]
+        isUserDataLoading = true
+        viewModel.fetchUserData(for: "teste")
     }
     
     func logout() {
-        isLoading = false
+        isLogoutLoading = false
         presentationMode.wrappedValue.dismiss()
     }
     
     func beginLogoutAnimation() {
         showingAlert = false
-        isLoading = true
+        isLogoutLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             logout()
         }

@@ -182,6 +182,6 @@ struct PreviousSessionScreen: View {
                                                                             teacher: "test teacher",
                                                                             totalSpots: 10,
                                                                             filledSpots: 10),
-                                                           username: UserSimplified(username: "testUsername"),
+                                                           username: "testUsername",
                                                            measurements: [10]))
 }

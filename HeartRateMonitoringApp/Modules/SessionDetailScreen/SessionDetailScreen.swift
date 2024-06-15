@@ -13,88 +13,116 @@ struct SessionDetailScreen: View {
     @State var isGuest: Bool
     @State var session: Session
     @State var imageName: String = "exercise-cartoon-1"
+    @State var showSignInLoading: Bool = false
+    @State var showFailedToast: Bool = false
+    @StateObject var viewModel = SessionDetailViewModel()
     
     var body: some View {
-        VStack (alignment: .center, spacing: 20) {
-            Text(localized(SessionDetailStrings.titleString))
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            VStack (spacing: 10){
-                HStack {
-                    Image(imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 180)
-                        .cornerRadius(20)
-                        .shadow(radius: 20)
-                }
-                HStack {
-                    Text(session.name)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Spacer()
-                }
-                VStack (spacing: 0) {
+        ZStack {
+            VStack (alignment: .center, spacing: 20) {
+                Text(localized(SessionDetailStrings.titleString))
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                VStack (spacing: 10){
                     HStack {
-                        Image(systemName: "book.fill")
-                        Text(session.teacher)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        Spacer()
-                        Text(session.date)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        Image(systemName: "calendar")
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 180)
+                            .cornerRadius(20)
+                            .shadow(radius: 20)
                     }
                     HStack {
-                        Spacer()
-                        Text(session.hour)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        Image(systemName: "clock.fill")
-                    }
-                }
-                
-                VStack (spacing: 0) {
-                    HStack {
-                        Text(localized(SessionDetailStrings.sessionDescriptionString))
+                        Text(session.name)
                             .font(.title)
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    Text(session.description ?? localized(SessionDetailStrings.noDescriptionString)).fontWeight(.semibold)
-                }
+                    VStack (spacing: 0) {
+                        HStack {
+                            Image(systemName: "book.fill")
+                            Text(session.teacher)
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            Spacer()
+                            Text(session.date)
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            Image(systemName: "calendar")
+                        }
+                        HStack {
+                            Spacer()
+                            Text(session.hour)
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            Image(systemName: "clock.fill")
+                        }
+                    }
+                    
+                    VStack (spacing: 0) {
+                        HStack {
+                            Text(localized(SessionDetailStrings.sessionDescriptionString))
+                                .font(.title)
+                                .fontWeight(.bold)
+                            Spacer()
+                        }
+                        Text(session.description ?? localized(SessionDetailStrings.noDescriptionString)).fontWeight(.semibold)
+                    }
+                    
+                    Spacer(minLength: 0)
+                    
+                    HStack {
+                        Spacer()
+                        Image(systemName: "person.fill").resizable().aspectRatio(contentMode: .fill).frame(width: 25, height: 25)
+                        Text("\(session.filledSpots)/\(session.totalSpots)").font(.title).fontWeight(.bold)
+                        Spacer()
+                    }
+                }.scrollOnOverflow()
+                Button(action: {
+                    didPressSignIn()
+                }, label: {
+                    Text(getSignInButtonText())
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(session.filledSpots == session.totalSpots || isGuest ? .gray : .red)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                }).disabled(session.filledSpots >= session.totalSpots)
                 
-                Spacer(minLength: 0)
-                
-                HStack {
-                    Spacer()
-                    Image(systemName: "person.fill").resizable().aspectRatio(contentMode: .fill).frame(width: 25, height: 25)
-                    Text("\(session.filledSpots)/\(session.totalSpots)").font(.title).fontWeight(.bold)
-                    Spacer()
-                }
-            }.scrollOnOverflow()
-            Button(action: {
-                didPressSignIn()
-            }, label: {
-                Text(getSignInButtonText())
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(session.filledSpots == session.totalSpots || isGuest ? .gray : .red)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
-            }).disabled(session.filledSpots >= session.totalSpots)
-        }
-        .padding()
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                CustomBackButton(onClick: { back() })
+
             }
-        }.onAppear {
-            imageName = getRandomImage()
-        }.swipeRight {
-            back()
+            .padding()
+            .navigationBarBackButtonHidden()
+            .onReceive(viewModel.publisher) { recievedValue in
+                switch recievedValue {
+                case .didSignInSuccessfully:
+                    signIn()
+                case .error:
+                    failedSignIn()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    CustomBackButton(onClick: { back() })
+                }
+            }.onAppear {
+                imageName = getRandomImage()
+            }.swipeRight {
+                back()
+            }
+            
+            if showSignInLoading {
+                LoadingView(isShowing: $showSignInLoading,
+                            title: localized(SessionDetailStrings.loadingTitle),
+                            description: localized(SessionDetailStrings.loadingDescription))
+                .ignoresSafeArea(.all)
+            }
+            
+            if showFailedToast {
+                CustomToast(isShowing: $showFailedToast,
+                            iconName: "info.circle.fill",
+                            message: localized(SessionDetailStrings.toastMessage))
+            }
         }
     }
     
@@ -102,9 +130,20 @@ struct SessionDetailScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
     
-    func didPressSignIn() {
+    func signIn() {
+        showSignInLoading = false
         back()
         didSignIn = true
+    }
+    
+    func didPressSignIn() {
+        showSignInLoading = true
+        viewModel.signIn(for: "teste", sessionId: session.id)
+    }
+    
+    func failedSignIn() {
+        showSignInLoading = false
+        showFailedToast = true
     }
     
     func getRandomImage() -> String {

@@ -11,7 +11,10 @@ struct JoinSessionScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
     @State var showConnectionModal: Bool = false
+    @State var showEnterSessionLoading: Bool = false
+    @State var showFailedEnterAlert: Bool = false
     @State var devices = [MockDevice]()
+    @StateObject var viewModel = JoinSessionViewModel()
     var preSessionData: PreSessionData
     
     var body: some View {
@@ -75,12 +78,41 @@ struct JoinSessionScreen: View {
                     goToSession(device)
                 })
             }
+            if showEnterSessionLoading {
+                LoadingView(isShowing: $showEnterSessionLoading,
+                            title: localized(JoinSessionStrings.loadingTitleString),
+                            description: localized(JoinSessionStrings.loadingDescriptionString))
+            }
+            if showFailedEnterAlert {
+                CustomAlert(isShowing: $showFailedEnterAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(JoinSessionStrings.alertTitleString),
+                            leftButtonText: localized(JoinSessionStrings.alertButtonString),
+                            rightButtonText: "",
+                            description: localized(JoinSessionStrings.alertDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
         }.swipeRight {
             back()
         }
         .navigationDestination(for: SessionData.self, destination: { sessionData in
             SessionScreen(path: $path, sessionData: sessionData)
         })
+        .onReceive(viewModel.publisher) { response in
+            showEnterSessionLoading.toggle()
+            switch response {
+            case .didEnterSession(let device):
+                path.append(SessionData(session: SessionSimplified(id: preSessionData.session.id,
+                                                                   name: preSessionData.session.name,
+                                                                   teacher: preSessionData.session.teacher),
+                                        username: preSessionData.user.username,
+                                        device: device))
+            default:
+                showFailedEnterAlert = true
+            }
+        }
         .navigationBarBackButtonHidden()
     }
     
@@ -93,11 +125,10 @@ struct JoinSessionScreen: View {
     
     func goToSession(_ device: MockDevice) {
         showConnectionModal.toggle()
-        path.append(SessionData(session: SessionSimplified(id: preSessionData.session.id,
-                                                           name: preSessionData.session.name,
-                                                           teacher: preSessionData.session.teacher),
-                                user: UserSimplified(username: preSessionData.user.username),
-                                device: device))
+        showEnterSessionLoading = true
+        viewModel.sendEnterData(username: preSessionData.user.username,
+                                sessionId: preSessionData.session.id,
+                                device: device)
     }
     
     func back() {

@@ -16,6 +16,7 @@ struct HomeScreen: View {
     @State private var showingToast = false
     @State private var isLoading = false
     @State private var userType: UserType = .guest
+    @StateObject var viewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -165,6 +166,14 @@ struct HomeScreen: View {
                 if screenId == ScreenIds.registerScreenID {
                     RegisterUserScreen(showRegisterToast: $showingToast)
                 }
+            }.onReceive(viewModel.publisher) { receiveValue in
+                isLoading = false
+                switch receiveValue {
+                case .didLoginSuccessfully(let username):
+                    loginSuccessful(username: username)
+                case .loginFailed:
+                    showingFailedLoginAlert = true
+                }
             }
         }
     }
@@ -181,15 +190,7 @@ struct HomeScreen: View {
     
     func performLogin(username: String, password: String) {
         isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isLoading = false
-            // Implement login logic here
-            if username == "Teste", password == "teste" {
-                loginSuccessful(username: username)
-            } else {
-                showingFailedLoginAlert = true
-            }
-        }
+        viewModel.attemptLogin(username: username, password: password)
     }
     
     func loginSuccessful(username: String) {

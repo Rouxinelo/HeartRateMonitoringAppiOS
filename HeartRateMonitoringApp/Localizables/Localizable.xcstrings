@@ -390,6 +390,57 @@
         }
       }
     },
+    "join_session_alertButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
+    "join_session_alertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to join session"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossível entrar na sessão"
+          }
+        }
+      }
+    },
+    "join_session_alertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro!"
+          }
+        }
+      }
+    },
     "join_session_connectSensor" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -437,6 +488,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Juntar-se à sessão"
+          }
+        }
+      }
+    },
+    "join_session_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joining session"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A entrar na sessão"
+          }
+        }
+      }
+    },
+    "join_session_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde..."
           }
         }
       }
@@ -798,6 +883,23 @@
         }
       }
     },
+    "main_menu_networkToastMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Error"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro de conexão"
+          }
+        }
+      }
+    },
     "main_menu_sectionTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -811,6 +913,42 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "O que fazer?"
+          }
+        }
+      }
+    },
+    "main_menu_userDataLoadingDescription" : {
+      "comment" : "Fetching user data...",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching user data..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "A carregar dados do utilizador"
+          }
+        }
+      }
+    },
+    "main_menu_userDataLoadingTitle" : {
+      "comment" : "Loading!",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aguarde!"
           }
         }
       }
@@ -1121,6 +1259,23 @@
         }
       }
     },
+    "register_user_alertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro!"
+          }
+        }
+      }
+    },
     "register_user_day" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1168,6 +1323,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email"
+          }
+        }
+      }
+    },
+    "register_user_emailAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email already in use"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email já utilizado"
           }
         }
       }
@@ -1342,6 +1514,23 @@
         }
       }
     },
+    "register_user_okAlert" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
     "register_user_password" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1410,6 +1599,23 @@
         }
       }
     },
+    "register_user_userAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username already in use"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome de utilizador já utilizado"
+          }
+        }
+      }
+    },
     "register_user_username" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1457,6 +1663,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ano"
+          }
+        }
+      }
+    },
+    "session_alertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You cannot return afterwards."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "É impossível voltar à sessão."
+          }
+        }
+      }
+    },
+    "session_alertLeftButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "session_alertRightButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exit"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair"
+          }
+        }
+      }
+    },
+    "session_alertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exit session?"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair?"
           }
         }
       }
@@ -1614,6 +1888,40 @@
         }
       }
     },
+    "session_detail_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing you in."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "A inscrever na sessão."
+          }
+        }
+      }
+    },
+    "session_detail_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please wait!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde!"
+          }
+        }
+      }
+    },
     "session_detail_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1627,6 +1935,23 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sobre esta sessão"
+          }
+        }
+      }
+    },
+    "session_detail_toastMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to sign in."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscrição falhada."
           }
         }
       }
@@ -2039,6 +2364,57 @@
         }
       }
     },
+    "user_session_alertButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
+    "user_session_alertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error fetching session data"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro ao carregar dados"
+          }
+        }
+      }
+    },
+    "user_session_alertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro"
+          }
+        }
+      }
+    },
     "user_sessions_joinableModal" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2052,6 +2428,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sessões a Assistir"
+          }
+        }
+      }
+    },
+    "user_sessions_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processing request."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A processar pedido."
+          }
+        }
+      }
+    },
+    "user_sessions_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde..."
           }
         }
       }
@@ -2273,6 +2683,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inscrição cancelada"
+          }
+        }
+      }
+    },
+    "user_sessions_signedToastFail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error signing out"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro no cancelamento"
           }
         }
       }

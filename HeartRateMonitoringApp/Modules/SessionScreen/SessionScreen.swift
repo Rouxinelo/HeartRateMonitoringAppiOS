@@ -11,11 +11,9 @@ import Charts
 struct SessionScreen: View {
     @Binding var path: NavigationPath
     @State var sessionData: SessionData
+    @State private var showingCloseAlert: Bool = false
     @State private var animationAmount: CGFloat = 1
-    @State private var sessionTime: Int = 0
-    @State private var timer: Timer? = nil
-    @State private var sessionTimeString: String = "00h 00m 00s"
-    @State private var measurements = [Int]()
+    @StateObject var viewModel = SessionViewModel()
     var maximumChartValues: Int = 5
     
     var body: some View {
@@ -55,7 +53,7 @@ struct SessionScreen: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(sessionTimeString)
+                    Text(viewModel.sessionTimeString)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundStyle(.red)
@@ -79,15 +77,15 @@ struct SessionScreen: View {
                          .onAppear {
                              animationAmount = 1.2
                          }
-                    Text(localized(SessionStrings.currentHeartRateString).replacingOccurrences(of: "$", with: "\(measurements.last ?? 0)"))
+                    Text(localized(SessionStrings.currentHeartRateString).replacingOccurrences(of: "$", with: "\(viewModel.measurements.last ?? 0)"))
                         .font(.headline)
                         .fontWeight(.bold)
                     GeometryReader { geometry in
                         ZStack {
                             Path { path in
-                                for i in 0..<self.lastFiveValues(measurements).count {
+                                for i in 0..<self.lastFiveValues(viewModel.measurements).count {
                                     let x = (geometry.size.width / CGFloat(maximumChartValues - 1)) * CGFloat (i)
-                                    let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(measurements)[i]) / 150)
+                                    let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(viewModel.measurements)[i]) / 150)
                                     if i == 0 {
                                         path.move(to: CGPoint(x: x, y: y))
                                     } else {
@@ -96,14 +94,14 @@ struct SessionScreen: View {
                                 }
                             }
                             .stroke(Color.red, lineWidth: 2)
-                            ForEach(0..<self.lastFiveValues(measurements).count, id: \.self) { i in
+                            ForEach(0..<self.lastFiveValues(viewModel.measurements).count, id: \.self) { i in
                                 let x = (geometry.size.width / CGFloat(maximumChartValues - 1)) * CGFloat (i)
-                                let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(measurements)[i]) / 150)
+                                let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(viewModel.measurements)[i]) / 150)
                                 Circle()
                                     .fill(Color.red)
                                     .frame(width: 10, height: 10)
                                     .position(x: x, y: y)
-                                Text("\(Int(self.lastFiveValues(measurements)[i]))")
+                                Text("\(Int(self.lastFiveValues(viewModel.measurements)[i]))")
                                     .fontWeight(.bold)
                                     .foregroundColor(.black)
                                     .position(x: x, y: y - 15)
@@ -120,7 +118,7 @@ struct SessionScreen: View {
                             Text(localized(SessionStrings.minString))
                                 .font(.headline)
                                 .fontWeight(.bold).frame(alignment: .leading)
-                            Text("\(measurements.min() ?? 0) \(localized(SessionStrings.bpmString))")
+                            Text("\(viewModel.measurements.min() ?? 0) \(localized(SessionStrings.bpmString))")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
@@ -129,7 +127,7 @@ struct SessionScreen: View {
                             Text(localized(SessionStrings.maxString))
                                 .font(.headline)
                                 .fontWeight(.bold)
-                            Text("\(measurements.max() ?? 0) \(localized(SessionStrings.bpmString))")
+                            Text("\(viewModel.measurements.max() ?? 0) \(localized(SessionStrings.bpmString))")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
@@ -138,7 +136,7 @@ struct SessionScreen: View {
                             Text(localized(SessionStrings.averageString))
                                 .font(.headline)
                                 .fontWeight(.bold)
-                            Text("\(getAverage(measurements)) \(localized(SessionStrings.bpmString))")
+                            Text("\(getAverage(viewModel.measurements)) \(localized(SessionStrings.bpmString))")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
@@ -147,48 +145,40 @@ struct SessionScreen: View {
                 }
                 Spacer()
             }.padding(.horizontal)
+            
+            if showingCloseAlert {
+                CustomAlert(isShowing: $showingCloseAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(SessionStrings.closeAlertTitleString),
+                            leftButtonText: localized(SessionStrings.closeAlertLeftButtonString),
+                            rightButtonText: localized(SessionStrings.closeAlertRightButtonString),
+                            description: localized(SessionStrings.closeAlertDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: { closeSession() },
+                            isSingleButton: false)
+            }
         }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
             SessionSummaryScreen(path: $path,
                                  sessionSummary: sessionSummaryData)
         })
+        .onReceive(viewModel.publisher) { result in
+            switch result {
+            case .didFailSendHeartrateDate:
+                return
+            case .didGetHeartRateValue(let heartRate):
+                viewModel.measurements.append(heartRate)
+            case .didLeaveSession(let summaryData):
+                path.append(summaryData)
+            }
+        }
         .navigationBarBackButtonHidden()
         .onAppear {
-            self.startTimer()
+            viewModel.setSessionData(sessionData)
+            viewModel.startTimer()
         }
         .onDisappear {
-            self.stopTimer()
+            viewModel.stopTimer()
         }
-    }
-    
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            updateTime()
-            appendRandomValue()
-        }
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-    }
-    
-    func updateTime() {
-        sessionTime += 1
-        sessionTimeString = "\(getFormattedHours(sessionTime))h \(getFormattedMinutes(sessionTime % 3600))m \(getFormattedSeconds(sessionTime % 60))s"
-    }
-    
-    func getFormattedHours(_ time: Int) -> String {
-        let hours = time/3600
-        return hours >= 10 ? "\(time/3600)" : "0\(time/3600)"
-        
-    }
-    
-    func getFormattedMinutes(_ time: Int) -> String {
-        let hours = time/60
-        return hours >= 10 ? "\(time/60)" : "0\(time/60)"
-    }
-    
-    func getFormattedSeconds(_ time: Int) -> String {
-        return time >= 10 ? "\(time)" : "0\(time)"
     }
     
     func lastFiveValues(_ array: [Int]) -> [Int] {
@@ -200,25 +190,12 @@ struct SessionScreen: View {
         return array.isEmpty ? 0 : array.reduce(0, +) / array.count
     }
     
-    func getHeartBeatDuration(_ averageBPM: Int) -> Double {
-        60.0 / Double(averageBPM)
-    }
-    
     func didTapClose() {
-        path.append(getSessionSummaryData())
+        showingCloseAlert = true
     }
     
-    // Mock Methods (remove after integrate sensors and backend)
-    func appendRandomValue() {
-        measurements.append(Int.random(in: 70...110))
-    }
-    
-    func getSessionSummaryData() -> SessionSummaryData {
-        SessionSummaryData(sensor: sessionData.device,
-                           user: sessionData.user,
-                           session: sessionData.session,
-                           measurements: measurements,
-                           sessionTime: sessionTime)
+    func closeSession() {
+        viewModel.didTapClose()
     }
 }
 
@@ -227,7 +204,7 @@ struct SessionScreen: View {
                   sessionData: SessionData(session: SessionSimplified(id: "testId",
                                                                       name: "Pilates Clinico",
                                                                       teacher: "Joao Rouxinol"),
-                                           user: UserSimplified(username: "testUsername"),
+                                           username: "testUsername",
                                            device: MockDevice(name: "Movesense 12345678",
                                                               batteryPercentage: 10)))
 }

@@ -43,7 +43,11 @@ public struct MainMenuStrings {
     static let welcomeStringUser: String = "main_menu_welcomeUser"
     static let logoutAlertTitle: String = "main_menu_logoutAlertTitle"
     static let logoutAlertDescription: String = ""
+    static let userDataLoadingTitle: String = "main_menu_userDataLoadingTitle"
+    static let userDataLoadingDescription: String = "main_menu_userDataLoadingDescription"
+    static let networkErrorToast: String = "main_menu_networkToastMessage"
 }
+
 public struct LoginViewStrings {
     static let loginString: String = "login_view_title"
     static let usernameString: String = "login_view_username"
@@ -78,6 +82,10 @@ public struct RegisterUserStrings {
     static let registerButton: String = "register_user_registerButton"
     static let loadingViewTitle: String = "register_user_loadingTitle"
     static let loadingViewDescription: String = "register_user_loadingDescription"
+    static let alertTitleString: String = "register_user_alertTitle"
+    static let emailRegisteredString: String = "register_user_emailAlertDescription"
+    static let userRegisteredString: String = "register_user_userAlertDescription"
+    static let alertOkString: String = "register_user_okAlert"
 }
 
 public struct CalendarStrings {
@@ -97,6 +105,9 @@ public struct SessionDetailStrings {
     static let signInButtonGuest: String = "session_detail_buttonGuest"
     static let signInButtonFull: String = "session_detail_buttonFull"
     static let signInButton: String = "session_detail_button"
+    static let loadingTitle: String = "session_detail_loadingTitle"
+    static let loadingDescription: String = "session_detail_loadingDescription"
+    static let toastMessage: String = "session_detail_toastMessage"
 }
 
 public struct UserDetailTypeStrings {
@@ -119,6 +130,12 @@ public struct UserSessionsStrings {
     static let joinableModalString: String = "user_sessions_joinableModal"
     static let previousModalString: String = "user_sessions_previousModal"
     static let signedToastString: String = "user_sessions_signedToast"
+    static let signedToastFailString: String = "user_sessions_signedToastFail"
+    static let loadingTitleString: String = "user_sessions_loadingTitle"
+    static let loadingDescriptionString: String = "user_sessions_loadingDescription"
+    static let alertTitleString: String = "user_session_alertTitle"
+    static let alertButtonString: String = "user_session_alertButton"
+    static let alertDescriptionString: String = "user_session_alertDescription"
 }
 
 public struct UserSessionsModalStrings {
@@ -156,6 +173,11 @@ public struct JoinSessionStrings {
     static let joinButtonString: String = "join_session_joinButton"
     static let connectSensorString: String = "join_session_connectSensor"
     static let modalTitleString: String = "join_session_modalTitle"
+    static let loadingTitleString: String = "join_session_loadingTitle"
+    static let loadingDescriptionString: String = "join_session_loadingDescription"
+    static let alertTitleString: String = "join_session_alertTitle"
+    static let alertButtonString: String = "join_session_alertButton"
+    static let alertDescriptionString: String = "join_session_alertDescription"
 }
 
 public struct SessionStrings {
@@ -167,6 +189,10 @@ public struct SessionStrings {
     static let minString: String = "session_min"
     static let maxString: String = "session_max"
     static let averageString: String = "session_average"
+    static let closeAlertTitleString: String = "session_alertTitle"
+    static let closeAlertDescriptionString: String = "session_alertDescription"
+    static let closeAlertLeftButtonString: String = "session_alertLeftButton"
+    static let closeAlertRightButtonString: String = "session_alertRightButton"
 }
 
 public struct SessionSummaryStrings {
