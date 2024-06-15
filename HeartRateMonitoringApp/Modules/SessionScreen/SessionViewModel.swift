@@ -11,6 +11,7 @@ import Combine
 enum SessionPublisherCases {
     case didFailSendHeartrateDate
     case didGetHeartRateValue(Int)
+    case didLeaveSession(SessionSummaryData)
 }
 
 class SessionViewModel: ObservableObject {
@@ -28,6 +29,7 @@ class SessionViewModel: ObservableObject {
     }
     
     func startTimer() {
+        bind()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.updateTime()
@@ -44,6 +46,12 @@ class SessionViewModel: ObservableObject {
                                                                                 sessionId: sessionId,
                                                                                 heartRate: heartrate)))
     }
+    
+    func didTapClose() {
+        guard let sessionData = sessionData else { return }
+        networkManager.performRequest(apiPath: .leaveSession(sessionData.username,
+                                                             sessionData.session.id))
+    }
 }
 
 private extension SessionViewModel {
@@ -55,10 +63,22 @@ private extension SessionViewModel {
         networkManager.statePublisher.sink { [weak self] response in
             guard let self = self else { return }
             switch response {
+            case .sessionOperationSuccessful:
+                guard let sessionSummaryData = getSessionSummaryData() else { return }
+                publisher.send(.didLeaveSession(sessionSummaryData))
             default:
                 return
             }
         }.store(in: &subscriptions)
+    }
+    
+    func getSessionSummaryData() -> SessionSummaryData? {
+        guard let sessionData = sessionData else { return nil }
+        return SessionSummaryData(sensor: sessionData.device,
+                           username: sessionData.username,
+                           session: sessionData.session,
+                           measurements: measurements,
+                           sessionTime: sessionTime)
     }
     
     func updateTime() {

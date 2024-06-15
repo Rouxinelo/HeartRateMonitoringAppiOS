@@ -167,6 +167,8 @@ struct SessionScreen: View {
                 return
             case .didGetHeartRateValue(let heartRate):
                 viewModel.measurements.append(heartRate)
+            case .didLeaveSession(let summaryData):
+                path.append(summaryData)
             }
         }
         .navigationBarBackButtonHidden()
@@ -193,15 +195,7 @@ struct SessionScreen: View {
     }
     
     func closeSession() {
-        path.append(getSessionSummaryData())
-    }
-    
-    func getSessionSummaryData() -> SessionSummaryData {
-        SessionSummaryData(sensor: sessionData.device,
-                           username: sessionData.username,
-                           session: sessionData.session,
-                           measurements: viewModel.measurements,
-                           sessionTime: viewModel.sessionTime)
+        viewModel.didTapClose()
     }
 }
 
