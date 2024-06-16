@@ -54,6 +54,8 @@
 		6B47AF492BAE3BE4001C0172 /* CustomToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B47AF482BAE3BE4001C0172 /* CustomToast.swift */; };
 		6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B47AF4D2BAF57DC001C0172 /* LanguageSelectorView.swift */; };
 		6B4BDB372BB0722D00E25C2D /* UserDetailType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4BDB362BB0722D00E25C2D /* UserDetailType.swift */; };
+		6B5DEB942C1F32F2006D8A33 /* MovesenseApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5DEB912C1F32F2006D8A33 /* MovesenseApi.framework */; };
+		6B5DEB952C1F32F2006D8A33 /* MovesenseApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5DEB912C1F32F2006D8A33 /* MovesenseApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B7194BC2BC4971E00B297AF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BB2BC4971E00B297AF /* Session.swift */; };
 		6B7194BE2BC4973200B297AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BD2BC4973200B297AF /* User.swift */; };
 		6B7194C02BC4975600B297AF /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7194BF2BC4975600B297AF /* Gender.swift */; };
@@ -104,7 +106,42 @@
 			remoteGlobalIDString = 6B3D79112BA793E6000DBE1A;
 			remoteInfo = HeartRateMonitoringApp;
 		};
+		6B5DEB902C1F32F2006D8A33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C15D578B22AFD8DC00DDCFF2;
+			remoteInfo = MovesenseApi;
+		};
+		6B5DEB922C1F32F2006D8A33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C15D579422AFD8DC00DDCFF2;
+			remoteInfo = MovesenseApiTests;
+		};
+		6B5DEB972C1F330E006D8A33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C15D578A22AFD8DC00DDCFF2;
+			remoteInfo = MovesenseApi;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6B5DEB962C1F32F2006D8A33 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6B5DEB952C1F32F2006D8A33 /* MovesenseApi.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6B0724132BB0D4EF00FEDEFE /* CalendarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
@@ -163,6 +200,7 @@
 		6B7194C22BC498AE00B297AF /* JoinSessionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSessionScreen.swift; sourceTree = "<group>"; };
 		6B7194C42BC49C3C00B297AF /* SessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionData.swift; sourceTree = "<group>"; };
 		6B7194C62BC49C9800B297AF /* PreSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSessionData.swift; sourceTree = "<group>"; };
+		6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MovesenseApi.xcodeproj; path = MovesenseApi/MovesenseApi.xcodeproj; sourceTree = "<group>"; };
 		6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsScreen.swift; sourceTree = "<group>"; };
 		6B872BB62BB04F3E0088899E /* CircularAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAvatar.swift; sourceTree = "<group>"; };
 		6B872BB82BB052E20088899E /* UserDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsSection.swift; sourceTree = "<group>"; };
@@ -197,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B5DEB942C1F32F2006D8A33 /* MovesenseApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +363,7 @@
 				6B3D79252BA793E7000DBE1A /* HeartRateMonitoringAppTests */,
 				6B3D792F2BA793E7000DBE1A /* HeartRateMonitoringAppUITests */,
 				6B3D79132BA793E6000DBE1A /* Products */,
+				6B73543F2C1F31A100FDEFED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -446,6 +486,23 @@
 				6B87934C2C14900100EC8B75 /* JoinSessionViewModel.swift */,
 			);
 			path = JoinSessionScreen;
+			sourceTree = "<group>";
+		};
+		6B73543F2C1F31A100FDEFED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6B7354412C1F31A100FDEFED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6B5DEB912C1F32F2006D8A33 /* MovesenseApi.framework */,
+				6B5DEB932C1F32F2006D8A33 /* MovesenseApiTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		6B872BB32BB04F100088899E /* UserDetailsScreen */ = {
@@ -572,10 +629,12 @@
 				6B3D790E2BA793E6000DBE1A /* Sources */,
 				6B3D790F2BA793E6000DBE1A /* Frameworks */,
 				6B3D79102BA793E6000DBE1A /* Resources */,
+				6B5DEB962C1F32F2006D8A33 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6B5DEB982C1F330E006D8A33 /* PBXTargetDependency */,
 			);
 			name = HeartRateMonitoringApp;
 			productName = HeartRateMonitoringApp;
@@ -653,6 +712,12 @@
 			mainGroup = 6B3D79092BA793E6000DBE1A;
 			productRefGroup = 6B3D79132BA793E6000DBE1A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6B7354412C1F31A100FDEFED /* Products */;
+					ProjectRef = 6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6B3D79112BA793E6000DBE1A /* HeartRateMonitoringApp */,
@@ -661,6 +726,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6B5DEB912C1F32F2006D8A33 /* MovesenseApi.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MovesenseApi.framework;
+			remoteRef = 6B5DEB902C1F32F2006D8A33 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6B5DEB932C1F32F2006D8A33 /* MovesenseApiTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MovesenseApiTests.xctest;
+			remoteRef = 6B5DEB922C1F32F2006D8A33 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6B3D79102BA793E6000DBE1A /* Resources */ = {
@@ -800,6 +882,11 @@
 			isa = PBXTargetDependency;
 			target = 6B3D79112BA793E6000DBE1A /* HeartRateMonitoringApp */;
 			targetProxy = 6B3D792D2BA793E7000DBE1A /* PBXContainerItemProxy */;
+		};
+		6B5DEB982C1F330E006D8A33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MovesenseApi;
+			targetProxy = 6B5DEB972C1F330E006D8A33 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
