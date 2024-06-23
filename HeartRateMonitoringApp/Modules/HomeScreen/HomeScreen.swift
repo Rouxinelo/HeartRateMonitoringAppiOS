@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MovesenseApi
 
 struct HomeScreen: View {
     @State private var path = NavigationPath()
@@ -175,9 +174,6 @@ struct HomeScreen: View {
                 case .loginFailed:
                     showingFailedLoginAlert = true
                 }
-            }.onAppear {
-                let x = Movesense.api
-                print(x.mdsVersion())
             }
         }
     }

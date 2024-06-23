@@ -27,8 +27,22 @@
         }
       }
     },
-    "%lld%%" : {
-
+    "bluetoothPermissionString" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow access to bluetooth to connect to devices"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitir acesso ao bluetooth para se conectar a dispositivos"
+          }
+        }
+      }
     },
     "calendar_alertDescription" : {
       "extractionState" : "manual",
@@ -437,6 +451,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro!"
+          }
+        }
+      }
+    },
+    "join_session_bluetoothAlertButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
+    "join_session_bluetoothAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check Bluetooth connection and permission"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifique se o Bluetooth está ligado e tem permissões"
+          }
+        }
+      }
+    },
+    "join_session_bluetoothAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth Error"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro Bluetooth"
           }
         }
       }

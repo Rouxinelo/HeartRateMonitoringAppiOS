@@ -28,8 +28,7 @@ struct SessionScreen: View {
                         }
                         HStack {
                             Image(systemName: "sensor.tag.radiowaves.forward.fill")
-                            Text(sessionData.device.name).font(.headline).fontWeight(.bold)
-                            
+                            Text(viewModel.getSensorName()).font(.headline).fontWeight(.bold)
                         }
                     }
                     Spacer()
@@ -197,6 +196,10 @@ struct SessionScreen: View {
     func closeSession() {
         viewModel.didTapClose()
     }
+    
+    func setSensorManager(_ sensorManager: SensorManager) {
+        viewModel.sensorManager = sensorManager
+    }
 }
 
 #Preview {
@@ -204,7 +207,5 @@ struct SessionScreen: View {
                   sessionData: SessionData(session: SessionSimplified(id: "testId",
                                                                       name: "Pilates Clinico",
                                                                       teacher: "Joao Rouxinol"),
-                                           username: "testUsername",
-                                           device: MockDevice(name: "Movesense 12345678",
-                                                              batteryPercentage: 10)))
+                                           username: "testUsername"))
 }

@@ -19,10 +19,15 @@ class SessionViewModel: ObservableObject {
     let publisher = PassthroughSubject<SessionPublisherCases, Never>()
     var subscriptions = Set<AnyCancellable>()
     var sessionData: SessionData?
+    var sensorManager: SensorManager?
     var timer: Timer? = nil
     @Published var sessionTime: Int = 0
     @Published var sessionTimeString: String = "00h 00m 00s"
     @Published var measurements = [Int]()
+    
+    func setSensorManager(_ sensorManager: SensorManager) {
+        self.sensorManager = sensorManager
+    }
     
     func setSessionData(_ sessionData: SessionData) {
         self.sessionData = sessionData
@@ -45,6 +50,11 @@ class SessionViewModel: ObservableObject {
         networkManager.performRequest(apiPath: .sendHeartRateData(HeartRateData(username: username,
                                                                                 sessionId: sessionId,
                                                                                 heartRate: heartrate)))
+    }
+    
+    func getSensorName() -> String {
+        guard let device = sensorManager?.device else { return "" }
+        return device.localName
     }
     
     func didTapClose() {
@@ -73,8 +83,8 @@ private extension SessionViewModel {
     }
     
     func getSessionSummaryData() -> SessionSummaryData? {
-        guard let sessionData = sessionData else { return nil }
-        return SessionSummaryData(sensor: sessionData.device,
+        guard let sessionData = sessionData, let device = sensorManager?.device else { return nil }
+        return SessionSummaryData(sensor: DeviceRepresentable(name: device.localName),
                            username: sessionData.username,
                            session: sessionData.session,
                            measurements: measurements,

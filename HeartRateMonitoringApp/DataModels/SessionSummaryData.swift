@@ -8,7 +8,7 @@
 import Foundation
 
 struct SessionSummaryData: Hashable {
-    let sensor: MockDevice
+    let sensor: DeviceRepresentable
     let username: String
     let session: SessionSimplified
     let measurements: [Int]

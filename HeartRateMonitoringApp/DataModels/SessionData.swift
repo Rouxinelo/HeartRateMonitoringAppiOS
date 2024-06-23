@@ -6,11 +6,11 @@
 //
 
 import Foundation
+import MovesenseApi
 
 struct SessionData: Hashable {
     let session: SessionSimplified
     let username: String
-    var device: MockDevice
 }
 
 struct SessionSimplified: Hashable {
@@ -18,4 +18,3 @@ struct SessionSimplified: Hashable {
     let name: String
     let teacher: String
 }
-
