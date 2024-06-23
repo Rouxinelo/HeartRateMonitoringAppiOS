@@ -24,30 +24,17 @@ struct PreviousSessionScreen: View {
                         Text(localized(PreviousSessionStrings.titleString))
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        HStack (spacing: 3) {
-                            Image(systemName: "book.fill")
-                            Text(sessionData.session.name)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack (spacing: 11) {
-                            Image(systemName: "person.fill")
-                            Text(sessionData.session.teacher)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack {
-                            Image(systemName: "calendar")
-                            Text(sessionData.session.date)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack (spacing: 9) {
-                            Image(systemName: "clock.fill")
-                            Text(sessionData.session.hour)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
+                        SessionInfoSection(imageName: "book.fill",
+                                           text: sessionData.session.name,
+                                           spacing: 3)
+                        SessionInfoSection(imageName: "person.fill",
+                                           text: sessionData.session.teacher,
+                                           spacing: 11)
+                        SessionInfoSection(imageName: "calendar",
+                                           text: sessionData.session.date)
+                        SessionInfoSection(imageName: "clock.fill",
+                                           text: sessionData.session.hour,
+                                           spacing: 9)
                     }
                     Spacer()
                     Button(action: {

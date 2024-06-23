@@ -18,18 +18,17 @@ struct SessionScreen: View {
     
     var body: some View {
         ZStack {
-            VStack (spacing: 30) {
+            VStack (spacing: 25) {
                 HStack (alignment: .center) {
                     VStack (alignment: .leading) {
                         Text(sessionData.session.name).font(.largeTitle).fontWeight(.bold)
-                        HStack (spacing: 15) {
-                            Image(systemName: "person.fill")
-                            Text(sessionData.session.teacher).font(.headline).fontWeight(.bold)
-                        }
-                        HStack {
-                            Image(systemName: "sensor.tag.radiowaves.forward.fill")
-                            Text(viewModel.getSensorName()).font(.headline).fontWeight(.bold)
-                        }
+                        SessionInfoSection(imageName: "person.fill",
+                                           text: sessionData.session.teacher,
+                                           spacing: 15)
+                        SessionInfoSection(imageName: "sensor.tag.radiowaves.forward.fill",
+                                           text: viewModel.getSensorName())
+                        SessionInfoSection(imageName: viewModel.getBatteryPercentageImage(viewModel.sensorBatteryLevel ?? 100),
+                                           text: "\(viewModel.sensorBatteryLevel ?? 100)%")
                         HStack {
                             Image(systemName: "")
                             Text("\(viewModel.sensorBatteryLevel ?? 100)%").font(.headline).fontWeight(.bold)

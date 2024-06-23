@@ -21,24 +21,14 @@ struct SessionSummaryScreen: View {
                         Text(localized(SessionSummaryStrings.titleString))
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        HStack (spacing: 9) {
-                            Image(systemName: "book.fill")
-                            Text(sessionSummary.session.name)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack (spacing: 15) {
-                            Image(systemName: "person.fill")
-                            Text(sessionSummary.session.teacher)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack {
-                            Image(systemName: "sensor.tag.radiowaves.forward.fill")
-                            Text(sessionSummary.sensor.name)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
+                        SessionInfoSection(imageName: "book.fill",
+                                           text: sessionSummary.session.name,
+                                           spacing: 9)
+                        SessionInfoSection(imageName: "person.fill",
+                                           text: sessionSummary.session.teacher,
+                                           spacing: 15)
+                        SessionInfoSection(imageName: "sensor.tag.radiowaves.forward.fill",
+                                           text: sessionSummary.sensor.name)
                     }
                     Spacer()
                     Button(action: {

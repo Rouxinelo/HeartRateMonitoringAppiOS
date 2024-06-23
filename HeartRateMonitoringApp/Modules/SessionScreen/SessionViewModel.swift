@@ -60,6 +60,21 @@ class SessionViewModel: ObservableObject {
         return device.localName
     }
     
+    func getBatteryPercentageImage(_ batteryPercentage: Int) -> String {
+        switch batteryPercentage {
+        case 0..<24:
+            return "battery.0percent"
+        case 25..<50:
+            return "battery.25percent"
+        case 50..<75:
+            return "battery.50percent"
+        case 75..<80:
+            return "battery.75percent"
+        default:
+            return "battery.100percent"
+        }
+    }
+    
     func didTapClose() {
         guard let sessionData = sessionData else { return }
         networkManager.performRequest(apiPath: .leaveSession(sessionData.username,
