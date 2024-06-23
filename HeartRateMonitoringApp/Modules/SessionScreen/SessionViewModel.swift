@@ -24,9 +24,12 @@ class SessionViewModel: ObservableObject {
     @Published var sessionTime: Int = 0
     @Published var sessionTimeString: String = "00h 00m 00s"
     @Published var measurements = [Int]()
+    @Published var sensorBatteryLevel: Int?
     
     func setSensorManager(_ sensorManager: SensorManager) {
         self.sensorManager = sensorManager
+        bindSensorManagerResponse()
+        sensorManager.performOperation(.systemEnergy)
     }
     
     func setSessionData(_ sessionData: SessionData) {
@@ -76,6 +79,21 @@ private extension SessionViewModel {
             case .sessionOperationSuccessful:
                 guard let sessionSummaryData = getSessionSummaryData() else { return }
                 publisher.send(.didLeaveSession(sessionSummaryData))
+            default:
+                return
+            }
+        }.store(in: &subscriptions)
+    }
+    
+    func bindSensorManagerResponse() {
+        guard let sensorManager = sensorManager else { return }
+        sensorManager.publisher.sink { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .didGetHeartRate(let movesenseHeartRate):
+                return
+            case .didGetSystemEnergy(let movesenseSystemEnergy):
+                self.sensorBatteryLevel = Int(movesenseSystemEnergy.percentage)
             default:
                 return
             }

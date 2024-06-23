@@ -15,6 +15,7 @@ enum SensorManagerPublisherCases {
     case didDiscoverNewDevice(MovesenseDevice)
     case didGetHeartRate(MovesenseHeartRate)
     case didGetEcg(MovesenseEcg)
+    case didGetSystemEnergy(MovesenseSystemEnergy)
 }
 
 class SensorManager: ObservableObject {
@@ -23,12 +24,12 @@ class SensorManager: ObservableObject {
     var operation: MovesenseOperation?
     var publisher = PassthroughSubject<SensorManagerPublisherCases, Never>()
 
-    func performOperation(_ resourceType: MovesenseResourceType, _ device: MovesenseDevice) {
+    func performOperation(_ resourceType: MovesenseResourceType) {
         switch resourceType {
         case .systemEnergy, .ecgInfo, .info:
-            self.requestInfo(device: device, resourseType: resourceType)
+            self.requestInfo(resourseType: resourceType)
         case .heartRate, .ecg:
-            self.performRequest(resourceType, device)
+            self.performRequest(resourceType)
         default:
             print(SensorManagerConstants.operationNotImplemented)
         }
@@ -74,8 +75,8 @@ extension SensorManager: Observer {
 
 // MARK: - Private Methods for working with the sensors
 private extension SensorManager {
-    func requestInfo(device: MovesenseDevice, resourseType: MovesenseResourceType) {
-        guard let api = self.api else { return }
+    func requestInfo(resourseType: MovesenseResourceType) {
+        guard let api = self.api, let device = self.device else { return }
         let request = MovesenseRequest(resourceType: resourseType, method: MovesenseMethod.get,
                                        parameters: nil)
         api.sendRequestForDevice(device, request: request) { response in
@@ -86,8 +87,8 @@ private extension SensorManager {
         }
     }
     
-    func performRequest(_ resourceType: MovesenseResourceType, _ device: MovesenseDevice) {
-        guard let resource = getResource(resourceType, device) else { return }
+    func performRequest(_ resourceType: MovesenseResourceType) {
+        guard let device = self.device, let resource = getResource(resourceType, device) else { return }
         let movesenseRequest = MovesenseRequest(resourceType: resourceType,
                                                 method: .subscribe,
                                                 parameters: getParameters(for: [1], resource))
@@ -127,7 +128,7 @@ extension SensorManager {
     
     func handleRecievedInfo(response: MovesenseResponse, device: MovesenseDevice) {
         if case let MovesenseResponse.systemEnergy(_, _, systemEnergy) = response {
-            print(systemEnergy.percentage)
+            publisher.send(.didGetSystemEnergy(systemEnergy))
         } else if case MovesenseResponse.info(_, _, _) = response {
             print(SensorManagerConstants.operationNotImplemented)
         } else if case MovesenseResponse.ecgInfo(_, _, _) = response {

@@ -30,6 +30,10 @@ struct SessionScreen: View {
                             Image(systemName: "sensor.tag.radiowaves.forward.fill")
                             Text(viewModel.getSensorName()).font(.headline).fontWeight(.bold)
                         }
+                        HStack {
+                            Image(systemName: "")
+                            Text("\(viewModel.sensorBatteryLevel ?? 100)%").font(.headline).fontWeight(.bold)
+                        }
                     }
                     Spacer()
                     Button(action: {
