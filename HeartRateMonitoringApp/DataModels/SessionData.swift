@@ -11,6 +11,7 @@ import MovesenseApi
 struct SessionData: Hashable {
     let session: SessionSimplified
     let username: String
+    let device: DeviceRepresentable
 }
 
 struct SessionSimplified: Hashable {

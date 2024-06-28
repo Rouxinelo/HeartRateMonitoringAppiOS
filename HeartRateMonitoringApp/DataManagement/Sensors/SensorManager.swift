@@ -169,8 +169,8 @@ extension SensorManager {
         switch operation {
         case .apiDeviceConnected(let device):
             print("\(SensorManagerConstants.api) \(device) \(SensorManagerConstants.connected)")
-            publisher.send(.didConnectToDevice(device))
             self.device = device
+            publisher.send(.didConnectToDevice(device))
         case .apiDeviceConnecting(let device):
             print("\(SensorManagerConstants.api) \(device) \(SensorManagerConstants.connecting)")
         case .apiDeviceDisconnected(let device):

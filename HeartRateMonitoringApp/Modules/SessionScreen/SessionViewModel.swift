@@ -10,8 +10,8 @@ import Combine
 
 enum SessionPublisherCases {
     case didFailSendHeartrateDate
-    case didGetHeartRateValue(Int)
     case didLeaveSession(SessionSummaryData)
+    case didLeaveSeassonFailedConnection(SessionSummaryData)
 }
 
 class SessionViewModel: ObservableObject {
@@ -21,15 +21,12 @@ class SessionViewModel: ObservableObject {
     var sessionData: SessionData?
     var sensorManager: SensorManager?
     var timer: Timer? = nil
-    @Published var sessionTime: Int = 0
+    var sessionTime: Int = 0
     @Published var sessionTimeString: String = "00h 00m 00s"
     @Published var measurements = [Int]()
-    @Published var sensorBatteryLevel: Int?
     
     func setSensorManager(_ sensorManager: SensorManager) {
         self.sensorManager = sensorManager
-        bindSensorManagerResponse()
-        sensorManager.performOperation(.systemEnergy)
     }
     
     func setSessionData(_ sessionData: SessionData) {
@@ -37,11 +34,12 @@ class SessionViewModel: ObservableObject {
     }
     
     func startTimer() {
+        guard let sensorManager = sensorManager else { return }
         bind()
+        sensorManager.performOperation(.heartRate)
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.updateTime()
-            self.appendRandomValue()
         }
     }
     
@@ -53,11 +51,6 @@ class SessionViewModel: ObservableObject {
         networkManager.performRequest(apiPath: .sendHeartRateData(HeartRateData(username: username,
                                                                                 sessionId: sessionId,
                                                                                 heartRate: heartrate)))
-    }
-    
-    func getSensorName() -> String {
-        guard let device = sensorManager?.device else { return "" }
-        return device.localName
     }
     
     func getBatteryPercentageImage(_ batteryPercentage: Int) -> String {
@@ -85,15 +78,17 @@ class SessionViewModel: ObservableObject {
 private extension SessionViewModel {
     func bind() {
         bindNetworkResponse()
+        bindSensorManagerResponse()
     }
     
     func bindNetworkResponse() {
         networkManager.statePublisher.sink { [weak self] response in
-            guard let self = self else { return }
+            guard let self = self, let sessionSummaryData = getSessionSummaryData() else { return }
             switch response {
             case .sessionOperationSuccessful:
-                guard let sessionSummaryData = getSessionSummaryData() else { return }
                 publisher.send(.didLeaveSession(sessionSummaryData))
+            case .sessionOperationFailed, .failedRequest, .urlUnavailable:
+                publisher.send(.didLeaveSeassonFailedConnection(sessionSummaryData))
             default:
                 return
             }
@@ -106,13 +101,19 @@ private extension SessionViewModel {
             guard let self = self else { return }
             switch response {
             case .didGetHeartRate(let movesenseHeartRate):
-                return
-            case .didGetSystemEnergy(let movesenseSystemEnergy):
-                self.sensorBatteryLevel = Int(movesenseSystemEnergy.percentage)
+                self.handleMeasurementRecieved(Int(movesenseHeartRate.average))
             default:
                 return
             }
         }.store(in: &subscriptions)
+    }
+    
+    func handleMeasurementRecieved(_ measurement: Int) {
+        guard let sessionData = sessionData else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.measurements.append(measurement)
+        }
+        sendHeartrateData(username: sessionData.username, sessionId: sessionData.session.id, heartrate: measurement)
     }
     
     func getSessionSummaryData() -> SessionSummaryData? {
@@ -127,16 +128,6 @@ private extension SessionViewModel {
     func updateTime() {
         sessionTime += 1
         sessionTimeString = "\(getFormattedHours(sessionTime))h \(getFormattedMinutes(sessionTime % 3600))m \(getFormattedSeconds(sessionTime % 60))s"
-    }
-    
-    // Mock Methods (remove after integrate sensors and backend)
-    func appendRandomValue() {
-        guard let sessionData = sessionData else { return }
-        let value = Int.random(in: 70...110)
-        measurements.append(value)
-        sendHeartrateData(username: sessionData.username,
-                          sessionId: sessionData.session.id,
-                          heartrate: value)
     }
     
     func getFormattedHours(_ time: Int) -> String {

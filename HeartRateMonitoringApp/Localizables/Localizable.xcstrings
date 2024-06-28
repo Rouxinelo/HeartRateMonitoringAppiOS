@@ -27,9 +27,6 @@
         }
       }
     },
-    "%lld%%" : {
-
-    },
     "bluetoothPermissionString" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1667,6 +1664,23 @@
         }
       }
     },
+    "register_user_toastMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network error"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erro de conexão"
+          }
+        }
+      }
+    },
     "register_user_userAlertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2132,12 +2146,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sair?"
+            "value" : "Leave?"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Sair?"
           }
         }
@@ -2326,6 +2340,23 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Detalhes da sessão"
+          }
+        }
+      }
+    },
+    "session_summary_toastMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not send summary"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossível enviar resumo"
           }
         }
       }

@@ -80,6 +80,7 @@ struct JoinSessionScreen: View {
                                    devices: $devices,
                                    title: localized(JoinSessionStrings.connectSensorString),
                                    onSelectedDevice: { device in
+                    showEnterSessionLoading = true
                     viewModel.connectToDevice(device)
                 })
             }
@@ -114,22 +115,25 @@ struct JoinSessionScreen: View {
             back()
         }
         .navigationDestination(for: SessionData.self, destination: { sessionData in
-            let view = SessionScreen(path: $path, sessionData: sessionData)
-            view.setSensorManager(viewModel.getSensorManager())
-            return view
+            SessionScreen(path: $path, sessionData: sessionData, sensorManager: viewModel.getSensorManager())
         })
         .onReceive(viewModel.publisher) { response in
             switch response {
             case .didEnterSession:
+                showEnterSessionLoading = false
+                guard let deviceRepresentable = viewModel.getDeviceRepresentable() else { return }
+                viewModel.removeAllSubscriptions()
                 path.append(SessionData(session: SessionSimplified(id: preSessionData.session.id,
                                                                    name: preSessionData.session.name,
                                                                    teacher: preSessionData.session.teacher),
-                                        username: preSessionData.user.username))
+                                        username: preSessionData.user.username,
+                                        device: deviceRepresentable))
             case .didFailOperation:
                 showFailedEnterAlert = true
             case .bluetoothPoweredOn:
                 startScanningForDevices()
             case .bluetoothPoweredOff, .bluetoothConnectionError:
+                showEnterSessionLoading = false
                 showBluetoothProblemsAlert = true
             case .didDiscoverNewDevice(let device):
                 devices.append(device)
@@ -151,7 +155,6 @@ struct JoinSessionScreen: View {
     
     func goToSession() {
         showConnectionModal.toggle()
-        showEnterSessionLoading = true
         viewModel.sendEnterData(username: preSessionData.user.username,
                                 sessionId: preSessionData.session.id)
     }

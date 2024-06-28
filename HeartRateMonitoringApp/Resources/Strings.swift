@@ -86,6 +86,7 @@ public struct RegisterUserStrings {
     static let emailRegisteredString: String = "register_user_emailAlertDescription"
     static let userRegisteredString: String = "register_user_userAlertDescription"
     static let alertOkString: String = "register_user_okAlert"
+    static let toastMessageString: String = "register_user_toastMessage"
 }
 
 public struct CalendarStrings {
@@ -215,6 +216,7 @@ public struct SessionSummaryStrings {
     static let alertDescriptionString: String = "session_summary_alertDescription"
     static let alertLeftButtonString: String = "session_summary_alertLeftButton"
     static let alertRightButtonString: String = "session_summary_alertRightButton"
+    static let toastMessageString: String = "session_summary_toastMessage"
 }
 
 public struct ScreenIds {

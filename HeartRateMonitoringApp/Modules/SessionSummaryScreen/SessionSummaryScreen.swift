@@ -10,6 +10,7 @@ import SwiftUI
 struct SessionSummaryScreen: View {
     @Binding var path: NavigationPath
     @State private var showingAlert = false
+    @State var showingToast: Bool
     @State var sessionSummary: SessionSummaryData
     @StateObject var viewModel = SessionSummaryViewModel()
     
@@ -105,6 +106,12 @@ struct SessionSummaryScreen: View {
                             rightButtonAction: { didPressClose() },
                             isSingleButton: false)
             }
+            
+            if showingToast {
+                CustomToast(isShowing: $showingToast,
+                            iconName: "info.circle.fill",
+                            message: localized(SessionSummaryStrings.toastMessageString))
+            }
         }.onAppear {
             viewModel.processSummary(sessionSummary)
         }.navigationBarBackButtonHidden()
@@ -135,7 +142,8 @@ struct SessionSummaryScreen: View {
 }
 
 #Preview {
-    SessionSummaryScreen(path: .constant(NavigationPath()),
+    SessionSummaryScreen(path: .constant(NavigationPath()), 
+                         showingToast: false,
                          sessionSummary: SessionSummaryData(sensor: DeviceRepresentable(name: "Movesense 12345678"),
                                                             username: "rouxinol",
                                                             session: SessionSimplified(id: "testID",

@@ -16,7 +16,7 @@ enum JoinSessionPublisherCases {
     case bluetoothPoweredOff
     case bluetoothConnectionError
     case didDiscoverNewDevice(device: DeviceRepresentable)
-    case didConnectToDevice(device: MovesenseDevice)
+    case didConnectToDevice
 }
 
 class JoinSessionViewModel: ObservableObject {
@@ -26,6 +26,7 @@ class JoinSessionViewModel: ObservableObject {
     var bluetoothChecker = BluetoothStateChecker()
     var sensorManager = SensorManager()
     var devices = [MovesenseDevice]()
+    var deviceRepresentable: DeviceRepresentable?
     
     init(subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()) {
         self.subscriptions = subscriptions
@@ -57,12 +58,33 @@ class JoinSessionViewModel: ObservableObject {
     func getSensorManager() -> SensorManager {
         sensorManager
     }
+    
+    func getDeviceRepresentable() -> DeviceRepresentable? {
+        deviceRepresentable
+    }
+    
+    func removeAllSubscriptions() {
+        subscriptions.removeAll()
+    }
 }
 
+// MARK: - Private methods
 private extension JoinSessionViewModel {
     func addDeviceToModal(device: MovesenseDevice) {
         DispatchQueue.main.async { [weak self] in
             self?.publisher.send(.didDiscoverNewDevice(device: DeviceRepresentable(name: device.localName)))
+        }
+    }
+    
+    func deviceConnected(device: MovesenseDevice) {
+        sensorManager.performOperation(.systemEnergy)
+    }
+    
+    func didGetSystemEnergy(systemEnergy: MovesenseSystemEnergy) {
+        guard let device = self.sensorManager.device else { return }
+        deviceRepresentable = DeviceRepresentable(name: device.localName, batteryPercentage: Int(systemEnergy.percentage))
+        DispatchQueue.main.async { [weak self] in
+            self?.publisher.send(.didConnectToDevice)
         }
     }
 }
@@ -106,10 +128,12 @@ private extension JoinSessionViewModel {
             switch response {
             case .didConnectToDevice(let movesenseDevice):
                 self.stopScanningForDevices()
-                self.publisher.send(.didConnectToDevice(device: movesenseDevice))
+                self.deviceConnected(device: movesenseDevice)
             case .didDiscoverNewDevice(let movesenseDevice):
                 self.devices.append(movesenseDevice)
                 self.addDeviceToModal(device: movesenseDevice)
+            case .didGetSystemEnergy(let systemEnergy):
+                self.didGetSystemEnergy(systemEnergy: systemEnergy)
             default:
                 print("Operation not supported here")
             }

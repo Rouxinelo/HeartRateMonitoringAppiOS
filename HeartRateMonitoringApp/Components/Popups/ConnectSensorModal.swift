@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DeviceRepresentable: Hashable {
     var name: String
+    var batteryPercentage: Int?
 }
 
 struct ConnectSensorModal: View {

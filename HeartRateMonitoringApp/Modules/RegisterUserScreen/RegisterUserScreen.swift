@@ -13,6 +13,7 @@ struct RegisterUserScreen: View {
     @Binding var showRegisterToast: Bool
     @State private var showUsernameRegisteredAlert: Bool = false
     @State private var showEmailRegisteredAlert: Bool = false
+    @State private var showNetworkErrorToast: Bool = false
     @State private var isLoading = false
     @State private var userName: String = ""
     @State private var firstName: String = ""
@@ -173,6 +174,12 @@ struct RegisterUserScreen: View {
                             isSingleButton: true)
             }
             
+            if showNetworkErrorToast {
+                CustomToast(isShowing: $showNetworkErrorToast,
+                            iconName: "info.circle.fill",
+                            message: localized(RegisterUserStrings.toastMessageString))
+            }
+            
         }
         .onReceive(viewModel.publisher) { recievedValue in
             switch recievedValue {
@@ -183,7 +190,7 @@ struct RegisterUserScreen: View {
             case .usernameAlreadyRegistered:
                 usernameRegistered()
             case .error:
-                return
+                networkError()
             }
         }
         .navigationBarBackButtonHidden()
@@ -234,6 +241,11 @@ struct RegisterUserScreen: View {
     func emailRegistered() {
         isLoading = false
         showEmailRegisteredAlert = true
+    }
+    
+    func networkError() {
+        isLoading = false
+        showNetworkErrorToast = true
     }
     
     func getUserFromData() -> RegisterUser {

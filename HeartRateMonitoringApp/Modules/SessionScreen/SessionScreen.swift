@@ -11,8 +11,10 @@ import Charts
 struct SessionScreen: View {
     @Binding var path: NavigationPath
     @State var sessionData: SessionData
+    @State var sensorManager: SensorManager
     @State private var showingCloseAlert: Bool = false
     @State private var animationAmount: CGFloat = 1
+    @State var shouldShowSummaryToast: Bool = false
     @StateObject var viewModel = SessionViewModel()
     var maximumChartValues: Int = 5
     
@@ -26,13 +28,9 @@ struct SessionScreen: View {
                                            text: sessionData.session.teacher,
                                            spacing: 15)
                         SessionInfoSection(imageName: "sensor.tag.radiowaves.forward.fill",
-                                           text: viewModel.getSensorName())
-                        SessionInfoSection(imageName: viewModel.getBatteryPercentageImage(viewModel.sensorBatteryLevel ?? 100),
-                                           text: "\(viewModel.sensorBatteryLevel ?? 100)%")
-                        HStack {
-                            Image(systemName: "")
-                            Text("\(viewModel.sensorBatteryLevel ?? 100)%").font(.headline).fontWeight(.bold)
-                        }
+                                           text: sessionData.device.name)
+                        SessionInfoSection(imageName: viewModel.getBatteryPercentageImage(sessionData.device.batteryPercentage ?? 100),
+                                           text: "\(sessionData.device.batteryPercentage ?? 100)%")
                     }
                     Spacer()
                     Button(action: {
@@ -161,21 +159,24 @@ struct SessionScreen: View {
             }
         }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
             SessionSummaryScreen(path: $path,
+                                 showingToast: shouldShowSummaryToast,
                                  sessionSummary: sessionSummaryData)
         })
         .onReceive(viewModel.publisher) { result in
             switch result {
             case .didFailSendHeartrateDate:
                 return
-            case .didGetHeartRateValue(let heartRate):
-                viewModel.measurements.append(heartRate)
             case .didLeaveSession(let summaryData):
+                path.append(summaryData)
+            case .didLeaveSeassonFailedConnection(let summaryData):
+                shouldShowSummaryToast = false
                 path.append(summaryData)
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
             viewModel.setSessionData(sessionData)
+            viewModel.setSensorManager(sensorManager)
             viewModel.startTimer()
         }
         .onDisappear {
@@ -199,10 +200,6 @@ struct SessionScreen: View {
     func closeSession() {
         viewModel.didTapClose()
     }
-    
-    func setSensorManager(_ sensorManager: SensorManager) {
-        viewModel.sensorManager = sensorManager
-    }
 }
 
 #Preview {
@@ -210,5 +207,8 @@ struct SessionScreen: View {
                   sessionData: SessionData(session: SessionSimplified(id: "testId",
                                                                       name: "Pilates Clinico",
                                                                       teacher: "Joao Rouxinol"),
-                                           username: "testUsername"))
+                                           username: "testUsername", 
+                                           device: DeviceRepresentable(name: "Movesense 1234",
+                                                                       batteryPercentage: 10)),
+                  sensorManager: SensorManager())
 }
