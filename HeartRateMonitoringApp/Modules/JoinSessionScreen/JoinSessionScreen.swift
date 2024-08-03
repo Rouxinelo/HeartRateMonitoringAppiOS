@@ -6,17 +6,23 @@
 //
 
 import SwiftUI
+import MovesenseApi
 
 struct JoinSessionScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
-    @State var showConnectionModal: Bool = false
     @State var showEnterSessionLoading: Bool = false
     @State var showFailedEnterAlert: Bool = false
-    @State var devices = [MockDevice]()
+    @State var showBluetoothProblemsAlert: Bool = false
+    @State var showConnectionModal: Bool = false {
+        didSet { if !showConnectionModal
+            { viewModel.stopScanningForDevices() }
+        }
+    }
+    @State var devices = [DeviceRepresentable]()
     @StateObject var viewModel = JoinSessionViewModel()
     var preSessionData: PreSessionData
-    
+
     var body: some View {
         ZStack {
             VStack (spacing: 10) {
@@ -64,8 +70,7 @@ struct JoinSessionScreen: View {
                 }
                 Spacer()
                 MultipleTextButton(action: {
-                    showConnectionModal = true
-                    addDevicesPeriodically()
+                    verifyBluetoothState()
                 }, title: localized(JoinSessionStrings.joinButtonString), description: localized(JoinSessionStrings.connectSensorString))
                 .padding()
             }
@@ -75,7 +80,8 @@ struct JoinSessionScreen: View {
                                    devices: $devices,
                                    title: localized(JoinSessionStrings.connectSensorString),
                                    onSelectedDevice: { device in
-                    goToSession(device)
+                    showEnterSessionLoading = true
+                    viewModel.connectToDevice(device)
                 })
             }
             if showEnterSessionLoading {
@@ -94,41 +100,63 @@ struct JoinSessionScreen: View {
                             rightButtonAction: {},
                             isSingleButton: true)
             }
+            if showBluetoothProblemsAlert {
+                CustomAlert(isShowing: $showBluetoothProblemsAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(JoinSessionStrings.bluetoothAlertTitleString),
+                            leftButtonText: localized(JoinSessionStrings.bluetoothAlertButtonString),
+                            rightButtonText: "",
+                            description: localized(JoinSessionStrings.bluetoothAlertDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
         }.swipeRight {
             back()
         }
         .navigationDestination(for: SessionData.self, destination: { sessionData in
-            SessionScreen(path: $path, sessionData: sessionData)
+            SessionScreen(path: $path, sessionData: sessionData, sensorManager: viewModel.getSensorManager())
         })
         .onReceive(viewModel.publisher) { response in
-            showEnterSessionLoading.toggle()
             switch response {
-            case .didEnterSession(let device):
+            case .didEnterSession:
+                showEnterSessionLoading = false
+                guard let deviceRepresentable = viewModel.getDeviceRepresentable() else { return }
+                viewModel.removeAllSubscriptions()
                 path.append(SessionData(session: SessionSimplified(id: preSessionData.session.id,
                                                                    name: preSessionData.session.name,
                                                                    teacher: preSessionData.session.teacher),
                                         username: preSessionData.user.username,
-                                        device: device))
-            default:
+                                        device: deviceRepresentable))
+            case .didFailOperation:
                 showFailedEnterAlert = true
+            case .bluetoothPoweredOn:
+                startScanningForDevices()
+            case .bluetoothPoweredOff, .bluetoothConnectionError:
+                showEnterSessionLoading = false
+                showBluetoothProblemsAlert = true
+            case .didDiscoverNewDevice(let device):
+                devices.append(device)
+            case .didConnectToDevice:
+                goToSession()
             }
         }
         .navigationBarBackButtonHidden()
     }
     
-    func addDevicesPeriodically() {
-        devices.append(MockDevice(name: "876543210", batteryPercentage: 25))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.devices.append(MockDevice(name: "012345678", batteryPercentage: 100))
-        }
+    func verifyBluetoothState() {
+        viewModel.checkForBluetoothConnection()
     }
     
-    func goToSession(_ device: MockDevice) {
+    func startScanningForDevices() {
+        showConnectionModal = true
+        viewModel.startScanningForDevices()
+    }
+    
+    func goToSession() {
         showConnectionModal.toggle()
-        showEnterSessionLoading = true
         viewModel.sendEnterData(username: preSessionData.user.username,
-                                sessionId: preSessionData.session.id,
-                                device: device)
+                                sessionId: preSessionData.session.id)
     }
     
     func back() {

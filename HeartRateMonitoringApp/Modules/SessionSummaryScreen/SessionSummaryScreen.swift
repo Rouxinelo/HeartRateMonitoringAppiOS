@@ -10,6 +10,7 @@ import SwiftUI
 struct SessionSummaryScreen: View {
     @Binding var path: NavigationPath
     @State private var showingAlert = false
+    @State var showingToast: Bool
     @State var sessionSummary: SessionSummaryData
     @StateObject var viewModel = SessionSummaryViewModel()
     
@@ -21,24 +22,14 @@ struct SessionSummaryScreen: View {
                         Text(localized(SessionSummaryStrings.titleString))
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        HStack (spacing: 9) {
-                            Image(systemName: "book.fill")
-                            Text(sessionSummary.session.name)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack (spacing: 15) {
-                            Image(systemName: "person.fill")
-                            Text(sessionSummary.session.teacher)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
-                        HStack {
-                            Image(systemName: "sensor.tag.radiowaves.forward.fill")
-                            Text(sessionSummary.sensor.name)
-                                .font(.headline)
-                                .fontWeight(.bold)
-                        }
+                        SessionInfoSection(imageName: "book.fill",
+                                           text: sessionSummary.session.name,
+                                           spacing: 9)
+                        SessionInfoSection(imageName: "person.fill",
+                                           text: sessionSummary.session.teacher,
+                                           spacing: 15)
+                        SessionInfoSection(imageName: "sensor.tag.radiowaves.forward.fill",
+                                           text: sessionSummary.sensor.name)
                     }
                     Spacer()
                     Button(action: {
@@ -115,6 +106,12 @@ struct SessionSummaryScreen: View {
                             rightButtonAction: { didPressClose() },
                             isSingleButton: false)
             }
+            
+            if showingToast {
+                CustomToast(isShowing: $showingToast,
+                            iconName: "info.circle.fill",
+                            message: localized(SessionSummaryStrings.toastMessageString))
+            }
         }.onAppear {
             viewModel.processSummary(sessionSummary)
         }.navigationBarBackButtonHidden()
@@ -145,9 +142,9 @@ struct SessionSummaryScreen: View {
 }
 
 #Preview {
-    SessionSummaryScreen(path: .constant(NavigationPath()),
-                         sessionSummary: SessionSummaryData(sensor: MockDevice(name: "Movesense 12345678",
-                                                                               batteryPercentage: 10),
+    SessionSummaryScreen(path: .constant(NavigationPath()), 
+                         showingToast: false,
+                         sessionSummary: SessionSummaryData(sensor: DeviceRepresentable(name: "Movesense 12345678"),
                                                             username: "rouxinol",
                                                             session: SessionSimplified(id: "testID",
                                                                                        name: "Test Name",

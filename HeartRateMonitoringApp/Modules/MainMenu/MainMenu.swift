@@ -116,7 +116,7 @@ struct MainMenu: View {
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
-            CalendarScreen(path: $path, isGuest: isGuest(), sessions: sessions)
+            CalendarScreen(path: $path, isGuest: isGuest(), username: getUser()?.username, sessions: sessions)
         }).navigationDestination(for: User.self, destination: { user in
             UserSessionsScreen(path: $path, user: user)
         }).onReceive(viewModel.publisher) { recievedValue in
@@ -152,7 +152,7 @@ struct MainMenu: View {
     func goToUserDetail() {
         guard case let .login(user) = userType else { return }
         isUserDataLoading = true
-        viewModel.fetchUserData(for: "teste")
+        viewModel.fetchUserData(for: user.username)
     }
     
     func logout() {

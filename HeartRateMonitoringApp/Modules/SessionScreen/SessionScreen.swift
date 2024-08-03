@@ -11,26 +11,26 @@ import Charts
 struct SessionScreen: View {
     @Binding var path: NavigationPath
     @State var sessionData: SessionData
+    @State var sensorManager: SensorManager
     @State private var showingCloseAlert: Bool = false
     @State private var animationAmount: CGFloat = 1
+    @State var shouldShowSummaryToast: Bool = false
     @StateObject var viewModel = SessionViewModel()
     var maximumChartValues: Int = 5
     
     var body: some View {
         ZStack {
-            VStack (spacing: 30) {
+            VStack (spacing: 25) {
                 HStack (alignment: .center) {
                     VStack (alignment: .leading) {
                         Text(sessionData.session.name).font(.largeTitle).fontWeight(.bold)
-                        HStack (spacing: 15) {
-                            Image(systemName: "person.fill")
-                            Text(sessionData.session.teacher).font(.headline).fontWeight(.bold)
-                        }
-                        HStack {
-                            Image(systemName: "sensor.tag.radiowaves.forward.fill")
-                            Text(sessionData.device.name).font(.headline).fontWeight(.bold)
-                            
-                        }
+                        SessionInfoSection(imageName: "person.fill",
+                                           text: sessionData.session.teacher,
+                                           spacing: 15)
+                        SessionInfoSection(imageName: "sensor.tag.radiowaves.forward.fill",
+                                           text: sessionData.device.name)
+                        SessionInfoSection(imageName: viewModel.getBatteryPercentageImage(sessionData.device.batteryPercentage ?? 100),
+                                           text: "\(sessionData.device.batteryPercentage ?? 100)%")
                     }
                     Spacer()
                     Button(action: {
@@ -159,21 +159,24 @@ struct SessionScreen: View {
             }
         }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
             SessionSummaryScreen(path: $path,
+                                 showingToast: shouldShowSummaryToast,
                                  sessionSummary: sessionSummaryData)
         })
         .onReceive(viewModel.publisher) { result in
             switch result {
             case .didFailSendHeartrateDate:
                 return
-            case .didGetHeartRateValue(let heartRate):
-                viewModel.measurements.append(heartRate)
             case .didLeaveSession(let summaryData):
+                path.append(summaryData)
+            case .didLeaveSeassonFailedConnection(let summaryData):
+                shouldShowSummaryToast = false
                 path.append(summaryData)
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
             viewModel.setSessionData(sessionData)
+            viewModel.setSensorManager(sensorManager)
             viewModel.startTimer()
         }
         .onDisappear {
@@ -204,7 +207,8 @@ struct SessionScreen: View {
                   sessionData: SessionData(session: SessionSimplified(id: "testId",
                                                                       name: "Pilates Clinico",
                                                                       teacher: "Joao Rouxinol"),
-                                           username: "testUsername",
-                                           device: MockDevice(name: "Movesense 12345678",
-                                                              batteryPercentage: 10)))
+                                           username: "testUsername", 
+                                           device: DeviceRepresentable(name: "Movesense 1234",
+                                                                       batteryPercentage: 10)),
+                  sensorManager: SensorManager())
 }

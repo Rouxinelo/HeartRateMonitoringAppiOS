@@ -82,7 +82,7 @@ private extension UserSessionsViewModel {
             guard let self = self else { return }
             switch recieveValue {
             case .didLoadPreviousSession(let previousSession):
-                if previousSession.measurements.isEmpty {
+                if previousSession.count == 0 {
                     publisher.send(.didLoadPreviousSession(nil))
                 } else {
                     publisher.send(.didLoadPreviousSession(previousSession))

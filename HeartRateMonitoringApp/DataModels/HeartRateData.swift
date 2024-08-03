@@ -11,4 +11,5 @@ struct HeartRateData: Codable {
     let username: String
     let sessionId: String
     let heartRate: Int
+    let timeStamp: Int
 }

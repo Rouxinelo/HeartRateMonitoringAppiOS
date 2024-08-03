@@ -12,6 +12,7 @@ struct SessionDetailScreen: View {
     @Binding var didSignIn: Bool
     @State var isGuest: Bool
     @State var session: Session
+    @State var username: String?
     @State var imageName: String = "exercise-cartoon-1"
     @State var showSignInLoading: Bool = false
     @State var showFailedToast: Bool = false
@@ -137,8 +138,9 @@ struct SessionDetailScreen: View {
     }
     
     func didPressSignIn() {
+        guard let username = username else { return }
         showSignInLoading = true
-        viewModel.signIn(for: "teste", sessionId: session.id)
+        viewModel.signIn(for: username, sessionId: session.id)
     }
     
     func failedSignIn() {

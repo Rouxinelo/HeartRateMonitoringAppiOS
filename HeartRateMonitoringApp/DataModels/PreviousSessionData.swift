@@ -9,6 +9,8 @@ import Foundation
 
 struct PreviousSessionData: Hashable, Decodable {
     var session: Session
-    var username: String
-    var measurements: [Int]
+    var count: Int
+    var average: Int
+    var maximum: Int
+    var minimum: Int
 }

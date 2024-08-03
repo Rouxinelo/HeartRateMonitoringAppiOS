@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct MockDevice: Hashable {
+struct DeviceRepresentable: Hashable {
     var name: String
-    var batteryPercentage: Int
+    var batteryPercentage: Int?
 }
 
 struct ConnectSensorModal: View {
     @Binding var isShowing: Bool
-    @Binding var devices: [MockDevice]
+    @Binding var devices: [DeviceRepresentable]
     @State var title: String
     @State var showConnectDevice: Bool = false
     @State private var yOffset: CGFloat = 1000
     
-    var onSelectedDevice: (MockDevice) -> Void
+    var onSelectedDevice: (DeviceRepresentable) -> Void
     
     var body: some View {
         ZStack {
@@ -54,12 +54,6 @@ struct ConnectSensorModal: View {
                                         .frame(width: 40, height: 40)
                                     Text(device.name).font(.headline)
                                     Spacer()
-                                    HStack (spacing: 5) {
-                                        Text("\(device.batteryPercentage)%").font(.headline)
-                                        Image(systemName: getBatteryPercentageImage(device.batteryPercentage))                     .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 40, height: 40)
-                                    }
                                 }.padding(.horizontal, 10)
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2)
@@ -97,26 +91,11 @@ struct ConnectSensorModal: View {
         return CGFloat(min(devices.count * 60, 450))
     }
     
-    func getBatteryPercentageImage(_ batteryPercentage: Int) -> String {
-        switch batteryPercentage {
-        case 0..<24:
-            return "battery.0percent"
-        case 25..<50:
-            return "battery.25percent"
-        case 50..<75:
-            return "battery.50percent"
-        case 75..<80:
-            return "battery.75percent"
-        default:
-            return "battery.100percent"
-        }
-    }
-    
     func getSessionsText() -> String {
         return "Found \(devices.count) Device\(devices.count != 1 ? "s" : "")"
     }
     
-    func close(_ device: MockDevice? = nil) {
+    func close(_ device: DeviceRepresentable? = nil) {
         if let device = device {
             onSelectedDevice(device)
         }
@@ -130,9 +109,9 @@ struct ConnectSensorModal: View {
 
 #Preview {
     ConnectSensorModal(isShowing: .constant(true),
-                       devices: .constant([MockDevice(name: "Movesense1", batteryPercentage: 10),
-                                           MockDevice(name: "Movesense1", batteryPercentage: 10),
-                                           MockDevice(name: "Movesense1", batteryPercentage: 10)]),
+                       devices: .constant([DeviceRepresentable(name: "Movesense1"),
+                                           DeviceRepresentable(name: "Movesense1"),
+                                           DeviceRepresentable(name: "Movesense1")]),
                        title: "Nearby Devices",
                        onSelectedDevice: { _ in })
 }

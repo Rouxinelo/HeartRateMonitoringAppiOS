@@ -16,4 +16,5 @@ struct RegisterUser: Codable {
     let birthDay: Int
     let birthMonth: Int
     let birthYear: Int
+    let gender: String
 }
