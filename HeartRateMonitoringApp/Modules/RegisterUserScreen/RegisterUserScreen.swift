@@ -256,7 +256,8 @@ struct RegisterUserScreen: View {
                      lastName: lastName,
                      birthDay: Int(birthDay) ?? 01,
                      birthMonth: Int(birthMonth) ?? 01,
-                     birthYear: Int(birthYear) ?? 1999)
+                     birthYear: Int(birthYear) ?? 1999,
+                     gender: isMaleSelected ? "M" : "F")
     }
 }
 

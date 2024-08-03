@@ -52,8 +52,8 @@ class SensorManager: ObservableObject {
         api.connectDevice(device)
     }
     
-    func disconnectDevice(_ device: MovesenseDevice) {
-        guard let api = self.api else { return }
+    func disconnectDevice() {
+        guard let api = self.api, let device = self.device else { return }
         api.disconnectDevice(device)
     }
 }

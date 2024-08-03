@@ -22,6 +22,7 @@ class SessionViewModel: ObservableObject {
     var sensorManager: SensorManager?
     var timer: Timer? = nil
     var sessionTime: Int = 0
+    var lastMeasurement: Int = 0
     @Published var sessionTimeString: String = "00h 00m 00s"
     @Published var measurements = [Int]()
     
@@ -50,7 +51,8 @@ class SessionViewModel: ObservableObject {
     func sendHeartrateData(username: String, sessionId: String, heartrate: Int) {
         networkManager.performRequest(apiPath: .sendHeartRateData(HeartRateData(username: username,
                                                                                 sessionId: sessionId,
-                                                                                heartRate: heartrate)))
+                                                                                heartRate: heartrate,
+                                                                                timeStamp: sessionTime)))
     }
     
     func getBatteryPercentageImage(_ batteryPercentage: Int) -> String {
@@ -69,7 +71,8 @@ class SessionViewModel: ObservableObject {
     }
     
     func didTapClose() {
-        guard let sessionData = sessionData else { return }
+        guard let sessionData = sessionData, let sensorManager = sensorManager else { return }
+        sensorManager.disconnectDevice()
         networkManager.performRequest(apiPath: .leaveSession(sessionData.username,
                                                              sessionData.session.id))
     }
@@ -109,11 +112,7 @@ private extension SessionViewModel {
     }
     
     func handleMeasurementRecieved(_ measurement: Int) {
-        guard let sessionData = sessionData else { return }
-        DispatchQueue.main.async { [weak self] in
-            self?.measurements.append(measurement)
-        }
-        sendHeartrateData(username: sessionData.username, sessionId: sessionData.session.id, heartrate: measurement)
+        lastMeasurement = measurement
     }
     
     func getSessionSummaryData() -> SessionSummaryData? {
@@ -126,8 +125,16 @@ private extension SessionViewModel {
     }
     
     func updateTime() {
+        guard let sessionData = sessionData else { return }
         sessionTime += 1
         sessionTimeString = "\(getFormattedHours(sessionTime))h \(getFormattedMinutes(sessionTime % 3600))m \(getFormattedSeconds(sessionTime % 60))s"
+        if lastMeasurement != 0 {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.measurements.append(self.lastMeasurement)
+            }
+            sendHeartrateData(username: sessionData.username, sessionId: sessionData.session.id, heartrate: lastMeasurement)
+        }
     }
     
     func getFormattedHours(_ time: Int) -> String {

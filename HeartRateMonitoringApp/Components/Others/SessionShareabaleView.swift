@@ -58,41 +58,40 @@ struct SessionShareabaleView: View {
                 HStack {
                     HeartRateSummarySection(sectionIcon: "number",
                                             sectionTitle: "Count",
-                                            sectionDescription: "\(sessionData.measurements.count) Samples",
+                                            sectionDescription: "\(sessionData.count) Samples",
                                             sectionColor: .red)
                     HeartRateSummarySection(sectionIcon: "alternatingcurrent",
                                             sectionTitle: "Average",
-                                            sectionDescription: "\(getAverage(sessionData.measurements)) BPM",
+                                            sectionDescription: "\(sessionData.average) BPM",
                                             sectionColor: .blue)
                 }
                 HStack {
                     HeartRateSummarySection(sectionIcon: "arrow.up",
                                             sectionTitle: "Maximum",
-                                            sectionDescription: "\(sessionData.measurements.max() ?? 0) BPM",
+                                            sectionDescription: "\(sessionData.maximum) BPM",
                                             sectionColor: .green)
                     HeartRateSummarySection(sectionIcon: "arrow.down",
                                             sectionTitle: "Minimum",
-                                            sectionDescription: "\(sessionData.measurements.min() ?? 0) BPM",
+                                            sectionDescription: "\(sessionData.minimum) BPM",
                                             sectionColor: .yellow)
                 }
             }
             Spacer()
         }
     }
-    
-    func getAverage(_ array: [Int]) -> Int {
-        return array.isEmpty ? 0 : array.reduce(0, +) / array.count
-    }
 }
 
 #Preview {
-    SessionShareabaleView(sessionData: PreviousSessionData(session: Session(id: "testID", 
+    SessionShareabaleView(sessionData: PreviousSessionData(session: Session(id: "1",
                                                                             name: "testName",
-                                                                            date: "11/11",
-                                                                            hour: "11h",
+                                                                            date: "01-01-1000",
+                                                                            hour: "18h",
                                                                             teacher: "testTeacher",
-                                                                            totalSpots: 11,
-                                                                            filledSpots: 11),
-                                                           username: "testUsername",
-                                                           measurements: [1,2,3]))
+                                                                            totalSpots: 10,
+                                                                            filledSpots: 10,
+                                                                            description: "testdesc"),
+                                                           count: 100,
+                                                           average: 100,
+                                                           maximum: 100,
+                                                           minimum: 100))
 }

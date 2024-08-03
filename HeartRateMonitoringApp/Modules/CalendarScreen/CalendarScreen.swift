@@ -14,7 +14,9 @@ struct CalendarScreen: View {
     @State var didSignIn: Bool = false
     @State var showEmptyAlert: Bool = false
     @State var isGuest: Bool
+    @State var username: String?
     @State var sessions: [Session]
+    @State var sessionToSignIn: Session?
     
     var body: some View {
         ZStack {
@@ -56,12 +58,12 @@ struct CalendarScreen: View {
             }
             .padding()
             .navigationDestination(for: Session.self, destination: { session in
-                SessionDetailScreen(didSignIn: $didSignIn, isGuest: isGuest, session: session)
+                SessionDetailScreen(didSignIn: $didSignIn, isGuest: isGuest, session: session, username: username)
             })
-            .swipeRight {
-                back()
-            }
             .navigationBarBackButtonHidden()
+            .onAppear {
+                if didSignIn { removeSession() }
+            }
             if didSignIn {
                 CustomToast(isShowing: $didSignIn, iconName: "info.circle.fill", message: localized(CalendarStrings.toastMessage))
             }
@@ -76,6 +78,7 @@ struct CalendarScreen: View {
                             rightButtonAction: {},
                             isSingleButton: true)
             }
+            
         }
     }
     
@@ -88,7 +91,15 @@ struct CalendarScreen: View {
     }
     
     func clickedSession(_ session: Session) {
+        sessionToSignIn = session
         path.append(session)
+    }
+    
+    func removeSession() {
+        guard let sessionToSignIn = sessionToSignIn,
+                let index = sessions.firstIndex(where: {$0.id == sessionToSignIn.id}) else { return }
+        sessions.remove(at: index)
+        self.sessionToSignIn = nil
     }
     
     func filterSessions(_ searchText: String) -> [Session] {
