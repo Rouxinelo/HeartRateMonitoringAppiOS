@@ -52,6 +52,8 @@ public struct LoginViewStrings {
     static let loginString: String = "login_view_title"
     static let usernameString: String = "login_view_username"
     static let passwordString: String = "login_view_password"
+    static let forgotPasswordString: String = "forgot_password_title"
+    static let forgotPasswordButtonString: String = "forgot_password_button"
 }
 
 public struct LanguageSelectorViewStrings {
@@ -221,4 +223,5 @@ public struct SessionSummaryStrings {
 
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
+    static let recoverPasswordScreenId: String = "recoverPassword"
 }
