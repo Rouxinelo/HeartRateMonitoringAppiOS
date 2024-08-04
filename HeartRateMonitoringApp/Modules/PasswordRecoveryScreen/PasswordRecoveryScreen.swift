@@ -31,10 +31,10 @@ struct PasswordRecoveryScreen: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100, height: 100)
-
+                
                 VStack(spacing: 0) {
                     HStack {
-                        Text("Enter your username")
+                        Text(localized(PasswordRecoveryStrings.textFieldTitleString))
                             .font(.title)
                             .fontWeight(.bold)
                         Spacer()
@@ -45,7 +45,7 @@ struct PasswordRecoveryScreen: View {
                                     placeholder: "")
                     .padding()
                     
-                    Text("If a username is found, and email will be sent")
+                    Text(PasswordRecoveryStrings.textFieldDescriptionString)
                         .foregroundStyle(.gray)
                 }
                 
@@ -53,9 +53,9 @@ struct PasswordRecoveryScreen: View {
                 
                 Button(action: {
                     isLoadingActive.toggle()
-                    viewModel.searchForUser("cjisdcjc")
+                    viewModel.searchForUser(username)
                 }, label: {
-                    Text("Recover Password")
+                    Text(PasswordRecoveryStrings.recoverPasswordButtonString)
                         .padding()
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
@@ -69,28 +69,32 @@ struct PasswordRecoveryScreen: View {
             
             if isLoadingActive {
                 LoadingView(isShowing: $isLoadingActive,
-                            title: "Please wait",
-                            description: "Searching for user...")
+                            title: PasswordRecoveryStrings.loadingTitleString,
+                            description: PasswordRecoveryStrings.loadingDescriptionString)
             }
             
             if showNoUserFoundAlert {
                 CustomAlert(isShowing: $showNoUserFoundAlert,
                             icon: "exclamationmark.circle",
-                            title: "Oops!",
-                            leftButtonText: "Ok",
+                            title: PasswordRecoveryStrings.alertTitleString,
+                            leftButtonText: PasswordRecoveryStrings.alertButtonString,
                             rightButtonText: "",
-                            description: "No username found.",
+                            description: PasswordRecoveryStrings.alertDescriptionString,
                             leftButtonAction: {},
                             rightButtonAction: {},
                             isSingleButton: true)
             }
             
         }.navigationBarBackButtonHidden()
+            .navigationDestination(for: RecoveryCode.self, destination: { recoveryCode in
+                
+            })
             .onReceive(viewModel.publisher) { result in
                 switch result {
-                case .didFindUser:
-                    path.append(RecoveryCode(username: username, code: viewModel.generateRecoveryCode()))
+                case .didFindUser(let username, let recoveryCode):
+                    path.append(RecoveryCode(user: username, code: recoveryCode))
                 case .didNotFindUser:
+                    isLoadingActive = false
                     showNoUserFoundAlert.toggle()
                 }
             }

@@ -223,6 +223,14 @@ public struct SessionSummaryStrings {
 
 public struct PasswordRecoveryStrings {
     static let titleString: String = "password_recovery_title"
+    static let textFieldTitleString: String = "password_recovery_textField_title"
+    static let textFieldDescriptionString: String = "password_recovery_textField_description"
+    static let recoverPasswordButtonString: String = "password_recovery_button"
+    static let loadingTitleString: String = "password_recovery_loading_title"
+    static let loadingDescriptionString: String = "password_recovery_loading_description"
+    static let alertTitleString: String = "password_recovery_alert_title"
+    static let alertDescriptionString: String = "password_recovery_alert_description"
+    static let alertButtonString: String = "password_recovery_alert_button"
 }
 
 public struct ScreenIds {

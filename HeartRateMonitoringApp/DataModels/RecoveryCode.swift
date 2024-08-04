@@ -8,6 +8,6 @@
 import Foundation
 
 struct RecoveryCode: Hashable {
-    let username: String
+    let user: User
     let code: Int
 }
