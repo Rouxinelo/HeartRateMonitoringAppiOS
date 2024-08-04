@@ -163,6 +163,9 @@
         }
       }
     },
+    "Enter your username" : {
+
+    },
     "forgot_password_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -437,6 +440,9 @@
           }
         }
       }
+    },
+    "If a username is found, and email will be sent" : {
+
     },
     "join_session_alertButton" : {
       "extractionState" : "manual",
@@ -1120,6 +1126,23 @@
         }
       }
     },
+    "password_recovery_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recovery"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperação"
+          }
+        }
+      }
+    },
     "previous_sessions_actions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1357,6 +1380,9 @@
           }
         }
       }
+    },
+    "Recover Password" : {
+
     },
     "register_user_alertTitle" : {
       "extractionState" : "manual",

@@ -221,6 +221,10 @@ public struct SessionSummaryStrings {
     static let toastMessageString: String = "session_summary_toastMessage"
 }
 
+public struct PasswordRecoveryStrings {
+    static let titleString: String = "password_recovery_title"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
     static let recoverPasswordScreenId: String = "recoverPassword"
