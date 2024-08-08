@@ -20,6 +20,10 @@ enum NetworkManageResponse {
     case didSignOutSession
     case didFailSign
     case didLogin
+    case didSendRecoveryEmail
+    case didNotSendRecoveryEmail
+    case didChangePassword
+    case didFailChangePassword
     case sessionOperationSuccessful
     case sessionOperationFailed
     case urlUnavailable
@@ -76,6 +80,18 @@ class NetworkManager {
             performPOSTRequest(for: apiPath, with: data)
         case .enterSession(let username, let sessionId), .leaveSession(let username, let sessionId):
             guard let data = encoder.encodeToJSON(SessionOperation(username: username, sessionId: sessionId)) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .changePassword(let data):
+            guard let data = encoder.encodeToJSON(data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .sendRecoveryEmail(let data):
+            guard let data = encoder.encodeToJSON(data) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -185,6 +201,12 @@ class NetworkManager {
                 return
             }
             handleSessionOperation(response: response)
+        case .sendRecoveryEmail, .changePassword:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handlePasswordRecoveryResponse(response: response)
         default:
             return
         }
@@ -260,6 +282,21 @@ private extension NetworkManager {
         switch response.message {
         case ResponseMessages.loginSuccessful:
             statePublisher.send(.didLogin)
+        default:
+            statePublisher.send(.failedRequest)
+        }
+    }
+    
+    func handlePasswordRecoveryResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.emailSent:
+            statePublisher.send(.didSendRecoveryEmail)
+        case ResponseMessages.emailFailed:
+            statePublisher.send(.didNotSendRecoveryEmail)
+        case ResponseMessages.changePassSuccessful:
+            statePublisher.send(.didChangePassword)
+        case ResponseMessages.changePassFailed:
+            statePublisher.send(.didFailChangePassword)
         default:
             statePublisher.send(.failedRequest)
         }

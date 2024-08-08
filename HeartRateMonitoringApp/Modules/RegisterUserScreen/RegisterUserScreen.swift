@@ -193,6 +193,9 @@ struct RegisterUserScreen: View {
                 networkError()
             }
         }
+        .onTapGesture {
+              self.endTextEditing()
+        }
         .navigationBarBackButtonHidden()
         .offset(y: isNumericFieldFocused ? -self.keyboardHeightHelper.keyboardHeight : 0)
     }

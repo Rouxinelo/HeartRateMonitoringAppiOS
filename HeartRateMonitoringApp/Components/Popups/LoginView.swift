@@ -15,6 +15,7 @@ struct LoginView: View {
     @State private var yOffset: CGFloat = 1000
     
     var onLogin: (String, String) -> Void
+    var onRecoverPassword: () -> Void
     
     var body: some View {
         ZStack {
@@ -56,11 +57,29 @@ struct LoginView: View {
                         .background(username.isEmpty || password.isEmpty ? Color.gray : Color.red)
                         .cornerRadius(10)
                 }
-                .padding()
+                .padding(.top)
                 .disabled(username.isEmpty || password.isEmpty)
+                
+                Text(localized(LoginViewStrings.forgotPasswordString))
+                    .fontWeight(.bold)
+                    .padding(.top)
+                
+                Button(action: {
+                    onRecoverPassword()
+                    close()
+                }) {
+                    Text(localized(LoginViewStrings.forgotPasswordButtonString))
+                        .padding()
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(width: 150)
+                        .background(Color.red)
+                        .cornerRadius(10)
+                }
+                .padding(.bottom)
                 Spacer()
             }
-            .frame(width: 250, height: 350)
+            .frame(width: 250, height: 450)
             .padding(30)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -79,8 +98,4 @@ struct LoginView: View {
     func close() {
         isShowing = false
     }
-}
-
-#Preview {
-    LoginView(isShowing: .constant(true), onLogin: { _,_ in })
 }

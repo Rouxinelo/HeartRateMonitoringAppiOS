@@ -96,7 +96,3 @@ struct CustomAlert: View {
     }
 }
 
-#Preview {
-    CustomAlert(isShowing: .constant(true), icon: "exclamationmark.circle", title: "Test Title", leftButtonText: "left", rightButtonText: "right", description: "Test Description", leftButtonAction: {}, rightButtonAction: {}, isSingleButton: false)
-}
-

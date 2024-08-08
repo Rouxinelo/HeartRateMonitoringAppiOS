@@ -21,3 +21,7 @@ public func localized(_ string: String) -> String {
     }
     return NSLocalizedString(string, bundle: languageBundle, comment: "")
 }
+
+public func getCurrentLanguage() -> String {
+    return LanguageManager().currentLanguage
+}

@@ -26,6 +26,8 @@ enum API {
     case getSessionSummary(String, String)
     case enterSession(String, String)
     case leaveSession(String, String)
+    case sendRecoveryEmail(RecoveryEmailData)
+    case changePassword(PasswordChangeData)
 }
 
 extension API: TargetType {
@@ -59,6 +61,10 @@ extension API: TargetType {
             return baseURL + "enter-session/"
         case .leaveSession:
             return baseURL + "leave-session/"
+        case .sendRecoveryEmail:
+            return baseURL + "send-recovery-email/"
+        case .changePassword:
+            return baseURL + "change-password/"
         }
     }
     
@@ -87,6 +93,10 @@ extension API: TargetType {
         case .enterSession:
             return "POST"
         case .leaveSession:
+            return "POST"
+        case .sendRecoveryEmail:
+            return "POST"
+        case .changePassword:
             return "POST"
         }
     }

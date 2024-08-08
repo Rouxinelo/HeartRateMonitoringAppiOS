@@ -142,6 +142,9 @@ struct HomeScreen: View {
                     LoginView(isShowing: $showingLogin, 
                               onLogin: { username, password in
                         performLogin(username: username, password: password)
+                    },
+                              onRecoverPassword: {
+                        path.append(ScreenIds.recoverPasswordScreenId)
                     })
                 }
                 if showingLanguageSelector {
@@ -165,6 +168,8 @@ struct HomeScreen: View {
             .navigationDestination(for: String.self) { screenId in
                 if screenId == ScreenIds.registerScreenID {
                     RegisterUserScreen(showRegisterToast: $showingToast)
+                } else if screenId == ScreenIds.recoverPasswordScreenId {
+                    PasswordRecoveryScreen(path: $path)
                 }
             }.onReceive(viewModel.publisher) { receiveValue in
                 isLoading = false

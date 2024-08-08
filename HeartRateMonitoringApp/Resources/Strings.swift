@@ -52,6 +52,8 @@ public struct LoginViewStrings {
     static let loginString: String = "login_view_title"
     static let usernameString: String = "login_view_username"
     static let passwordString: String = "login_view_password"
+    static let forgotPasswordString: String = "forgot_password_title"
+    static let forgotPasswordButtonString: String = "forgot_password_button"
 }
 
 public struct LanguageSelectorViewStrings {
@@ -219,6 +221,41 @@ public struct SessionSummaryStrings {
     static let toastMessageString: String = "session_summary_toastMessage"
 }
 
+public struct PasswordRecoveryStrings {
+    static let titleString: String = "password_recovery_title"
+    static let textFieldTitleString: String = "password_recovery_textField_title"
+    static let textFieldDescriptionString: String = "password_recovery_textField_description"
+    static let recoverPasswordButtonString: String = "password_recovery_button"
+    static let loadingTitleString: String = "password_recovery_loading_title"
+    static let loadingDescriptionString: String = "password_recovery_loading_description"
+    static let alertTitleString: String = "password_recovery_alert_title"
+    static let alertDescriptionString: String = "password_recovery_alert_description"
+    static let alertButtonString: String = "password_recovery_alert_button"
+}
+
+public struct InsertRecoveryCodeStrings {
+    static let titleString: String = "insert_recovery_title"
+    static let codeTitleString: String = "insert_recovery_codeTitle"
+    static let codePlaceHolderString: String = "insert_recovery_codePlaceholder"
+    static let codeDescriptionString: String = "insert_recovery_codeDescription"
+    static let newPasswordString: String = "insert_recovery_newPassword"
+    static let insertPasswordString: String = "insert_recovery_insertPassword"
+    static let confirmPasswordString: String = "insert_recovery_confirmPassword"
+    static let recoverPasswordButtonString: String = "insert_recovery_button"
+    static let loadingTitleString: String = "insert_recovery_loadingTitle"
+    static let loadingDescriptionString: String = "insert_recovery_loadingDescription"
+    static let errorTitleString: String = "insert_recovery_errorTitle"
+    static let errorDescriptionString: String = "insert_recovery_errorDescription"
+    static let alertButtonString: String = "insert_recovery_alertButton"
+    static let networkAlertTitleString: String = "insert_recovery_networkTitle"
+    static let networkAlertDescriptionString: String = "insert_recovery_networkDescription"
+    static let sucessAlertTitleString: String = "insert_recovery_sucessTitle"
+    static let sucessAlertDescriptionString: String = "insert_recovery_sucessDescription"
+    static let validCodeString: String = "insert_recovery_validCode"
+    static let invalidCodeString: String = "insert_recovery_invalidCode"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
+    static let recoverPasswordScreenId: String = "recoverPassword"
 }
