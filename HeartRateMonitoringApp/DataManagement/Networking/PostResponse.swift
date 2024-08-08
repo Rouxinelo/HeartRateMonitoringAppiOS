@@ -22,5 +22,9 @@ struct ResponseMessages {
     static let signOutSessionFailed = "SIGN_OUT_FAIL"
     static let enterSessionSuccessful = "ENTER_SESSION_OK"
     static let leaveSessionSuccessful = "LEAVE_SESSION_OK"
+    static let emailSent = "EMAIL_SENT"
+    static let emailFailed = "EMAIL_NOT_SENT"
+    static let changePassSuccessful = "CHANGE_PASS_OK"
+    static let changePassFailed = "CHANGE_PASS_FAIL"
     static let genericError = "ERROR"
 }

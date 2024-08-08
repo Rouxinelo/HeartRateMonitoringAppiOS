@@ -37,6 +37,7 @@ struct PasswordRecoveryScreen: View {
                         Text(localized(PasswordRecoveryStrings.textFieldTitleString))
                             .font(.title)
                             .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
                         Spacer()
                     }.padding()
                     
@@ -45,8 +46,11 @@ struct PasswordRecoveryScreen: View {
                                     placeholder: "")
                     .padding()
                     
-                    Text(PasswordRecoveryStrings.textFieldDescriptionString)
-                        .foregroundStyle(.gray)
+                    HStack {
+                        Text(localized(PasswordRecoveryStrings.textFieldDescriptionString))
+                            .foregroundStyle(.gray)
+                        Spacer()
+                    }.padding(.horizontal)
                 }
                 
                 Spacer()
@@ -55,7 +59,7 @@ struct PasswordRecoveryScreen: View {
                     isLoadingActive.toggle()
                     viewModel.searchForUser(username)
                 }, label: {
-                    Text(PasswordRecoveryStrings.recoverPasswordButtonString)
+                    Text(localized(PasswordRecoveryStrings.recoverPasswordButtonString))
                         .padding()
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
@@ -69,17 +73,17 @@ struct PasswordRecoveryScreen: View {
             
             if isLoadingActive {
                 LoadingView(isShowing: $isLoadingActive,
-                            title: PasswordRecoveryStrings.loadingTitleString,
-                            description: PasswordRecoveryStrings.loadingDescriptionString)
+                            title: localized(PasswordRecoveryStrings.loadingTitleString),
+                            description: localized(PasswordRecoveryStrings.loadingDescriptionString))
             }
             
             if showNoUserFoundAlert {
                 CustomAlert(isShowing: $showNoUserFoundAlert,
                             icon: "exclamationmark.circle",
-                            title: PasswordRecoveryStrings.alertTitleString,
-                            leftButtonText: PasswordRecoveryStrings.alertButtonString,
+                            title: localized(PasswordRecoveryStrings.alertTitleString),
+                            leftButtonText: localized(PasswordRecoveryStrings.alertButtonString),
                             rightButtonText: "",
-                            description: PasswordRecoveryStrings.alertDescriptionString,
+                            description: localized(PasswordRecoveryStrings.alertDescriptionString),
                             leftButtonAction: {},
                             rightButtonAction: {},
                             isSingleButton: true)
@@ -87,16 +91,20 @@ struct PasswordRecoveryScreen: View {
             
         }.navigationBarBackButtonHidden()
             .navigationDestination(for: RecoveryCode.self, destination: { recoveryCode in
-                
+                InsertRecoveryCodeScreen(path: $path, recoveryCode: recoveryCode)
             })
             .onReceive(viewModel.publisher) { result in
                 switch result {
                 case .didFindUser(let username, let recoveryCode):
+                    isLoadingActive = false
                     path.append(RecoveryCode(user: username, code: recoveryCode))
                 case .didNotFindUser:
                     isLoadingActive = false
                     showNoUserFoundAlert.toggle()
                 }
+            }
+            .onTapGesture {
+                self.endTextEditing()
             }
     }
     
