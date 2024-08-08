@@ -13,7 +13,10 @@ struct CustomBackButton: View {
         Button(action: {
             onClick()
         }) {
-            Image(systemName: "chevron.backward").foregroundStyle(.red).fontWeight(.bold).font(.headline)
+            Image(systemName: "chevron.backward")
+                .foregroundStyle(.red)
+                .fontWeight(.bold)
+                .font(.headline)
         }
     }
 }

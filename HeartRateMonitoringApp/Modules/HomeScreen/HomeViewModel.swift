@@ -33,6 +33,28 @@ class HomeViewModel: ObservableObject {
         networkManager.performRequest(apiPath: .login(UserLogin(username: username, password: password)))
     }
     
+    func getCountryImage() -> String {
+        switch getCurrentLanguage() {
+        case "en":
+            return languageSelectorViewIcons.englishIcon
+        case "pt-PT":
+            return languageSelectorViewIcons.portugueseIcon
+        default:
+            return "globeIcon"
+        }
+    }
+    
+    func getLanguageId() -> String {
+        switch getCurrentLanguage() {
+        case "en":
+            return "EN"
+        case "pt-PT":
+            return "PT"
+        default:
+            return "EN"
+        }
+    }
+    
     func bindNetworkResponse() {
         networkManager.statePublisher.sink { [weak self] response in
             guard let self = self, let username = self.username else {

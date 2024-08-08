@@ -21,6 +21,32 @@ struct HomeScreen: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showingLanguageSelector = true
+                        }) {
+                            VStack {
+                                Image(viewModel.getCountryImage())
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40, alignment: .center)
+                                    .cornerRadius(50)
+                                    .padding(.top, 10)
+                                Text(viewModel.getLanguageId())
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.black)
+                            }
+                            .frame(width: 75)
+                            .background(Color.lightGray)
+                            .cornerRadius(10)
+                            .shadow(radius: 50)
+                        }
+                        .padding()
+                    }
+                    Spacer()
+                }
                 VStack(spacing: 30) {
                     Image(LoginScreenIcons.heartIcon)
                         .resizable()
