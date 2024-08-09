@@ -200,6 +200,9 @@
     "HeartRate Monitoring App" : {
 
     },
+    "Hola Negro" : {
+
+    },
     "home_screen_alertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -400,6 +403,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Registo"
+          }
+        }
+      }
+    },
+    "home_screen_teacher" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teacher"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Professor"
           }
         }
       }

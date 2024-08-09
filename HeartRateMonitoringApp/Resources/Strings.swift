@@ -13,6 +13,7 @@ public struct HomeScreenStrings {
     static let registerString: String = "home_screen_register"
     static let guestString: String = "home_screen_guest"
     static let languageString: String = "home_screen_language"
+    static let teacherString: String = "home_screen_teacher"
     static let guestAlertTitle: String = "home_screen_alertTitle"
     static let guestAlertDescription: String = "home_screen_alertDescription"
     static let guestAlertContinue: String = "home_screen_continue"
