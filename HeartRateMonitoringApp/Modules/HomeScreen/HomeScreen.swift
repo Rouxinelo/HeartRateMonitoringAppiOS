@@ -120,15 +120,15 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                             }
                             Button(action: {
-                                showingLanguageSelector = true
+                                path.append(Teacher(id: 1, name: "test teacher", password: "testPassword"))
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
-                                    Image(systemName: HomeScreenIcons.settingsIcon)
+                                    Image(systemName: HomeScreenIcons.teacherIcon)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                    Text(localized(HomeScreenStrings.languageString))
+                                    Text(localized(HomeScreenStrings.teacherString))
                                         .font(.headline)
                                         .fontWeight(.bold)
                                         .padding()
@@ -197,7 +197,11 @@ struct HomeScreen: View {
                 } else if screenId == ScreenIds.recoverPasswordScreenId {
                     PasswordRecoveryScreen(path: $path)
                 }
-            }.onReceive(viewModel.publisher) { receiveValue in
+            }
+            .navigationDestination(for: Teacher.self) { teacher in
+                TeacherMenuScreen(path: $path, teacher: teacher)
+            }
+            .onReceive(viewModel.publisher) { receiveValue in
                 isLoading = false
                 switch receiveValue {
                 case .didLoginSuccessfully(let username):
