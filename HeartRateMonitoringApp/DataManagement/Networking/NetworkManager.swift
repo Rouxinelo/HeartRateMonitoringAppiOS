@@ -26,6 +26,8 @@ enum NetworkManageResponse {
     case didFailChangePassword
     case sessionOperationSuccessful
     case sessionOperationFailed
+    case createSessionSuccessful
+    case createSessionFailed
     case urlUnavailable
     case failedRequest
 }
@@ -91,6 +93,12 @@ class NetworkManager {
             }
             performPOSTRequest(for: apiPath, with: data)
         case .sendRecoveryEmail(let data):
+            guard let data = encoder.encodeToJSON(data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .createSession(let data):
             guard let data = encoder.encodeToJSON(data) else {
                 statePublisher.send(.failedRequest)
                 return
@@ -207,6 +215,12 @@ class NetworkManager {
                 return
             }
             handlePasswordRecoveryResponse(response: response)
+        case .createSession:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleCreateSessionResponse(response: response)
         default:
             return
         }
@@ -297,6 +311,17 @@ private extension NetworkManager {
             statePublisher.send(.didChangePassword)
         case ResponseMessages.changePassFailed:
             statePublisher.send(.didFailChangePassword)
+        default:
+            statePublisher.send(.failedRequest)
+        }
+    }
+    
+    func handleCreateSessionResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.createSessionSuccessful:
+            statePublisher.send(.createSessionSuccessful)
+        case ResponseMessages.createSessionFail:
+            statePublisher.send(.createSessionFailed)
         default:
             statePublisher.send(.failedRequest)
         }

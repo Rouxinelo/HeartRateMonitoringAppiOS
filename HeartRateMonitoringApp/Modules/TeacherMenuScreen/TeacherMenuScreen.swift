@@ -13,11 +13,12 @@ struct TeacherMenuScreen: View {
     @State var teacher: Teacher
     @State private var showingAlert = false
     @State private var isLogoutLoading = false
-
+    @State private var showSessionToast = false
+    
     var body: some View {
         ZStack {
             VStack {
-                Text("Hola Negro")
+                Text(localized(TeacherMenuStrings.titleString).replacingOccurrences(of: "$", with: teacher.name))
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 Spacer()
@@ -33,15 +34,16 @@ struct TeacherMenuScreen: View {
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .red,
                                     sectionIcon: MainMenuIcons.myClassesIcon,
-                                    sectionTitle: "Agendar",
-                                    sectionDescription: "Agendar uma nova sessão para uma data futura",
+                                    sectionTitle: localized(TeacherMenuStrings.createSessionTitleString),
+                                    sectionDescription: localized(TeacherMenuStrings.createSessionDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
+                        path.append(CreateSessionData(teacherName: teacher.name, teacherId: teacher.id))
                     })
                     MainMenuSection(sectionColor: .green,
                                     sectionIcon: MainMenuIcons.calendarIcon,
-                                    sectionTitle: "Agendamentos",
-                                    sectionDescription: "Visualizar sessões futuras e os seus participantes",
+                                    sectionTitle: localized(TeacherMenuStrings.futureSessionsTitleString),
+                                    sectionDescription: localized(TeacherMenuStrings.futureSessionsDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
                         })
@@ -49,15 +51,15 @@ struct TeacherMenuScreen: View {
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .yellow,
                                     sectionIcon: "clock.arrow.circlepath",
-                                    sectionTitle: "Histórico",
-                                    sectionDescription: "Visualizar sessões e participantes das sessões passadas",
+                                    sectionTitle: localized(TeacherMenuStrings.previousSessionsTitleString),
+                                    sectionDescription: localized(TeacherMenuStrings.previousSessionsDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
                     })
                     MainMenuSection(sectionColor: .blue,
                                     sectionIcon: MainMenuIcons.logoutIcon,
-                                    sectionTitle: "Logout",
-                                    sectionDescription: "Sair para o menu principal",
+                                    sectionTitle: localized(TeacherMenuStrings.logoutTitleString),
+                                    sectionDescription: localized(TeacherMenuStrings.logoutDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
                         showingAlert = true 
@@ -83,6 +85,15 @@ struct TeacherMenuScreen: View {
                             description: localized(MainMenuStrings.loadingViewDescription))
             }
             
+            if showSessionToast {
+                CustomToast(isShowing: $showSessionToast,
+                            iconName: "info.circle.fill",
+                            message: localized(TeacherMenuStrings.sessionToastString))
+            }
+            
+        }
+        .navigationDestination(for: CreateSessionData.self) { createSessionData in
+            CreateSessionScreen(showCreateSessionToast: $showSessionToast, createSessionData: createSessionData)
         }
         .navigationBarBackButtonHidden()
     }

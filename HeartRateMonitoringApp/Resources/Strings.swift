@@ -256,6 +256,42 @@ public struct InsertRecoveryCodeStrings {
     static let invalidCodeString: String = "insert_recovery_invalidCode"
 }
 
+public struct TeacherMenuStrings {
+    static let titleString: String = "teacher_menu_title"
+    static let createSessionTitleString: String = "teacher_menu_createSessionTitle"
+    static let createSessionDescriptionString: String = "teacher_menu_createSessionDescription"
+    static let futureSessionsTitleString: String = "teacher_menu_futureSessionsTitle"
+    static let futureSessionsDescriptionString: String = "teacher_menu_futureSessionsDescription"
+    static let previousSessionsTitleString: String = "teacher_menu_previousSessionsTitle"
+    static let previousSessionsDescriptionString: String = "teacher_menu_previousSessionsDescription"
+    static let logoutTitleString: String = "teacher_menu_logoutTitle"
+    static let logoutDescriptionString: String = "teacher_menu_logoutDescription"
+    static let sessionToastString: String = "teacher_menu_toast"
+}
+
+public struct CreateSessionStrings {
+    static let titleString: String = "create_session_title"
+    static let namePlaceholderString: String = "create_session_namePlaceholder"
+    static let nameTitleString: String = "create_session_nameTitle"
+    static let nameDescriptionString: String = "create_session_nameDescription"
+    static let descriptionTitleString: String = "create_session_descriptionTitle"
+    static let descriptionDescriptionString: String = "create_session_descriptionDescription"
+    static let dateTitleString: String = "create_session_dateTitle"
+    static let dayString: String = "create_session_day"
+    static let monthString: String = "create_session_month"
+    static let yearString: String = "create_session_year"
+    static let spotsTitleString: String = "create_session_spotsTitle"
+    static let spotsDescriptionString: String = "create_session_spotsDescription"
+    static let hourTitleString: String = "create_session_hourTitle"
+    static let hourDescriptionString: String = "create_session_hourDescription"
+    static let loadingTitleString: String = "create_session_loadingTitle"
+    static let loadingDescriptionString: String = "create_session_loadingDescription"
+    static let alertTitleString: String = "create_session_alertTitle"
+    static let alertDescriptionString: String = "create_session_alertDescription"
+    static let alertButtonString: String = "create_session_alertButton"
+    static let createButtonString: String = "create_session_button"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
     static let recoverPasswordScreenId: String = "recoverPassword"
