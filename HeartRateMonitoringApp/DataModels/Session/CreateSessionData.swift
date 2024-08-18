@@ -9,5 +9,4 @@ import Foundation
 
 struct CreateSessionData: Hashable {
     let teacherName: String
-    let teacherId: Int
 }

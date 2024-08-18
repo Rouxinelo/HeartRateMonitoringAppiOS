@@ -11,6 +11,8 @@ import Combine
 enum HomePublisherCases {
     case didLoginSuccessfully(String)
     case loginFailed
+    case teacherLoginFailed
+    case teacherLoginSuccessful(Teacher)
 }
 
 class HomeViewModel: ObservableObject {
@@ -31,6 +33,11 @@ class HomeViewModel: ObservableObject {
     func attemptLogin(username: String, password: String) {
         self.username = username
         networkManager.performRequest(apiPath: .login(UserLogin(username: username, password: password)))
+    }
+    
+    func attemptTeacherLogin(name: String, password: String) {
+        networkManager.performRequest(apiPath: .loginTeacher(Teacher(name: name,
+                                                                     password: password)))
     }
     
     func getCountryImage() -> String {
@@ -57,13 +64,23 @@ class HomeViewModel: ObservableObject {
     
     func bindNetworkResponse() {
         networkManager.statePublisher.sink { [weak self] response in
-            guard let self = self, let username = self.username else {
+            guard let self = self else {
                 self?.publisher.send(.loginFailed)
                 return
             }
             switch response {
             case .didLogin:
+                guard let username = self.username else {
+                    self.publisher.send(.loginFailed)
+                    return
+                }
                 publisher.send(.didLoginSuccessfully(username))
+            case .loadTeacherData(let teacher):
+                guard let teacher = teacher else {
+                    publisher.send(.teacherLoginFailed)
+                    return
+                }
+                publisher.send(.teacherLoginSuccessful(teacher))
             default:
                 publisher.send(.loginFailed)
             }

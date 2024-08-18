@@ -38,7 +38,7 @@ struct TeacherMenuScreen: View {
                                     sectionDescription: localized(TeacherMenuStrings.createSessionDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
-                        path.append(CreateSessionData(teacherName: teacher.name, teacherId: teacher.id))
+                        path.append(CreateSessionData(teacherName: teacher.name))
                     })
                     MainMenuSection(sectionColor: .green,
                                     sectionIcon: MainMenuIcons.calendarIcon,

@@ -10,6 +10,7 @@ import Combine
 
 enum NetworkManageResponse {
     case loadUserData(User? = nil)
+    case loadTeacherData(Teacher? = nil)
     case loadCalendarSessions([Session]? = nil)
     case registerUserResult(RegisterUserResult)
     case didLoadSignedSessions([Session]? = nil)
@@ -64,6 +65,12 @@ class NetworkManager {
             performPOSTRequest(for: apiPath, with: data)
         case .login(let user):
             guard let data = encoder.encodeToJSON(user) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .loginTeacher(let teacher):
+            guard let data = encoder.encodeToJSON(teacher) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -221,6 +228,12 @@ class NetworkManager {
                 return
             }
             handleCreateSessionResponse(response: response)
+        case .loginTeacher:
+            guard let response = decoder.decodeTeacherData(data: data) else {
+                statePublisher.send(.loadTeacherData(nil))
+                return
+            }
+            handleTeacherDataResponse(teacher: response)
         default:
             return
         }
@@ -239,6 +252,10 @@ class NetworkManager {
 // MARK: - Handling POST Request Responses
 
 private extension NetworkManager {
+    func handleTeacherDataResponse(teacher: Teacher) {
+        statePublisher.send(.loadTeacherData(teacher))
+    }
+    
     func handleSessionOperation(response: PostResponse) {
         switch response.message {
         case ResponseMessages.enterSessionSuccessful, ResponseMessages.leaveSessionSuccessful:

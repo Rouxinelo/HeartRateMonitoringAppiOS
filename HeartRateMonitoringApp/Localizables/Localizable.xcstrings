@@ -166,9 +166,6 @@
         }
       }
     },
-    "Create session" : {
-
-    },
     "create_session_alertButton" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -497,9 +494,6 @@
         }
       }
     },
-    "Day" : {
-
-    },
     "forgot_password_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -535,9 +529,6 @@
       }
     },
     "HeartRate Monitoring App" : {
-
-    },
-    "Hola Negro" : {
 
     },
     "home_screen_alertDescription" : {
@@ -794,9 +785,6 @@
           }
         }
       }
-    },
-    "Insert a short description for the session" : {
-
     },
     "insert_recovery_alertButton" : {
       "extractionState" : "manual",
@@ -1809,15 +1797,6 @@
         }
       }
     },
-    "Month" : {
-
-    },
-    "New session" : {
-
-    },
-    "Participants" : {
-
-    },
     "password_recovery_alert_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2634,9 +2613,6 @@
         }
       }
     },
-    "Session date" : {
-
-    },
     "session_alertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3436,9 +3412,6 @@
         }
       }
     },
-    "The session's starting hour" : {
-
-    },
     "user_detail_age" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3880,9 +3853,6 @@
           }
         }
       }
-    },
-    "Year" : {
-
     }
   },
   "version" : "1.0"

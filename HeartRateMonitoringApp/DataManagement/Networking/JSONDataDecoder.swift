@@ -45,4 +45,13 @@ struct JSONDataDecoder {
             return nil
         }
     }
+    
+    func decodeTeacherData(data: Data) -> Teacher? {
+        do {
+            let userData = try decoder.decode(Teacher.self, from: data)
+            return userData
+        } catch {
+            return nil
+        }
+    }
 }
