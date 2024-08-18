@@ -11,7 +11,8 @@ struct HomeScreen: View {
     @State private var path = NavigationPath()
     @State private var showingAlert = false
     @State private var showingFailedLoginAlert = false
-    @State private var showingLogin = false
+    @State private var showingUserLogin = false
+    @State private var showingTeacherLogin = false
     @State private var showingLanguageSelector = false
     @State private var showingToast = false
     @State private var isLoading = false
@@ -60,7 +61,7 @@ struct HomeScreen: View {
                     VStack(spacing: 20) {
                         HStack(spacing: 10) {
                             Button(action: {
-                                self.showingLogin = true
+                                self.showingUserLogin = true
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -120,7 +121,7 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                             }
                             Button(action: {
-                                path.append(Teacher(id: 1, name: "test teacher", password: "testPassword"))
+                                showingTeacherLogin = true
                             }) {
                                 VStack(spacing:0) {
                                     Spacer()
@@ -164,14 +165,24 @@ struct HomeScreen: View {
                                 rightButtonAction: {},
                                 isSingleButton: true)
                 }
-                if showingLogin {
-                    LoginView(isShowing: $showingLogin, 
+                if showingUserLogin {
+                    LoginView(isShowing: $showingUserLogin, 
+                              isRecoverPasswordHidden: false,
                               onLogin: { username, password in
-                        performLogin(username: username, password: password)
+                        performUserLogin(username: username, password: password)
                     },
                               onRecoverPassword: {
                         path.append(ScreenIds.recoverPasswordScreenId)
                     })
+                }
+                if showingTeacherLogin {
+                    LoginView(isShowing: $showingTeacherLogin,
+                              isRecoverPasswordHidden: true,
+                              onLogin: { name, password in
+                        performTeacherLogin(name: name, password: password)
+                    },
+                              onRecoverPassword: {}
+                    )
                 }
                 if showingLanguageSelector {
                     LanguageSelectorView(isShowing: $showingLanguageSelector, 
@@ -208,6 +219,10 @@ struct HomeScreen: View {
                     loginSuccessful(username: username)
                 case .loginFailed:
                     showingFailedLoginAlert = true
+                case .teacherLoginFailed:
+                    showingFailedLoginAlert = true
+                case .teacherLoginSuccessful(let teacher):
+                    path.append(teacher)
                 }
             }
         }
@@ -223,9 +238,14 @@ struct HomeScreen: View {
         showingAlert = false
     }
     
-    func performLogin(username: String, password: String) {
+    func performUserLogin(username: String, password: String) {
         isLoading = true
         viewModel.attemptLogin(username: username, password: password)
+    }
+    
+    func performTeacherLogin(name: String, password: String) {
+        isLoading = true
+        viewModel.attemptTeacherLogin(name: name, password: password)
     }
     
     func loginSuccessful(username: String) {

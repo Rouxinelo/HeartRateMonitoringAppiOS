@@ -12,6 +12,7 @@ struct LoginView: View {
     @Binding var isShowing: Bool
     @State private var username = ""
     @State private var password = ""
+    @State var isRecoverPasswordHidden: Bool
     @State private var yOffset: CGFloat = 1000
     
     var onLogin: (String, String) -> Void
@@ -60,26 +61,28 @@ struct LoginView: View {
                 .padding(.top)
                 .disabled(username.isEmpty || password.isEmpty)
                 
+                if !isRecoverPasswordHidden {
                 Text(localized(LoginViewStrings.forgotPasswordString))
                     .fontWeight(.bold)
                     .padding(.top)
                 
-                Button(action: {
-                    onRecoverPassword()
-                    close()
-                }) {
-                    Text(localized(LoginViewStrings.forgotPasswordButtonString))
-                        .padding()
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(width: 150)
-                        .background(Color.red)
-                        .cornerRadius(10)
+                    Button(action: {
+                        onRecoverPassword()
+                        close()
+                    }) {
+                        Text(localized(LoginViewStrings.forgotPasswordButtonString))
+                            .padding()
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(width: 150)
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
+                    .padding(.bottom)
                 }
-                .padding(.bottom)
                 Spacer()
             }
-            .frame(width: 250, height: 450)
+            .frame(width: 250, height: isRecoverPasswordHidden ? 350 : 450)
             .padding(30)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))

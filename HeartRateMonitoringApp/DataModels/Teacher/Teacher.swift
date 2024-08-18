@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Teacher: Hashable {
-    let id: Int
+struct Teacher: Codable, Hashable {
     let name: String
     let password: String
 }
