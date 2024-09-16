@@ -19,7 +19,7 @@ enum API {
     case register(RegisterUser)
     case getUserData(String)
     case getAllSessions(String)
-    case getUserSessions(String, UserSessionType)
+    case getUserSessions(String, SessionType)
     case signInSession(String, String)
     case signOutSession(String, String)
     case sendHeartRateData(HeartRateData)
@@ -30,6 +30,8 @@ enum API {
     case sendRecoveryEmail(RecoveryEmailData)
     case changePassword(PasswordChangeData)
     case createSession(SessionCreationData)
+    case getTeacherSessions(String, SessionType)
+    case cancelSession(String, String)
 }
 
 extension API: TargetType {
@@ -71,6 +73,10 @@ extension API: TargetType {
             return baseURL + "change-password/"
         case .createSession:
             return baseURL + "create-session/"
+        case .getTeacherSessions:
+            return baseURL + "get-teacher-sessions/"
+        case .cancelSession:
+            return baseURL + "cancel-session/"
         }
     }
     
@@ -107,6 +113,10 @@ extension API: TargetType {
         case .changePassword:
             return "POST"
         case .createSession:
+            return "POST"
+        case .getTeacherSessions:
+            return "POST"
+        case .cancelSession:
             return "POST"
         }
     }

@@ -149,7 +149,7 @@ struct UserSessionsScreen: View {
         }
     }
     
-    func searchSessions(_ type: UserSessionType) {
+    func searchSessions(_ type: SessionType) {
         showLoading = true
         viewModel.fetchSessions(for: user.username, type)
     }

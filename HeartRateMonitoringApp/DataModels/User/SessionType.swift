@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserSessionType: String {
+enum SessionType: String {
     case joinable
     case previous
     case signed

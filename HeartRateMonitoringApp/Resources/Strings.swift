@@ -292,6 +292,25 @@ public struct CreateSessionStrings {
     static let createButtonString: String = "create_session_button"
 }
 
+public struct TeacherFutureSessionsStrings {
+    static let titleString: String = "teacher_future_title"
+    static let loadingTitleString: String = "teacher_future_loadingTitle"
+    static let loadingDescriptionString: String = "teacher_future_loadingDescription"
+    static let cancelAlertTitleString: String = "teacher_future_cancelAlertTitle"
+    static let cancelAlertLeftButtonString: String = "teacher_future_cancelAlertLeftButton"
+    static let cancelAlertRightButtonString: String = "teacher_future_cancelAlertRightButton"
+    static let cancelAlertDescriptionString: String = "teacher_future_cancelAlertDescription"
+    static let failedAlertTitleString: String = "teacher_future_failedAlertTitle"
+    static let failedAlertLeftButtonString: String = "teacher_future_failedAlertLeftButton"
+    static let failedAlertRightButtonString: String = "teacher_future_failedAlertRightButton"
+    static let failedAlertDescriptionString: String = "teacher_future_failedAlertDescription"
+    static let toastTitleString: String = "teacher_future_toastTitle"
+    static let noSessionsAlertTitleString: String = "teacher_future_noSessionsTitle"
+    static let noSessionsLeftButtonString: String = "teacher_future_noSessionsLeftButton"
+    static let noSessionsRightButtonString: String = "teacher_future_noSessionsRightButton"
+    static let noSessionsDescriptionString: String = "teacher_future_noSessionsDescription"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
     static let recoverPasswordScreenId: String = "recoverPassword"
