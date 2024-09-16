@@ -27,7 +27,7 @@ class UserSessionsViewModel: ObservableObject {
         bind()
     }
     
-    func fetchSessions(for user: String, _ type: UserSessionType) {
+    func fetchSessions(for user: String, _ type: SessionType) {
         networkManager.performRequest(apiPath: .getUserSessions(user, type))
     }
     

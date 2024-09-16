@@ -29,6 +29,9 @@ enum NetworkManageResponse {
     case sessionOperationFailed
     case createSessionSuccessful
     case createSessionFailed
+    case didLoadTeacherSessions([Session]? = nil)
+    case didCancelSession
+    case didFailCancelSession
     case urlUnavailable
     case failedRequest
 }
@@ -107,6 +110,18 @@ class NetworkManager {
             performPOSTRequest(for: apiPath, with: data)
         case .createSession(let data):
             guard let data = encoder.encodeToJSON(data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .getTeacherSessions(let teacher, let sessionType):
+            guard let data = encoder.encodeToJSON(TeacherSessionData(name: teacher, type: sessionType.rawValue)) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .cancelSession(let teacher, let sessionId):
+            guard let data = encoder.encodeToJSON(SessionCancelData(name: teacher, sessionId: sessionId)) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -234,6 +249,18 @@ class NetworkManager {
                 return
             }
             handleTeacherDataResponse(teacher: response)
+        case .getTeacherSessions:
+            guard let response = decoder.decodeSessions(data: data) else {
+                statePublisher.send(.loadTeacherData(nil))
+                return
+            }
+            handleTeacherSessions(sessions: response)
+        case .cancelSession:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.loadTeacherData(nil))
+                return
+            }
+            handleCancelSessionResponse(response: response)
         default:
             return
         }
@@ -265,7 +292,7 @@ private extension NetworkManager {
         }
     }
     
-    func handleGetUserSessions(type: UserSessionType, sessions: [Session]) {
+    func handleGetUserSessions(type: SessionType, sessions: [Session]) {
         switch type {
         case .joinable:
             statePublisher.send(.didLoadJoinableSessions(sessions))
@@ -342,5 +369,20 @@ private extension NetworkManager {
         default:
             statePublisher.send(.failedRequest)
         }
+    }
+    
+    func handleCancelSessionResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.cancelSessionFail:
+            statePublisher.send(.didFailCancelSession)
+        case ResponseMessages.cancelSessionSuccessful:
+            statePublisher.send(.didCancelSession)
+        default:
+            statePublisher.send(.failedRequest)
+        }
+    }
+    
+    func handleTeacherSessions(sessions: [Session]) {
+        statePublisher.send(.didLoadTeacherSessions(sessions))
     }
 }

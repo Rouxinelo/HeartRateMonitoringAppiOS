@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum TeacherMenuDestinations {
+    case createSession(String)
+    case previousSessions(String)
+    case futureSessions(String)
+}
+
 struct TeacherMenuScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: NavigationPath
@@ -46,7 +52,8 @@ struct TeacherMenuScreen: View {
                                     sectionDescription: localized(TeacherMenuStrings.futureSessionsDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
-                        })
+                        path.append(FutureSessionTeacherData(teacherName: teacher.name))
+                    })
                 }
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .yellow,
@@ -94,6 +101,9 @@ struct TeacherMenuScreen: View {
         }
         .navigationDestination(for: CreateSessionData.self) { createSessionData in
             CreateSessionScreen(showCreateSessionToast: $showSessionToast, createSessionData: createSessionData)
+        }
+        .navigationDestination(for: FutureSessionTeacherData.self) { futureSessionData in
+            FutureSessionsTeacherScreen(futureSessionData: futureSessionData)
         }
         .navigationBarBackButtonHidden()
     }
