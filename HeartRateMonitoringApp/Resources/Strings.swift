@@ -305,10 +305,9 @@ public struct TeacherFutureSessionsStrings {
     static let failedAlertRightButtonString: String = "teacher_future_failedAlertRightButton"
     static let failedAlertDescriptionString: String = "teacher_future_failedAlertDescription"
     static let toastTitleString: String = "teacher_future_toastTitle"
-    static let noSessionsAlertTitleString: String = "teacher_future_noSessionsTitle"
-    static let noSessionsLeftButtonString: String = "teacher_future_noSessionsLeftButton"
-    static let noSessionsRightButtonString: String = "teacher_future_noSessionsRightButton"
-    static let noSessionsDescriptionString: String = "teacher_future_noSessionsDescription"
+    static let noSessionsAlertTitleString: String = "teacher_noSessionsTitle"
+    static let noSessionsLeftButtonString: String = "teacher_noSessionsLeftButton"
+    static let noSessionsDescriptionString: String = "teacher_noSessionsDescription"
     static let searchPlaceholderString: String = "teacher_searchPlaceholder"
 }
 
@@ -316,8 +315,26 @@ public struct TeacherJoinableSessionsStrings {
     static let titleString: String = "teacher_joinable_title"
     static let searchPlaceholderString: String = "teacher_searchPlaceholder"
     static let sessionsCountString: String = "calendar_foundSessions"
-    static let loadingTitleString: String = "teacher_loading_title"
-    static let loadingTitleDescription: String = "teacher_loading_description"
+    static let loadingTitleString: String = "teacher_loadingTitle"
+    static let loadingDescriptionString: String = "teacher_loadingDescription"
+    static let startLoadingTitleString: String = "teacher_joinable_loadingStartTitle"
+    static let startLoadingDescriptionString: String = "teacher_joinable_loadingStartDescription"
+    static let startAlertTitleString: String = "teacher_joinable_startAlertTitle"
+    static let startAlertDescriptionString: String = "teacher_joinable_startAlertDescription"
+    static let startAlertButtonString: String = "teacher_joinable_startAlertButton"
+    static let noSessionsAlertTitleString: String = "teacher_noSessionsTitle"
+    static let noSessionsLeftButtonString: String = "teacher_future_noSessionsLeftButton"
+    static let noSessionsDescriptionString: String = "teacher_noSessionsDescription"
+}
+
+public struct SetupSessionStrings {
+    static let titleString: String = "setup_session_title"
+    static let zoomTitleString: String = "setup_session_zoomTitle"
+    static let zoomIdTitleString: String = "setup_session_zoomIdTitle"
+    static let zoomIdPlaceholderString: String = "setup_session_zoomIdPlaceholder"
+    static let zoomPasswordTitleString: String = "setup_session_zoomPasswordTitle"
+    static let zoomPasswordPlaceholderString: String = "setup_session_zoomPasswordPlaceholder"
+    static let buttonString: String = "setup_session_button"
     
 }
 

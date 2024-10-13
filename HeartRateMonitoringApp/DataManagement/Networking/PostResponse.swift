@@ -30,5 +30,6 @@ struct ResponseMessages {
     static let createSessionFail = "CREATE_SESSION_FAIL"
     static let cancelSessionSuccessful = "SESSION_CANCEL_OK"
     static let cancelSessionFail = "SESSION_CANCEL_FAIL"
+    static let startSessionSuccessful = "SESSION_START_OK"
     static let genericError = "ERROR"
 }

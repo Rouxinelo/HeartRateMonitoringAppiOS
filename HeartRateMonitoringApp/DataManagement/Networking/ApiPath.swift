@@ -32,6 +32,7 @@ enum API {
     case createSession(SessionCreationData)
     case getTeacherSessions(String, SessionType)
     case cancelSession(String, String)
+    case startSession(StartSessionData)
 }
 
 extension API: TargetType {
@@ -77,6 +78,8 @@ extension API: TargetType {
             return baseURL + "get-teacher-sessions/"
         case .cancelSession:
             return baseURL + "cancel-session/"
+        case .startSession:
+            return baseURL + "start-session/"
         }
     }
     
@@ -117,6 +120,8 @@ extension API: TargetType {
         case .getTeacherSessions:
             return "POST"
         case .cancelSession:
+            return "POST"
+        case .startSession:
             return "POST"
         }
     }

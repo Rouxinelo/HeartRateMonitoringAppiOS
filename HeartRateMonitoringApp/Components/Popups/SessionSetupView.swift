@@ -25,7 +25,7 @@ struct SessionSetupView: View {
                 }
             ZStack {
                 VStack {
-                    Text("Session Setup")
+                    Text(localized(SetupSessionStrings.titleString))
                         .font(.title)
                         .bold()
                         .foregroundColor(.black)
@@ -39,7 +39,7 @@ struct SessionSetupView: View {
                     .padding(.bottom)
                     
                     HStack {
-                        Text("Live Stream Setup")
+                        Text(localized(SetupSessionStrings.zoomTitleString))
                             .font(.title2)
                             .fontWeight(.bold)
                         Spacer()
@@ -48,7 +48,7 @@ struct SessionSetupView: View {
                     .padding(.horizontal)
                     
                     HStack {
-                        Text("Your Zoom call ID")
+                        Text(localized(SetupSessionStrings.zoomIdTitleString))
                         Spacer()
                     }
                     .font(.headline)
@@ -56,12 +56,12 @@ struct SessionSetupView: View {
                     
                     CustomTextField(searchText: $callId,
                                     isPrivateField: false,
-                                    placeholder: "Zoom ID")
+                                    placeholder: localized(SetupSessionStrings.zoomIdPlaceholderString))
                     .padding(.bottom)
                     .padding(.horizontal)
                     
                     HStack {
-                        Text("Your Zoom call password")
+                        Text(localized(SetupSessionStrings.zoomPasswordTitleString))
                         Spacer()
                     }
                     .font(.headline)
@@ -69,7 +69,7 @@ struct SessionSetupView: View {
                     
                     CustomTextField(searchText: $callPassword,
                                     isPrivateField: false,
-                                    placeholder: "Zoom Password")
+                                    placeholder: localized(SetupSessionStrings.zoomPasswordPlaceholderString))
                     .padding(.horizontal)
                     
                     Spacer()
@@ -78,7 +78,7 @@ struct SessionSetupView: View {
                         onStartPressed(callId, callPassword, session)
                         close()
                     }) {
-                        Text("Start")
+                        Text(localized(SetupSessionStrings.buttonString))
                             .padding()
                             .fontWeight(.bold)
                             .foregroundColor(.white)

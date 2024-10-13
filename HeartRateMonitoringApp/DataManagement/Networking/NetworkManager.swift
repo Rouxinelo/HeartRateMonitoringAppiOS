@@ -32,6 +32,7 @@ enum NetworkManageResponse {
     case didLoadTeacherSessions([Session]? = nil)
     case didCancelSession
     case didFailCancelSession
+    case didStartSession
     case urlUnavailable
     case failedRequest
 }
@@ -122,6 +123,12 @@ class NetworkManager {
             performPOSTRequest(for: apiPath, with: data)
         case .cancelSession(let teacher, let sessionId):
             guard let data = encoder.encodeToJSON(SessionCancelData(name: teacher, sessionId: sessionId)) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .startSession(let sessionData):
+            guard let data = encoder.encodeToJSON(sessionData) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -261,6 +268,12 @@ class NetworkManager {
                 return
             }
             handleCancelSessionResponse(response: response)
+        case .startSession:
+            guard let response = decoder.decodeResponse(data: data) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            handleStartSessionResponse(response: response)
         default:
             return
         }
@@ -384,5 +397,14 @@ private extension NetworkManager {
     
     func handleTeacherSessions(sessions: [Session]) {
         statePublisher.send(.didLoadTeacherSessions(sessions))
+    }
+    
+    func handleStartSessionResponse(response: PostResponse) {
+        switch response.message {
+        case ResponseMessages.startSessionSuccessful:
+            statePublisher.send(.didStartSession)
+        default:
+            statePublisher.send(.failedRequest)
+        }
     }
 }

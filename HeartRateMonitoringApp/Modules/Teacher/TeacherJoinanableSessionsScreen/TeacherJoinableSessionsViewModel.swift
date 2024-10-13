@@ -11,8 +11,8 @@ import Combine
 enum TeacherJoinableSessionsCases {
     case sessionsLoaded([Session])
     case noSessionsLoaded
-    case sessionJoinSuccessful
-    case sessionJoinFailed
+    case sessionStartSuccessful
+    case sessionStartFailed
 }
 
 class TeacherJoinableSessionsViewModel: ObservableObject {
@@ -29,8 +29,10 @@ class TeacherJoinableSessionsViewModel: ObservableObject {
         networkManager.performRequest(apiPath: .getTeacherSessions(teacher, .joinable))
     }
     
-    func cancelSession(teacher: String, sessionId: String) {
-        networkManager.performRequest(apiPath: .cancelSession(teacher, sessionId))
+    func startSession(sessionId: String, zoomId: String, zoomPassword: String) {
+        networkManager.performRequest(apiPath: .startSession(StartSessionData(sessionId: sessionId,
+                                                                              zoomId: zoomId,
+                                                                              zoomPassword: zoomPassword)))
     }
 }
 
@@ -45,10 +47,10 @@ private extension TeacherJoinableSessionsViewModel {
                     return
                 }
                 publisher.send(.sessionsLoaded(sessions))
-            case .didCancelSession:
-                publisher.send(.sessionJoinSuccessful)
-            case .didFailCancelSession:
-                publisher.send(.sessionJoinFailed)
+            case .didStartSession:
+                publisher.send(.sessionStartSuccessful)
+            case .failedRequest:
+                publisher.send(.sessionStartFailed)
             default:
                 return
             }

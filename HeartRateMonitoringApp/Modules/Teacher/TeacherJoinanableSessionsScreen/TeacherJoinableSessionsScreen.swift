@@ -17,7 +17,7 @@ struct TeacherJoinableSessionsScreen: View {
     @State var loadingSessionsAlert: Bool = false
     @State var loadingSessionStartAlert: Bool = false
     @State var showJoinSessionModal: Bool = false
-    @State var showJoinFailedAlert: Bool = false
+    @State var showStartFailedAlert: Bool = false
     @State var showNoSessionsAlert: Bool = false
     
     var body: some View {
@@ -26,7 +26,7 @@ struct TeacherJoinableSessionsScreen: View {
                 HStack (alignment: .center) {
                     CustomBackButton(onClick: { back() })
                     Spacer()
-                    Text(localized(TeacherFutureSessionsStrings.titleString))
+                    Text(localized(TeacherJoinableSessionsStrings.titleString))
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     Spacer()
@@ -37,7 +37,7 @@ struct TeacherJoinableSessionsScreen: View {
                 .padding()
                 
                 HStack {
-                    Text(localized(CalendarStrings.sessionsCount).replacingOccurrences(of: "$", with: "\(filterSessions(searchText).count)"))
+                    Text(localized(TeacherJoinableSessionsStrings.sessionsCountString).replacingOccurrences(of: "$", with: "\(filterSessions(searchText).count)"))
                         .font(.title)
                         .fontWeight(.bold)
                     Spacer()
@@ -63,13 +63,14 @@ struct TeacherJoinableSessionsScreen: View {
             
             if loadingSessionsAlert {
                 LoadingView(isShowing: $loadingSessionsAlert,
-                            title: localized(TeacherFutureSessionsStrings.loadingTitleString),
-                            description: localized(TeacherFutureSessionsStrings.loadingDescriptionString))
+                            title: localized(TeacherJoinableSessionsStrings.loadingTitleString),
+                            description: localized(TeacherJoinableSessionsStrings.loadingDescriptionString))
             }
             
             if loadingSessionStartAlert {
                 LoadingView(isShowing: $loadingSessionStartAlert,
-                            title: "Setting up", description: "Please wait...")
+                            title: localized(TeacherJoinableSessionsStrings.startLoadingTitleString),
+                            description: localized(TeacherJoinableSessionsStrings.startLoadingDescriptionString))
             }
             
             if showJoinSessionModal, let selectedSession = selectedSession {
@@ -80,13 +81,13 @@ struct TeacherJoinableSessionsScreen: View {
                 })
             }
             
-            if showJoinFailedAlert {
-                CustomAlert(isShowing: $showJoinFailedAlert,
+            if showStartFailedAlert {
+                CustomAlert(isShowing: $showStartFailedAlert,
                             icon: "exclamationmark.circle",
-                            title: localized(TeacherFutureSessionsStrings.failedAlertTitleString),
-                            leftButtonText: localized(TeacherFutureSessionsStrings.failedAlertLeftButtonString),
+                            title: localized(TeacherJoinableSessionsStrings.startAlertTitleString),
+                            leftButtonText: localized(TeacherJoinableSessionsStrings.startAlertButtonString),
                             rightButtonText: "",
-                            description: localized(TeacherFutureSessionsStrings.failedAlertDescriptionString),
+                            description: localized(TeacherJoinableSessionsStrings.startAlertDescriptionString),
                             leftButtonAction: { back() },
                             rightButtonAction: {},
                             isSingleButton: true)
@@ -95,10 +96,10 @@ struct TeacherJoinableSessionsScreen: View {
             if showNoSessionsAlert {
                 CustomAlert(isShowing: $showNoSessionsAlert,
                             icon: "exclamationmark.circle",
-                            title: localized(TeacherFutureSessionsStrings.noSessionsAlertTitleString),
-                            leftButtonText: localized(TeacherFutureSessionsStrings.noSessionsLeftButtonString),
+                            title: localized(TeacherJoinableSessionsStrings.noSessionsAlertTitleString),
+                            leftButtonText: localized(TeacherJoinableSessionsStrings.noSessionsLeftButtonString),
                             rightButtonText: "",
-                            description: localized(TeacherFutureSessionsStrings.noSessionsDescriptionString),
+                            description: localized(TeacherJoinableSessionsStrings.noSessionsDescriptionString),
                             leftButtonAction: { back() },
                             rightButtonAction: {},
                             isSingleButton: true)
@@ -114,12 +115,15 @@ struct TeacherJoinableSessionsScreen: View {
             switch response {
             case .noSessionsLoaded:
                 loadingSessionsAlert = false
-                break
             case .sessionsLoaded(let sessions):
                 self.sessions = sessions
                 loadingSessionsAlert = false
-            default:
-                return
+            case .sessionStartFailed:
+                loadingSessionStartAlert = false
+                showStartFailedAlert = true
+            case .sessionStartSuccessful:
+                loadingSessionStartAlert = false
+                // Redirect to the session screen
             }
         }
     }
@@ -134,8 +138,7 @@ struct TeacherJoinableSessionsScreen: View {
     }
     
     func containsSearchedText(_ session: Session, _ searchText: String) -> Bool {
-        session.name.removeSpaces().lowercased().contains(searchText.removeSpaces().lowercased()) ||
-        session.teacher.removeSpaces().lowercased().contains(searchText.removeSpaces().lowercased())
+        session.name.removeSpaces().lowercased().contains(searchText.removeSpaces().lowercased())
     }
     
     func clickedSession(_ session: Session) {
@@ -145,8 +148,7 @@ struct TeacherJoinableSessionsScreen: View {
     
     func startSession(session: Session, zoomId: String, zoomPassword: String) {
         loadingSessionStartAlert = true
-        // Send email to other users
-        // Send request to join
+        viewModel.startSession(sessionId: session.id, zoomId: zoomId, zoomPassword: zoomPassword)
     }
     
     func getOccupationString(totalSpots: Int, occupiedSpots: Int) -> String {
