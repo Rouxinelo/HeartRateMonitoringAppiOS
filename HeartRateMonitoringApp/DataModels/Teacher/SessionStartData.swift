@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StartSessionData: Codable {
+struct SessionStartData: Codable {
     let sessionId: String
     let zoomId: String
     let zoomPassword: String

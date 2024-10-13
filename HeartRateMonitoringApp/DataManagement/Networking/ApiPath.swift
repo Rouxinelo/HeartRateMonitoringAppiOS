@@ -32,7 +32,7 @@ enum API {
     case createSession(SessionCreationData)
     case getTeacherSessions(String, SessionType)
     case cancelSession(String, String)
-    case startSession(StartSessionData)
+    case startSession(SessionStartData)
 }
 
 extension API: TargetType {

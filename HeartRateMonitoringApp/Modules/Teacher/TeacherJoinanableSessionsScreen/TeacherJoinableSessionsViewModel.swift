@@ -30,7 +30,7 @@ class TeacherJoinableSessionsViewModel: ObservableObject {
     }
     
     func startSession(sessionId: String, zoomId: String, zoomPassword: String) {
-        networkManager.performRequest(apiPath: .startSession(StartSessionData(sessionId: sessionId,
+        networkManager.performRequest(apiPath: .startSession(SessionStartData(sessionId: sessionId,
                                                                               zoomId: zoomId,
                                                                               zoomPassword: zoomPassword)))
     }

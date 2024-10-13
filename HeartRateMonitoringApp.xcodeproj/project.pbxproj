@@ -57,7 +57,7 @@
 		6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B47AF4D2BAF57DC001C0172 /* LanguageSelectorView.swift */; };
 		6B4BDB372BB0722D00E25C2D /* UserDetailType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4BDB362BB0722D00E25C2D /* UserDetailType.swift */; };
 		6B4FC4952CBC165100198BE0 /* SessionSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC4942CBC165100198BE0 /* SessionSetupView.swift */; };
-		6B4FC4982CBC61C800198BE0 /* StartSessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC4972CBC61C800198BE0 /* StartSessionData.swift */; };
+		6B4FC4982CBC61C800198BE0 /* SessionStartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC4972CBC61C800198BE0 /* SessionStartData.swift */; };
 		6B5743372CB746C200DB5518 /* TeacherJoinableSessionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5743362CB746C200DB5518 /* TeacherJoinableSessionsScreen.swift */; };
 		6B5743392CB74F9600DB5518 /* TeacherJoinableSessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5743382CB74F9600DB5518 /* TeacherJoinableSessionsViewModel.swift */; };
 		6B5DEB942C1F32F2006D8A33 /* MovesenseApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5DEB912C1F32F2006D8A33 /* MovesenseApi.framework */; };
@@ -222,7 +222,7 @@
 		6B47AF4D2BAF57DC001C0172 /* LanguageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectorView.swift; sourceTree = "<group>"; };
 		6B4BDB362BB0722D00E25C2D /* UserDetailType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailType.swift; sourceTree = "<group>"; };
 		6B4FC4942CBC165100198BE0 /* SessionSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupView.swift; sourceTree = "<group>"; };
-		6B4FC4972CBC61C800198BE0 /* StartSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSessionData.swift; sourceTree = "<group>"; };
+		6B4FC4972CBC61C800198BE0 /* SessionStartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStartData.swift; sourceTree = "<group>"; };
 		6B5743362CB746C200DB5518 /* TeacherJoinableSessionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherJoinableSessionsScreen.swift; sourceTree = "<group>"; };
 		6B5743382CB74F9600DB5518 /* TeacherJoinableSessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherJoinableSessionsViewModel.swift; sourceTree = "<group>"; };
 		6B5FDA8F2C28C9D100AC66B6 /* SessionInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoSection.swift; sourceTree = "<group>"; };
@@ -621,7 +621,7 @@
 				6B71FDED2C6ADCC400CB7F14 /* SessionCreationData.swift */,
 				6BDC5C0E2C7BB46E00AEEC99 /* TeacherSessionData.swift */,
 				6BDC5C102C7BB4CE00AEEC99 /* SessionCancelData.swift */,
-				6B4FC4972CBC61C800198BE0 /* StartSessionData.swift */,
+				6B4FC4972CBC61C800198BE0 /* SessionStartData.swift */,
 			);
 			path = Teacher;
 			sourceTree = "<group>";
@@ -997,7 +997,7 @@
 				6B0EC0A52BEFB6C900747793 /* UIApplication.swift in Sources */,
 				6B4FC4952CBC165100198BE0 /* SessionSetupView.swift in Sources */,
 				6B0EC0A92BEFD87F00747793 /* SessionSign.swift in Sources */,
-				6B4FC4982CBC61C800198BE0 /* StartSessionData.swift in Sources */,
+				6B4FC4982CBC61C800198BE0 /* SessionStartData.swift in Sources */,
 				6B7194BE2BC4973200B297AF /* User.swift in Sources */,
 				6BB806822C602E5100E992BD /* RecoveryCode.swift in Sources */,
 				6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */,
