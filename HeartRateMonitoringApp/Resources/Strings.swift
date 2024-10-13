@@ -262,8 +262,8 @@ public struct TeacherMenuStrings {
     static let createSessionDescriptionString: String = "teacher_menu_createSessionDescription"
     static let futureSessionsTitleString: String = "teacher_menu_futureSessionsTitle"
     static let futureSessionsDescriptionString: String = "teacher_menu_futureSessionsDescription"
-    static let previousSessionsTitleString: String = "teacher_menu_previousSessionsTitle"
-    static let previousSessionsDescriptionString: String = "teacher_menu_previousSessionsDescription"
+    static let joinSessionTitleString: String = "teacher_menu_joinSessionsTitle"
+    static let joinSessionDescriptionString: String = "teacher_menu_joinSessionsDescription"
     static let logoutTitleString: String = "teacher_menu_logoutTitle"
     static let logoutDescriptionString: String = "teacher_menu_logoutDescription"
     static let sessionToastString: String = "teacher_menu_toast"
@@ -294,8 +294,8 @@ public struct CreateSessionStrings {
 
 public struct TeacherFutureSessionsStrings {
     static let titleString: String = "teacher_future_title"
-    static let loadingTitleString: String = "teacher_future_loadingTitle"
-    static let loadingDescriptionString: String = "teacher_future_loadingDescription"
+    static let loadingTitleString: String = "teacher_loadingTitle"
+    static let loadingDescriptionString: String = "teacher_loadingDescription"
     static let cancelAlertTitleString: String = "teacher_future_cancelAlertTitle"
     static let cancelAlertLeftButtonString: String = "teacher_future_cancelAlertLeftButton"
     static let cancelAlertRightButtonString: String = "teacher_future_cancelAlertRightButton"
@@ -309,6 +309,16 @@ public struct TeacherFutureSessionsStrings {
     static let noSessionsLeftButtonString: String = "teacher_future_noSessionsLeftButton"
     static let noSessionsRightButtonString: String = "teacher_future_noSessionsRightButton"
     static let noSessionsDescriptionString: String = "teacher_future_noSessionsDescription"
+    static let searchPlaceholderString: String = "teacher_searchPlaceholder"
+}
+
+public struct TeacherJoinableSessionsStrings {
+    static let titleString: String = "teacher_joinable_title"
+    static let searchPlaceholderString: String = "teacher_searchPlaceholder"
+    static let sessionsCountString: String = "calendar_foundSessions"
+    static let loadingTitleString: String = "teacher_loading_title"
+    static let loadingTitleDescription: String = "teacher_loading_description"
+    
 }
 
 public struct ScreenIds {

@@ -1362,7 +1362,7 @@
     "Key" : {
       "extractionState" : "manual"
     },
-    "Key 1" : {
+    "Key 2" : {
       "extractionState" : "manual"
     },
     "language_selector_confirm" : {
@@ -1398,6 +1398,9 @@
           }
         }
       }
+    },
+    "Live Stream Setup" : {
+
     },
     "login_view_password" : {
       "extractionState" : "manual",
@@ -2625,6 +2628,9 @@
         }
       }
     },
+    "Session Setup" : {
+
+    },
     "session_alertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3254,6 +3260,9 @@
         }
       }
     },
+    "Start" : {
+
+    },
     "teacher_future_cancelAlertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3376,40 +3385,6 @@
         }
       }
     },
-    "teacher_future_loadingDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please wait..."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aguarde..."
-          }
-        }
-      }
-    },
-    "teacher_future_loadingTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading!"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A carregar!"
-          }
-        }
-      }
-    },
     "teacher_future_noSessionsDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3498,6 +3473,40 @@
         }
       }
     },
+    "teacher_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please wait..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde..."
+          }
+        }
+      }
+    },
+    "teacher_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A carregar!"
+          }
+        }
+      }
+    },
     "teacher_menu_createSessionDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3566,6 +3575,40 @@
         }
       }
     },
+    "teacher_menu_joinSessionsDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Host a scheduled session"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ser anfitrião de uma sessão programada"
+          }
+        }
+      }
+    },
+    "teacher_menu_joinSessionsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sessão"
+          }
+        }
+      }
+    },
     "teacher_menu_logoutDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3600,40 +3643,6 @@
         }
       }
     },
-    "teacher_menu_previousSessionsDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check previous sessions and participants"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verificar sessões anteriores e participantes"
-          }
-        }
-      }
-    },
-    "teacher_menu_previousSessionsTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Historic"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Histórico"
-          }
-        }
-      }
-    },
     "teacher_menu_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3664,6 +3673,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sessão agendada!"
+          }
+        }
+      }
+    },
+    "teacher_searchPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search (session name)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Procurar (nome da sessão)"
           }
         }
       }
@@ -4109,6 +4135,12 @@
           }
         }
       }
+    },
+    "Your Zoom call ID" : {
+
+    },
+    "Your Zoom call password" : {
+
     }
   },
   "version" : "1.0"

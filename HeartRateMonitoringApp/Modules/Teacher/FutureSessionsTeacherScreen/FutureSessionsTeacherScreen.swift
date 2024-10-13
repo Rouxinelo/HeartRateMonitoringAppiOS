@@ -33,7 +33,7 @@ struct FutureSessionsTeacherScreen: View {
                 }
                 CustomTextField(searchText: $searchText,
                                 isPrivateField: false,
-                                placeholder: localized(CalendarStrings.textFieldPlaceholder))
+                                placeholder: localized(TeacherFutureSessionsStrings.searchPlaceholderString))
                 .padding()
                 
                 HStack {
