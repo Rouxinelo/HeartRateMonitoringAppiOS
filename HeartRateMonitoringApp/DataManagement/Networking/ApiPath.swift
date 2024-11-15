@@ -37,7 +37,7 @@ enum API {
 
 extension API: TargetType {
     var baseURL: String {
-        "http://192.168.1.68:8000/"
+        "http://192.168.1.81:8000/"
     }
     
     var path: String {
