@@ -57,11 +57,13 @@ struct TeacherMenuScreen: View {
                 }
                 HStack (spacing: 5) {
                     MainMenuSection(sectionColor: .yellow,
-                                    sectionIcon: "clock.arrow.circlepath",
-                                    sectionTitle: localized(TeacherMenuStrings.previousSessionsTitleString),
-                                    sectionDescription: localized(TeacherMenuStrings.previousSessionsDescriptionString),
+                                    sectionIcon: "door.left.hand.closed",
+                                    sectionTitle: localized(TeacherMenuStrings.joinSessionTitleString),
+                                    sectionDescription: localized(TeacherMenuStrings.joinSessionDescriptionString),
                                     isUnavailable: false,
                                     sectionAction: {
+                        path.append(JoinableSessionTeacherData(teacherName: teacher.name))
+
                     })
                     MainMenuSection(sectionColor: .blue,
                                     sectionIcon: MainMenuIcons.logoutIcon,
@@ -104,6 +106,9 @@ struct TeacherMenuScreen: View {
         }
         .navigationDestination(for: FutureSessionTeacherData.self) { futureSessionData in
             FutureSessionsTeacherScreen(futureSessionData: futureSessionData)
+        }
+        .navigationDestination(for: JoinableSessionTeacherData.self) { joinableSessionData in
+            TeacherJoinableSessionsScreen(joinableSessionData: joinableSessionData)
         }
         .navigationBarBackButtonHidden()
     }

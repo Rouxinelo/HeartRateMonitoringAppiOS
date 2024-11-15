@@ -15,6 +15,6 @@ struct FutureSessionTeacherData: Hashable {
     let teacherName: String
 }
 
-struct PreviousSessionTeacherData: Hashable {
+struct JoinableSessionTeacherData: Hashable {
     let teacherName: String
 }

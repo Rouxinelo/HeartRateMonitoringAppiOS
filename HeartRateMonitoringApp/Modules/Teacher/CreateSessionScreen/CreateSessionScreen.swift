@@ -204,7 +204,7 @@ struct CreateSessionScreen: View {
         viewModel.createSession(with: SessionCreationData(teacher: createSessionData.teacherName,
                                                           name: sessionName,
                                                           description: description,
-                                                          date: "\(day)/\(month)/\(year)",
+                                                          date: "\(day)-\(month)-\(year)",
                                                           hour: "\(hour)h",
                                                           totalSpots: Int(spots) ?? 0))
     }
