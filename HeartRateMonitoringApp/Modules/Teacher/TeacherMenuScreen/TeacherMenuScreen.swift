@@ -108,7 +108,7 @@ struct TeacherMenuScreen: View {
             FutureSessionsTeacherScreen(futureSessionData: futureSessionData)
         }
         .navigationDestination(for: JoinableSessionTeacherData.self) { joinableSessionData in
-            TeacherJoinableSessionsScreen(joinableSessionData: joinableSessionData)
+            TeacherJoinableSessionsScreen(path: $path, joinableSessionData: joinableSessionData)
         }
         .navigationBarBackButtonHidden()
     }

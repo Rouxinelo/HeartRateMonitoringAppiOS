@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TeacherJoinableSessionsScreen: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
     @StateObject var viewModel = TeacherJoinableSessionsViewModel()
     @State var joinableSessionData: JoinableSessionTeacherData
     @State var searchText: String = ""
@@ -47,12 +48,12 @@ struct TeacherJoinableSessionsScreen: View {
                 VStack (spacing: 0) {
                     ForEach(filterSessions(searchText), id: \.self) { session in
                         SessionSection(title: session.name,
-                                        date: session.date,
-                                        hour: session.hour,
-                                        teacher: session.teacher,
-                                        occupation: getOccupationString(totalSpots: session.totalSpots,
-                                                                        occupiedSpots: session.filledSpots),
-                                        onClick: { clickedSession(session) })
+                                       date: session.date,
+                                       hour: session.hour,
+                                       teacher: session.teacher,
+                                       occupation: getOccupationString(totalSpots: session.totalSpots,
+                                                                       occupiedSpots: session.filledSpots),
+                                       onClick: { clickedSession(session) })
                     }
                 }.scrollOnOverflow()
                     .padding(.top)
@@ -110,7 +111,10 @@ struct TeacherJoinableSessionsScreen: View {
         .onAppear {
             loadingSessionsAlert = true
             viewModel.loadSessions(joinableSessionData.teacherName)
-        }
+        }.navigationBarBackButtonHidden()
+        .navigationDestination(for: TeacherSessionStartedData.self, destination: { recoveryCode in
+            TeacherSessionScreen()
+        })
         .onReceive(viewModel.publisher) { response in
             switch response {
             case .noSessionsLoaded:
@@ -123,7 +127,7 @@ struct TeacherJoinableSessionsScreen: View {
                 showStartFailedAlert = true
             case .sessionStartSuccessful:
                 loadingSessionStartAlert = false
-                // Redirect to the session screen
+                goToSessionScreen()
             }
         }
     }
@@ -153,5 +157,9 @@ struct TeacherJoinableSessionsScreen: View {
     
     func getOccupationString(totalSpots: Int, occupiedSpots: Int) -> String {
         "\(occupiedSpots)/\(totalSpots)"
+    }
+    
+    func goToSessionScreen() {
+        path.append(TeacherSessionStartedData(teacher: joinableSessionData.teacherName, sessionId: selectedSession?.id ?? ""))
     }
 }
