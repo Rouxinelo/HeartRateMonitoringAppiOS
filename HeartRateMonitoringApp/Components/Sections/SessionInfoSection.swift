@@ -20,8 +20,3 @@ struct SessionInfoSection: View {
         }
     }
 }
-
-#Preview {
-    SessionInfoSection(imageName: "trash.fill",
-                       text: "Test Name")
-}

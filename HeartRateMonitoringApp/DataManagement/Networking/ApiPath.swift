@@ -33,11 +33,12 @@ enum API {
     case getTeacherSessions(String, SessionType)
     case cancelSession(String, String)
     case startSession(SessionStartData)
+    case session(String)
 }
 
 extension API: TargetType {
     var baseURL: String {
-        "http://192.168.1.81:8000/"
+        "http://192.168.1.97:8000/"
     }
     
     var path: String {
@@ -80,6 +81,8 @@ extension API: TargetType {
             return baseURL + "cancel-session/"
         case .startSession:
             return baseURL + "start-session/"
+        case .session(let sessionId):
+            return baseURL + "session/\(sessionId)/"
         }
     }
     
@@ -123,6 +126,8 @@ extension API: TargetType {
             return "POST"
         case .startSession:
             return "POST"
+        case .session:
+            return "GET"
         }
     }
 }

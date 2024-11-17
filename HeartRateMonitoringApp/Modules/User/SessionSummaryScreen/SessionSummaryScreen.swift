@@ -140,15 +140,3 @@ struct SessionSummaryScreen: View {
         path.removeLast(path.count - 1)
     }
 }
-
-#Preview {
-    SessionSummaryScreen(path: .constant(NavigationPath()), 
-                         showingToast: false,
-                         sessionSummary: SessionSummaryData(sensor: DeviceRepresentable(name: "Movesense 12345678"),
-                                                            username: "rouxinol",
-                                                            session: SessionSimplified(id: "testID",
-                                                                                       name: "Test Name",
-                                                                                       teacher: "Test Teacher"),
-                                                            measurements: [1, 2, 3, 4, 5, 6, 7, 8],
-                                                            sessionTime: 3661))
-}

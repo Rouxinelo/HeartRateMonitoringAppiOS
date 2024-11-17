@@ -59,7 +59,3 @@ struct CustomToast: View {
         isShowing = false
     }
 }
-
-#Preview {
-    CustomToast(isShowing: .constant(true), iconName: "info.circle.fill", message: "Test Message")
-}

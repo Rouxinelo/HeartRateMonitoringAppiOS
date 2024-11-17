@@ -112,23 +112,3 @@ struct CalendarScreen: View {
         session.teacher.removeSpaces().lowercased().contains(searchText.removeSpaces().lowercased())
     }
 }
-
-#Preview {
-    CalendarScreen(path: .constant(NavigationPath()),
-                   didSignIn: false,
-                   isGuest: true,
-                   sessions: [Session(id: "test1", 
-                                      name: "Pilates Clinico",
-                                      date: "24/03",
-                                      hour: "19h",
-                                      teacher: "J. Rouxinol",
-                                      totalSpots: 10,
-                                      filledSpots: 10),
-                              Session(id: "test2", 
-                                      name: "Fisioterapia",
-                                      date: "30/03",
-                                      hour: "23h",
-                                      teacher: "J. Saias",
-                                      totalSpots: 15,
-                                      filledSpots: 5)])
-}

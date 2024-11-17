@@ -77,6 +77,9 @@
 		6B71FDEE2C6ADCC400CB7F14 /* SessionCreationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71FDED2C6ADCC400CB7F14 /* SessionCreationData.swift */; };
 		6B71FDF02C6ADCF500CB7F14 /* CreateSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71FDEF2C6ADCF500CB7F14 /* CreateSessionViewModel.swift */; };
 		6B8349C32CEA3BDD003AC8E9 /* TeacherSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C22CEA3BDD003AC8E9 /* TeacherSessionViewModel.swift */; };
+		6B8349C62CEA3ED8003AC8E9 /* TeacherSessionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */; };
+		6B8349C82CEA68C5003AC8E9 /* TeacherSessionUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */; };
+		6B8349CA2CEA6963003AC8E9 /* SSEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C92CEA6963003AC8E9 /* SSEData.swift */; };
 		6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */; };
 		6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB62BB04F3E0088899E /* CircularAvatar.swift */; };
 		6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB82BB052E20088899E /* UserDetailsSection.swift */; };
@@ -244,6 +247,9 @@
 		6B71FDEF2C6ADCF500CB7F14 /* CreateSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionViewModel.swift; sourceTree = "<group>"; };
 		6B7354402C1F31A100FDEFED /* MovesenseApi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MovesenseApi.xcodeproj; path = MovesenseApi/MovesenseApi.xcodeproj; sourceTree = "<group>"; };
 		6B8349C22CEA3BDD003AC8E9 /* TeacherSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionViewModel.swift; sourceTree = "<group>"; };
+		6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionUserView.swift; sourceTree = "<group>"; };
+		6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionUserData.swift; sourceTree = "<group>"; };
+		6B8349C92CEA6963003AC8E9 /* SSEData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEData.swift; sourceTree = "<group>"; };
 		6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsScreen.swift; sourceTree = "<group>"; };
 		6B872BB62BB04F3E0088899E /* CircularAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAvatar.swift; sourceTree = "<group>"; };
 		6B872BB82BB052E20088899E /* UserDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsSection.swift; sourceTree = "<group>"; };
@@ -639,6 +645,8 @@
 				6BDC5C102C7BB4CE00AEEC99 /* SessionCancelData.swift */,
 				6B4FC4972CBC61C800198BE0 /* SessionStartData.swift */,
 				6B4BB9552CE6D47B00FB6455 /* TeacherSessionStartedData.swift */,
+				6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */,
+				6B8349C92CEA6963003AC8E9 /* SSEData.swift */,
 			);
 			path = Teacher;
 			sourceTree = "<group>";
@@ -740,6 +748,7 @@
 				6BC27BF12BB8C7850089217F /* RegisterScreenGenderField.swift */,
 				6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */,
 				6B5FDA8F2C28C9D100AC66B6 /* SessionInfoSection.swift */,
+				6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -1017,6 +1026,8 @@
 				6B0EC0A92BEFD87F00747793 /* SessionSign.swift in Sources */,
 				6B4FC4982CBC61C800198BE0 /* SessionStartData.swift in Sources */,
 				6B7194BE2BC4973200B297AF /* User.swift in Sources */,
+				6B8349C62CEA3ED8003AC8E9 /* TeacherSessionUserView.swift in Sources */,
+				6B8349CA2CEA6963003AC8E9 /* SSEData.swift in Sources */,
 				6BB806822C602E5100E992BD /* RecoveryCode.swift in Sources */,
 				6B2846072BAA35D1007A9D8E /* UserType.swift in Sources */,
 				6B0EC0A12BEF9C1D00747793 /* JSONDataEncoder.swift in Sources */,
@@ -1082,6 +1093,7 @@
 				6B5743372CB746C200DB5518 /* TeacherJoinableSessionsScreen.swift in Sources */,
 				6BC27BE42BB8337B0089217F /* CustomTextField.swift in Sources */,
 				6B4BB9562CE6D47B00FB6455 /* TeacherSessionStartedData.swift in Sources */,
+				6B8349C82CEA68C5003AC8E9 /* TeacherSessionUserData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

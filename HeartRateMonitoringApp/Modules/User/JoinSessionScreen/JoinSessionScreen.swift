@@ -163,20 +163,3 @@ struct JoinSessionScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-#Preview {
-    JoinSessionScreen(path: .constant(NavigationPath()), preSessionData: PreSessionData(session: Session(id: "testID",
-                                                                                              name: "Test Name",
-                                                                                              date: "11/11",
-                                                                                              hour: "11h",
-                                                                                              teacher: "Test Teacher",
-                                                                                              totalSpots: 1,
-                                                                                              filledSpots: 1),
-                                                                             user: User(username: "testUsername",
-                                                                                        firstName: "Test",
-                                                                                        lastName: "Name",
-                                                                                        email: "testEmail@testemail.com",
-                                                                                        gender: "M",
-                                                                                        age: 11,
-                                                                                        password: "ucdu")))
-}

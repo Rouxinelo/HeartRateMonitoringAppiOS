@@ -106,12 +106,3 @@ struct ConnectSensorModal: View {
         }
     }
 }
-
-#Preview {
-    ConnectSensorModal(isShowing: .constant(true),
-                       devices: .constant([DeviceRepresentable(name: "Movesense1"),
-                                           DeviceRepresentable(name: "Movesense1"),
-                                           DeviceRepresentable(name: "Movesense1")]),
-                       title: "Nearby Devices",
-                       onSelectedDevice: { _ in })
-}

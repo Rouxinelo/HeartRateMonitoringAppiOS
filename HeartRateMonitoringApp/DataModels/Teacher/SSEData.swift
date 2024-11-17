@@ -5,4 +5,10 @@
 //  Created by João Rouxinol on 17/11/2024.
 //
 
-import Foundation
+struct SSEData: Codable {
+    let sessionId: String
+    let username: String
+    let timeStamp: String
+    let event: String
+    let value: String
+}

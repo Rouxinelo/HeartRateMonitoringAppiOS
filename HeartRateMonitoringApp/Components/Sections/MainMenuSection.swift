@@ -41,7 +41,3 @@ struct MainMenuSection: View {
         .disabled(isUnavailable)
     }
 }
-
-#Preview {
-    MainMenuSection(sectionColor: .red, sectionIcon: "arrow.clockwise.circle", sectionTitle: "Test", sectionDescription: "Test Description", isUnavailable: false, sectionAction: {})
-}

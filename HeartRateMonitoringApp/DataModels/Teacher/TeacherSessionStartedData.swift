@@ -10,4 +10,5 @@ import Foundation
 struct TeacherSessionStartedData: Hashable {
     let teacher: String
     let sessionId: String
+    let sessionName: String
 }

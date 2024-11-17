@@ -54,4 +54,13 @@ struct JSONDataDecoder {
             return nil
         }
     }
+    
+    func decodeSSEResponse(data: Data) -> SSEData? {
+        do {
+            let sseData = try decoder.decode(SSEData.self, from: data)
+            return sseData
+        } catch {
+            return nil
+        }
+    }
 }

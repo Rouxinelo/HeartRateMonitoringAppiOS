@@ -30,6 +30,15 @@
     "%lldh" : {
 
     },
+    "00h00m00s" : {
+
+    },
+    "10" : {
+
+    },
+    "Active" : {
+
+    },
     "bluetoothPermissionString" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -506,6 +515,9 @@
         }
       }
     },
+    "Current HR:" : {
+
+    },
     "forgot_password_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -541,9 +553,6 @@
       }
     },
     "HeartRate Monitoring App" : {
-
-    },
-    "Hello, World!" : {
 
     },
     "home_screen_alertDescription" : {
@@ -800,6 +809,9 @@
           }
         }
       }
+    },
+    "Inactive" : {
+
     },
     "insert_recovery_alertButton" : {
       "extractionState" : "manual",

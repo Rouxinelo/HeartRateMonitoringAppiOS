@@ -20,7 +20,3 @@ struct CustomBackButton: View {
         }
     }
 }
-
-#Preview {
-    CustomBackButton(onClick: {})
-}

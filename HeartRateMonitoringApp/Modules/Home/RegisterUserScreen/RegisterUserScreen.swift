@@ -263,7 +263,3 @@ struct RegisterUserScreen: View {
                      gender: isMaleSelected ? "M" : "F")
     }
 }
-
-#Preview {
-    RegisterUserScreen(showRegisterToast: .constant(false))
-}

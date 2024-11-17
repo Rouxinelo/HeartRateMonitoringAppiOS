@@ -201,14 +201,3 @@ struct SessionScreen: View {
         viewModel.didTapClose()
     }
 }
-
-#Preview {
-    SessionScreen(path: .constant(NavigationPath()),
-                  sessionData: SessionData(session: SessionSimplified(id: "testId",
-                                                                      name: "Pilates Clinico",
-                                                                      teacher: "Joao Rouxinol"),
-                                           username: "testUsername", 
-                                           device: DeviceRepresentable(name: "Movesense 1234",
-                                                                       batteryPercentage: 10)),
-                  sensorManager: SensorManager())
-}

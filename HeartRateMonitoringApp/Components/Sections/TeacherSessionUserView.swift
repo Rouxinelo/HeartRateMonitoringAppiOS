@@ -1,5 +1,5 @@
 //
-//  SessionUserView.swift
+//  TeacherSessionUserView.swift
 //  HeartRateMonitoringApp
 //
 //  Created by João Rouxinol on 17/11/2024.
@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct TeacherSessionUserView: View {
-    @State var isActive: Bool = true {
-        didSet {
-            triggerFlashAnimation()
-        }
-    }
+    @State var isActive: Bool
     @State var name: String
     @State var currentHR: Int = 0
     @State var maxHR: Int = 0
     @State var avgHR: Int = 0
     @State var minHR: Int = 0
     @State var flash: Bool = false
-    @State var measurements: [Int] = []
+    @State var measurements: [Int]
     
     var body: some View {
         ZStack {
@@ -93,6 +89,8 @@ struct TeacherSessionUserView: View {
                     triggerFlashAnimation()
                 }
             }
+        }.onAppear {
+            setNewValues()
         }
         .padding(.horizontal)
     }
@@ -116,17 +114,11 @@ struct TeacherSessionUserView: View {
         isActive ? .green : .yellow
     }
     
-    func addNewMeasurement(measurement: Int) {
-        measurements.append(measurement)
-        setNewValues()
-    }
-    
     func setNewValues() {
         guard measurements.count > 0 else { return }
         maxHR = measurements.max() ?? 0
         minHR = measurements.min() ?? 0
         currentHR = measurements.last ?? 0
         avgHR = measurements.reduce(0, +) / max(measurements.count, 1)
-        triggerFlashAnimation()
     }
 }

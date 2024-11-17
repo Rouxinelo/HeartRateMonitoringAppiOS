@@ -37,10 +37,3 @@ struct HeartRateSummarySection: View {
         }
     }
 }
-
-#Preview {
-    HeartRateSummarySection(sectionIcon: "arrow.up", 
-                            sectionTitle: "Average",
-                            sectionDescription: "Test Description",
-                            sectionColor: .red)
-}

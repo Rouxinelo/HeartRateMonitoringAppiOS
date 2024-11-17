@@ -112,8 +112,8 @@ struct TeacherJoinableSessionsScreen: View {
             loadingSessionsAlert = true
             viewModel.loadSessions(joinableSessionData.teacherName)
         }.navigationBarBackButtonHidden()
-        .navigationDestination(for: TeacherSessionStartedData.self, destination: { recoveryCode in
-            TeacherSessionScreen()
+        .navigationDestination(for: TeacherSessionStartedData.self, destination: { sessionStartedData in
+            TeacherSessionScreen(sessionStartedData: sessionStartedData)
         })
         .onReceive(viewModel.publisher) { response in
             switch response {
@@ -160,6 +160,7 @@ struct TeacherJoinableSessionsScreen: View {
     }
     
     func goToSessionScreen() {
-        path.append(TeacherSessionStartedData(teacher: joinableSessionData.teacherName, sessionId: selectedSession?.id ?? ""))
+        guard let selectedSession = selectedSession else { return }
+        path.append(TeacherSessionStartedData(teacher: joinableSessionData.teacherName, sessionId: selectedSession.id, sessionName: selectedSession.name))
     }
 }

@@ -164,15 +164,3 @@ struct SessionDetailScreen: View {
         }
     }
 }
-
-#Preview {
-    SessionDetailScreen(didSignIn: .constant(true),
-                        isGuest: false,
-                        session: Session(id: "test123",
-                                         name: "Example Session",
-                                         date: "11/11",
-                                         hour: "11h",
-                                         teacher: "Example Teacher",
-                                         totalSpots: 10,
-                                         filledSpots: 10))
-}

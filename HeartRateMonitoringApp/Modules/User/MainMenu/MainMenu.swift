@@ -195,14 +195,3 @@ struct MainMenu: View {
         }
     }
 }
-
-#Preview {
-    MainMenu(path: .constant(NavigationPath()), 
-             userType: .login(User(username: "rouxinol",
-                                                                      firstName: "Joao",
-                                                                      lastName: "Rouxinol",
-                                                                      email: "testemail@test.com",
-                                                                      gender: "M",
-                                                                      age: 27,
-                                                                      password: "testPassword")))
-}

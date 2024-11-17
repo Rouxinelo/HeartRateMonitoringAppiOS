@@ -200,14 +200,3 @@ struct UserSessionsScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-#Preview {
-    UserSessionsScreen(path: .constant(NavigationPath()),
-                       user: User(username: "",
-                                  firstName: "",
-                                  lastName: "",
-                                  email: "",
-                                  gender: "",
-                                  age: 0,
-                                  password: ""))
-}
