@@ -10,7 +10,8 @@ import SwiftUI
 struct TeacherSessionScreen: View {
     @StateObject var viewModel = TeacherSessionViewModel()
     @State var sessionStartedData: TeacherSessionStartedData
-    @State var testItems = [TeacherSessionUserData]()
+    @State var showUserEnterToast: Bool = false
+    @State var toastMessage: String = ""
     
     var body: some View {
         ZStack {
@@ -46,7 +47,7 @@ struct TeacherSessionScreen: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     HStack {
-                        Text("00h00m00s")
+                        Text(viewModel.sessionTimeString)
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundStyle(.red)
@@ -55,7 +56,7 @@ struct TeacherSessionScreen: View {
                         Spacer()
                         
                         HStack (spacing: 0) {
-                            Text("10")
+                            Text("\(viewModel.sessionUserData.count)")
                                 .font(.headline)
                                 .fontWeight(.bold)
                             Image(systemName: "person.fill")
@@ -64,18 +65,52 @@ struct TeacherSessionScreen: View {
                         }
                     }
                 }
-                VStack (spacing: 0) {
-                    ForEach(testItems, id: \.self) { userData in
-                        TeacherSessionUserView(isActive: userData.isActive,
-                                               name: "\(userData.name)",
-                                               measurements: userData.measurements)
-                            .padding(.vertical)
-                    }
-                }.scrollOnOverflow()
+                
+                List(viewModel.sessionUserData, id: \.self) { userData in
+                    TeacherSessionUserView(isActive: userData.isActive,
+                                           name: "\(userData.name)",
+                                           measurements: userData.measurements)
+                    .padding(.vertical)
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
+                }
+                .listStyle(PlainListStyle())
+                .background(Color.white)
+                .edgesIgnoringSafeArea(.all)
+                
                 Spacer()
+                
             }.padding(.horizontal)
+            
+            if showUserEnterToast {
+                CustomToast(isShowing: $showUserEnterToast,
+                            iconName: "info.circle.fill",
+                            message: toastMessage)
+            }
+        }
+        .onAppear {
+            viewModel.startListening(sessionId: sessionStartedData.sessionId)
+            viewModel.startTimer()
+        }.onReceive(viewModel.publisher) { response in
+            switch response {
+            case .didEnterSession(let name):
+                showToastMessage(event: .enterSession, name: name)
+            case .didLeaveSession(let name):
+                showToastMessage(event: .leaveSession, name: name)
+            }
         }
         .navigationBarBackButtonHidden()
+    }
+    
+    func showToastMessage(event: SessionEvent, name: String) {
+        switch event {
+        case .enterSession:
+            toastMessage = "\(name) has joined the session!"
+        case .leaveSession:
+            toastMessage = "\(name) has left the session!"
+        }
+        showUserEnterToast = false
+        showUserEnterToast = true
     }
 }
 

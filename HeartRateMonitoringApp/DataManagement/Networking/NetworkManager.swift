@@ -35,7 +35,6 @@ enum NetworkManageResponse {
     case didStartSession
     case urlUnavailable
     case failedRequest
-    case didRecieveSSEResponse(SSEData)
 }
 
 enum RegisterUserResult {
@@ -52,7 +51,7 @@ class NetworkManager {
 
     func performRequest(apiPath: API) {
         switch apiPath {
-        case .getUserData, .getAllSessions, .getUserSessions, .session:
+        case .getUserData, .getAllSessions, .getUserSessions:
             performGETRequest(for: apiPath)
         case .register(let user):
             guard let data = encoder.encodeToJSON(user) else {
@@ -134,6 +133,8 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
+        default:
+            return
         }
     }
     
@@ -279,12 +280,6 @@ class NetworkManager {
                 return
             }
             handleStartSessionResponse(response: response)
-        case .session:
-            guard let response = decoder.decodeSSEResponse(data: data) else {
-                statePublisher.send(.failedRequest)
-                return
-            }
-            handleSSEResponse(response: response)
         default:
             return
         }
@@ -417,9 +412,5 @@ private extension NetworkManager {
         default:
             statePublisher.send(.failedRequest)
         }
-    }
-    
-    func handleSSEResponse(response: SSEData) {
-        statePublisher.send(.didRecieveSSEResponse(response))
     }
 }

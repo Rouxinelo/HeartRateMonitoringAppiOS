@@ -14,7 +14,6 @@ struct TeacherSessionUserView: View {
     @State var maxHR: Int = 0
     @State var avgHR: Int = 0
     @State var minHR: Int = 0
-    @State var flash: Bool = false
     @State var measurements: [Int]
     
     var body: some View {
@@ -60,21 +59,21 @@ struct TeacherSessionUserView: View {
                             Spacer()
                             Image(systemName: "arrow.up")
                             .foregroundStyle(.red)
-                            Text(getHRString(maxHR))
+                            Text("\(maxHR)")
                         }
                         Spacer()
                         HStack {
                             Spacer()
                             Image(systemName: "alternatingcurrent")
                             .foregroundStyle(.red)
-                            Text(getHRString(avgHR))
+                            Text("\(avgHR)")
                         }
                         Spacer()
                         HStack {
                             Spacer()
                             Image(systemName: "arrow.down")
                                 .foregroundStyle(.red)
-                            Text(getHRString(minHR))
+                            Text("\(minHR)")
                         }
                     }
                     .font(.title2)
@@ -82,12 +81,9 @@ struct TeacherSessionUserView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 100)
                 .padding()
-                .background(flash ? getFlashColorAnimation() : Color.white)
+                .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .shadow(radius: 5)
-                .onAppear {
-                    triggerFlashAnimation()
-                }
             }
         }.onAppear {
             setNewValues()
@@ -97,21 +93,6 @@ struct TeacherSessionUserView: View {
     
     func getHRString(_ heartRate: Int) -> String {
         "\(heartRate) BPM"
-    }
-    
-    func triggerFlashAnimation() {
-        withAnimation(.easeInOut(duration: 0.1)) {
-            flash = true
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            withAnimation {
-                flash = false
-            }
-        }
-    }
-    
-    func getFlashColorAnimation() -> Color {
-        isActive ? .green : .yellow
     }
     
     func setNewValues() {

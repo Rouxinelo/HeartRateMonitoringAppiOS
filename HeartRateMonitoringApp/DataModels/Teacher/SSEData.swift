@@ -12,3 +12,9 @@ struct SSEData: Codable {
     let event: String
     let value: String
 }
+
+struct SSEDataEvents {
+    static let enterSession = "ENTER_SESSION"
+    static let leaveSession = "LEAVE_SESSION"
+    static let heartRate = "HEARTRATE"
+}

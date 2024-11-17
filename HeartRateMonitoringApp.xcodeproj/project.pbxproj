@@ -80,6 +80,7 @@
 		6B8349C62CEA3ED8003AC8E9 /* TeacherSessionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */; };
 		6B8349C82CEA68C5003AC8E9 /* TeacherSessionUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */; };
 		6B8349CA2CEA6963003AC8E9 /* SSEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349C92CEA6963003AC8E9 /* SSEData.swift */; };
+		6B8349CC2CEA96DD003AC8E9 /* SSENetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8349CB2CEA96DD003AC8E9 /* SSENetworkManager.swift */; };
 		6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */; };
 		6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB62BB04F3E0088899E /* CircularAvatar.swift */; };
 		6B872BB92BB052E20088899E /* UserDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B872BB82BB052E20088899E /* UserDetailsSection.swift */; };
@@ -250,6 +251,7 @@
 		6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionUserView.swift; sourceTree = "<group>"; };
 		6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionUserData.swift; sourceTree = "<group>"; };
 		6B8349C92CEA6963003AC8E9 /* SSEData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEData.swift; sourceTree = "<group>"; };
+		6B8349CB2CEA96DD003AC8E9 /* SSENetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSENetworkManager.swift; sourceTree = "<group>"; };
 		6B872BB42BB04F1F0088899E /* UserDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsScreen.swift; sourceTree = "<group>"; };
 		6B872BB62BB04F3E0088899E /* CircularAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAvatar.swift; sourceTree = "<group>"; };
 		6B872BB82BB052E20088899E /* UserDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsSection.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				6BD818F82BE8593A002F0ADE /* JSONDataDecoder.swift */,
 				6B0EC09E2BEF90DA00747793 /* PostResponse.swift */,
 				6B0EC0A02BEF9C1D00747793 /* JSONDataEncoder.swift */,
+				6B8349CB2CEA96DD003AC8E9 /* SSENetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1052,6 +1055,7 @@
 				6B3D79162BA793E6000DBE1A /* HeartRateMonitoringAppApp.swift in Sources */,
 				6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */,
 				6B10AACF2BC2FD2D00AFE2FC /* View.swift in Sources */,
+				6B8349CC2CEA96DD003AC8E9 /* SSENetworkManager.swift in Sources */,
 				6BB8D50D2BF6CD8D00A17837 /* SessionViewModel.swift in Sources */,
 				6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */,
 				6B7194C02BC4975600B297AF /* Gender.swift in Sources */,
