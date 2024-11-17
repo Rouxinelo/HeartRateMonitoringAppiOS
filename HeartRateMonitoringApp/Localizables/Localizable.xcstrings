@@ -2940,6 +2940,40 @@
         }
       }
     },
+    "session_joinToast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ has joined the session!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ entrou na sessão!"
+          }
+        }
+      }
+    },
+    "session_leaveToast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ has left the session!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ saiu da sessão!"
+          }
+        }
+      }
+    },
     "session_max" : {
       "extractionState" : "manual",
       "localizations" : {
