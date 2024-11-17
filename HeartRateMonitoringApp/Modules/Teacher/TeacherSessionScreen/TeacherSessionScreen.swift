@@ -105,9 +105,9 @@ struct TeacherSessionScreen: View {
     func showToastMessage(event: SessionEvent, name: String) {
         switch event {
         case .enterSession:
-            toastMessage = "\(name) has joined the session!"
+            toastMessage = localized(TeacherSessionStrings.toastJoinString).replacingOccurrences(of: "$", with: name)
         case .leaveSession:
-            toastMessage = "\(name) has left the session!"
+            toastMessage = localized(TeacherSessionStrings.toastLeaveString).replacingOccurrences(of: "$", with: name)
         }
         showUserEnterToast = false
         showUserEnterToast = true
