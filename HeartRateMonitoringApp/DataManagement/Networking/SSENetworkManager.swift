@@ -44,9 +44,7 @@ class SSENetworkManager: NSObject, URLSessionDataDelegate {
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if let error = error {
-            print("SSE connection failed: \(error.localizedDescription)")
-        }
+        statePublisher.send(.failedRequest)
     }
     
     func handleSSEResponse(response: SSEData) {

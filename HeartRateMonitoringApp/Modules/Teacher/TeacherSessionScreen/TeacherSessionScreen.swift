@@ -97,6 +97,9 @@ struct TeacherSessionScreen: View {
                 showToastMessage(event: .enterSession, name: name)
             case .didLeaveSession(let name):
                 showToastMessage(event: .leaveSession, name: name)
+            case .networkError:
+                // Handle Close Session because of error
+                toastMessage = "NETWORK ERROR"
             }
         }
         .navigationBarBackButtonHidden()

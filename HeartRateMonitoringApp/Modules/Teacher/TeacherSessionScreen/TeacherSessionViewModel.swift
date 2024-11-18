@@ -16,6 +16,7 @@ enum SessionEvent {
 enum TeacherSessionCases {
     case didEnterSession(String)
     case didLeaveSession(String)
+    case networkError
 }
 
 class TeacherSessionViewModel: ObservableObject {
@@ -46,8 +47,8 @@ class TeacherSessionViewModel: ObservableObject {
                     default:
                         return
                     }
-                default:
-                    return
+                case .failedRequest:
+                    self?.publisher.send(.networkError)
                 }
             }.store(in: &subscriptions)
     }
