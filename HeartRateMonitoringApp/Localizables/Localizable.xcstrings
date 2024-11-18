@@ -30,6 +30,9 @@
     "%lldh" : {
 
     },
+    "Active" : {
+
+    },
     "bluetoothPermissionString" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -506,6 +509,9 @@
         }
       }
     },
+    "Current HR:" : {
+
+    },
     "forgot_password_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -797,6 +803,9 @@
           }
         }
       }
+    },
+    "Inactive" : {
+
     },
     "insert_recovery_alertButton" : {
       "extractionState" : "manual",
@@ -2927,6 +2936,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação Cardíaca:"
+          }
+        }
+      }
+    },
+    "session_joinToast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ has joined the session!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ entrou na sessão!"
+          }
+        }
+      }
+    },
+    "session_leaveToast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ has left the session!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$ saiu da sessão!"
           }
         }
       }

@@ -80,18 +80,3 @@ struct SessionShareabaleView: View {
         }
     }
 }
-
-#Preview {
-    SessionShareabaleView(sessionData: PreviousSessionData(session: Session(id: "1",
-                                                                            name: "testName",
-                                                                            date: "01-01-1000",
-                                                                            hour: "18h",
-                                                                            teacher: "testTeacher",
-                                                                            totalSpots: 10,
-                                                                            filledSpots: 10,
-                                                                            description: "testdesc"),
-                                                           count: 100,
-                                                           average: 100,
-                                                           maximum: 100,
-                                                           minimum: 100))
-}

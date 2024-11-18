@@ -338,6 +338,13 @@ public struct SetupSessionStrings {
     
 }
 
+public struct TeacherSessionStrings {
+    static let closeString: String = "session_close"
+    static let timeString: String = "session_time"
+    static let toastJoinString: String = "session_joinToast"
+    static let toastLeaveString: String = "session_leaveToast"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
     static let recoverPasswordScreenId: String = "recoverPassword"

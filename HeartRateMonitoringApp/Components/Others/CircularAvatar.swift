@@ -22,7 +22,3 @@ struct CircularAvatar: View {
             ).shadow(radius: 10)
     }
 }
-
-#Preview {
-    CircularAvatar(backgroundColor: .blue, textColor: .white, text: "JR")
-}

@@ -64,10 +64,3 @@ struct UserDetailsScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-#Preview {
-    UserDetailsScreen(details: [UserDetail(detailType: .name, description: "test name"),
-                                UserDetail(detailType: .email, description: "testemail@testemail.com"),
-                                UserDetail(detailType: .gender, description: "M"),
-                                UserDetail(detailType: .age, description: "50")])
-}

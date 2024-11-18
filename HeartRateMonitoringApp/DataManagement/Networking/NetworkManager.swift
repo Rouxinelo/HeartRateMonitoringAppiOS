@@ -133,7 +133,13 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
+        default:
+            return
         }
+    }
+    
+    func stopConnection() {
+        subscriptions.removeAll()
     }
     
     private func performPOSTRequest(for apiPath: API, with data: Data) {

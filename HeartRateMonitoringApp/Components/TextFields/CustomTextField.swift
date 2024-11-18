@@ -47,7 +47,3 @@ struct CustomTextField: View {
         }
     }
 }
-
-#Preview {
-    CustomTextField(searchText: .constant(""), isPrivateField: false, placeholder: "Search")
-}

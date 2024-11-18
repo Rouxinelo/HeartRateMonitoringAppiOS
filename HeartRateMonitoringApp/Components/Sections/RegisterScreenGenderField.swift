@@ -31,7 +31,3 @@ struct RegisterScreenGenderField: View {
         }
     }
 }
-
-#Preview {
-    RegisterScreenGenderField(isMaleSelected: .constant(false), isFemaleSelected: .constant(false))
-}

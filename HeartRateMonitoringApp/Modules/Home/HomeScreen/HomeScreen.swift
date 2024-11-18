@@ -268,7 +268,3 @@ struct HomeScreen: View {
                     password: "testPassword")
     }
 }
-
-#Preview {
-    HomeScreen()
-}

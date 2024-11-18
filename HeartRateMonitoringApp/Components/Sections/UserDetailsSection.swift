@@ -45,7 +45,3 @@ struct UserDetailsSection: View {
         .shadow(radius: 5)
     }
 }
-
-#Preview {
-    UserDetailsSection(image: "exclamationmark.circle", title: "Test Title", description: "Test Description")
-}

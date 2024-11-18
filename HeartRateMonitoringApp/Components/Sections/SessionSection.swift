@@ -65,12 +65,3 @@ struct SessionSection: View {
         }
     }
 }
-
-#Preview {
-    SessionSection(title: "Pilates Clinico",
-                    date: "19/02",
-                    hour: "22h",
-                    teacher: "J. Santos",
-                    occupation: "10/10",
-                    onClick: {})
-}

@@ -35,7 +35,3 @@ struct CustomNumericField: View {
         }
     }
 }
-
-#Preview {
-    CustomNumericField(numberText: .constant(""), placeHolder: "Insert Number", maximumDigits: 3)
-}

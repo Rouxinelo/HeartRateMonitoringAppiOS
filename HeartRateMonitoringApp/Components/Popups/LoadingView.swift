@@ -55,7 +55,3 @@ struct LoadingView: View {
         isShowing = false
     }
 }
-
-#Preview {
-    LoadingView(isShowing: .constant(true), title: "Test Title", description: "Test Description")
-}

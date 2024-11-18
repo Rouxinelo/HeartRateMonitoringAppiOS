@@ -29,7 +29,3 @@ struct RegisterScreenField: View {
         .padding(.horizontal)
     }
 }
-
-#Preview {
-    RegisterScreenField(searchText: .constant(""), isHiddenField: false, placeholder: "Test Placeholder", title: "Test Title", description: "Test Description")
-}

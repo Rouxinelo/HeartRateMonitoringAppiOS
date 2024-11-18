@@ -33,7 +33,3 @@ struct CustomRadioButton: View {
         }
         .buttonStyle(PlainButtonStyle())    }
 }
-
-#Preview {
-    CustomRadioButton(isSelected: .constant(false), text: "M")
-}

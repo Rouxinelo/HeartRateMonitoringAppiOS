@@ -39,9 +39,3 @@ struct MultipleTextButton: View {
         }
     }
 }
-
-#Preview {
-    MultipleTextButton(action: {},
-                       title: "ExampleTitle",
-                       description: "ExampleDescription")
-}

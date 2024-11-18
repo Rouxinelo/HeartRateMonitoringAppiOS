@@ -135,7 +135,3 @@ struct LanguageSelectorView: View {
         }
     }
 }
-
-#Preview {
-    LanguageSelectorView(isShowing: .constant(true), onLanguageChange: {})
-}

@@ -119,24 +119,3 @@ struct UserSessionsModal: View {
         }
     }
 }
-
-#Preview {
-    UserSessionsModal(isShowing: .constant(true),
-                      sessions: [Session(id: "session1",
-                                         name: "ahsduash",
-                                         date: "sdhsu",
-                                         hour: "du",
-                                         teacher: "duhs",
-                                         totalSpots: 1,
-                                         filledSpots: 1),
-                                 Session(id: "session2",
-                                         name: "ahhcnbsduash",
-                                         date: "sdhsu",
-                                         hour: "du",
-                                         teacher: "duhs",
-                                         totalSpots: 1,
-                                         filledSpots: 1)],
-                      title: "Test Title",
-                      onSelectSession: { _ in })
-}
-
