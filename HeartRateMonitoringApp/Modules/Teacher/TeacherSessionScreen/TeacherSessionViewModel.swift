@@ -17,6 +17,7 @@ enum TeacherSessionCases {
     case didEnterSession(String)
     case didLeaveSession(String)
     case networkError
+    case didCreateSummaryData(TeacherSessionSummaryData)
 }
 
 class TeacherSessionViewModel: ObservableObject {
@@ -66,6 +67,12 @@ class TeacherSessionViewModel: ObservableObject {
     
     func stopTimer() {
         timer?.invalidate()
+    }
+    
+    func finishSession(sessionName: String) {
+        publisher.send(.didCreateSummaryData(TeacherSessionSummaryData(sessionName: sessionName,
+                                                                       sessionTime: sessionTimeString, 
+                                                                       sessionUserData: sessionUserData)))
     }
 }
 

@@ -113,7 +113,7 @@ struct TeacherJoinableSessionsScreen: View {
             viewModel.loadSessions(joinableSessionData.teacherName)
         }.navigationBarBackButtonHidden()
         .navigationDestination(for: TeacherSessionStartedData.self, destination: { sessionStartedData in
-            TeacherSessionScreen(sessionStartedData: sessionStartedData)
+            TeacherSessionScreen(path: $path, sessionStartedData: sessionStartedData)
         })
         .onReceive(viewModel.publisher) { response in
             switch response {

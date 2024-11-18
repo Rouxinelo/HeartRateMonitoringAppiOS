@@ -343,6 +343,11 @@ public struct TeacherSessionStrings {
     static let timeString: String = "session_time"
     static let toastJoinString: String = "session_joinToast"
     static let toastLeaveString: String = "session_leaveToast"
+    static let alertTitleString: String = "session_alertTitle"
+    static let alertDescriptionString: String = "session_alertDescription"
+    static let alertLeftButtonString: String = "session_alertLeftButton"
+    static let alertRightButtonString: String = "session_alertRightButton"
+
 }
 
 public struct ScreenIds {
