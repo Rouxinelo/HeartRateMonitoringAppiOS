@@ -121,7 +121,7 @@ struct TeacherSessionScreen: View {
         }
         .navigationBarBackButtonHidden()
         .navigationDestination(for: TeacherSessionSummaryData.self, destination: { summaryData in
-            TeacherSessionSummaryScreen()
+            TeacherSessionSummaryScreen(teacherSessionSummaryData: summaryData)
         })
     }
     

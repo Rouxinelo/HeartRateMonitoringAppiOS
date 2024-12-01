@@ -90,6 +90,9 @@
 		6B8793492C0898A800EC8B75 /* SessionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8793482C0898A800EC8B75 /* SessionType.swift */; };
 		6B87934B2C148C2D00EC8B75 /* SessionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B87934A2C148C2D00EC8B75 /* SessionOperation.swift */; };
 		6B87934D2C14900100EC8B75 /* JoinSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B87934C2C14900100EC8B75 /* JoinSessionViewModel.swift */; };
+		6BA0527E2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA0527D2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift */; };
+		6BA052812CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA052802CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift */; };
+		6BA052832CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA052822CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift */; };
 		6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */; };
 		6BB8067E2C5FF33E00E992BD /* PasswordRecoveryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB8067D2C5FF33E00E992BD /* PasswordRecoveryScreen.swift */; };
 		6BB806802C602C5A00E992BD /* PasswordRecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB8067F2C602C5A00E992BD /* PasswordRecoveryViewModel.swift */; };
@@ -263,6 +266,9 @@
 		6B8793482C0898A800EC8B75 /* SessionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionType.swift; sourceTree = "<group>"; };
 		6B87934A2C148C2D00EC8B75 /* SessionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionOperation.swift; sourceTree = "<group>"; };
 		6B87934C2C14900100EC8B75 /* JoinSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSessionViewModel.swift; sourceTree = "<group>"; };
+		6BA0527D2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryUserView.swift; sourceTree = "<group>"; };
+		6BA052802CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryViewModel.swift; sourceTree = "<group>"; };
+		6BA052822CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryUserData.swift; sourceTree = "<group>"; };
 		6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6BB8067D2C5FF33E00E992BD /* PasswordRecoveryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryScreen.swift; sourceTree = "<group>"; };
 		6BB8067F2C602C5A00E992BD /* PasswordRecoveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewModel.swift; sourceTree = "<group>"; };
@@ -354,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				6B0A89C42CEBEE5800BB8059 /* TeacherSessionSummaryScreen.swift */,
+				6BA052802CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift */,
 			);
 			path = TeacherSessionSummaryScreen;
 			sourceTree = "<group>";
@@ -663,6 +670,7 @@
 				6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */,
 				6B8349C92CEA6963003AC8E9 /* SSEData.swift */,
 				6B0A89C02CEBEC0700BB8059 /* TeacherSessionSummaryData.swift */,
+				6BA052822CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift */,
 			);
 			path = Teacher;
 			sourceTree = "<group>";
@@ -765,6 +773,7 @@
 				6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */,
 				6B5FDA8F2C28C9D100AC66B6 /* SessionInfoSection.swift */,
 				6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */,
+				6BA0527D2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -1028,7 +1037,9 @@
 				6B3D79432BA79525000DBE1A /* HomeScreen.swift in Sources */,
 				6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */,
 				6B08139B2BCBECD800AAAE30 /* HeartRateSummarySection.swift in Sources */,
+				6BA052832CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift in Sources */,
 				6BBB68DB2BDA894A003E8109 /* SessionShareabaleView.swift in Sources */,
+				6BA0527E2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift in Sources */,
 				6BC27BF42BB8CAF80089217F /* CustomRadioButton.swift in Sources */,
 				6B87934D2C14900100EC8B75 /* JoinSessionViewModel.swift in Sources */,
 				6BE3844E2C69877C00D46D4B /* HourSelector.swift in Sources */,
@@ -1071,6 +1082,7 @@
 				6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */,
 				6B10AACF2BC2FD2D00AFE2FC /* View.swift in Sources */,
 				6B8349CC2CEA96DD003AC8E9 /* SSENetworkManager.swift in Sources */,
+				6BA052812CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift in Sources */,
 				6BB8D50D2BF6CD8D00A17837 /* SessionViewModel.swift in Sources */,
 				6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */,
 				6B7194C02BC4975600B297AF /* Gender.swift in Sources */,
