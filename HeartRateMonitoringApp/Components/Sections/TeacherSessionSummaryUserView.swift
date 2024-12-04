@@ -39,7 +39,7 @@ struct TeacherSessionSummaryUserView: View {
                             Spacer()
                             
                             HStack {
-                                Text("User Details:")
+                                Text(localized(TeacherSessionSummaryUserViewStrings.userDetailsString))
                                     .font(.headline)
                                 Spacer()
                             }

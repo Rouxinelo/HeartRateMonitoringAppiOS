@@ -99,7 +99,7 @@ struct TeacherSessionScreen: View {
                             rightButtonText: localized(TeacherSessionStrings.alertRightButtonString),
                             description: localized(TeacherSessionStrings.alertDescriptionString),
                             leftButtonAction: {},
-                            rightButtonAction: { viewModel.finishSession(sessionName: sessionStartedData.sessionName) },
+                            rightButtonAction: { viewModel.finishSession(sessionName: sessionStartedData.sessionName, sessionId: sessionStartedData.sessionId) },
                             isSingleButton: false)
             }
             
@@ -114,14 +114,14 @@ struct TeacherSessionScreen: View {
             case .didLeaveSession(let name):
                 showToastMessage(event: .leaveSession, name: name)
             case .networkError:
-                viewModel.finishSession(sessionName: sessionStartedData.sessionName)
+                viewModel.finishSession(sessionName: sessionStartedData.sessionName, sessionId: sessionStartedData.sessionId)
             case .didCreateSummaryData(let summaryData):
                 finishSession(with: summaryData)
             }
         }
         .navigationBarBackButtonHidden()
         .navigationDestination(for: TeacherSessionSummaryData.self, destination: { summaryData in
-            TeacherSessionSummaryScreen(teacherSessionSummaryData: summaryData)
+            TeacherSessionSummaryScreen(path: $path, teacherSessionSummaryData: summaryData)
         })
     }
     

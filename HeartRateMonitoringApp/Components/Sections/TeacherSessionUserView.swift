@@ -21,7 +21,7 @@ struct TeacherSessionUserView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Text(isActive ? "Active" : "Inactive")
+                    Text(localized(isActive ? TeacherSessionUserViewStrings.stateActiveString : TeacherSessionUserViewStrings.stateInactiveString))
                     Image(systemName: isActive ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
                         .foregroundStyle(isActive ? .green : .yellow)
                 }.font(.headline)
@@ -38,7 +38,7 @@ struct TeacherSessionUserView: View {
                         Spacer()
                         
                         HStack {
-                            Text("Current HR:")
+                            Text(localized(TeacherSessionUserViewStrings.currentHRString))
                                 .font(.headline)
                             Spacer()
                         }

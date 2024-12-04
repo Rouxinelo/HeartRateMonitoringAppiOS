@@ -33,6 +33,7 @@ enum API {
     case getTeacherSessions(String, SessionType)
     case cancelSession(String, String)
     case startSession(SessionStartData)
+    case closeSession(SessionCloseData)
     case session(String)
 }
 
@@ -83,6 +84,8 @@ extension API: TargetType {
             return baseURL + "start-session/"
         case .session(let sessionId):
             return baseURL + "session/\(sessionId)/"
+        case .closeSession:
+            return baseURL + "close-session/"
         }
     }
     
@@ -128,6 +131,8 @@ extension API: TargetType {
             return "POST"
         case .session:
             return "GET"
+        case .closeSession:
+            return "POST"
         }
     }
 }

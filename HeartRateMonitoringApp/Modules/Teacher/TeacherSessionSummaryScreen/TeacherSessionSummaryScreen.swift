@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TeacherSessionSummaryScreen: View {
+    @Binding var path: NavigationPath
     @State var teacherSessionSummaryData: TeacherSessionSummaryData
     @StateObject var viewModel = TeacherSessionSummaryViewModel()
     @State var showingCloseAlert: Bool = false
@@ -27,7 +28,7 @@ struct TeacherSessionSummaryScreen: View {
                     Spacer()
                     
                     Button(action: {
-                        didTapClose()
+                        didPressClose()
                     }) {
                         VStack {
                             Image(systemName: "xmark")
@@ -112,7 +113,7 @@ struct TeacherSessionSummaryScreen: View {
         .navigationBarBackButtonHidden()
     }
     
-    func didTapClose() {
-        showingCloseAlert = true
+    func didPressClose() {
+        path.removeLast(path.count - 1)
     }
 }

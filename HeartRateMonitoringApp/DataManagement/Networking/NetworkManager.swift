@@ -133,6 +133,12 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
+        case .closeSession(let sessionData):
+            guard let data = encoder.encodeToJSON(sessionData) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
         default:
             return
         }

@@ -350,6 +350,16 @@ public struct TeacherSessionStrings {
 
 }
 
+public struct TeacherSessionUserViewStrings {
+    static let stateActiveString: String = "teacher_session_view_activeState"
+    static let stateInactiveString: String = "teacher_session_view_inactiveState"
+    static let currentHRString: String = "teacher_session_view_currentHR"
+}
+
+public struct TeacherSessionSummaryUserViewStrings {
+    static let userDetailsString: String = "teacher_session_summary_view_userDetails"
+}
+
 public struct ScreenIds {
     static let registerScreenID: String = "registerScreen"
     static let recoverPasswordScreenId: String = "recoverPassword"
