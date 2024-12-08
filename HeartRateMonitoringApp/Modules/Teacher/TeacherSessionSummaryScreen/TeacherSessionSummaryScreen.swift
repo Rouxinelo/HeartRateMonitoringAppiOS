@@ -11,7 +11,8 @@ struct TeacherSessionSummaryScreen: View {
     @Binding var path: NavigationPath
     @State var teacherSessionSummaryData: TeacherSessionSummaryData
     @StateObject var viewModel = TeacherSessionSummaryViewModel()
-    @State var showingCloseAlert: Bool = false
+    @State var showBPMAlert: Bool = false
+    @State var selectedUserAge: Int = 0
     
     var body: some View {
         ZStack {
@@ -68,13 +69,13 @@ struct TeacherSessionSummaryScreen: View {
                 }
                 VStack {
                     HStack {
-                        Text("Summary:")
+                        Text(localized(TeacherSessionSummaryStrings.titleString))
                             .font(.title)
                             .fontWeight(.bold)
                         Spacer()
                     }
                     HStack {
-                        Text("(Users without any heartrate measurements were excluded)")
+                        Text(localized(TeacherSessionSummaryStrings.excludedUsersString))
                             .font(.headline)
                             .fontWeight(.bold)
                         Spacer()
@@ -82,30 +83,23 @@ struct TeacherSessionSummaryScreen: View {
                 }
                 List(viewModel.userSummaryData, id: \.self) { userData in
                     TeacherSessionSummaryUserView(user: userData.user,
-                                                  measurements: userData.measurements)
+                                                  measurements: userData.measurements, 
+                                                  onClick: { user in
+                        selectedUserAge = user.age
+                        showBPMAlert = true
+                    })
                     .padding(.vertical)
                     .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)
                 }
                 .edgesIgnoringSafeArea(.all)
                 .listStyle(PlainListStyle())
-                
                 Spacer()
-                
             }.padding(.horizontal)
             
-            if showingCloseAlert {
-                CustomAlert(isShowing: $showingCloseAlert,
-                            icon: "exclamationmark.circle",
-                            title: localized(TeacherSessionStrings.alertTitleString),
-                            leftButtonText: localized(TeacherSessionStrings.alertLeftButtonString),
-                            rightButtonText: localized(TeacherSessionStrings.alertRightButtonString),
-                            description: localized(TeacherSessionStrings.alertDescriptionString),
-                            leftButtonAction: {},
-                            rightButtonAction: {},
-                            isSingleButton: false)
+            if showBPMAlert {
+                TeacherSessionSummaryBPMView(isShowing: $showBPMAlert, age: selectedUserAge)
             }
-            
         }
         .onAppear {
             viewModel.getUserSummaryData(for: teacherSessionSummaryData)

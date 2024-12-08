@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "(Users without any heartrate measurements were excluded)" : {
-
-    },
     "%@h %@m %@s" : {
 
     },
@@ -31,12 +28,6 @@
       }
     },
     "%lldh" : {
-
-    },
-    "65 %@" : {
-
-    },
-    "Active" : {
 
     },
     "bluetoothPermissionString" : {
@@ -515,9 +506,6 @@
         }
       }
     },
-    "Current HR:" : {
-
-    },
     "forgot_password_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -809,9 +797,6 @@
           }
         }
       }
-    },
-    "Inactive" : {
-
     },
     "insert_recovery_alertButton" : {
       "extractionState" : "manual",
@@ -3422,9 +3407,6 @@
         }
       }
     },
-    "Summary:" : {
-
-    },
     "teacher_future_cancelAlertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3958,6 +3940,108 @@
         }
       }
     },
+    "teacher_session_summary_bpm_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The maximum healthy heart rate is given by:\\nMaximum HR = 220 - Age"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O valor máximo de BPM saudável é dado pela fórmula: \\nFrequência Max = 220 - Idade"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_maxBpm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum healthy value: $ BPM"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valor máximo saudável: $ BPM"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The highest heart rate value is above the recommended threshold"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A frequência cardíaca mais alta registada para neste indivíduo está acima do recomendado"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_excludedUsers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Users without any heart rate measurements were excluded)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Utilizadores sem medições cardíacas foram excluídos)"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Resumo:"
+          }
+        }
+      }
+    },
     "teacher_session_summary_view_userDetails" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4025,9 +4109,6 @@
           }
         }
       }
-    },
-    "User Details:" : {
-
     },
     "user_detail_age" : {
       "extractionState" : "manual",

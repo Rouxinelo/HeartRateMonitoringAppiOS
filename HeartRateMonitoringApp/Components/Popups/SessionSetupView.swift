@@ -40,6 +40,7 @@ struct SessionSetupView: View {
                     
                     HStack {
                         Text(localized(SetupSessionStrings.zoomTitleString))
+                            .multilineTextAlignment(.leading)
                             .font(.title2)
                             .fontWeight(.bold)
                         Spacer()
@@ -99,7 +100,7 @@ struct SessionSetupView: View {
                         .font(.headline)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }
-            .frame(width: 250, height: 400, alignment: .bottom)
+            .frame(width: 250, height: 450, alignment: .bottom)
             .padding(30)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))

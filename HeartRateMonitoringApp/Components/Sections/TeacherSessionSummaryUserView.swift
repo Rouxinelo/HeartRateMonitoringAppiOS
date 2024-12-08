@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TeacherSessionSummaryUserView: View {
-    @State var isDangerousBPM: Bool = true
     @State var user: User
     @State var measurements: [Int]
-    
+    let onClick: (User) -> Void
+
     var body: some View {
         ZStack {
             Button(action: {
-                
+                onClick(user)
             }) {
                 VStack {
                     HStack {
@@ -24,7 +24,7 @@ struct TeacherSessionSummaryUserView: View {
                             .font(.headline)
                             .foregroundStyle(.red)
                     }
-                    .opacity(isDangerousBPM ? 1 : 0)
+                    .opacity(isDangerousBPM() ? 1 : 0)
                     .padding(.horizontal)
                     HStack(spacing: 10) {
                         VStack {
@@ -32,6 +32,7 @@ struct TeacherSessionSummaryUserView: View {
                                 Image(systemName: "person.fill")
                                     .foregroundStyle(.red)
                                 Text(getFormattedName(for: user))
+                                    .multilineTextAlignment(.leading)
                                 Spacer()
                             }
                             .font(.title)
@@ -45,7 +46,7 @@ struct TeacherSessionSummaryUserView: View {
                             }
                             
                             HStack {
-                                Text("65 \(getGenderEmoji("M"))")
+                                Text("\(user.age) \(getGenderEmoji(user.gender))")
                                 Spacer()
                             }
                             .font(.title2)
@@ -58,7 +59,7 @@ struct TeacherSessionSummaryUserView: View {
                                 Image(systemName: "arrow.up")
                                     .foregroundStyle(.red)
                                 Text("\(measurements.max() ?? 0)")
-                            }.foregroundStyle(isDangerousBPM ? .red : .black)
+                            }.foregroundStyle(isDangerousBPM() ? .red : .black)
                             Spacer()
                             HStack {
                                 Spacer()
@@ -86,7 +87,7 @@ struct TeacherSessionSummaryUserView: View {
                 .foregroundStyle(.black)
             }
             .padding(.horizontal)
-        }.disabled(!isDangerousBPM)
+        }.disabled(!isDangerousBPM())
     }
     
     func getGenderEmoji(_ gender: String) -> String {
@@ -103,5 +104,9 @@ struct TeacherSessionSummaryUserView: View {
     func getFormattedName(for user: User) -> String {
         guard let firstNameChar = user.firstName.first else { return "" }
         return "\(firstNameChar). \(user.lastName)"
+    }
+    
+    func isDangerousBPM() -> Bool {
+        (220 - user.age) <= measurements.max() ?? 0
     }
 }

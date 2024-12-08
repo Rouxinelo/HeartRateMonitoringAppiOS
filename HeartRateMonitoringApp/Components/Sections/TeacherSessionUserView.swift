@@ -31,6 +31,7 @@ struct TeacherSessionUserView: View {
                             Image(systemName: "person.fill")
                                 .foregroundStyle(.red)
                             Text(name)
+                                .multilineTextAlignment(.leading)
                             Spacer()
                         }
                         .font(.title)
@@ -92,7 +93,7 @@ struct TeacherSessionUserView: View {
     }
     
     func getHRString(_ heartRate: Int) -> String {
-        "\(heartRate) BPM"
+        "\(heartRate)"
     }
     
     func setNewValues() {
