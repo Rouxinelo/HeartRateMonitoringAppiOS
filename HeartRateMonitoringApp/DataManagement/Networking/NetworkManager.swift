@@ -41,6 +41,7 @@ enum RegisterUserResult {
     case usernameAlreadyRegistered
     case emailAlreadyRegistered
     case registerSuccessful
+    case invalidBirthDate
 }
 
 class NetworkManager {
@@ -336,6 +337,8 @@ private extension NetworkManager {
             statePublisher.send(.registerUserResult(.usernameAlreadyRegistered))
         case ResponseMessages.registerSuccessfullMessage:
             statePublisher.send(.registerUserResult(.registerSuccessful))
+        case ResponseMessages.registerFailedBirthdate:
+            statePublisher.send(.registerUserResult(.invalidBirthDate))
         default:
             statePublisher.send(.failedRequest)
         }

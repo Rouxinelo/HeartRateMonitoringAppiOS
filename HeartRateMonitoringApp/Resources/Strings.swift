@@ -90,6 +90,8 @@ public struct RegisterUserStrings {
     static let userRegisteredString: String = "register_user_userAlertDescription"
     static let alertOkString: String = "register_user_okAlert"
     static let toastMessageString: String = "register_user_toastMessage"
+    static let invalidBirthdateDescriptionString: String = "register_user_birthdateAlertDescription"
+
 }
 
 public struct CalendarStrings {

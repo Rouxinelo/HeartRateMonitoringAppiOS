@@ -12,6 +12,7 @@ enum RegisterUserPublisherCases {
     case didRegisterSuccessfully
     case emailAlreadyRegistered
     case usernameAlreadyRegistered
+    case invalidBirthDate
     case error
 }
 
@@ -45,6 +46,8 @@ class RegisterUserViewModel: ObservableObject {
                     self.publisher.send(.emailAlreadyRegistered)
                 case .registerSuccessful:
                     self.publisher.send(.didRegisterSuccessfully)
+                case .invalidBirthDate:
+                    self.publisher.send(.invalidBirthDate)
                 }
             default:
                 self.publisher.send(.error)

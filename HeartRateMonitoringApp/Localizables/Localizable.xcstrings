@@ -1359,6 +1359,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "language_selector_confirm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2206,6 +2209,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro!"
+          }
+        }
+      }
+    },
+    "register_user_birthdateAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid birth date"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data de nascimento inválida"
           }
         }
       }

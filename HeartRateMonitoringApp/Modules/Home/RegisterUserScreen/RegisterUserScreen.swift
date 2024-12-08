@@ -13,6 +13,7 @@ struct RegisterUserScreen: View {
     @Binding var showRegisterToast: Bool
     @State private var showUsernameRegisteredAlert: Bool = false
     @State private var showEmailRegisteredAlert: Bool = false
+    @State private var showInvalidBirthDateAlert: Bool = false
     @State private var showNetworkErrorToast: Bool = false
     @State private var isLoading = false
     @State private var userName: String = ""
@@ -174,6 +175,18 @@ struct RegisterUserScreen: View {
                             isSingleButton: true)
             }
             
+            if showInvalidBirthDateAlert {
+                CustomAlert(isShowing: $showInvalidBirthDateAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(RegisterUserStrings.alertTitleString),
+                            leftButtonText: localized(RegisterUserStrings.alertOkString),
+                            rightButtonText: "",
+                            description: localized(RegisterUserStrings.invalidBirthdateDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
+            
             if showNetworkErrorToast {
                 CustomToast(isShowing: $showNetworkErrorToast,
                             iconName: "info.circle.fill",
@@ -189,6 +202,8 @@ struct RegisterUserScreen: View {
                 emailRegistered()
             case .usernameAlreadyRegistered:
                 usernameRegistered()
+            case .invalidBirthDate:
+                invalidBirthDate()
             case .error:
                 networkError()
             }
@@ -244,6 +259,11 @@ struct RegisterUserScreen: View {
     func emailRegistered() {
         isLoading = false
         showEmailRegisteredAlert = true
+    }
+    
+    func invalidBirthDate() {
+        isLoading = false
+        showInvalidBirthDateAlert = true
     }
     
     func networkError() {
