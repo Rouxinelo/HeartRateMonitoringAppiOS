@@ -14,6 +14,8 @@
 		6B0813972BCBE28E00AAAE30 /* SessionSummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */; };
 		6B0813992BCBE3D800AAAE30 /* SessionSummaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */; };
 		6B08139B2BCBECD800AAAE30 /* HeartRateSummarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */; };
+		6B0A89C12CEBEC0700BB8059 /* TeacherSessionSummaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0A89C02CEBEC0700BB8059 /* TeacherSessionSummaryData.swift */; };
+		6B0A89C52CEBEE5800BB8059 /* TeacherSessionSummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0A89C42CEBEE5800BB8059 /* TeacherSessionSummaryScreen.swift */; };
 		6B0DDDF02C237D0000C65EEE /* BluetoothStateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0DDDEF2C237D0000C65EEE /* BluetoothStateChecker.swift */; };
 		6B0EC09B2BED76FB00747793 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC09A2BED76FB00747793 /* MainMenuViewModel.swift */; };
 		6B0EC09D2BEF87AF00747793 /* RegisterUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EC09C2BEF87AF00747793 /* RegisterUserViewModel.swift */; };
@@ -88,7 +90,11 @@
 		6B8793492C0898A800EC8B75 /* SessionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8793482C0898A800EC8B75 /* SessionType.swift */; };
 		6B87934B2C148C2D00EC8B75 /* SessionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B87934A2C148C2D00EC8B75 /* SessionOperation.swift */; };
 		6B87934D2C14900100EC8B75 /* JoinSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B87934C2C14900100EC8B75 /* JoinSessionViewModel.swift */; };
+		6BA0527E2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA0527D2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift */; };
+		6BA052812CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA052802CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift */; };
+		6BA052832CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA052822CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift */; };
 		6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */; };
+		6BAA3F072D053C50005AD349 /* TeacherSessionSummaryBPMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA3F062D053C50005AD349 /* TeacherSessionSummaryBPMView.swift */; };
 		6BB8067E2C5FF33E00E992BD /* PasswordRecoveryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB8067D2C5FF33E00E992BD /* PasswordRecoveryScreen.swift */; };
 		6BB806802C602C5A00E992BD /* PasswordRecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB8067F2C602C5A00E992BD /* PasswordRecoveryViewModel.swift */; };
 		6BB806822C602E5100E992BD /* RecoveryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB806812C602E5100E992BD /* RecoveryCode.swift */; };
@@ -183,6 +189,8 @@
 		6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSummaryScreen.swift; sourceTree = "<group>"; };
 		6B0813982BCBE3D800AAAE30 /* SessionSummaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSummaryData.swift; sourceTree = "<group>"; };
 		6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateSummarySection.swift; sourceTree = "<group>"; };
+		6B0A89C02CEBEC0700BB8059 /* TeacherSessionSummaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryData.swift; sourceTree = "<group>"; };
+		6B0A89C42CEBEE5800BB8059 /* TeacherSessionSummaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryScreen.swift; sourceTree = "<group>"; };
 		6B0DDDEF2C237D0000C65EEE /* BluetoothStateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateChecker.swift; sourceTree = "<group>"; };
 		6B0EC09A2BED76FB00747793 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		6B0EC09C2BEF87AF00747793 /* RegisterUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewModel.swift; sourceTree = "<group>"; };
@@ -259,7 +267,11 @@
 		6B8793482C0898A800EC8B75 /* SessionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionType.swift; sourceTree = "<group>"; };
 		6B87934A2C148C2D00EC8B75 /* SessionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionOperation.swift; sourceTree = "<group>"; };
 		6B87934C2C14900100EC8B75 /* JoinSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSessionViewModel.swift; sourceTree = "<group>"; };
+		6BA0527D2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryUserView.swift; sourceTree = "<group>"; };
+		6BA052802CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryViewModel.swift; sourceTree = "<group>"; };
+		6BA052822CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryUserData.swift; sourceTree = "<group>"; };
 		6BA8ADDE2BAA39DB00F76BEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6BAA3F062D053C50005AD349 /* TeacherSessionSummaryBPMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSessionSummaryBPMView.swift; sourceTree = "<group>"; };
 		6BB8067D2C5FF33E00E992BD /* PasswordRecoveryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryScreen.swift; sourceTree = "<group>"; };
 		6BB8067F2C602C5A00E992BD /* PasswordRecoveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewModel.swift; sourceTree = "<group>"; };
 		6BB806812C602E5100E992BD /* RecoveryCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryCode.swift; sourceTree = "<group>"; };
@@ -344,6 +356,15 @@
 				6B28AE4B2BF915DB00D076FE /* SessionSummaryViewModel.swift */,
 			);
 			path = SessionSummaryScreen;
+			sourceTree = "<group>";
+		};
+		6B0A89C32CEBEE4900BB8059 /* TeacherSessionSummaryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6B0A89C42CEBEE5800BB8059 /* TeacherSessionSummaryScreen.swift */,
+				6BA052802CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift */,
+			);
+			path = TeacherSessionSummaryScreen;
 			sourceTree = "<group>";
 		};
 		6B0DDDEE2C237CF500C65EEE /* Bluetooth */ = {
@@ -535,6 +556,7 @@
 		6B5743312CB7424400DB5518 /* Teacher */ = {
 			isa = PBXGroup;
 			children = (
+				6B0A89C32CEBEE4900BB8059 /* TeacherSessionSummaryScreen */,
 				6B4BB9512CE6CE2B00FB6455 /* TeacherSessionScreen */,
 				6B5743352CB745D900DB5518 /* TeacherJoinanableSessionsScreen */,
 				6BE384412C65913000D46D4B /* TeacherMenuScreen */,
@@ -649,6 +671,8 @@
 				6B4BB9552CE6D47B00FB6455 /* TeacherSessionStartedData.swift */,
 				6B8349C72CEA68C5003AC8E9 /* TeacherSessionUserData.swift */,
 				6B8349C92CEA6963003AC8E9 /* SSEData.swift */,
+				6B0A89C02CEBEC0700BB8059 /* TeacherSessionSummaryData.swift */,
+				6BA052822CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift */,
 			);
 			path = Teacher;
 			sourceTree = "<group>";
@@ -751,6 +775,7 @@
 				6B08139A2BCBECD800AAAE30 /* HeartRateSummarySection.swift */,
 				6B5FDA8F2C28C9D100AC66B6 /* SessionInfoSection.swift */,
 				6B8349C52CEA3ED8003AC8E9 /* TeacherSessionUserView.swift */,
+				6BA0527D2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -764,6 +789,7 @@
 				6B10AACC2BC2AA9C00AFE2FC /* UserSessionsModal.swift */,
 				6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */,
 				6B4FC4942CBC165100198BE0 /* SessionSetupView.swift */,
+				6BAA3F062D053C50005AD349 /* TeacherSessionSummaryBPMView.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -993,6 +1019,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B0A89C12CEBEC0700BB8059 /* TeacherSessionSummaryData.swift in Sources */,
 				6BD818F72BE8276B002F0ADE /* NetworkManager.swift in Sources */,
 				6B872BB72BB04F3E0088899E /* CircularAvatar.swift in Sources */,
 				6B4BDB372BB0722D00E25C2D /* UserDetailType.swift in Sources */,
@@ -1013,7 +1040,9 @@
 				6B3D79432BA79525000DBE1A /* HomeScreen.swift in Sources */,
 				6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */,
 				6B08139B2BCBECD800AAAE30 /* HeartRateSummarySection.swift in Sources */,
+				6BA052832CF3759C00969BF4 /* TeacherSessionSummaryUserData.swift in Sources */,
 				6BBB68DB2BDA894A003E8109 /* SessionShareabaleView.swift in Sources */,
+				6BA0527E2CF36FD700969BF4 /* TeacherSessionSummaryUserView.swift in Sources */,
 				6BC27BF42BB8CAF80089217F /* CustomRadioButton.swift in Sources */,
 				6B87934D2C14900100EC8B75 /* JoinSessionViewModel.swift in Sources */,
 				6BE3844E2C69877C00D46D4B /* HourSelector.swift in Sources */,
@@ -1044,6 +1073,7 @@
 				6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */,
 				6BE384432C65913F00D46D4B /* TeacherMenuScreen.swift in Sources */,
 				6B47AF492BAE3BE4001C0172 /* CustomToast.swift in Sources */,
+				6BAA3F072D053C50005AD349 /* TeacherSessionSummaryBPMView.swift in Sources */,
 				6B6E02022C61A3BB0028A659 /* RecoveryEmailData.swift in Sources */,
 				6B872BB52BB04F1F0088899E /* UserDetailsScreen.swift in Sources */,
 				6BBB68DD2BDA951B003E8109 /* ScreenshotManager.swift in Sources */,
@@ -1056,6 +1086,7 @@
 				6B2845FC2BA79BAC007A9D8E /* Strings.swift in Sources */,
 				6B10AACF2BC2FD2D00AFE2FC /* View.swift in Sources */,
 				6B8349CC2CEA96DD003AC8E9 /* SSENetworkManager.swift in Sources */,
+				6BA052812CF3749F00969BF4 /* TeacherSessionSummaryViewModel.swift in Sources */,
 				6BB8D50D2BF6CD8D00A17837 /* SessionViewModel.swift in Sources */,
 				6B47AF4E2BAF57DC001C0172 /* LanguageSelectorView.swift in Sources */,
 				6B7194C02BC4975600B297AF /* Gender.swift in Sources */,
@@ -1075,6 +1106,7 @@
 				6B11431B2C1F3A1600BDEF27 /* SensorManager.swift in Sources */,
 				6B10AACD2BC2AA9C00AFE2FC /* UserSessionsModal.swift in Sources */,
 				6B0EC09F2BEF90DA00747793 /* PostResponse.swift in Sources */,
+				6B0A89C52CEBEE5800BB8059 /* TeacherSessionSummaryScreen.swift in Sources */,
 				6B2845FE2BA7A39C007A9D8E /* Icons.swift in Sources */,
 				6BDC5C112C7BB4CE00AEEC99 /* SessionCancelData.swift in Sources */,
 				6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */,

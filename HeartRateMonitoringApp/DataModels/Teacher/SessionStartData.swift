@@ -12,3 +12,7 @@ struct SessionStartData: Codable {
     let zoomId: String
     let zoomPassword: String
 }
+
+struct SessionCloseData: Codable {
+    let sessionId: String
+}

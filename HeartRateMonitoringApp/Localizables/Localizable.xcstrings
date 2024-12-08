@@ -30,9 +30,6 @@
     "%lldh" : {
 
     },
-    "Active" : {
-
-    },
     "bluetoothPermissionString" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -509,9 +506,6 @@
         }
       }
     },
-    "Current HR:" : {
-
-    },
     "forgot_password_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -803,9 +797,6 @@
           }
         }
       }
-    },
-    "Inactive" : {
-
     },
     "insert_recovery_alertButton" : {
       "extractionState" : "manual",
@@ -3945,6 +3936,176 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Procurar (nome da sessão)"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The maximum healthy heart rate is given by:\\nMaximum HR = 220 - Age"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O valor máximo de BPM saudável é dado pela fórmula: \\nFrequência Max = 220 - Idade"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_maxBpm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum healthy value: $ BPM"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valor máximo saudável: $ BPM"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_bpm_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The highest heart rate value is above the recommended threshold"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A frequência cardíaca mais alta registada para neste indivíduo está acima do recomendado"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_excludedUsers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Users without any heart rate measurements were excluded)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Utilizadores sem medições cardíacas foram excluídos)"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Resumo:"
+          }
+        }
+      }
+    },
+    "teacher_session_summary_view_userDetails" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User Details:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalhes:"
+          }
+        }
+      }
+    },
+    "teacher_session_view_activeState" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ativo"
+          }
+        }
+      }
+    },
+    "teacher_session_view_currentHR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current HR:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BPM Atual:"
+          }
+        }
+      }
+    },
+    "teacher_session_view_inactiveState" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inactive"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inativo"
           }
         }
       }

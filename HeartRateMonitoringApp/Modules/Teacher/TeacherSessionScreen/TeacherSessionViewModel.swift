@@ -17,10 +17,12 @@ enum TeacherSessionCases {
     case didEnterSession(String)
     case didLeaveSession(String)
     case networkError
+    case didCreateSummaryData(TeacherSessionSummaryData)
 }
 
 class TeacherSessionViewModel: ObservableObject {
-    let networkManager = SSENetworkManager()
+    let sseManager = SSENetworkManager()
+    let networkManager = NetworkManager()
     let publisher = PassthroughSubject<TeacherSessionCases, Never>()
     var subscriptions = Set<AnyCancellable>()
     var timer: Timer? = nil
@@ -33,7 +35,7 @@ class TeacherSessionViewModel: ObservableObject {
     }
     
     func startListening(sessionId: String) {
-        networkManager.performRequest(apiPath: .session(sessionId))
+        sseManager.performRequest(apiPath: .session(sessionId))
             .sink { [weak self] response in
                 switch response {
                 case .didRecieveSSEResponse(let sseData):
@@ -54,7 +56,7 @@ class TeacherSessionViewModel: ObservableObject {
     }
     
     func stopListening() {
-        networkManager.disconnect()
+        sseManager.disconnect()
     }
     
     func startTimer() {
@@ -66,6 +68,13 @@ class TeacherSessionViewModel: ObservableObject {
     
     func stopTimer() {
         timer?.invalidate()
+    }
+    
+    func finishSession(sessionName: String, sessionId: String) {
+        networkManager.performRequest(apiPath: .closeSession(SessionCloseData(sessionId: sessionId)))
+        publisher.send(.didCreateSummaryData(TeacherSessionSummaryData(sessionName: sessionName,
+                                                                       sessionTime: sessionTimeString, 
+                                                                       sessionUserData: sessionUserData)))
     }
 }
 

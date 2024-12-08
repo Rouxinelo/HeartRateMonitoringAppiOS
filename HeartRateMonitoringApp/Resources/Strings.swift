@@ -343,6 +343,33 @@ public struct TeacherSessionStrings {
     static let timeString: String = "session_time"
     static let toastJoinString: String = "session_joinToast"
     static let toastLeaveString: String = "session_leaveToast"
+    static let alertTitleString: String = "session_alertTitle"
+    static let alertDescriptionString: String = "session_alertDescription"
+    static let alertLeftButtonString: String = "session_alertLeftButton"
+    static let alertRightButtonString: String = "session_alertRightButton"
+
+}
+
+public struct TeacherSessionUserViewStrings {
+    static let stateActiveString: String = "teacher_session_view_activeState"
+    static let stateInactiveString: String = "teacher_session_view_inactiveState"
+    static let currentHRString: String = "teacher_session_view_currentHR"
+}
+
+public struct TeacherSessionSummaryStrings {
+    static let titleString: String = "teacher_session_summary_title"
+    static let excludedUsersString: String = "teacher_session_summary_excludedUsers"
+}
+
+public struct TeacherSessionSummaryUserViewStrings {
+    static let userDetailsString: String = "teacher_session_summary_view_userDetails"
+}
+
+public struct TeacherSessionSummaryBPMViewStrings {
+    static let titleString = "teacher_session_summary_bpm_title"
+    static let descriptionString = "teacher_session_summary_bpm_description"
+    static let maxBpmString = "teacher_session_summary_bpm_maxBpm"
+    static let buttonString = "teacher_session_summary_bpm_button"
 }
 
 public struct ScreenIds {

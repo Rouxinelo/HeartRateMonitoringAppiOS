@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct TeacherSessionScreen: View {
+    @Binding var path: NavigationPath
     @StateObject var viewModel = TeacherSessionViewModel()
     @State var sessionStartedData: TeacherSessionStartedData
     @State var showUserEnterToast: Bool = false
+    @State private var showingCloseAlert: Bool = false
     @State var toastMessage: String = ""
     
     var body: some View {
@@ -28,6 +30,7 @@ struct TeacherSessionScreen: View {
                     Spacer()
                     
                     Button(action: {
+                        didTapClose()
                     }) {
                         VStack {
                             Image(systemName: "xmark")
@@ -87,6 +90,19 @@ struct TeacherSessionScreen: View {
                             iconName: "info.circle.fill",
                             message: toastMessage)
             }
+            
+            if showingCloseAlert {
+                CustomAlert(isShowing: $showingCloseAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(TeacherSessionStrings.alertTitleString),
+                            leftButtonText: localized(TeacherSessionStrings.alertLeftButtonString),
+                            rightButtonText: localized(TeacherSessionStrings.alertRightButtonString),
+                            description: localized(TeacherSessionStrings.alertDescriptionString),
+                            leftButtonAction: {},
+                            rightButtonAction: { viewModel.finishSession(sessionName: sessionStartedData.sessionName, sessionId: sessionStartedData.sessionId) },
+                            isSingleButton: false)
+            }
+            
         }
         .onAppear {
             viewModel.startListening(sessionId: sessionStartedData.sessionId)
@@ -98,11 +114,15 @@ struct TeacherSessionScreen: View {
             case .didLeaveSession(let name):
                 showToastMessage(event: .leaveSession, name: name)
             case .networkError:
-                // Handle Close Session because of error
-                toastMessage = "NETWORK ERROR"
+                viewModel.finishSession(sessionName: sessionStartedData.sessionName, sessionId: sessionStartedData.sessionId)
+            case .didCreateSummaryData(let summaryData):
+                finishSession(with: summaryData)
             }
         }
         .navigationBarBackButtonHidden()
+        .navigationDestination(for: TeacherSessionSummaryData.self, destination: { summaryData in
+            TeacherSessionSummaryScreen(path: $path, teacherSessionSummaryData: summaryData)
+        })
     }
     
     func showToastMessage(event: SessionEvent, name: String) {
@@ -114,6 +134,16 @@ struct TeacherSessionScreen: View {
         }
         showUserEnterToast = false
         showUserEnterToast = true
+    }
+    
+    func didTapClose() {
+        showingCloseAlert = true
+    }
+    
+    func finishSession(with summaryData: TeacherSessionSummaryData) {
+        viewModel.stopTimer()
+        viewModel.stopListening()
+        path.append(summaryData)
     }
 }
 
