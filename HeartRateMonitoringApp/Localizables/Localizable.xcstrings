@@ -1359,12 +1359,6 @@
         }
       }
     },
-    "Key" : {
-      "extractionState" : "manual"
-    },
-    "Key 2" : {
-      "extractionState" : "manual"
-    },
     "language_selector_confirm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1724,7 +1718,6 @@
       }
     },
     "main_menu_userDataLoadingTitle" : {
-      "comment" : "Loading!",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1735,8 +1728,8 @@
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Aguarde!"
+            "state" : "translated",
+            "value" : "Aguarde"
           }
         }
       }
@@ -3402,7 +3395,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Definição da transmissão"
+            "value" : "Dados da transmissão"
           }
         }
       }
