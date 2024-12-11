@@ -30,7 +30,7 @@ struct MainMenuSection: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
-                    Text(isUnavailable ? "Unavailable in Guest Mode": sectionDescription)
+                    Text(isUnavailable ? localized(MainMenuStrings.sectionGuestUnavailableString): sectionDescription)
                 }
                 .frame(width: 180, height: 200, alignment: .top)
                 .background(isUnavailable ? .gray : sectionColor)

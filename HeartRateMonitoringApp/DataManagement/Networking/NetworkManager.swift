@@ -21,6 +21,7 @@ enum NetworkManageResponse {
     case didSignOutSession
     case didFailSign
     case didLogin
+    case didFailLogin
     case didSendRecoveryEmail
     case didNotSendRecoveryEmail
     case didChangePassword
@@ -41,6 +42,7 @@ enum RegisterUserResult {
     case usernameAlreadyRegistered
     case emailAlreadyRegistered
     case registerSuccessful
+    case invalidBirthDate
 }
 
 class NetworkManager {
@@ -336,6 +338,8 @@ private extension NetworkManager {
             statePublisher.send(.registerUserResult(.usernameAlreadyRegistered))
         case ResponseMessages.registerSuccessfullMessage:
             statePublisher.send(.registerUserResult(.registerSuccessful))
+        case ResponseMessages.registerFailedBirthdate:
+            statePublisher.send(.registerUserResult(.invalidBirthDate))
         default:
             statePublisher.send(.failedRequest)
         }
@@ -365,6 +369,8 @@ private extension NetworkManager {
         switch response.message {
         case ResponseMessages.loginSuccessful:
             statePublisher.send(.didLogin)
+        case ResponseMessages.loginFailed:
+            statePublisher.send(.didFailLogin)
         default:
             statePublisher.send(.failedRequest)
         }

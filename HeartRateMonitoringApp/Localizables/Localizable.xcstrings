@@ -730,6 +730,23 @@
         }
       }
     },
+    "home_screen_networkErrorDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not connect to the server"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Não há conexão ao servidor"
+          }
+        }
+      }
+    },
     "home_screen_register" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1359,6 +1376,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "language_selector_confirm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1508,6 +1528,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sessões"
+          }
+        }
+      }
+    },
+    "main_menu_guestUnavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unavailable in guest mode"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não disponível como convidado"
           }
         }
       }
@@ -2206,6 +2243,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro!"
+          }
+        }
+      }
+    },
+    "register_user_birthdateAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid birth date"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data de nascimento inválida"
           }
         }
       }
@@ -2992,6 +3046,57 @@
         }
       }
     },
+    "session_networkAlertButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exit"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair"
+          }
+        }
+      }
+    },
+    "session_networkAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lost connection to the server"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conexão com o servidor perdida"
+          }
+        }
+      }
+    },
+    "session_networkAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro!"
+          }
+        }
+      }
+    },
     "session_summary_alertDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3522,8 +3627,22 @@
         }
       }
     },
-    "teacher_future_noSessionsRightButton" : {
-      "extractionState" : "manual"
+    "teacher_future_noSessionsLeftButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exit"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair"
+          }
+        }
+      }
     },
     "teacher_future_title" : {
       "extractionState" : "manual",
@@ -3616,13 +3735,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Could not start session, try again later."
+            "value" : "Could not complete request, try again later."
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não foi possível iniciar a sessão, tente novamente."
+            "value" : "Não foi possível concluir a operação, tente novamente."
           }
         }
       }
@@ -4235,6 +4354,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro"
+          }
+        }
+      }
+    },
+    "user_session_networkError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network error!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erro de conexão!"
           }
         }
       }

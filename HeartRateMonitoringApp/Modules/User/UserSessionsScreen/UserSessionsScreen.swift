@@ -17,6 +17,7 @@ struct UserSessionsScreen: View {
     @State var showFailedSignOutToast: Bool = false
     @State var showErrorSessionAlert: Bool = false
     @State var showLoading: Bool = false
+    @State var showNetworkErrorToast: Bool = false
     @State var joinableSessions = [Session]()
     @State var signedSessions = [Session]()
     @State var previousSessions = [Session]()
@@ -112,6 +113,12 @@ struct UserSessionsScreen: View {
                             isSingleButton: true)
             }
             
+            if showNetworkErrorToast {
+                CustomToast(isShowing: $showNetworkErrorToast,
+                            iconName: "info.circle.fill",
+                            message: localized(UserSessionsStrings.networkErrorToast))
+            }
+            
         }.swipeRight {
             back()
         }
@@ -146,6 +153,9 @@ struct UserSessionsScreen: View {
                 return
             }
             handlePreviousSession(session)
+        case .networkError:
+            showLoading = false
+            showNetworkErrorToast = true
         }
     }
     

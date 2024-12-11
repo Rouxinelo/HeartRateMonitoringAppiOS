@@ -11,6 +11,7 @@ struct HomeScreen: View {
     @State private var path = NavigationPath()
     @State private var showingAlert = false
     @State private var showingFailedLoginAlert = false
+    @State private var showingNetworkErrorAlert = false
     @State private var showingUserLogin = false
     @State private var showingTeacherLogin = false
     @State private var showingLanguageSelector = false
@@ -165,6 +166,17 @@ struct HomeScreen: View {
                                 rightButtonAction: {},
                                 isSingleButton: true)
                 }
+                if showingNetworkErrorAlert {
+                    CustomAlert(isShowing: $showingNetworkErrorAlert,
+                                icon: HomeScreenIcons.alertIcon,
+                                title: localized(HomeScreenStrings.loginFailedTitle),
+                                leftButtonText: localized(HomeScreenStrings.guestAlertContinue),
+                                rightButtonText: "",
+                                description: localized(HomeScreenStrings.networkErrorDescriptionString),
+                                leftButtonAction: {},
+                                rightButtonAction: {},
+                                isSingleButton: true)
+                }
                 if showingUserLogin {
                     LoginView(isShowing: $showingUserLogin, 
                               isRecoverPasswordHidden: false,
@@ -223,6 +235,8 @@ struct HomeScreen: View {
                     showingFailedLoginAlert = true
                 case .teacherLoginSuccessful(let teacher):
                     path.append(teacher)
+                case .networkError:
+                    showingNetworkErrorAlert = true
                 }
             }
         }

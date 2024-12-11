@@ -96,7 +96,9 @@ struct JoinSessionScreen: View {
                             leftButtonText: localized(JoinSessionStrings.alertButtonString),
                             rightButtonText: "",
                             description: localized(JoinSessionStrings.alertDescriptionString),
-                            leftButtonAction: {},
+                            leftButtonAction: {
+                    viewModel.handleError()
+                },
                             rightButtonAction: {},
                             isSingleButton: true)
             }
@@ -129,7 +131,7 @@ struct JoinSessionScreen: View {
                                         username: preSessionData.user.username,
                                         device: deviceRepresentable))
             case .didFailOperation:
-                showFailedEnterAlert = true
+                handleConnectionError()
             case .bluetoothPoweredOn:
                 startScanningForDevices()
             case .bluetoothPoweredOff, .bluetoothConnectionError:
@@ -139,6 +141,8 @@ struct JoinSessionScreen: View {
                 devices.append(device)
             case .didConnectToDevice:
                 goToSession()
+            case .didDisconnectDevice:
+                back()
             }
         }
         .navigationBarBackButtonHidden()
@@ -161,5 +165,10 @@ struct JoinSessionScreen: View {
     
     func back() {
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    func handleConnectionError() {
+        showConnectionModal = false
+        showFailedEnterAlert = true
     }
 }

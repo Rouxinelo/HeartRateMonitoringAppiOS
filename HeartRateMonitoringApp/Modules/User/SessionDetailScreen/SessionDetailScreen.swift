@@ -65,6 +65,7 @@ struct SessionDetailScreen: View {
                             Text(localized(SessionDetailStrings.sessionDescriptionString))
                                 .font(.title)
                                 .fontWeight(.bold)
+                                .multilineTextAlignment(.leading)
                             Spacer()
                         }
                         Text(session.description ?? localized(SessionDetailStrings.noDescriptionString)).fontWeight(.semibold)

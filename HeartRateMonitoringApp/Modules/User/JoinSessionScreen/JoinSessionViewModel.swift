@@ -17,6 +17,7 @@ enum JoinSessionPublisherCases {
     case bluetoothConnectionError
     case didDiscoverNewDevice(device: DeviceRepresentable)
     case didConnectToDevice
+    case didDisconnectDevice
 }
 
 class JoinSessionViewModel: ObservableObject {
@@ -65,6 +66,11 @@ class JoinSessionViewModel: ObservableObject {
     
     func removeAllSubscriptions() {
         subscriptions.removeAll()
+    }
+    
+    func handleError() {
+        sensorManager.disconnectDevice()
+        publisher.send(.didDisconnectDevice)
     }
 }
 

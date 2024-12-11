@@ -119,6 +119,7 @@ struct TeacherJoinableSessionsScreen: View {
             switch response {
             case .noSessionsLoaded:
                 loadingSessionsAlert = false
+                showNoSessionsAlert = true
             case .sessionsLoaded(let sessions):
                 self.sessions = sessions
                 loadingSessionsAlert = false
