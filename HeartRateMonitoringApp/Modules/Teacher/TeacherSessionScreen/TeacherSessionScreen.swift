@@ -13,6 +13,7 @@ struct TeacherSessionScreen: View {
     @State var sessionStartedData: TeacherSessionStartedData
     @State var showUserEnterToast: Bool = false
     @State private var showingCloseAlert: Bool = false
+    @State private var showingNetworkErrorAlert: Bool = false
     @State var toastMessage: String = ""
     
     var body: some View {
@@ -103,6 +104,18 @@ struct TeacherSessionScreen: View {
                             isSingleButton: false)
             }
             
+            if showingNetworkErrorAlert {
+                CustomAlert(isShowing: $showingNetworkErrorAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(TeacherSessionStrings.networkAlertTitleString),
+                            leftButtonText: localized(TeacherSessionStrings.networkAlertButtonString),
+                            rightButtonText: "",
+                            description: localized(TeacherSessionStrings.networkAlertDescriptionString),
+                            leftButtonAction: { viewModel.finishSession(sessionName: sessionStartedData.sessionName, sessionId: sessionStartedData.sessionId) },
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
+            
         }
         .onAppear {
             viewModel.startListening(sessionId: sessionStartedData.sessionId)
@@ -114,7 +127,7 @@ struct TeacherSessionScreen: View {
             case .didLeaveSession(let name):
                 showToastMessage(event: .leaveSession, name: name)
             case .networkError:
-                viewModel.finishSession(sessionName: sessionStartedData.sessionName, sessionId: sessionStartedData.sessionId)
+                showingNetworkErrorAlert = true
             case .didCreateSummaryData(let summaryData):
                 finishSession(with: summaryData)
             }

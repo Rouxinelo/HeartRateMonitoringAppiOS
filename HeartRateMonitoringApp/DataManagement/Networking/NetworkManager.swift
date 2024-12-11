@@ -21,6 +21,7 @@ enum NetworkManageResponse {
     case didSignOutSession
     case didFailSign
     case didLogin
+    case didFailLogin
     case didSendRecoveryEmail
     case didNotSendRecoveryEmail
     case didChangePassword
@@ -368,6 +369,8 @@ private extension NetworkManager {
         switch response.message {
         case ResponseMessages.loginSuccessful:
             statePublisher.send(.didLogin)
+        case ResponseMessages.loginFailed:
+            statePublisher.send(.didFailLogin)
         default:
             statePublisher.send(.failedRequest)
         }

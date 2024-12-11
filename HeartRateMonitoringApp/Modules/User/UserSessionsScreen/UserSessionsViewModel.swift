@@ -15,6 +15,7 @@ enum UserSessionPublisherCases {
     case didLoadPreviousSession(PreviousSessionData?)
     case didFailSignOut
     case didSignOut
+    case networkError
 }
 
 class UserSessionsViewModel: ObservableObject {
@@ -57,6 +58,8 @@ private extension UserSessionsViewModel {
                 publisher.send(.didLoadSignedSessions(sessions))
             case .didLoadPreviousSessions(let sessions):
                 publisher.send(.didLoadPreviousSessions(sessions))
+            case .failedRequest:
+                publisher.send(.networkError)
             default:
                 return
             }

@@ -24,9 +24,6 @@ struct CustomAlert: View {
         ZStack {
             Color(.black)
                 .opacity(0.5)
-                .onTapGesture {
-                    close()
-                }
             VStack(spacing: 20) {
                 
                 Image(systemName: icon)

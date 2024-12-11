@@ -130,6 +130,8 @@ struct MainMenu: View {
                 areSessionsLoading = false
                 goToCalendar(with: sessions)
             case .error:
+                isUserDataLoading = false
+                areSessionsLoading = false
                 showErrorToast = true
             }
         }

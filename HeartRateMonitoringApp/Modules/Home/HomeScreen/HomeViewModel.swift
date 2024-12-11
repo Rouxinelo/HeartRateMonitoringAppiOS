@@ -13,6 +13,7 @@ enum HomePublisherCases {
     case loginFailed
     case teacherLoginFailed
     case teacherLoginSuccessful(Teacher)
+    case networkError
 }
 
 class HomeViewModel: ObservableObject {
@@ -81,8 +82,10 @@ class HomeViewModel: ObservableObject {
                     return
                 }
                 publisher.send(.teacherLoginSuccessful(teacher))
-            default:
+            case .didFailLogin:
                 publisher.send(.loginFailed)
+            default:
+                publisher.send(.networkError)
             }
         }.store(in: &subscriptions)
     }

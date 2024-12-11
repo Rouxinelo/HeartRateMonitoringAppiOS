@@ -23,6 +23,7 @@ public struct HomeScreenStrings {
     static let loginFailedTitle: String = "home_screen_loginFailedTitle"
     static let loginFailedDescription: String = "home_screen_loginFailedDescription"
     static let registeredToastMessage: String = "home_screen_toastMessage"
+    static let networkErrorDescriptionString: String = "home_screen_networkErrorDescription"
 }
 
 public struct MainMenuStrings {
@@ -47,6 +48,7 @@ public struct MainMenuStrings {
     static let userDataLoadingTitle: String = "main_menu_userDataLoadingTitle"
     static let userDataLoadingDescription: String = "main_menu_userDataLoadingDescription"
     static let networkErrorToast: String = "main_menu_networkToastMessage"
+    static let sectionGuestUnavailableString: String = "main_menu_guestUnavailable"
 }
 
 public struct LoginViewStrings {
@@ -142,6 +144,7 @@ public struct UserSessionsStrings {
     static let alertTitleString: String = "user_session_alertTitle"
     static let alertButtonString: String = "user_session_alertButton"
     static let alertDescriptionString: String = "user_session_alertDescription"
+    static let networkErrorToast: String = "user_session_networkError"
 }
 
 public struct UserSessionsModalStrings {
@@ -349,6 +352,9 @@ public struct TeacherSessionStrings {
     static let alertDescriptionString: String = "session_alertDescription"
     static let alertLeftButtonString: String = "session_alertLeftButton"
     static let alertRightButtonString: String = "session_alertRightButton"
+    static let networkAlertTitleString: String = "session_networkAlertTitle"
+    static let networkAlertDescriptionString: String = "session_networkAlertDescription"
+    static let networkAlertButtonString: String = "session_networkAlertButton"
 
 }
 
