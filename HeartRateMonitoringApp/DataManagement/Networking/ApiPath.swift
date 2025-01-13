@@ -15,6 +15,7 @@ protocol TargetType {
 
 enum API {
     case login(UserLogin)
+    case logout(UserLogout)
     case loginTeacher(Teacher)
     case register(RegisterUser)
     case getUserData(String)
@@ -46,6 +47,8 @@ extension API: TargetType {
         switch self {
         case .login:
             return baseURL + "login-user"
+        case .logout:
+            return baseURL + "logout-user"
         case .loginTeacher:
             return baseURL + "login-teacher"
         case .register:
@@ -92,6 +95,8 @@ extension API: TargetType {
     var method: String {
         switch self {
         case .login:
+            return "POST"
+        case .logout:
             return "POST"
         case .loginTeacher:
             return "POST"

@@ -24,6 +24,7 @@ public struct HomeScreenStrings {
     static let loginFailedDescription: String = "home_screen_loginFailedDescription"
     static let registeredToastMessage: String = "home_screen_toastMessage"
     static let networkErrorDescriptionString: String = "home_screen_networkErrorDescription"
+    static let alreadyLoggedDescriptionString: String = "home_screen_alreadyLoggedDescription"
 }
 
 public struct MainMenuStrings {
@@ -378,6 +379,16 @@ public struct TeacherSessionSummaryBPMViewStrings {
     static let descriptionString = "teacher_session_summary_bpm_description"
     static let maxBpmString = "teacher_session_summary_bpm_maxBpm"
     static let buttonString = "teacher_session_summary_bpm_button"
+}
+
+public struct ConnectSensorModalStrings {
+    static let devicesString = "sensor_modal_devices"
+}
+
+public struct InvalidTokenAlertStrings {
+    static let titleString = "invalid_token_title"
+    static let descriptionString = "invalid_token_description"
+    static let buttonString = "invalid_token_button"
 }
 
 public struct ScreenIds {

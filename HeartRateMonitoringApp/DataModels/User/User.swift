@@ -14,5 +14,4 @@ public struct User: Hashable, Codable {
     let email: String
     let gender: String
     let age: Int
-    let password: String
 }

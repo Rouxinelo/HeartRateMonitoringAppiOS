@@ -54,7 +54,7 @@ struct PreviousSessionScreen: View {
                 }.padding(.horizontal)
                 
                 VStack (spacing: 10) {
-                    Text(localized("previous_sessions_hrData"))
+                    Text(localized(PreviousSessionStrings.heartRateDataString))
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .center)

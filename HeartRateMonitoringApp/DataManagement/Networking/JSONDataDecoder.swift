@@ -37,6 +37,15 @@ struct JSONDataDecoder {
         }
     }
     
+    func decodeLoginResponse(data: Data) -> LoginResponse? {
+        do {
+            let response = try decoder.decode(LoginResponse.self, from: data)
+            return response
+        } catch {
+            return nil
+        }
+    }
+    
     func decodePreviousSession(data: Data) -> PreviousSessionData? {
         do {
             let response = try decoder.decode(PreviousSessionData.self, from: data)

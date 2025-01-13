@@ -20,6 +20,7 @@ struct MainMenu: View {
     @State private var isUserDataLoading = false
     @State private var areSessionsLoading = false
     @State private var showErrorToast = false
+    @State private var showTokenAlert = false
     @StateObject var viewModel = MainMenuViewModel()
     
     let userType: UserType
@@ -113,6 +114,12 @@ struct MainMenu: View {
                             iconName: "info.circle.fill",
                             message: localized(MainMenuStrings.networkErrorToast))
             }
+            
+            if showTokenAlert {
+                InvalidTokenAlert(isShowing: $showTokenAlert,
+                                  path: $path)
+            }
+            
         }.navigationDestination(for: [UserDetail].self, destination: { detail in
             UserDetailsScreen(details: detail)
         }).navigationDestination(for: [Session].self, destination: { sessions in
@@ -129,6 +136,8 @@ struct MainMenu: View {
             case .didLoadSignableSessions(let sessions):
                 areSessionsLoading = false
                 goToCalendar(with: sessions)
+            case .invalidToken:
+                showTokenAlert = true
             case .error:
                 isUserDataLoading = false
                 areSessionsLoading = false
@@ -164,6 +173,9 @@ struct MainMenu: View {
     
     func beginLogoutAnimation() {
         showingAlert = false
+        if case let .login(user) = userType {
+            viewModel.logout(for: user.username)
+        }
         isLogoutLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             logout()

@@ -115,6 +115,9 @@
 		6BC27BF02BB8C1150089217F /* CustomNumericField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27BEF2BB8C1150089217F /* CustomNumericField.swift */; };
 		6BC27BF22BB8C7850089217F /* RegisterScreenGenderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27BF12BB8C7850089217F /* RegisterScreenGenderField.swift */; };
 		6BC27BF42BB8CAF80089217F /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27BF32BB8CAF80089217F /* CustomRadioButton.swift */; };
+		6BC8CBE62D33006000067995 /* UserLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8CBE52D33006000067995 /* UserLogout.swift */; };
+		6BC8CBE92D334E0600067995 /* DeviceToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8CBE82D334E0600067995 /* DeviceToken.swift */; };
+		6BC8CBEB2D348F0200067995 /* InvalidTokenAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8CBEA2D348F0200067995 /* InvalidTokenAlert.swift */; };
 		6BD818F52BE804D0002F0ADE /* ApiPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD818F42BE804D0002F0ADE /* ApiPath.swift */; };
 		6BD818F72BE8276B002F0ADE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD818F62BE8276B002F0ADE /* NetworkManager.swift */; };
 		6BD818F92BE8593A002F0ADE /* JSONDataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD818F82BE8593A002F0ADE /* JSONDataDecoder.swift */; };
@@ -292,6 +295,9 @@
 		6BC27BEF2BB8C1150089217F /* CustomNumericField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNumericField.swift; sourceTree = "<group>"; };
 		6BC27BF12BB8C7850089217F /* RegisterScreenGenderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenGenderField.swift; sourceTree = "<group>"; };
 		6BC27BF32BB8CAF80089217F /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
+		6BC8CBE52D33006000067995 /* UserLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogout.swift; sourceTree = "<group>"; };
+		6BC8CBE82D334E0600067995 /* DeviceToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceToken.swift; sourceTree = "<group>"; };
+		6BC8CBEA2D348F0200067995 /* InvalidTokenAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidTokenAlert.swift; sourceTree = "<group>"; };
 		6BD818F42BE804D0002F0ADE /* ApiPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPath.swift; sourceTree = "<group>"; };
 		6BD818F62BE8276B002F0ADE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6BD818F82BE8593A002F0ADE /* JSONDataDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataDecoder.swift; sourceTree = "<group>"; };
@@ -401,6 +407,7 @@
 				6BC27BDC2BB0DE0A0089217F /* OverflowContentViewModifier.swift */,
 				6B10AAC02BBC365500AFE2FC /* KeyboardHelper.swift */,
 				6BBB68DC2BDA951B003E8109 /* ScreenshotManager.swift */,
+				6BC8CBE82D334E0600067995 /* DeviceToken.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -656,6 +663,7 @@
 				6B0EC0A22BEFAA2400747793 /* RegisterUser.swift */,
 				6B16BC022BF2C63600FE5959 /* UserLogin.swift */,
 				6B8793482C0898A800EC8B75 /* SessionType.swift */,
+				6BC8CBE52D33006000067995 /* UserLogout.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -760,6 +768,7 @@
 			children = (
 				6B47AF482BAE3BE4001C0172 /* CustomToast.swift */,
 				6B2846032BA8F1E9007A9D8E /* CustomAlert.swift */,
+				6BC8CBEA2D348F0200067995 /* InvalidTokenAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -1097,7 +1106,9 @@
 				6BDC5C0B2C75678500AEEC99 /* FutureSessionsTeacherScreen.swift in Sources */,
 				6B16BC032BF2C63600FE5959 /* UserLogin.swift in Sources */,
 				6BE384462C66C79200D46D4B /* CreateSessionScreen.swift in Sources */,
+				6BC8CBE92D334E0600067995 /* DeviceToken.swift in Sources */,
 				6B5FDA902C28C9D100AC66B6 /* SessionInfoSection.swift in Sources */,
+				6BC8CBEB2D348F0200067995 /* InvalidTokenAlert.swift in Sources */,
 				6B0EC09B2BED76FB00747793 /* MainMenuViewModel.swift in Sources */,
 				6B0813942BCAD91500AAAE30 /* SessionScreen.swift in Sources */,
 				6B8793492C0898A800EC8B75 /* SessionType.swift in Sources */,
@@ -1119,6 +1130,7 @@
 				6B7194C52BC49C3C00B297AF /* SessionData.swift in Sources */,
 				6B10AAC12BBC365500AFE2FC /* KeyboardHelper.swift in Sources */,
 				6B3A17322BB0A82E00C98E35 /* CustomBackButton.swift in Sources */,
+				6BC8CBE62D33006000067995 /* UserLogout.swift in Sources */,
 				6BBB68D52BDA72AE003E8109 /* PreviousSessionScreen.swift in Sources */,
 				6B0DDDF02C237D0000C65EEE /* BluetoothStateChecker.swift in Sources */,
 				6B2845F92BA796E9007A9D8E /* Color.swift in Sources */,

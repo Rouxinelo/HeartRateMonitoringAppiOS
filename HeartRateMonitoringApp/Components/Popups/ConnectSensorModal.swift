@@ -92,7 +92,7 @@ struct ConnectSensorModal: View {
     }
     
     func getSessionsText() -> String {
-        return "Found \(devices.count) Device\(devices.count != 1 ? "s" : "")"
+        return localized(ConnectSensorModalStrings.devicesString).replacingOccurrences(of: "$", with: "\(devices.count)")
     }
     
     func close(_ device: DeviceRepresentable? = nil) {

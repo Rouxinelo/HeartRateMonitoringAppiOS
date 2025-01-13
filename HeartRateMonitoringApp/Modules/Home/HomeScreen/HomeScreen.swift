@@ -15,6 +15,7 @@ struct HomeScreen: View {
     @State private var showingUserLogin = false
     @State private var showingTeacherLogin = false
     @State private var showingLanguageSelector = false
+    @State private var showAlreadyLoggedError = false
     @State private var showingToast = false
     @State private var isLoading = false
     @State private var userType: UserType = .guest
@@ -210,6 +211,17 @@ struct HomeScreen: View {
                     LoadingView(isShowing: $isLoading, title: localized(HomeScreenStrings.loginLoadingTitle), 
                                 description: localized(HomeScreenStrings.loginLoadingDescription))
                 }
+                if showAlreadyLoggedError {
+                    CustomAlert(isShowing: $showAlreadyLoggedError,
+                                icon: HomeScreenIcons.alertIcon,
+                                title: localized(HomeScreenStrings.loginFailedTitle),
+                                leftButtonText: localized(HomeScreenStrings.guestAlertContinue),
+                                rightButtonText: "",
+                                description: localized(HomeScreenStrings.alreadyLoggedDescriptionString),
+                                leftButtonAction: {},
+                                rightButtonAction: {},
+                                isSingleButton: true)
+                }
             }
             .navigationDestination(for: UserType.self) { _ in
                 MainMenu(path: $path, userType: userType)
@@ -235,6 +247,8 @@ struct HomeScreen: View {
                     showingFailedLoginAlert = true
                 case .teacherLoginSuccessful(let teacher):
                     path.append(teacher)
+                case .alreadyLogged:
+                    showAlreadyLoggedError = true
                 case .networkError:
                     showingNetworkErrorAlert = true
                 }
@@ -278,7 +292,6 @@ struct HomeScreen: View {
                     lastName: "TestName",
                     email: "testmail@test.com",
                     gender: "M",
-                    age: 18,
-                    password: "testPassword")
+                    age: 18)
     }
 }
