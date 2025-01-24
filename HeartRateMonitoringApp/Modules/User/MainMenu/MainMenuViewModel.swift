@@ -13,6 +13,7 @@ enum MainMenuPublisherCases {
     case didLoadUserSessions([Session])
     case didLoadSignableSessions([Session])
     case error
+    case invalidToken
 }
 
 class MainMenuViewModel: ObservableObject {
@@ -31,6 +32,10 @@ class MainMenuViewModel: ObservableObject {
     
     func fetchCalendarSessions(for username: String) {
         networkManager.performRequest(apiPath: .getAllSessions(username))
+    }
+    
+    func logout(for username: String) {
+        networkManager.performRequest(apiPath: .logout(UserLogout(username: username)))
     }
     
     func bind() {
@@ -53,6 +58,8 @@ class MainMenuViewModel: ObservableObject {
                     return
                 }
                 self.publisher.send(.didLoadSignableSessions(sessions))
+            case .invalidToken:
+                self.publisher.send(.invalidToken)
             default:
                 self.publisher.send(.error)
             }

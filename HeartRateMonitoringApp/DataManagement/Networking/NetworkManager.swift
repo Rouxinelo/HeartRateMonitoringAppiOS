@@ -20,8 +20,9 @@ enum NetworkManageResponse {
     case didSignInSession
     case didSignOutSession
     case didFailSign
-    case didLogin
+    case didLogin(String)
     case didFailLogin
+    case alreadyLogged
     case didSendRecoveryEmail
     case didNotSendRecoveryEmail
     case didChangePassword
@@ -36,6 +37,7 @@ enum NetworkManageResponse {
     case didStartSession
     case urlUnavailable
     case failedRequest
+    case invalidToken
 }
 
 enum RegisterUserResult {
@@ -70,6 +72,12 @@ class NetworkManager {
             }
             performPOSTRequest(for: apiPath, with: data)
         case .login(let user):
+            guard let data = encoder.encodeToJSON(user) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
+        case .logout(let user):
             guard let data = encoder.encodeToJSON(user) else {
                 statePublisher.send(.failedRequest)
                 return
@@ -174,11 +182,11 @@ class NetworkManager {
     }
     
     private func performGETRequest(for apiPath: API) {
-        guard let url = URL(string: apiPath.path) else {
+        guard let url = URL(string: apiPath.path), let request = getRequest(for: apiPath, with: url) else {
             statePublisher.send(.urlUnavailable)
             return
         }
-        URLSession.shared.dataTaskPublisher(for: url)
+        URLSession.shared.dataTaskPublisher(for: request)
             .eraseToAnyPublisher()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
@@ -197,9 +205,13 @@ class NetworkManager {
     }
     
     private func decodeData(data: Data, apiPath: API) {
+        if let decodedData = decoder.decodeResponse(data: data), decodedData.message == ResponseMessages.invalidToken {
+            statePublisher.send(.invalidToken)
+            return
+        }
         switch apiPath {
         case .login:
-            guard let response = decoder.decodeResponse(data: data) else {
+            guard let response = decoder.decodeLoginResponse(data: data) else {
                 statePublisher.send(.failedRequest)
                 return
             }
@@ -298,7 +310,17 @@ class NetworkManager {
         request.httpMethod = apiPath.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(getApiToken(), forHTTPHeaderField: "Device-Token")
         request.httpBody = params
+        return request
+    }
+    
+    private func getRequest(for apiPath: API, with url: URL) -> URLRequest? {
+        var request = URLRequest(url: url)
+        request.httpMethod = apiPath.method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(getApiToken(), forHTTPHeaderField: "Device-Token")
         return request
     }
 }
@@ -365,12 +387,14 @@ private extension NetworkManager {
         }
     }
     
-    func handleLoginUserResponse(response: PostResponse) {
+    func handleLoginUserResponse(response: LoginResponse) {
         switch response.message {
         case ResponseMessages.loginSuccessful:
-            statePublisher.send(.didLogin)
+            statePublisher.send(.didLogin(response.deviceToken))
         case ResponseMessages.loginFailed:
             statePublisher.send(.didFailLogin)
+        case ResponseMessages.alreadyLogged:
+            statePublisher.send(.alreadyLogged)
         default:
             statePublisher.send(.failedRequest)
         }

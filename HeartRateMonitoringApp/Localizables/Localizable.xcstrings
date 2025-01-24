@@ -577,6 +577,23 @@
         }
       }
     },
+    "home_screen_alreadyLoggedDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User is active in another device"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilizador ativo noutro dispositivo"
+          }
+        }
+      }
+    },
     "home_screen_cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1134,6 +1151,51 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Código válido"
+          }
+        }
+      }
+    },
+    "invalid_token_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
+    },
+    "invalid_token_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Returning to main menu."
+          }
+        }
+      }
+    },
+    "invalid_token_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro!"
           }
         }
       }
@@ -2668,6 +2730,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ano"
+          }
+        }
+      }
+    },
+    "sensor_modal_devices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Found $ Devices"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontrados $ Dispositivos"
           }
         }
       }

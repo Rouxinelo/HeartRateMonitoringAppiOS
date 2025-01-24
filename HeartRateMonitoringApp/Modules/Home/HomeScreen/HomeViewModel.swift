@@ -11,6 +11,7 @@ import Combine
 enum HomePublisherCases {
     case didLoginSuccessfully(String)
     case loginFailed
+    case alreadyLogged
     case teacherLoginFailed
     case teacherLoginSuccessful(Teacher)
     case networkError
@@ -70,11 +71,12 @@ class HomeViewModel: ObservableObject {
                 return
             }
             switch response {
-            case .didLogin:
+            case .didLogin(let deviceToken):
                 guard let username = self.username else {
                     self.publisher.send(.loginFailed)
                     return
                 }
+                DeviceToken.shared.apiToken = deviceToken
                 publisher.send(.didLoginSuccessfully(username))
             case .loadTeacherData(let teacher):
                 guard let teacher = teacher else {
@@ -84,6 +86,8 @@ class HomeViewModel: ObservableObject {
                 publisher.send(.teacherLoginSuccessful(teacher))
             case .didFailLogin:
                 publisher.send(.loginFailed)
+            case .alreadyLogged:
+                publisher.send(.alreadyLogged)
             default:
                 publisher.send(.networkError)
             }

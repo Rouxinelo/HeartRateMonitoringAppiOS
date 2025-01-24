@@ -12,10 +12,17 @@ struct PostResponse: Codable {
     var message: String
 }
 
+struct LoginResponse: Codable {
+    var statusCode: Int
+    var message: String
+    var deviceToken: String
+}
+
 struct ResponseMessages {
     static let registerSuccessfullMessage = "REGISTER_OK"
     static let loginSuccessful = "LOGIN_OK"
     static let loginFailed = "LOGIN_FAIL"
+    static let alreadyLogged = "ALREADY_LOGGED"
     static let registerFailedUsername = "REGISTER_FAILED_USERNAME_USED"
     static let registerFailedEmail = "REGISTER_FAILED_EMAIL_USED"
     static let registerFailedBirthdate = "REGISTER_FAILED_INVALID_BIRTHDATE"
@@ -33,5 +40,6 @@ struct ResponseMessages {
     static let cancelSessionSuccessful = "SESSION_CANCEL_OK"
     static let cancelSessionFail = "SESSION_CANCEL_FAIL"
     static let startSessionSuccessful = "SESSION_START_OK"
+    static let invalidToken = "INVALID_TOKEN"
     static let genericError = "ERROR"
 }
