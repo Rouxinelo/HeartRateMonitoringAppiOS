@@ -95,6 +95,12 @@ class NetworkManager {
                 return
             }
             performPOSTRequest(for: apiPath, with: data)
+        case .sendHrvData(let hrvData):
+            guard let data = encoder.encodeToJSON(hrvData) else {
+                statePublisher.send(.failedRequest)
+                return
+            }
+            performPOSTRequest(for: apiPath, with: data)
         case .sendSessionSummary(let postSessionData):
             guard let data = encoder.encodeToJSON(postSessionData) else {
                 statePublisher.send(.failedRequest)

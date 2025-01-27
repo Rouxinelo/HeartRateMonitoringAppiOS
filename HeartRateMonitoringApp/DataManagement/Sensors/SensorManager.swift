@@ -16,12 +16,14 @@ enum SensorManagerPublisherCases {
     case didGetHeartRate(MovesenseHeartRate)
     case didGetEcg(MovesenseEcg)
     case didGetSystemEnergy(MovesenseSystemEnergy)
+    case didGetEcgInfo(MovesenseEcgInfo)
 }
 
 class SensorManager: ObservableObject {
     var api: MovesenseApi? = Movesense.api
     var device: MovesenseDevice?
-    var operation: MovesenseOperation?
+    var hrOperation: MovesenseOperation?
+    var ecgOperation: MovesenseOperation?
     var publisher = PassthroughSubject<SensorManagerPublisherCases, Never>()
 
     func performOperation(_ resourceType: MovesenseResourceType) {
@@ -92,7 +94,11 @@ private extension SensorManager {
         let movesenseRequest = MovesenseRequest(resourceType: resourceType,
                                                 method: .subscribe,
                                                 parameters: getParameters(for: [1], resource))
-        operation = device.sendRequest(movesenseRequest, observer: self)
+        if resourceType == .heartRate {
+            hrOperation = device.sendRequest(movesenseRequest, observer: self)
+        } else if resourceType == .ecg {
+            ecgOperation = device.sendRequest(movesenseRequest, observer: self)
+        }
     }
     
     func getParameters(for indexes: [Int], _ resource: MovesenseResource) -> [MovesenseRequestParameter]? {
@@ -131,8 +137,8 @@ extension SensorManager {
             publisher.send(.didGetSystemEnergy(systemEnergy))
         } else if case MovesenseResponse.info(_, _, _) = response {
             print(SensorManagerConstants.operationNotImplemented)
-        } else if case MovesenseResponse.ecgInfo(_, _, _) = response {
-            print(SensorManagerConstants.operationNotImplemented)
+        } else if case let MovesenseResponse.ecgInfo(_, _, ecgInfo) = response {
+            publisher.send(.didGetEcgInfo(ecgInfo))
         }
     }
     
@@ -141,7 +147,6 @@ extension SensorManager {
         case .operationError(_):
             print(SensorManagerConstants.simpleError)
         case .operationEvent(let event):
-            print(SensorManagerConstants.simpleEvent)
             handleEvent(event)
         case .operationResponse(_):
             print(SensorManagerConstants.response)

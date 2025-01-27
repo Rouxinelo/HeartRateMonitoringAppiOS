@@ -92,6 +92,8 @@ struct SessionSummaryScreen: View {
                                                 sectionColor: .yellow)
                     }
                 }
+                
+                HrvSection(hrv: $sessionSummary.hrv)
                 Spacer()
             }
             

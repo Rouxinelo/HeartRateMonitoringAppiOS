@@ -15,11 +15,15 @@ struct TeacherSessionUserView: View {
     @State var avgHR: Int = 0
     @State var minHR: Int = 0
     @State var measurements: [Int]
+    @State var hrv: Int
     
     var body: some View {
         ZStack {
             VStack {
                 HStack {
+                    Image(systemName: "waveform.path.ecg")
+                        .foregroundStyle(.red)
+                    Text("\(hrv)ms")
                     Spacer()
                     Text(localized(isActive ? TeacherSessionUserViewStrings.stateActiveString : TeacherSessionUserViewStrings.stateInactiveString))
                     Image(systemName: isActive ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
@@ -53,7 +57,6 @@ struct TeacherSessionUserView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     }
-                    
                     
                     VStack {
                         HStack {

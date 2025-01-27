@@ -30,6 +30,9 @@
     "%lldh" : {
 
     },
+    "%lldms" : {
+
+    },
     "bluetoothPermissionString" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2173,6 +2176,23 @@
         }
       }
     },
+    "previous_sessions_hrvTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HRV"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "VFC"
+          }
+        }
+      }
+    },
     "previous_sessions_maxTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3057,6 +3077,57 @@
         }
       }
     },
+    "session_hrvAlertButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fechar"
+          }
+        }
+      }
+    },
+    "session_hrvAlertDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heart Rate Variability is the time variation between heartbeats"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Variabilidade da Frequência Cardíaca é a variância temporal entre batimentos cardíacos"
+          }
+        }
+      }
+    },
+    "session_hrvAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HRV"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VFC"
+          }
+        }
+      }
+    },
     "session_joinToast" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3087,6 +3158,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "$ saiu da sessão!"
+          }
+        }
+      }
+    },
+    "session_loadingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please wait..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguarde..."
+          }
+        }
+      }
+    },
+    "session_loadingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A carregar!"
           }
         }
       }

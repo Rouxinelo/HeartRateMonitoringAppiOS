@@ -46,6 +46,8 @@ class TeacherSessionViewModel: ObservableObject {
                         self?.handleLeaveSession(sseData)
                     case SSEDataEvents.heartRate:
                         self?.handleHeartRateInput(sseData)
+                    case SSEDataEvents.hrv:
+                        self?.handleHRVInput(sseData)
                     default:
                         return
                     }
@@ -102,9 +104,16 @@ private extension TeacherSessionViewModel {
         }
     }
     
+    func handleHRVInput(_ sseData: SSEData) {
+        if let index = sessionUserData.firstIndex(where: { $0.username == sseData.username && $0.isActive}),
+            let value = Int(sseData.value) {
+            sessionUserData[index].hrv = value
+        }
+    }
+    
     func createNewUserData(_ sseData: SSEData) -> TeacherSessionUserData? {
         guard sseData.event == SSEDataEvents.enterSession else { return nil }
-        return TeacherSessionUserData(username: sseData.username, name: sseData.value, measurements: [])
+        return TeacherSessionUserData(username: sseData.username, name: sseData.value, measurements: [], hrv: 0)
     }
     
     func updateTime() {

@@ -24,6 +24,7 @@ enum API {
     case signInSession(String, String)
     case signOutSession(String, String)
     case sendHeartRateData(HeartRateData)
+    case sendHrvData(HRVData)
     case sendSessionSummary(PostSessionData)
     case getSessionSummary(String, String)
     case enterSession(String, String)
@@ -65,6 +66,8 @@ extension API: TargetType {
             return baseURL + "session-sign-out/"
         case .sendHeartRateData:
             return baseURL + "heartbeat-info/"
+        case .sendHrvData:
+            return baseURL + "hrv/"
         case .sendSessionSummary:
             return baseURL + "session-summary/"
         case .getSessionSummary:
@@ -113,6 +116,8 @@ extension API: TargetType {
         case .signOutSession:
             return "POST"
         case .sendHeartRateData:
+            return "POST"
+        case .sendHrvData:
             return "POST"
         case .sendSessionSummary:
             return "POST"

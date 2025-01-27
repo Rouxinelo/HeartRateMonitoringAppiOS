@@ -30,6 +30,7 @@ struct CustomAlert: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50, height: 50)
+                    .foregroundStyle(.red)
                 
                 Text(title)
                     .font(.title)

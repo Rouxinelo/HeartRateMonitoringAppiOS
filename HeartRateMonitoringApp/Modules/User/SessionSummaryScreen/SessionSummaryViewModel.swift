@@ -30,6 +30,9 @@ private extension SessionSummaryViewModel {
     func getPostSessionData(for sessionSummary: SessionSummaryData) -> PostSessionData {
         PostSessionData(username: sessionSummary.username,
                         sessionId: sessionSummary.session.id,
-                        measurements: sessionSummary.measurements)
+                        measurements: sessionSummary.measurements,
+                        
+                        hrv: sessionSummary.hrv
+        )
     }
 }
