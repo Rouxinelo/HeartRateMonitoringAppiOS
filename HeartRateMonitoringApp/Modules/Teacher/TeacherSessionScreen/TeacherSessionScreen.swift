@@ -73,7 +73,8 @@ struct TeacherSessionScreen: View {
                 List(viewModel.sessionUserData, id: \.self) { userData in
                     TeacherSessionUserView(isActive: userData.isActive,
                                            name: "\(userData.name)",
-                                           measurements: userData.measurements)
+                                           measurements: userData.measurements,
+                                           hrv: userData.hrv)
                     .padding(.vertical)
                     .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)

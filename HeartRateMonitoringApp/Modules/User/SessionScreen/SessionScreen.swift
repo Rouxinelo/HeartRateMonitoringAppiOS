@@ -15,6 +15,8 @@ struct SessionScreen: View {
     @State private var showingCloseAlert: Bool = false
     @State private var animationAmount: CGFloat = 1
     @State var shouldShowSummaryToast: Bool = false
+    @State var showInitializeLoading: Bool = false
+    @State var showHrvAlert: Bool = false
     @StateObject var viewModel = SessionViewModel()
     var maximumChartValues: Int = 5
     
@@ -85,7 +87,7 @@ struct SessionScreen: View {
                             Path { path in
                                 for i in 0..<self.lastFiveValues(viewModel.measurements).count {
                                     let x = (geometry.size.width / CGFloat(maximumChartValues - 1)) * CGFloat (i)
-                                    let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(viewModel.measurements)[i]) / 150)
+                                    let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(viewModel.measurements)[i] - 50) / 150)
                                     if i == 0 {
                                         path.move(to: CGPoint(x: x, y: y))
                                     } else {
@@ -96,7 +98,7 @@ struct SessionScreen: View {
                             .stroke(Color.red, lineWidth: 2)
                             ForEach(0..<self.lastFiveValues(viewModel.measurements).count, id: \.self) { i in
                                 let x = (geometry.size.width / CGFloat(maximumChartValues - 1)) * CGFloat (i)
-                                let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(viewModel.measurements)[i]) / 150)
+                                let y = geometry.size.height * (1 - CGFloat(self.lastFiveValues(viewModel.measurements)[i] - 50) / 150)
                                 Circle()
                                     .fill(Color.red)
                                     .frame(width: 10, height: 10)
@@ -143,6 +145,29 @@ struct SessionScreen: View {
                         }
                     }
                 }
+                
+                Button(action: {
+                    showHrvAlert = true
+                }) {
+                    ZStack(alignment: .topLeading) {
+                        HrvSection(hrv: $viewModel.hrv)
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "exclamationmark.circle")
+                                    .font(.system(size: 10))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.red)
+                                    .padding(8)
+                            }
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .frame(width: 150, height: 35, alignment: .center)
+                .padding(.top, 10)
+                
                 Spacer()
             }.padding(.horizontal)
             
@@ -157,6 +182,25 @@ struct SessionScreen: View {
                             rightButtonAction: { closeSession() },
                             isSingleButton: false)
             }
+            
+            if showInitializeLoading {
+                LoadingView(isShowing: $showInitializeLoading,
+                            title: localized(SessionStrings.loadingTitle),
+                            description: localized(SessionStrings.loadingDescription))
+            }
+            
+            if showHrvAlert {
+                CustomAlert(isShowing: $showHrvAlert,
+                            icon: "exclamationmark.circle",
+                            title: localized(SessionStrings.hrvAlertTitle),
+                            leftButtonText: localized(SessionStrings.hrvAlertButton),
+                            rightButtonText: "",
+                            description: localized(SessionStrings.hrvAlertDescription),
+                            leftButtonAction: {},
+                            rightButtonAction: {},
+                            isSingleButton: true)
+            }
+            
         }.navigationDestination(for: SessionSummaryData.self, destination: { sessionSummaryData in
             SessionSummaryScreen(path: $path,
                                  showingToast: shouldShowSummaryToast,
@@ -171,13 +215,16 @@ struct SessionScreen: View {
             case .didLeaveSeassonFailedConnection(let summaryData):
                 shouldShowSummaryToast = false
                 path.append(summaryData)
+            case .didFetchSamplingRate:
+                showInitializeLoading = false
+                viewModel.startTimer()
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
             viewModel.setSessionData(sessionData)
             viewModel.setSensorManager(sensorManager)
-            viewModel.startTimer()
+            showInitializeLoading = true
         }
         .onDisappear {
             viewModel.stopTimer()

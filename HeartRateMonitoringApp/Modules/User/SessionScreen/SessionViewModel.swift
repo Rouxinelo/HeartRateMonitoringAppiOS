@@ -12,6 +12,7 @@ enum SessionPublisherCases {
     case didFailSendHeartrateDate
     case didLeaveSession(SessionSummaryData)
     case didLeaveSeassonFailedConnection(SessionSummaryData)
+    case didFetchSamplingRate
 }
 
 class SessionViewModel: ObservableObject {
@@ -20,14 +21,18 @@ class SessionViewModel: ObservableObject {
     var subscriptions = Set<AnyCancellable>()
     var sessionData: SessionData?
     var sensorManager: SensorManager?
+    var ecgManager: ECGManager?
     var timer: Timer? = nil
     var sessionTime: Int = 0
     var lastMeasurement: Int = 0
     @Published var sessionTimeString: String = "00h 00m 00s"
     @Published var measurements = [Int]()
+    @Published var hrv: Int = 0
     
     func setSensorManager(_ sensorManager: SensorManager) {
         self.sensorManager = sensorManager
+        sensorManager.performOperation(.ecgInfo)
+        bind()
     }
     
     func setSessionData(_ sessionData: SessionData) {
@@ -36,8 +41,8 @@ class SessionViewModel: ObservableObject {
     
     func startTimer() {
         guard let sensorManager = sensorManager else { return }
-        bind()
         sensorManager.performOperation(.heartRate)
+        sensorManager.performOperation(.ecg)
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.updateTime()
@@ -46,6 +51,7 @@ class SessionViewModel: ObservableObject {
     
     func stopTimer() {
         timer?.invalidate()
+        sensorManager?.disconnectDevice()
     }
     
     func sendHeartrateData(username: String, sessionId: String, heartrate: Int) {
@@ -105,8 +111,28 @@ private extension SessionViewModel {
             switch response {
             case .didGetHeartRate(let movesenseHeartRate):
                 self.handleMeasurementRecieved(Int(movesenseHeartRate.average))
+            case .didGetEcg(let movesenseECG):
+                self.processECGSamples(movesenseECG.samples.map { Int($0) })
+            case .didGetEcgInfo(let ecgInfo):
+                self.ecgManager = ECGManager(samplingRate: Int(ecgInfo.currentSampleRate))
+                bindECGManagerResponse()
+                DispatchQueue.main.async { [weak self] in
+                    self?.publisher.send(.didFetchSamplingRate)
+                }
             default:
                 return
+            }
+        }.store(in: &subscriptions)
+    }
+    
+    func bindECGManagerResponse() {
+        guard let ecgManager = ecgManager else { return }
+        ecgManager.publisher.sink { [weak self] response in
+            guard let self = self, let sessionData = sessionData else { return }
+            switch response {
+            case .didSetHRV(let hrv):
+                self.didGetHrv(Int(hrv))
+                self.networkManager.performRequest(apiPath: .sendHrvData(HRVData(username: sessionData.username, sessionId: sessionData.session.id, hrv: Int(hrv))))
             }
         }.store(in: &subscriptions)
     }
@@ -115,13 +141,25 @@ private extension SessionViewModel {
         lastMeasurement = measurement
     }
     
+    func processECGSamples(_ samples: [Int]) {
+        guard let ecgManager = ecgManager else { return }
+        ecgManager.process(samples: samples)
+    }
+    
+    func didGetHrv(_ hrv: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.hrv = hrv
+        }
+    }
+    
     func getSessionSummaryData() -> SessionSummaryData? {
         guard let sessionData = sessionData, let device = sensorManager?.device else { return nil }
         return SessionSummaryData(sensor: DeviceRepresentable(name: device.localName),
-                           username: sessionData.username,
-                           session: sessionData.session,
-                           measurements: measurements,
-                           sessionTime: sessionTime)
+                                  username: sessionData.username,
+                                  session: sessionData.session,
+                                  measurements: measurements,
+                                  hrv: hrv,
+                                  sessionTime: sessionTime)
     }
     
     func updateTime() {
@@ -150,5 +188,9 @@ private extension SessionViewModel {
     
     func getFormattedSeconds(_ time: Int) -> String {
         return time >= 10 ? "\(time)" : "0\(time)"
+    }
+    
+    func getAverage(_ array: [Int]) -> Int {
+        return array.isEmpty ? 0 : array.reduce(0, +) / array.count
     }
 }

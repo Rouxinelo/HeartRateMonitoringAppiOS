@@ -12,5 +12,6 @@ struct SessionSummaryData: Hashable {
     let username: String
     let session: SessionSimplified
     let measurements: [Int]
+    var hrv: Int
     let sessionTime: Int
 }

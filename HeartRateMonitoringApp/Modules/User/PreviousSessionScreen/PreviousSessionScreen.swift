@@ -80,6 +80,8 @@ struct PreviousSessionScreen: View {
                     }
                 }
                 
+                HrvSection(hrv: $sessionData.hrv)
+                
                 VStack (spacing: 10){
                     Text(localized(PreviousSessionStrings.actionString)).font(.title).fontWeight(.bold)
                     HStack {

@@ -76,6 +76,8 @@ struct SessionShareabaleView: View {
                                             sectionColor: .yellow)
                 }
             }
+            
+            HrvSection(hrv: $sessionData.hrv)
             Spacer()
         }
     }

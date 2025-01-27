@@ -17,4 +17,5 @@ struct SSEDataEvents {
     static let enterSession = "ENTER_SESSION"
     static let leaveSession = "LEAVE_SESSION"
     static let heartRate = "HEARTRATE"
+    static let hrv = "HRV"
 }

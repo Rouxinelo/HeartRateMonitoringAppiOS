@@ -170,10 +170,11 @@ public struct PreviousSessionStrings {
     static let shareString: String = "previous_sessions_share"
     static let toastErrorString: String = "previous_sessions_toastError"
     static let toastSuccessString: String = "previous_sessions_toastSuccess"
+    static let hrvDataString: String = "previous_sessions_hrvTitle"
 }
 
 public struct SessionShareabaleStrings {
-    static let titleString: String = "session_shareable_title"
+    static let titleString: String = "previous_sessions_title"
 }
 
 public struct JoinSessionStrings {
@@ -207,6 +208,11 @@ public struct SessionStrings {
     static let closeAlertDescriptionString: String = "session_alertDescription"
     static let closeAlertLeftButtonString: String = "session_alertLeftButton"
     static let closeAlertRightButtonString: String = "session_alertRightButton"
+    static let loadingTitle: String = "session_loadingTitle"
+    static let loadingDescription: String = "session_loadingDescription"
+    static let hrvAlertTitle: String = "session_hrvAlertTitle"
+    static let hrvAlertDescription: String = "session_hrvAlertDescription"
+    static let hrvAlertButton: String = "session_hrvAlertButton"
 }
 
 public struct SessionSummaryStrings {

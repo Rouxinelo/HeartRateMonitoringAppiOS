@@ -13,4 +13,5 @@ struct PreviousSessionData: Hashable, Decodable {
     var average: Int
     var maximum: Int
     var minimum: Int
+    var hrv: Int
 }
