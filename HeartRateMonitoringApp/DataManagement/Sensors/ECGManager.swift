@@ -11,7 +11,7 @@ class ECGManager {
     private let samplingRate: Int
     private let samplesPerWindow: Int
     private var samplesBuffer: [Int] = []
-    private(set) var hrv: Double?
+    private var hrvValues: [Double] = []
 
     init(samplingRate: Int) {
         self.samplingRate = samplingRate
@@ -24,9 +24,10 @@ class ECGManager {
             let tenSecondChunk = Array(samplesBuffer.prefix(samplesPerWindow))
             samplesBuffer.removeFirst(samplesPerWindow)
             let rrIntervals = detectRPeaksAndCalculateRR(from: tenSecondChunk)
-            hrv = HRVCalculator.calculateRMSSD(from: rrIntervals)
-            if let hrv = hrv {
-                publisher.send(.didSetHRV(hrv))
+            if let hrv = HRVCalculator.calculateRMSSD(from: rrIntervals) {
+                hrvValues.append(hrv)
+                let averageHRV = hrvValues.reduce(0, +) / Double(hrvValues.count)
+                publisher.send(.didSetHRV(averageHRV))
             }
         }
     }
@@ -66,7 +67,6 @@ class ECGManager {
                 rPeakIndices.append(i)
             }
         }
-
         return rPeakIndices
     }
 
@@ -82,8 +82,7 @@ class ECGManager {
 class HRVCalculator {
     static func calculateRMSSD(from rrIntervals: [Double]) -> Double? {
         guard rrIntervals.count > 1 else { return nil }
-        let squaredDifferences = zip(rrIntervals.dropFirst(), rrIntervals)
-            .map { pow(($0 - $1) * 1000, 2) }
+        let squaredDifferences = zip(rrIntervals.dropFirst(), rrIntervals).map { pow(($0 - $1) * 1000, 2) }
         let meanSquaredDiff = squaredDifferences.reduce(0, +) / Double(squaredDifferences.count)
         return sqrt(meanSquaredDiff)
     }

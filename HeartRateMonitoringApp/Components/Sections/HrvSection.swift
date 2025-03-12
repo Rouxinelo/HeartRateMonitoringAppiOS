@@ -47,6 +47,6 @@ struct HrvSection: View {
     }
     
     func getHrvImage() -> String {
-        hrv < 30 ? "face-sad" : "face-happy"
+        hrv < 20 ? "face-sad" : "face-happy"
     }
 }
