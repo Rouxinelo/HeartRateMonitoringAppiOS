@@ -223,7 +223,7 @@ struct HomeScreen: View {
                                 isSingleButton: true)
                 }
             }
-            .navigationDestination(for: UserType.self) { _ in
+            .navigationDestination(for: UserType.self) { userType in
                 MainMenu(path: $path, userType: userType)
             }
             .navigationDestination(for: String.self) { screenId in
@@ -261,8 +261,7 @@ struct HomeScreen: View {
     }
     
     func enterAsGuest() {
-        userType = .guest
-        path.append(userType)
+        path.append(UserType.guest)
         showingAlert = false
     }
     
@@ -277,8 +276,7 @@ struct HomeScreen: View {
     }
     
     func loginSuccessful(username: String) {
-        userType = .login(getMockUser(username))
-        path.append(userType)
+        path.append(UserType.login(getMockUser(username)))
     }
     
     func handleLanguageSelection() {

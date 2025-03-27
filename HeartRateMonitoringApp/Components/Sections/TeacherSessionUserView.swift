@@ -16,6 +16,7 @@ struct TeacherSessionUserView: View {
     @State var minHR: Int = 0
     @State var measurements: [Int]
     @State var hrv: Int
+    @State var gender: String
     
     var body: some View {
         ZStack {
@@ -32,8 +33,9 @@ struct TeacherSessionUserView: View {
                 HStack(spacing: 10) {
                     VStack {
                         HStack {
-                            Image(systemName: "person.fill")
-                                .foregroundStyle(.red)
+                            Text("\(getGenderEmoji(gender))")
+                            .font(.title2)
+                            .fontWeight(.bold)
                             Text(name)
                                 .multilineTextAlignment(.leading)
                             Spacer()
@@ -51,7 +53,7 @@ struct TeacherSessionUserView: View {
                         HStack {
                             Image(systemName: "heart.fill")
                             .foregroundStyle(.red)
-                            Text(getHRString(currentHR))
+                            Text(getHRString(currentHR) + " BPM")
                             Spacer()
                         }
                         .font(.title2)
@@ -63,21 +65,21 @@ struct TeacherSessionUserView: View {
                             Spacer()
                             Image(systemName: "arrow.up")
                             .foregroundStyle(.red)
-                            Text("\(maxHR)")
+                            Text("\(maxHR) BPM")
                         }
                         Spacer()
                         HStack {
                             Spacer()
                             Image(systemName: "alternatingcurrent")
                             .foregroundStyle(.red)
-                            Text("\(avgHR)")
+                            Text("\(avgHR) BPM")
                         }
                         Spacer()
                         HStack {
                             Spacer()
                             Image(systemName: "arrow.down")
                                 .foregroundStyle(.red)
-                            Text("\(minHR)")
+                            Text("\(minHR) BPM")
                         }
                     }
                     .font(.title2)
@@ -105,5 +107,16 @@ struct TeacherSessionUserView: View {
         minHR = measurements.min() ?? 0
         currentHR = measurements.last ?? 0
         avgHR = measurements.reduce(0, +) / max(measurements.count, 1)
+    }
+    
+    func getGenderEmoji(_ gender: String) -> String {
+        switch gender.uppercased() {
+        case "M":
+            return "👦🏻"
+        case "F":
+            return "👩🏻"
+        default:
+            return "👤"
+        }
     }
 }
