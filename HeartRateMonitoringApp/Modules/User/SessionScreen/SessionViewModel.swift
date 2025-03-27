@@ -21,7 +21,7 @@ class SessionViewModel: ObservableObject {
     var subscriptions = Set<AnyCancellable>()
     var sessionData: SessionData?
     var sensorManager: SensorManager?
-    var ecgManager: ECGManager?
+    var hrvManager: HRVManager = HRVManager()
     var timer: Timer? = nil
     var sessionTime: Int = 0
     var lastMeasurement: Int = 0
@@ -42,7 +42,6 @@ class SessionViewModel: ObservableObject {
     func startTimer() {
         guard let sensorManager = sensorManager else { return }
         sensorManager.performOperation(.heartRate)
-        sensorManager.performOperation(.ecg)
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.updateTime()
@@ -111,10 +110,10 @@ private extension SessionViewModel {
             switch response {
             case .didGetHeartRate(let movesenseHeartRate):
                 self.handleMeasurementRecieved(Int(movesenseHeartRate.average))
+                self.processECGSamples(movesenseHeartRate.rrData)
             case .didGetEcg(let movesenseECG):
                 self.processECGSamples(movesenseECG.samples.map { Int($0) })
             case .didGetEcgInfo(let ecgInfo):
-                self.ecgManager = ECGManager(samplingRate: Int(ecgInfo.currentSampleRate))
                 bindECGManagerResponse()
                 DispatchQueue.main.async { [weak self] in
                     self?.publisher.send(.didFetchSamplingRate)
@@ -126,8 +125,7 @@ private extension SessionViewModel {
     }
     
     func bindECGManagerResponse() {
-        guard let ecgManager = ecgManager else { return }
-        ecgManager.publisher.sink { [weak self] response in
+        hrvManager.publisher.sink { [weak self] response in
             guard let self = self, let sessionData = sessionData else { return }
             switch response {
             case .didSetHRV(let hrv):
@@ -142,8 +140,7 @@ private extension SessionViewModel {
     }
     
     func processECGSamples(_ samples: [Int]) {
-        guard let ecgManager = ecgManager else { return }
-        ecgManager.process(samples: samples)
+        hrvManager.addSamples(samples: samples)
     }
     
     func didGetHrv(_ hrv: Int) {
@@ -172,6 +169,9 @@ private extension SessionViewModel {
                 self.measurements.append(self.lastMeasurement)
             }
             sendHeartrateData(username: sessionData.username, sessionId: sessionData.session.id, heartrate: lastMeasurement)
+        }
+        if sessionTime % 60 == 0 {
+            hrvManager.calculateSDNN()
         }
     }
     

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "%@h %@m %@s" : {
 
     },
@@ -16,6 +19,9 @@
           }
         }
       }
+    },
+    "%lld BPM" : {
+
     },
     "%lld/%lld" : {
       "localizations" : {
@@ -4259,13 +4265,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The maximum healthy heart rate is given by:\\nMaximum HR = 220 - Age"
+            "value" : "The maximum healthy heart rate is given by: 220 - Age"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O valor máximo de BPM saudável é dado pela fórmula: \\nFrequência Max = 220 - Idade"
+            "value" : "O valor máximo de BPM saudável é dado por: 220 - Idade"
           }
         }
       }

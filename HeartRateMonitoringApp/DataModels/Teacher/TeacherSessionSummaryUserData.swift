@@ -10,4 +10,5 @@ import Foundation
 struct TeacherSessionSummaryUserData: Hashable {
     let user: User
     let measurements: [Int]
+    let hrv: Int
 }

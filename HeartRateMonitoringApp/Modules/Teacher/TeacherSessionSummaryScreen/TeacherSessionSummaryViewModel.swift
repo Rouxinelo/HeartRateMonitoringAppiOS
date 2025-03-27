@@ -44,13 +44,17 @@ private extension TeacherSessionSummaryViewModel {
     }
     
     func addUserData(user: User, sessionSummaryData: TeacherSessionSummaryData) {
-        guard let measurements = getMeasurements(user: user, sessionSummaryData: sessionSummaryData) else { return }
+        guard let measurements = getMeasurements(user: user, sessionSummaryData: sessionSummaryData), let hrv = getHRV(user: user, sessionSummaryData: sessionSummaryData) else { return }
         DispatchQueue.main.async {
-            self.userSummaryData.append(TeacherSessionSummaryUserData(user: user, measurements: measurements))
+            self.userSummaryData.append(TeacherSessionSummaryUserData(user: user, measurements: measurements, hrv: hrv))
         }
     }
     
     func getMeasurements(user: User, sessionSummaryData: TeacherSessionSummaryData) -> [Int]? {
         sessionSummaryData.sessionUserData.first { $0.username == user.username }?.measurements
+    }
+    
+    func getHRV(user: User, sessionSummaryData: TeacherSessionSummaryData) -> Int? {
+        sessionSummaryData.sessionUserData.first { $0.username == user.username }?.hrv
     }
 }

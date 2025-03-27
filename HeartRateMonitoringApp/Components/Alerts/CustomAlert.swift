@@ -45,18 +45,39 @@ struct CustomAlert: View {
                     .multilineTextAlignment(.center)
                 
                 HStack(spacing: 20) {
-                    Button(action: {
-                        leftButtonAction()
-                        close()
-                    }, label: {
-                        Text(leftButtonText)
-                            .padding()
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity)
-                            .background(.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                    })
+                    if isSingleButton {
+                        Button(action: {
+                            leftButtonAction()
+                            close()
+                        }, label: {
+                            Text(leftButtonText)
+                                .padding()
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .background(.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(20)
+                        })
+                    } else {
+                        Button(action: {
+                            leftButtonAction()
+                            close()
+                        }, label: {
+                            Text(leftButtonText)
+                                .padding()
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.red)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.clear)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.red, lineWidth: 2)
+                                        )
+                                )
+                        })
+                    }
                     if !isSingleButton {
                         Button(action: {
                             rightButtonAction()

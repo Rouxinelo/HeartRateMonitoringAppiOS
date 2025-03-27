@@ -84,6 +84,7 @@ struct TeacherSessionSummaryScreen: View {
                 List(viewModel.userSummaryData, id: \.self) { userData in
                     TeacherSessionSummaryUserView(user: userData.user,
                                                   measurements: userData.measurements, 
+                                                  hrv: userData.hrv,
                                                   onClick: { user in
                         selectedUserAge = user.age
                         showBPMAlert = true

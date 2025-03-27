@@ -10,6 +10,7 @@ import SwiftUI
 struct TeacherSessionSummaryUserView: View {
     @State var user: User
     @State var measurements: [Int]
+    @State var hrv: Int
     let onClick: (User) -> Void
 
     var body: some View {
@@ -19,19 +20,23 @@ struct TeacherSessionSummaryUserView: View {
             }) {
                 VStack {
                     HStack {
+                        Image(systemName: "waveform.path.ecg")
+                            .foregroundStyle(.red)
+                        Text("\(hrv)ms")
                         Spacer()
                         Image(systemName: "info.circle")
                             .font(.headline)
                             .foregroundStyle(.red)
+                            .opacity(isDangerousBPM() ? 1 : 0)
                     }
-                    .opacity(isDangerousBPM() ? 1 : 0)
+                    .fontWeight(.bold)
                     .padding(.horizontal)
                     HStack(spacing: 10) {
                         VStack {
                             HStack {
                                 Image(systemName: "person.fill")
                                     .foregroundStyle(.red)
-                                Text(getFormattedName(for: user))
+                                Text(user.firstName)
                                     .multilineTextAlignment(.leading)
                                 Spacer()
                             }
@@ -58,21 +63,21 @@ struct TeacherSessionSummaryUserView: View {
                                 Spacer()
                                 Image(systemName: "arrow.up")
                                     .foregroundStyle(.red)
-                                Text("\(measurements.max() ?? 0)")
+                                Text("\(measurements.max() ?? 0) BPM")
                             }.foregroundStyle(isDangerousBPM() ? .red : .black)
                             Spacer()
                             HStack {
                                 Spacer()
                                 Image(systemName: "alternatingcurrent")
                                     .foregroundStyle(.red)
-                                Text("\(measurements.reduce(0, +) / max(measurements.count, 1))")
+                                Text("\(measurements.reduce(0, +) / max(measurements.count, 1)) BPM")
                             }
                             Spacer()
                             HStack {
                                 Spacer()
                                 Image(systemName: "arrow.down")
                                     .foregroundStyle(.red)
-                                Text("\(measurements.min() ?? 0)")
+                                Text("\(measurements.min() ?? 0) BPM")
                             }
                         }
                         .font(.title2)
@@ -99,11 +104,6 @@ struct TeacherSessionSummaryUserView: View {
         default:
             return "👤"
         }
-    }
-    
-    func getFormattedName(for user: User) -> String {
-        guard let firstNameChar = user.firstName.first else { return "" }
-        return "\(firstNameChar). \(user.lastName)"
     }
     
     func isDangerousBPM() -> Bool {
