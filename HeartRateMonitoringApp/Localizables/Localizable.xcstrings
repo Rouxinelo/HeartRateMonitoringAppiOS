@@ -2455,21 +2455,7 @@
       }
     },
     "register_user_firstNameDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your first name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O seu primeiro nome"
-          }
-        }
-      }
+      "extractionState" : "manual"
     },
     "register_user_gender" : {
       "extractionState" : "manual",
@@ -2483,7 +2469,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gênero"
+            "value" : "Género"
           }
         }
       }
@@ -2500,7 +2486,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O seu Gênero"
+            "value" : "O seu Género"
           }
         }
       }
@@ -2523,21 +2509,7 @@
       }
     },
     "register_user_lastNameDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your last name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O seu último nome"
-          }
-        }
-      }
+      "extractionState" : "manual"
     },
     "register_user_loadingDescription" : {
       "extractionState" : "manual",
@@ -4458,7 +4430,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gênero"
+            "value" : "Género"
           }
         }
       }
