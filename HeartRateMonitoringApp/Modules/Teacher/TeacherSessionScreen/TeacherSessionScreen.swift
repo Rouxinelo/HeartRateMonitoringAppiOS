@@ -74,7 +74,8 @@ struct TeacherSessionScreen: View {
                     TeacherSessionUserView(isActive: userData.isActive,
                                            name: "\(userData.name)",
                                            measurements: userData.measurements,
-                                           hrv: userData.hrv)
+                                           hrv: userData.hrv,
+                                           gender: "M")
                     .padding(.vertical)
                     .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)

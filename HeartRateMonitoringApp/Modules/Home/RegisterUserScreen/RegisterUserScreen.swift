@@ -53,12 +53,12 @@ struct RegisterUserScreen: View {
                                             isHiddenField: false,
                                             placeholder: "",
                                             title: localized(RegisterUserStrings.firstNameString),
-                                            description: localized(RegisterUserStrings.firstNameDescription))
+                                            description: localized(" "))
                         RegisterScreenField(searchText: $lastName,
                                             isHiddenField: false,
                                             placeholder: "",
                                             title: localized(RegisterUserStrings.lastNameString),
-                                            description: localized(RegisterUserStrings.lastNameDescription))
+                                            description: localized(" "))
                     }
                     RegisterScreenField(searchText: $email,
                                         isHiddenField: false,

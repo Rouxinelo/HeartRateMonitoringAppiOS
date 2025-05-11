@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B0724142BB0D4EF00FEDEFE /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0724132BB0D4EF00FEDEFE /* CalendarScreen.swift */; };
 		6B0724162BB0D5DE00FEDEFE /* SessionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */; };
+		6B07E0DE2D9A1FA90022553B /* HRVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B07E0DC2D9A1FA90022553B /* HRVManager.swift */; };
 		6B0813912BC7346B00AAAE30 /* ConnectSensorModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */; };
 		6B0813942BCAD91500AAAE30 /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813932BCAD91500AAAE30 /* SessionScreen.swift */; };
 		6B0813972BCBE28E00AAAE30 /* SessionSummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */; };
@@ -34,7 +35,6 @@
 		6B1168CD2BDC47BD00B0E9FE /* ImageSaveResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1168CC2BDC47BD00B0E9FE /* ImageSaveResult.swift */; };
 		6B16BC012BF2C4C000FE5959 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16BC002BF2C4C000FE5959 /* HomeViewModel.swift */; };
 		6B16BC032BF2C63600FE5959 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16BC022BF2C63600FE5959 /* UserLogin.swift */; };
-		6B1F77222D43231200059AC1 /* ECGManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1F77212D43231200059AC1 /* ECGManager.swift */; };
 		6B24E2BE2BDE97640048BA30 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6B24E2BD2BDE97640048BA30 /* Localizable.xcstrings */; };
 		6B24E2C02BDEA0890048BA30 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24E2BF2BDEA0890048BA30 /* LanguageManager.swift */; };
 		6B2845F92BA796E9007A9D8E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2845F82BA796E9007A9D8E /* Color.swift */; };
@@ -189,6 +189,7 @@
 /* Begin PBXFileReference section */
 		6B0724132BB0D4EF00FEDEFE /* CalendarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
 		6B0724152BB0D5DE00FEDEFE /* SessionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSection.swift; sourceTree = "<group>"; };
+		6B07E0DC2D9A1FA90022553B /* HRVManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRVManager.swift; sourceTree = "<group>"; };
 		6B0813902BC7346B00AAAE30 /* ConnectSensorModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSensorModal.swift; sourceTree = "<group>"; };
 		6B0813932BCAD91500AAAE30 /* SessionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
 		6B0813962BCBE28E00AAAE30 /* SessionSummaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSummaryScreen.swift; sourceTree = "<group>"; };
@@ -214,7 +215,6 @@
 		6B1168CC2BDC47BD00B0E9FE /* ImageSaveResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveResult.swift; sourceTree = "<group>"; };
 		6B16BC002BF2C4C000FE5959 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		6B16BC022BF2C63600FE5959 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
-		6B1F77212D43231200059AC1 /* ECGManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGManager.swift; sourceTree = "<group>"; };
 		6B24E2BD2BDE97640048BA30 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6B24E2BF2BDEA0890048BA30 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		6B2845F82BA796E9007A9D8E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -831,8 +831,8 @@
 		6BD818F02BE7F086002F0ADE /* Sensors */ = {
 			isa = PBXGroup;
 			children = (
+				6B07E0DC2D9A1FA90022553B /* HRVManager.swift */,
 				6B11431A2C1F3A1600BDEF27 /* SensorManager.swift */,
-				6B1F77212D43231200059AC1 /* ECGManager.swift */,
 			);
 			path = Sensors;
 			sourceTree = "<group>";
@@ -1065,7 +1065,6 @@
 				6BC27BF02BB8C1150089217F /* CustomNumericField.swift in Sources */,
 				6B47AF452BACD615001C0172 /* MainMenuSection.swift in Sources */,
 				6B0813972BCBE28E00AAAE30 /* SessionSummaryScreen.swift in Sources */,
-				6B1F77222D43231200059AC1 /* ECGManager.swift in Sources */,
 				6B2846012BA8E867007A9D8E /* MainMenu.swift in Sources */,
 				6B47AF472BAE2B41001C0172 /* LoadingView.swift in Sources */,
 				6B87934B2C148C2D00EC8B75 /* SessionOperation.swift in Sources */,
@@ -1085,6 +1084,7 @@
 				6BB8067E2C5FF33E00E992BD /* PasswordRecoveryScreen.swift in Sources */,
 				6B2A30242BC5E91F00E45B20 /* MultipleTextButton.swift in Sources */,
 				6B0EC0A32BEFAA2400747793 /* RegisterUser.swift in Sources */,
+				6B07E0DE2D9A1FA90022553B /* HRVManager.swift in Sources */,
 				6BDC5C0D2C7BA6A000AEEC99 /* FutureSessionsTeacherViewModel.swift in Sources */,
 				6BA8ADDF2BAA39DB00F76BEE /* LoginView.swift in Sources */,
 				6BE384432C65913F00D46D4B /* TeacherMenuScreen.swift in Sources */,
